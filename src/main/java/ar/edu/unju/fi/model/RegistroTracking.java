@@ -29,7 +29,7 @@ public class RegistroTracking {
 	@Autowired
 	Vehiculo vehiculos;
 	
-	//@Autowired
+	@Autowired  //Verificar a futuro
 	List<Tripulante> tripulantes;
 	
 	/**
