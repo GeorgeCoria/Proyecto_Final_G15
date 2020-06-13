@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class RegistroTracking {
 	
-	//----------------- Variables Miembros -----------------//
+	//----------------- Variables Miembro -----------------//
 	/**
 	 * Atributo que representa la fecha y hora del registro.
 	 */
@@ -49,6 +49,7 @@ public class RegistroTracking {
 	 * Constructor por defecto.
 	 */
 	public RegistroTracking() {
+		
 	}
 	
 	/**
