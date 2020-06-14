@@ -14,8 +14,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class Localidad {
 	/**
-	 * Atribo de la clase Localidad
-	 * que almacen el nombre de la 
+	 * Atributo de la clase Localidad
+	 * que almacena el nombre de la 
 	 * Localidad 
 	 */
 	private String nombre;
@@ -66,6 +66,23 @@ public class Localidad {
 		this.nombre = nombre;
 	}
 
+	//--------------- Metodos y/o funciones -------------------
+	/**
+	 * Metodo toString sobrescrito con el fin de capturar  
+	 * todos lo atributos de la clase.
+	 * Generalmente es llamado cuando se desea visulizar todos
+	 * atributos de la localidad
+	 * 
+	 * 
+	 * 
+	 */
+	@Override
+	public String toString() {
+		return "Localidad [nombre=" + nombre + "]";
+	}
+
+	
+	
 	
 	
 

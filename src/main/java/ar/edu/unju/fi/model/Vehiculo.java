@@ -1,12 +1,14 @@
 package ar.edu.unju.fi.model;
 
+import org.springframework.stereotype.Component;
+
 /**
  * Clase para gestionar los datos de un vehiculo controlado
  * 
  * @author Marcia Velarde
  *
  */
-
+@Component
 public class Vehiculo {
 
 	// ---------------VARIABLES MIEMBRO---------------//

@@ -70,7 +70,7 @@ public class RegistroTracking {
 		this.detalleLugarRegistro = detalleLugarRegistro;
 	}
 
-	//----------------- Constructores -----------------// 
+	//----------------- Metodos accesores-----------------// 
 	
 	/**
 	 * Permite capturar fecha y hora del registro
