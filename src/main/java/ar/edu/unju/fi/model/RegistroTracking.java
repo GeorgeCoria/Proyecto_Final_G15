@@ -1,6 +1,7 @@
 package ar.edu.unju.fi.model;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,42 +17,42 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class RegistroTracking {
-	
+
 	//----------------- Variables Miembro -----------------//
 	/**
 	 * Atributo que representa la fecha y hora del registro.
 	 */
 	LocalDateTime fechaHora;
-	
+
 	/**
 	 * Atributo que representa un vehiculo y sus caracteristicas.
 	 */
 	@Autowired
 	Vehiculo vehiculos;
-	
-	@Autowired  //Verificar a futuro
-	List<Tripulante> tripulantes;
-	
+
+
+	List<Tripulante> tripulantes = new ArrayList <Tripulante>();
+
 	/**
 	 * Atributo que representa la localidad donde se realizo el registro.
 	 */
 	@Autowired
 	Localidad localidad;
-	
+
 	/**
 	 * Atributo que representa obervaciones del lugar donde se realizo el registro. 
 	 */
 	String detalleLugarRegistro;
 
 	//----------------- Constructores -----------------//
-	
+
 	/**
 	 * Constructor por defecto.
 	 */
 	public RegistroTracking() {
-		
+
 	}
-	
+
 	/**
 	 * Constructro parametrizado.
 	 * 
@@ -71,7 +72,7 @@ public class RegistroTracking {
 	}
 
 	//----------------- Metodos accesores-----------------// 
-	
+
 	/**
 	 * Permite capturar fecha y hora del registro
 	 * @return fechaHora
@@ -105,6 +106,14 @@ public class RegistroTracking {
 	}
 
 	/**
+	 * Permite capturar el atributo Localidad
+	 * @return localidad
+	 */
+	public Localidad getLocalidad() {
+		return localidad;
+	}
+
+	/**
 	 * Permite capturar la lista de tripulantes.
 	 * @return tripulantes
 	 */
@@ -113,18 +122,10 @@ public class RegistroTracking {
 	}
 
 	/**
-	 * @param tripulantes the tripulantes to set
+	 * @param Permite asignar valores a la lista de tripulantes
 	 */
 	public void setTripulantes(List<Tripulante> tripulantes) {
 		this.tripulantes = tripulantes;
-	}
-
-	/**
-	 * Permite capturar el atributo Localidad
-	 * @return localidad
-	 */
-	public Localidad getLocalidad() {
-		return localidad;
 	}
 
 	/**
@@ -151,14 +152,15 @@ public class RegistroTracking {
 		this.detalleLugarRegistro = detalleLugarRegistro;
 	}
 
-	//----------------- Metodo SobreEscrito -----------------//
-	
+	//----------------- Metodo ToString  -----------------//
+
 	/**
 	 * Permite visualizar los atributos de objeto RegistroTracking
 	 */
 	@Override
 	public String toString() {
-		return "RegistroTracking [fechaHora=" + fechaHora + ", tripulantes=" + tripulantes + ", localidad=" + localidad
-				+ ", detalleLugarRegistro=" + detalleLugarRegistro + "]";
+		return "RegistroTracking [fechaHora=" + fechaHora + ", vehiculos=" + vehiculos + ", tripulantes=" + tripulantes
+				+ ", localidad=" + localidad + ", detalleLugarRegistro=" + detalleLugarRegistro + "]";
 	}
+	
 }
