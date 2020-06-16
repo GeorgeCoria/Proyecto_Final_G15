@@ -1,0 +1,21 @@
+
+
+
+
+
+
+.card-overflow-flex{
+
+	overflow: auto;
+	display: flex;
+
+}
+
+.card-flex{
+	flex-wrap: wrap;
+}
+
+.h-100p{
+	height: 100px;
+	
+}

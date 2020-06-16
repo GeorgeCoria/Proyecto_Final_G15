@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.5.0/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/consultas.css">
+		<title>Consultas</title>
+	</head>
+	
+	<body>
+	 
+		<div th:insert="layout/header :: header"></div>
+		
+		<section class="container">
+			<header>
+				<h1 class="text-center mt-3 mb-3">Ingrese un Titulo</h1>
+			</header>
+			
+			<div>
+			 	<div class="nav nav-tabs" id="nav-tab" role="tablist">
+				    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Vehiculo</a>
+				    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Tripulante</a>
+				    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Patente</a>
+				</div>
+			</div>
+	
+			<div class="tab-content" id="nav-tabContent">
+				<div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+					<form class="col-12">
+						<div class="card-overflow-flex card-flex">
+						 	<div class="col-sm-4 order-1">
+						   		<div class="card m-3">
+						    		<h2 class="card-header">Inicio Fecha-Hora</h2>
+						      		<div class="card-body">
+										<div>
+											<label for="validationDefault01"></label> 
+											<input type="datetime-local" class="form-control" id="validationDefault01" value="Mark" required>
+										</div>
+						      		</div>
+						    	</div>
+						  	</div>
+					  
+						  	<div class="col-sm-4 order-3">
+						   		<div class="card m-3">
+						    		<h2 class="card-header">Fin Fecha-Hora</h2>
+							      	<div class="card-body">
+										<div>
+											<label for="validationDefault02"></label> 
+											<input type="datetime-local" class="form-control" id="validationDefault02" value="Otto" required>
+										</div>
+							      	</div>
+							    </div>
+							</div>
+						  
+						  	<div class="col-sm-4 order-2">
+						    	<div class="card m-3">
+						    		<h2 class="card-header">Localidades</h2>
+						      		<div class="card-body ">
+										<div >
+											<select class="custom-select m-1" id="validationDefault04" required>
+												<option selected disabled value="">Sin Seleccionar</option>
+												<option>S.S. Jujuy</option>
+											</select>
+										</div>
+						     		</div>
+						    	</div>
+						  	</div>
+						</div>
+						
+					<!-- w= width | d= display | mb=margin bottom | h=hight | pb= padding bottom | m=margin -->
+						<h2 class="w-100 d-flex mb-3 h-100p pb-5">
+							<button class="btn btn-primary w-50 m-auto" type="submit"><b>Buscar</b></button>
+						</h2>
+					</form>
+					
+					<div class="card-overflow-flex">
+						<div class="col-sm-6">
+					  		<div class="card">
+					   			<h2 class="card-header">Datos de los Vehiculos</h2>
+					      		<div class="card-body">
+						        	<table class="table table-hover table-sm">
+										<thead>
+											<tr>
+												<th scope="col">Titular</th>
+												<th scope="col">Patente</th>
+												<th scope="col">Modelo</th>
+												<th scope="col">Marca</th>
+												<th scope="col">Fecha-Hora</th>
+												<th scope="col">Localidad</th>
+											</tr>
+										</thead>
+								
+										<tbody>
+											<tr>
+												<td>Mark</td>
+												<td>AA 441 ES</td>
+												<td>Fiat Cronos</td>
+												<td>Fiat</td>
+												<td>15/06/2020 01:27</td>
+												<td >S.S.J</td>
+											</tr>
+										</tbody>
+									</table>
+					      		</div>
+					    	</div>
+					  	</div>
+					  	
+					  	<div class="col-sm-6">
+					    	<div class="card">
+					    		<h2 class="card-header">Datos de los Tripulantes</h2>
+					      		<div class="card-body">
+						        	<table class="table table-hover table-sm">
+										<thead>
+											<tr>
+												<th scope="col">DNI</th>
+												<th scope="col">Apellido</th>
+												<th scope="col">Nombre</th>
+												<th scope="col">Nacionalidad</th>
+											</tr>
+										</thead>
+										
+										<tbody>
+											<tr>
+												<td>23165465</td>
+												<td>A1</td>
+												<td>N1</td>
+												<td>Argentina</td>
+											</tr>
+											
+											<tr>
+												<td>12345465</td>
+												<td>A2</td>
+												<td>N2</td>
+												<td>Brazil</td>
+											</tr>
+											
+											<tr>
+												<td>655665</td>
+												<td>A3</td>
+												<td>N3</td>
+												<td>Chile</td>
+											</tr>
+										</tbody>
+									</table>
+					        	</div>
+					      	</div>
+					    </div>
+					</div>
+				</div>
+	
+				<div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+					<form class="form-inline" method="get">
+					  	<div class="form-group mx-sm-3 mb-2">
+						    <label for="inputPassword2" class="sr-only">nombreTripulante</label>
+						    <input type="password" class="form-control" id="inputPassword2" placeholder="nombreTripulante">
+					  	</div>
+					  	
+					  	<button type="submit" class="btn btn-primary mb-2" >Buscar Tripulante</button>
+					</form>
+		
+					<h2>Informacion Personal del Tripulante</h2>
+					
+					<table class="table table-sm table-hover">
+						<thead>
+							<tr>
+								<th scope="col">DNI</th>
+								<th scope="col">Apellido</th>
+								<th scope="col">Nombre</th>
+								<th scope="col">Nacionalidad</th>
+							</tr>
+						</thead>
+						
+						<tbody>
+							<tr>
+								<td>15975382456</td>
+								<td>C1</td>
+								<td>E1</td>
+								<td>IDK</td>
+							</tr>
+						</tbody>
+					</table>	
+						
+					<h2>Recorrido del Tripulante</h2>
+						
+					<table class="table table-sm table-hover">
+						<thead>
+							<tr>
+								<th scope="col">Patente-Vehiculo</th>
+								<th scope="col">Fecha-Hora</th>
+								<th scope="col">Localidad</th>
+								<th scope="col">Detalle-Registro</th>
+							</tr>
+						</thead>
+						
+						<tbody>
+							<tr>
+								<td>ARS 154</td>
+								<td>15/06/2020 17:35 hs</td>
+								<td>S.S. Jujuy</td>
+								<td>Hola hola hola...</td>
+							</tr>
+		
+							<tr>
+								<td>BR 154</td>
+								<td>15/06/2020 22:54 hs</td>
+								<td>Humahuaca</td>
+								<td>Hola hola hola...</td>
+							</tr>
+						</tbody>
+					</table>	
+				</div>
+					
+				<div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+					<form class="form-inline" method="get">
+					  	<div class="form-group mx-sm-3 mb-2">
+						    <label for="inputPassword2" class="sr-only">nombrePatente</label>
+						    <input type="password" class="form-control" id="inputPassword2" placeholder="nombrePatente">
+						</div>
+						
+						<button type="submit" class="btn btn-primary mb-2" >Buscar Patente</button>
+					</form>
+		
+					<h2>Informacion personal del Vehiculo</h2>
+					
+					<table class="table table-sm table-hover">
+						<thead>
+							<tr>
+								<th scope="col">Titular</th>
+								<th scope="col">Patente</th>
+								<th scope="col">Modelo</th>
+								<th scope="col">Marca</th>
+								<th scope="col">Tipo</th>
+								<th scope="col">NumeroChasis</th>
+								<th scope="col">NumeroMotor</th>
+								<th scope="col">Color</th>
+							</tr>
+						</thead>
+						
+						<tbody>
+							<tr>
+								<td>Apellido Nombre nombre</td>
+								<td>ARG 1575 4</td>
+								<td>G21</td>
+								<td>Ford</td>
+								<td>RGBSA</td>
+								<td>50</td>
+								<td>Ltr156</td>
+								<td>Blanco</td>
+							</tr>
+						</tbody>
+					</table>
+					
+					<h2>Recorrido del Vehiculo</h2>
+						
+					<table class="table table-sm table-hover">
+						<thead>
+							<tr>
+								<th scope="col">Fecha-Hora</th>
+								<th scope="col">Localidad</th>
+								<th scope="col">Detalle-Registro</th>
+							</tr>
+						</thead>
+						
+						<tbody>
+							<tr>
+								<td>15/06/2020 17:35 hs</td>
+								<td>S.S. Jujuy</td>
+								<td>Hola hola hola...</td>
+							</tr>
+		
+							<tr>
+								<td>15/06/2020 22:54 hs</td>
+								<td>Humahuaca</td>
+								<td>Hola hola hola...</td>
+							</tr>
+						</tbody>
+					</table>
+					
+					<h2>Tripulantes</h2>
+					
+					<table class="table table-sm table-hover">
+						<thead>
+							<tr>
+								<th scope="col">DNI</th>
+								<th scope="col">Apellido</th>
+								<th scope="col">Nombre</th>
+								<th scope="col">Nacionalidad</th>
+							</tr>
+						</thead>
+						
+						<tbody>
+							<tr>
+								<td>15975382456</td>
+								<td>C1</td>
+								<td>E1</td>
+								<td>IDK</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>	
+		</section>
+	
+		<div th:insert="layout/footer :: footer"></div>
+	</body>
+</html>
