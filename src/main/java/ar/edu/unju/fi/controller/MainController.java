@@ -12,5 +12,10 @@ public class MainController {
 	public String main(Model model) {
 		return "registrador";
 	}
+	
+	@RequestMapping("/login")
+	public String login() {
+		return "login";
+	}
 
 }
