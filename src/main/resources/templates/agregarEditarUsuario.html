@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+  </head>
+
+  <body class="container">
+  
+  	<div th:insert="layout/header :: header"></div>
+
+  	<form class="col-8">
+  		<div class="jumbotron jumbotron-fluid">
+		  <div class="container">
+		    <h1 class="display-4">Formulario de Registro</h1>
+		  </div>
+		</div>
+	    <div class="form-group">
+		    <label for="formGroupExampleInput">NOMBRE DE USUARIO</label>
+		    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Nombre de Usuario">
+		</div>
+		<div class="form-group">
+		    <label for="formGroupExampleInput2">PASSWORD</label>
+		    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Password">
+	   </div>
+	   <div class="form-group">
+		    <label for="formGroupExampleInput2">NOMBRE REAL</label>
+		    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Nombre real del Usuario">
+	   </div>
+	   <div class="form-group">
+		    <label for="formGroupExampleInput2">APELLIDO REAL</label>
+		    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Apellido del Usuario">
+	   </div>
+	  
+	  <fieldset class="form-group">
+	    <div class="row">
+	      <legend class="col-form-label col-sm-2 pt-0">Tipo de Usuario</legend>
+	      <div class="col-sm-10">
+	        <div class="form-check">
+	          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+	          <label class="form-check-label" for="gridRadios1">
+	            REGISTRADOR
+	          </label>
+	        </div>
+	        <div class="form-check">
+	          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+	          <label class="form-check-label" for="gridRadios2">
+	            CONSULTOR
+	          </label>
+	        </div>
+	      </div>
+	    </div>
+	  </fieldset>
+	
+	  <div class="form-group row col-8">
+	    <div class="col-sm-10">
+	      <button type="submit" class="btn btn-primary">GUARDAR</button>
+	      <button type="button" class="btn btn-danger">CANCELAR</button>
+	    </div>
+	  </div>
+	</form>
+	
+	<!-- Insercion del fragmento footer utlizando thymeleaf  -->
+	<div th:insert="layout/footer :: footer"></div>
+  	
+  </body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+  </head>
+
+  <body class="container">
+
+	<div th:insert="layout/header :: header"></div>
+
+	<div class="jumbotron jumbotron-fluid">
+		<div class="container">
+			<h1 class="display-4">Lista de Usuarios</h1>
+		</div>
+	</div>
+
+	<div class="table table-borderless">
+	  <div class="row">
+	    <div class="col-9">
+	      <ul class="nav nav-tabs" >
+			  <li class="nav-item">
+			    <a class="nav-link active" href="#">Ver Todo</a>
+			  </li>
+			  <li class="nav-item">
+			    <a class="nav-link" href="#">Registradores</a>
+			  </li>
+			  <li class="nav-item">
+			    <a class="nav-link" href="#">Consultores</a>
+			  </li>
+			   
+		</ul>
+	    </div>
+	    <div class="col 3">
+	      <button type="button" class="btn btn-primary">Añadir Usuario</button>
+	    </div>
+	  </div>
+	 </div>
+
+	 
+
+
+	<table class="table table-striped">
+	  <thead>
+	    <tr>
+	      <th scope="col">Nombre De Usuario</th>
+	      <th scope="col">Password</th>
+	      <th scope="col">Nombre Real</th>
+	      <th scope="col">Apellido</th>
+	      <th scope="col">Tipo de Usuario</th>
+	      <th scope="col">Accion</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr>
+	      <th scope="row">1</th>
+	      <td>Mark</td>
+	      <td>Otto</td>
+	      <td>@mdo</td>
+	      <td>@mdo</td>
+	      <td>
+	      	<button type="button" class="btn btn-primary">Editar</button>
+			<button type="button" class="btn btn-danger">Eliminar</button>
+	      </td>
+	    </tr>
+	    <tr>
+	      <th scope="row">2</th>
+	      <td>Jacob</td>
+	      <td>Thornton</td>
+	      <td>@fat</td>
+	      <td>@mdo</td>
+	       <td>
+	      	<button type="button" class="btn btn-primary">Editar</button>
+			<button type="button" class="btn btn-danger">Eliminar</button>
+	      </td>
+	    </tr>
+	    <tr>
+	      <th scope="row">3</th>
+	      <td>Larry</td>
+	      <td>the Bird</td>
+	      <td>@twitter</td>
+	      <td>@mdo</td>
+	    </tr>
+	  </tbody>
+	</table>
+	
+	<!-- Insercion del fragmento footer utlizando thymeleaf  -->
+	<div th:insert="layout/footer :: footer"></div>
+
+ 
+  </body>
+</html>

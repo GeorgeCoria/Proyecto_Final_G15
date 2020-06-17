@@ -25,4 +25,14 @@ public class MainController {
 	public String getList() {
 		return "consultas";
 	}
+	
+	@GetMapping("/listaDeUsuarios")
+	public String mostrarListaAdmin() {
+		
+		return "listaTiposDeUsuarios";
+	}
+	@GetMapping("/ventanaAdmin")
+	public String mostrarFormAdmin() {
+		return "agregarEditarUsuario";
+	}
 }
