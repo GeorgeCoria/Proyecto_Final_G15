@@ -18,6 +18,9 @@ modal-backdrop {
 	border-radius: 2em;
 }
 
+.abajo{
+	margin-bottom: 0px;	
+}
 
 .transparencia{
 	 background: rgba(34,34,34,0.75); !important;

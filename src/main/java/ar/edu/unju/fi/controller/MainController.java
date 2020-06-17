@@ -10,10 +10,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class MainController {
 	
-
-	@RequestMapping("/registrador")
-	public String main() {
+	@GetMapping("/")
+	public String logIn() {
+		return "login";
+	}
+	
+	@GetMapping("/registrador")
+	public String registradorVehiculo() {
 		return "registradorVehiculos";
+	}
+	
+	@GetMapping("/registrador2")
+	public String RegistradorUsuario() {
+		return "registradorusuario";
 	}
 	
 	@RequestMapping("/login")

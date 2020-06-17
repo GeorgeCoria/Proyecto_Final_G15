@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+	crossorigin="anonymous">
+	
+	<link rel="stylesheet" type="text/css"
+	href="static/css/registrador2.css" th:href="@{/css/registrador2.css}">
+<title>Registrador de usuarios</title>
+</head>
+
+<body>
+	<div th:insert="layout/header :: header"></div>
+
+	<div class="modal-dialog text-center">
+		<div class="col-sm-8 formulario">
+			<div class="modal-content">
+
+				<div class="col-12 user-img">
+					<img src="/images/user.png">
+				</div>
+
+				<form class="col-12">
+					<div class="form-group" id="user-group">
+						<input type="text" class="form-control" placeholder="Nombre"
+							name="username" />
+					</div>
+
+					<div class="form-group" id="apellido-group">
+						<input type="text" class="form-control" placeholder="Apellido "
+							name="surname" />
+					</div>
+
+					<div class="form-group" id="nacionalidad-group">
+						<input type="text" class="form-control" placeholder="Nacionalidad"
+							name="nacionality" />
+					</div>
+
+					<div class="form-group" id="dni-group">
+						<input type="number" class="form-control" placeholder="D.N.I."
+							name="dni" />
+					</div>
+
+
+					<button type="submit" class="btn btn-primary">Registrar
+						usuario</button>
+					<button type="submit" class="btn btn-primary">Terminar
+						registro</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div th:insert="layout/footer :: footer"></div>
+</body>
+</html>
