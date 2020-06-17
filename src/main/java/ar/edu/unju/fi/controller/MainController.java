@@ -12,8 +12,8 @@ public class MainController {
 	
 
 	@RequestMapping("/registrador")
-	public String main(Model model) {
-		return "registrador";
+	public String main() {
+		return "registradorVehiculos";
 	}
 	
 	@RequestMapping("/login")

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="css/registrador.css"/>
+<title>Registrador de Vehiculos </title>
+</head>
+<body class="fondo" >
+<div th:insert="layout/header :: header"></div>
+	
+	<div class="row my-3">
+			<div class="col-md-10 text-center mx-auto mb-3">
+	 			<img class="cabecera" src="/images/car.png">	
+	 		</div>
+	  	</div>
+
+	<div class=" modal-content transparencia text-center mb-5">
+	 	
+	 	<hr>
+	 	<div class="row ">
+	 		<div class="col-md-6 text-center mx-auto mb-3">
+	 			<h1 class="text-white"> REGISTRO DE VEHICULOS </h1>
+	 		</div>
+	 	</div>		
+	 	<hr>
+	 		
+		<div class="row ">
+			<div class="col-md-1"> </div>
+			
+			<div class="col-md-5 mt-3 mb-3 fondoLista">
+				<select class="custom-select text-white "  size="5"  multiple>
+					<option class="bg-dark text-white text-center font-weight-bold"
+					selected disabled value="">SELECCIONE UNA LOCALIDAD</option>
+					<option value="1">Uno</option>
+					<option value="2">Dos</option>
+					<option value="3">Tres</option>
+					<option value="4">Cuatro</option>
+					<option value="5">Cinco</option>
+					<option value="6">Seis</option>
+				</select>
+			</div>
+
+				<div class="col-md-5 mb-3">
+					<label for="validationTitular">TITULAR</label>
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="grupoColor">ABC</span>
+						</div>
+						<input type="text" class="form-control" id="validationTitular"
+							placeholder="Ingrese el nombre del titular"
+							aria-describedby="grupoColor" required>
+					</div>
+					
+					<label for="validationPatente">PATENTE</label>
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="grupoPatente">ABC</span>
+						</div>
+						<input type="text" class="form-control" id="validationPatente"
+							placeholder="Ingrese el la patente"
+							aria-describedby="grupoPatente" required>
+					</div>
+				</div>	
+ 		</div>
+ 		
+		<div class="row">
+				<div class="col-md-1"> </div>
+				
+				   <div class="col-md-2 mb-3">
+				      <label for="validationColor">COLOR</label>
+				      <div class="input-group">
+				        <div class="input-group-prepend">
+				          <span class="input-group-text" id="inputGroupPrepend3">ABC</span>
+				        </div>
+				        <input type="text" class="form-control" id="validationColor" placeholder="Ingrese el color" aria-describedby="inputGroupPrepend3" required>
+				      </div>
+				    </div>
+				    
+				    <div class="col-md-3 mb-3">
+				      <label for="validationMarca">MARCA</label>
+				      <div class="input-group">
+				        <div class="input-group-prepend">
+				          <span class="input-group-text" id="inputMarca">ABC</span>
+				        </div>
+				        <input type="text" class="form-control" id="validationMarca" placeholder="Ingrese la marca" aria-describedby="inputMarca" required>
+				      </div>
+				    </div> 
+				    
+				    <div class="col-md-3 mb-3">
+				      <label for="validationModelo">MODELO</label>
+				      <div class="input-group">
+				        <div class="input-group-prepend">
+				          <span class="input-group-text" id="inputModelo">ABC</span>
+				        </div>
+				        <input type="text" class="form-control" id="validationModelo" placeholder="Ingrese el modelo" aria-describedby="inputModelo" required>
+				      </div>
+				    </div> 
+				    
+				    <div class="col-md-2 mb-3">
+				      <label for="validationChasis">NUMERO DE CHASIS</label>
+				      <div class="input-group">
+				        <div class="input-group-prepend">
+				          <span class="input-group-text" id="inputModelo">123</span>
+				        </div>
+				        <input type="number" class="form-control" id="validationChasis" placeholder="Ingrese el numero del chasis" aria-describedby="inputModelo" required>
+				      </div>
+				    </div> 
+		</div> 
+		
+		<div class="row">
+				<div class="col-md-1"> </div>
+				    <div class="col-md-5 mb-3">
+				      <label for="validationMotor">NUMERO DE MOTOR</label>
+				      <div class="input-group">
+				        <div class="input-group-prepend">
+				          <span class="input-group-text" id="validationMotor">123</span>
+				        </div>
+				        <input type="number" class="form-control" id="validationChasis" placeholder="Ingrese el numero de chasis del motor" aria-describedby="inputModelo" required>
+				      </div>
+				    <br>
+				   
+				 <p class="tituloLista "> SELECCION DE TIPO </p>
+				<select class="custom-select" id="validationTipo" required>
+					<option selected disabled value="">Seleccion el tipo del vehiculo</option>
+					<option>Automovil</option>
+					<option>Motocileta</option>
+					<option>Camion</option>
+				</select>
+			</div>
+			 
+			<div class="col-md-5 mb-3 text-center">
+				      <label for="validationDetalle">DETALLES ADICIONALES</label>
+				      <div class="input-group">
+				        <div class="input-group-prepend">
+				          <span class="input-group-text" id="validationDetalle">ABC</span>
+				        </div>
+				        <input type="text" class="form-control" id="validationChasis" placeholder="Ingrese aqui el numero de chasis del vehiculo" aria-describedby="inputModelo" size="3" required>
+				      </div>
+				    <br>
+				    <button type="submit" class="btn btn-primary mb-2" >Registrar vehiculo</button>
+			</div> 		    
+		</div>		    
+ 	</div>
+ 	<div th:insert="layout/footer :: footer"></div>
+</body>
+</html>

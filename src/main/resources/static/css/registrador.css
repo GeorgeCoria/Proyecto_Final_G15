@@ -1,0 +1,65 @@
+.fondo{
+	width: 100%;
+	
+	background-image: url("/images/fondoReg.jpg");
+	background-repeat: no-repeat; /*  La imagen no se repetira  */
+	background-size: cover; /*  La imagen cubrira el contenedor  */
+	background-attachment: fixed; /*  La imagen quedara fija en el fondo y no se movera  */
+}
+
+modal-backdrop {
+     background-color: rgba(0,0,0,.0001) !important;
+}
+
+.cabecera{
+	margin: auto;
+	width: 10%;
+	border: blue;
+	border-radius: 2em;
+}
+
+
+.transparencia{
+	 background: rgba(34,34,34,0.75); !important;
+}
+
+div > label {
+	font-family: cursive;
+	color: white;
+	border-radius: 2em;
+	background: rgba(0,255,0,0.5);
+	margin-top: 1em;
+	text-align: center;
+}
+
+.tituloLista{
+	font-family: cursive;
+	color: white;
+	border-radius: 2em;
+	background: rgba(0,255,0,0.5);
+	width: 33%;
+	margin: 1em auto;
+}
+
+.fondoLista {
+	background-image: url("/images/fondo_select.jpg");
+	background-attachment: fixed; /*  La imagen quedara fija en el fondo y no se movera  */
+	background-size: 70%;
+}
+
+.fondoLista select {
+	width: 102%;
+	border: none;
+    box-shadow: none;
+    background-color: transparent;
+    background-image: none;
+    appearance: none;
+    float: left;
+}
+
+hr {
+	background-color: tomato;
+	margin: 2em;
+}
+
+
