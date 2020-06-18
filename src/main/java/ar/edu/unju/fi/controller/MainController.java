@@ -12,7 +12,7 @@ public class MainController {
 	
 	@GetMapping("/")
 	public String logIn() {
-		return "login";
+		return "login2";
 	}
 	
 	@GetMapping("/registrador")
@@ -27,7 +27,7 @@ public class MainController {
 	
 	@RequestMapping("/login")
 	public String login() {
-		return "login";
+		return "login2";
 	}
 	
 	@GetMapping("/consultas")

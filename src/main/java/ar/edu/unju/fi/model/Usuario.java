@@ -18,27 +18,27 @@ public class Usuario {
 	/**
 	 * Representa el nombre de la clase Usuario.
 	 */
-	String nombreUsuario;
+	private String nombreUsuario;
 	
 	/**
 	 * Representa la contraseña de la clase Usuario.
 	 */
-	String password;
+	private String password;
 	
 	/**
 	 * Representa el nombre Real de la clase Usuario.
 	 */
-	String nombreReal;
+	private String nombreReal;
 	
 	/**
 	 * Representa el apellido Real de la clase Usuario.
 	 */
-	String apellidoReal;
+	private String apellidoReal;
 	
 	/**
 	 * Representa el tipo de usuario de la clase Usuario. (consultor-registrador-adm)
 	 */
-	String tipoUsuario;
+	private String tipoUsuario;
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////
 	//----------------- Contructores -----------------//

@@ -22,27 +22,27 @@ public class RegistroTracking {
 	/**
 	 * Atributo que representa la fecha y hora del registro.
 	 */
-	LocalDateTime fechaHora;
+	private LocalDateTime fechaHora;
 
 	/**
 	 * Atributo que representa un vehiculo y sus caracteristicas.
 	 */
 	@Autowired
-	Vehiculo vehiculos;
+	private Vehiculo vehiculos;
 
 
-	List<Tripulante> tripulantes = new ArrayList <Tripulante>();
+	private List<Tripulante> tripulantes = new ArrayList <Tripulante>();
 
 	/**
 	 * Atributo que representa la localidad donde se realizo el registro.
 	 */
 	@Autowired
-	Localidad localidad;
+	private Localidad localidad;
 
 	/**
 	 * Atributo que representa obervaciones del lugar donde se realizo el registro. 
 	 */
-	String detalleLugarRegistro;
+	private String detalleLugarRegistro;
 
 	//----------------- Constructores -----------------//
 

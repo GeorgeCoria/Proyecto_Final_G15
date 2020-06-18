@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+
+	<link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.5.0/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/login.css"/>
+	
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+    <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+    
+	<title>Login</title>
+	
+</head>
+
+<body>
+
+<!-- Insercion del fragmento header utilizando thymeleaf  -->
+	<div th:insert="layout/header :: header"></div>
+
+    <div class="modal-dialog text-center">
+        <div class="col-sm-8 main-section">
+            <div class="modal-content2">
+                <div class="col-12 user-img">
+                    <img class="img-responsive" src="img/avatar_login.png" th:src="@{/images/avatar_login.png}"/>
+                </div>
+                <form class="col-12" th:action="@{/login}" method="get">
+                    <div class="form-group" id="user-group">
+                        <input type="text" class="form-control" placeholder="Usuario" name="username"/>
+                    </div>
+                    <div class="form-group" id="contrasena-group">
+                        <input type="password" class="form-control" placeholder="Contraseña" name="password"/>
+                    </div>
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i>  Ingresar </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+<!-- Insercion del fragmento footer utilizando thymeleaf  -->
+    <div th:insert="layout/footer :: footer"></div>
+	
+</body>
+</html>
