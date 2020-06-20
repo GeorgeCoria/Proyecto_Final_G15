@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.5.0/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/consultas.css">
+		<title>Tripulante</title>
+	</head>
+	
+	<body>
+		<header th:insert="layout/header :: header"></header>
+		<!-- Propiedades destacada: container-sm min-with 576px = max-with 540px, flex-wrap | mb= margin bottom-->
+		<section class="container-sm mb-5">
+			<!-- Propiedades destacada: nav= flex-wrap, d.flex | nav-tabs=colorBorder -->
+			<nav class="nav nav-tabs mt-3">
+				<!-- Propiedades a destacar: nav-item= flex| nav-link y active= borderColor | -->
+			    <a class="nav-link active" href="localidad">Localidad</a>
+			    <a class="nav-item nav-link active" href="tripulante">Tripulante</a>
+			    <a class="nav-link active" href="patente">Patente</a>
+			</nav>
+			
+			<!-- mt/b = margin top/bottom -->
+			<h2 class="text-center mt-5 mb-5">Listado de recorrido por Tripulante</h2>
+			
+			<!-- Propiedades a destacar: form-inline= d.flex, flex-wrap -->
+			<form class="form-inline justify-content-end mt-5 mb-5" method="get">
+				<!-- Propiedades a destacar: form-group/form-control= color/border/font | mx= margin eje X-->
+				<input type="text" class="form-group form-control mx-sm-3" placeholder="nombreTripulante">
+				<!-- btn/primary= colores/bordes | mr= margin right-->
+				<button type="submit" class="btn btn-primary mr-sm-4" >Buscar Tripulante</button>
+			</form>
+			
+			<!--Propiedades destacar: row=flex-wrap, d.flex | mt=margin top-->	
+			<div class="col-sm-12 mt-5 d-flex overflow-auto">
+				<div class="col-sm-5 min-width-sm">
+					<!-- Propiedad destacar: card= d.flex, border/colores -->
+					<div class="card">
+						<!-- Propiedad destacar: card-header= colores  -->
+						<h2 class="card-header text-center">Informacion del Tripulante</h2>
+						<!-- Propiedad destacar: card-body= flex, padding -->
+						<div class="card-body">
+							<!-- Propiedad destacar: table= color/bordes | table-sm padding -->
+							<table class="table table-sm table-hover">
+								<thead>
+									<tr>
+										<th scope="col">DNI</th>
+										<th scope="col">Apellido</th>
+										<th scope="col">Nombre</th>
+										<th scope="col">Nacionalidad</th>
+									</tr>
+								</thead>
+									
+								<tbody>
+									<tr>
+										<td>12455123</td>
+										<td>Ccccccccc1</td>
+										<td>Eeeeeeee1</td>
+										<td>Argentinaa</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				
+				<div class="col-sm-7 min-width-md">	
+					<div class="card">	
+						<h2 class="card-header text-center">Recorrido del Tripulante</h2>
+						<div class="card-body">	
+							<table class="table table-sm table-hover">
+								<thead>
+									<tr>
+										<th scope="col">Patente-Vehiculo</th>
+										<th scope="col">Fecha-Hora</th>
+										<th scope="col">Localidad</th>
+										<th scope="col">Detalle-Registro</th>
+									</tr>
+								</thead>
+									
+								<tbody>
+									<tr>
+										<td>ARS 154 15</td>
+										<td>15/06/2020 17:35 hs</td>
+										<td>S.S. Jujuy</td>
+										<td>Hola hola hola...</td>
+									</tr>
+					
+									<tr>
+										<td>BR 154 15</td>
+										<td>15/06/2020 22:54 hs</td>
+										<td>Humahuaca</td>
+										<td>Hola hola hola...</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>	
+			</div>
+		</section>
+		
+		<div th:insert="layout/footer :: footer"></div>
+	</body>
+</html>

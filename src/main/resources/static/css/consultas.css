@@ -1,21 +1,39 @@
 
-
-
-
-
-
-.card-overflow-flex{
-
-	overflow: auto;
-	display: flex;
-
+.linea-red{
+	outline: 1px solid red;
 }
 
-.card-flex{
-	flex-wrap: wrap;
+.linea-blue{
+	outline: 1px solid blue;
+}
+
+.linea-green{
+	outline: 1px solid green;
+}
+
+.linea-black{
+	outline: 5px solid black;
 }
 
 .h-100p{
 	height: 100px;
-	
 }
+
+.min-width-xsm{
+	min-width: 300px;
+}
+
+.min-width-sm{
+	min-width: 400px;
+}
+
+.min-width-md{
+	min-width: 500px;
+}
+
+
+
+
+
+
+

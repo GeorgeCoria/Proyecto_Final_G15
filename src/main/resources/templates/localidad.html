@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.5.0/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/consultas.css">
+		<title>Localidad</title>
+	</head>
+	
+	<body>
+		<header th:insert="layout/header :: header"></header>
+		<!-- Propiedades destacada: container-sm min-with 576px = max-with 540px, flex-wrap | mb= margin bottom-->
+		<section class="container-sm mb-5">
+		
+			<!-- Propiedades destacada: nav= flex-wrap, d.flex | nav-tabs=colorBorder -->
+			<nav class="nav nav-tabs mt-3">
+			 	<!-- Propiedades a destacar: nav-item= flex| nav-link y active= borderColor | -->
+			  	<a class="nav-item nav-link active" href="localidad">Localidad</a>
+				<a class="nav-link active" href="tripulante">Tripulante</a>
+				<a class="nav-link active" href="patente">Patente</a>
+			</nav>
+			
+			<!-- mt/b = margin top/bottom -->
+			<h2 class="text-center mt-5 mb-5">Listado de Vehiculo Por Localidad y Fecha-Hora</h2>
+		
+			<!-- mb= margin bottom -->
+			<form class="col-12 mb-5">
+				<!--Propiedades destacar: row=flex-wrap, d.flex-->
+				<div class="row overflow-auto justify-content-center">
+					<div class="col-sm-4 order-1 min-width-xsm">
+					 	<!-- Propiedad destacar: card= d.flex, border/colores | m-3= margin -->
+					  	<div class="card m-3">
+					  		<!-- Propiedad destacar: card-header= colores  -->
+					  		<h2 class="card-header text-center">Inicio Fecha-Hora</h2>
+					  		<!-- Propiedad destacar: card-body= flex, padding -->
+					   		<div class="card-body">
+								<label for="validationDefault01"></label>
+								<!-- required obliga q el campo se complete --> 
+								<input type="datetime-local" class="form-control" id="validationDefault01" required>
+					  		</div>
+					   	</div>
+					</div>
+					  
+					<div class="col-sm-4 order-3 min-width-xsm">
+					 	<div class="card m-3">
+					   		<h2 class="card-header text-center">Fin Fecha-Hora</h2>
+					     	<div class="card-body">
+								<label for="validationDefault02"></label> 
+								<input type="datetime-local" class="form-control" id="validationDefault02" required>
+					      	</div>
+					    </div>
+					</div>
+						  
+					<div class="col-sm-4 order-2 min-width-xsm">
+						   <div class="card m-3">
+						    <h2 class="card-header text-center">Localidades</h2>
+						   	<div class="card-body">
+						   		<!-- Propiedad destacar: custom-select= color/border/letras/ -->
+								<select class="custom-select mt-3" id="validationDefault04" required>
+									<option selected disabled>Sin Seleccionar</option>
+									<option>S.S. Jujuy</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+						
+				<!-- w= width | d= display | mb=margin bottom | h=hight | pb= padding bottom | m=margin -->
+				<div class="w-100 d-flex h-100p">
+					<button class="btn btn-primary w-50 m-auto" type="submit"><b>Buscar</b></button>
+				</div>
+			</form>
+					
+			<div class="col-sm-12 d-flex overflow-auto">
+				<div class="col-sm-7 min-width-md ">
+					<!-- Propiedad destacar: card= d.flex, colores/bordes -->
+					<div class="card">
+					  	<!-- Propiedad destacar: card-header= colores  -->
+					   	<h2 class="card-header text-center">Datos de los Vehiculos</h2>
+					   	<!-- Propiedad destacar: card-body= flex, padding -->
+					   	<div class="card-body">
+					      	<!-- Propiedad destacar: table= color/bordes | table-sm padding -->
+							<table class="table table-hover table-sm">
+								<thead>
+									<tr>
+										<th scope="col">Titular</th>
+										<th scope="col">Patente</th>
+										<th scope="col">Modelo</th>
+										<th scope="col">Marca</th>
+										<th scope="col">Fecha-Hora</th>
+										<th scope="col">Localidad</th>
+									</tr>
+								</thead>
+								
+								<tbody>
+									<tr>
+										<td>Mark</td>
+										<td>AA 441 ES</td>
+										<td>Fiat Cronos</td>
+										<td>Fiat</td>
+										<td>15/06/2020 01:27</td>
+										<td >S.S.J</td>
+									</tr>
+								</tbody>
+							</table>
+					 	</div>
+					 </div>
+				</div>
+					  	
+				<div class="col-sm-5 min-width-sm">
+					<div class="card">
+					    <h2 class="card-header text-center">Datos de los Tripulantes</h2>
+					    <div class="card-body">
+							<table class="table table-hover table-sm">
+								<thead>
+									<tr>
+										<th scope="col">DNI</th>
+										<th scope="col">Apellido</th>
+										<th scope="col">Nombre</th>
+										<th scope="col">Nacionalidad</th>
+									</tr>
+								</thead>
+										
+								<tbody>
+										<tr>
+										<td>23165465</td>
+										<td>A1</td>
+										<td>N1</td>
+										<td>Argentina</td>
+									</tr>
+											
+									<tr>
+										<td>12345465</td>
+										<td>A2</td>
+										<td>N2</td>
+										<td>Brazil</td>
+									</tr>
+											
+									<tr>
+										<td>655665</td>
+										<td>A3</td>
+										<td>N3</td>
+										<td>Chile</td>
+									</tr>
+								</tbody>
+							</table>
+					  	</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	 
+		<div th:insert="layout/footer :: footer"></div>
+	</body>
+</html>
