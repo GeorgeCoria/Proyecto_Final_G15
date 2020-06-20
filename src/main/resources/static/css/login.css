@@ -1,15 +1,32 @@
-body{
-    background: url(../images/fondoReg.jpg) no-repeat center center fixed;
+
+.contenido{
+    background: url(../images/presentacion.jpg) no-repeat center fixed;
     background-size: cover;
+    display: flex;
+}
+
+.presentacion{
+    margin: auto;
+    height: auto;
+    background: none;
 }
 
 .main-section{
-    margin:0 auto;
+    margin: auto;
     margin-top:25%;
-    padding: 0;
+    margin-bottom: 20%;
+}
+
+@media screen and (max-width: 575px){
+	.contenido{
+		display:inline-block;
+	}
 }
 
 .modal-content2 {
+	min-width: 15em;
+    max-width: 18em;
+    margin: auto;
     position: relative;
     display: -ms-flexbox;
     display: flex;
