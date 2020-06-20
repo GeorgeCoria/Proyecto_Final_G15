@@ -1,36 +1,27 @@
 .fondo{
-	width: 100%;
-	
+	width:104%;
 	background-image: url("/images/fondoReg.jpg");
 	background-repeat: no-repeat; /*  La imagen no se repetira  */
 	background-size: cover; /*  La imagen cubrira el contenedor  */
 	background-attachment: fixed; /*  La imagen quedara fija en el fondo y no se movera  */
 }
 
-modal-backdrop {
-     background-color: rgba(0,0,0,.0001) !important;
-}
-
 .cabecera{
 	margin: auto;
 	width: 10%;
-	border: blue;
-	border-radius: 2em;
 }
 
-.abajo{
-	margin-bottom: 0px;	
-}
 
 .transparencia{
 	 background: rgba(34,34,34,0.75); !important;
+	 border-radius: 10em;
+	 box-shadow: 6px 6px 6px black;
 }
 
 div > label {
 	font-family: cursive;
 	color: white;
 	border-radius: 2em;
-	background: rgba(0,255,0,0.5);
 	margin-top: 1em;
 	text-align: center;
 }
@@ -39,30 +30,38 @@ div > label {
 	font-family: cursive;
 	color: white;
 	border-radius: 2em;
-	background: rgba(0,255,0,0.5);
 	width: 33%;
 	margin: 1em auto;
 }
 
 .fondoLista {
-	background-image: url("/images/fondo_select.jpg");
-	background-attachment: fixed; /*  La imagen quedara fija en el fondo y no se movera  */
-	background-size: 70%;
+	  background: rgba(0,255,0,0.1);
 }
 
 .fondoLista select {
-	width: 102%;
+	width: 100%;
 	border: none;
     box-shadow: none;
     background-color: transparent;
     background-image: none;
-    appearance: none;
-    float: left;
 }
 
 hr {
 	background-color: tomato;
 	margin: 2em;
+	box-shadow: 6px 6px 6px tomato;
+}
+
+span{
+	box-shadow: 6px 6px 6px tomato;
+}
+
+input{
+	box-shadow: 6px 6px 6px tomato;
+}
+
+select {
+	box-shadow: 6px 6px 6px tomato;
 }
 
 

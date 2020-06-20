@@ -9,30 +9,30 @@
 	
 	<title>Registrador de Vehiculos </title>
 </head>
-<body class="fondo" >
-<div th:insert="layout/header :: header"></div>
+	<div th:insert="layout/header :: header"></div>
+	<body class="fondo p-0" >
 	
-	<div class="row">
-			<div class="col-md-10 text-center abajo mx-auto my-2">
-	 			<img class="cabecera" src="/images/car.png">	
-	 		</div>
-	  	</div>
-
-	<div class=" modal-content transparencia text-center mb-5">
+<div class="row">
+	<div class="col-md-9 mx-auto">
+	
+	<div class="transparencia text-center mb-5">
 	 	
-	 	<hr>
+	 	
 	 	<div class="row ">
-	 		<div class="col-md-6 text-center mx-auto mb-3">
+	 		
+	 		<div class="col-md-6 text-center mx-auto">
+	 			<hr>
 	 			<h1 class="text-white"> REGISTRO DE VEHICULOS </h1>
+	 			<hr>
 	 		</div>
 	 	</div>		
-	 	<hr>
+	 	
 	 		
 		<div class="row ">
 			<div class="col-md-1"> </div>
 			
 			<div class="col-md-5 mt-3 mb-3 fondoLista">
-				<select class="custom-select text-white "  size="5"  multiple>
+				<select class="custom-select text-white "  size="7"  multiple>
 					<option class="bg-dark text-white text-center font-weight-bold"
 					selected disabled value="">SELECCIONE UNA LOCALIDAD</option>
 					<option value="1">Uno</option>
@@ -101,7 +101,7 @@
 				    </div> 
 				    
 				    <div class="col-md-2 mb-3">
-				      <label for="validationChasis">NUMERO DE CHASIS</label>
+				      <label for="validationChasis">N° DE CHASIS</label>
 				      <div class="input-group">
 				        <div class="input-group-prepend">
 				          <span class="input-group-text" id="inputModelo">123</span>
@@ -114,7 +114,7 @@
 		<div class="row">
 				<div class="col-md-1"> </div>
 				    <div class="col-md-5 mb-3">
-				      <label for="validationMotor">NUMERO DE MOTOR</label>
+				      <label for="validationMotor">N° DE MOTOR</label>
 				      <div class="input-group">
 				        <div class="input-group-prepend">
 				          <span class="input-group-text" id="validationMotor">123</span>
@@ -123,8 +123,8 @@
 				      </div>
 				    <br>
 				   
-				 <p class="tituloLista "> SELECCION DE TIPO </p>
-				<select class="custom-select" id="validationTipo" required>
+				<p class="tituloLista ">TIPO </p>
+				<select class="custom-select mb-5" id="validationTipo" required>
 					<option selected disabled value="">Seleccion el tipo del vehiculo</option>
 					<option>Automovil</option>
 					<option>Motocileta</option>
@@ -141,10 +141,14 @@
 				        <input type="text" class="form-control" id="validationChasis" placeholder="Ingrese aqui el numero de chasis del vehiculo" aria-describedby="inputModelo" size="3" required>
 				      </div>
 				    <br>
-				    <button type="submit" class="btn btn-primary mb-2" >Registrar vehiculo</button>
+				    <button type="submit" class="btn btn-primary mt-2" >Registrar vehiculo</button>
 			</div> 		    
 		</div>		    
  	</div>
- 	<div th:insert="layout/footer :: footer"></div>
+ </div>
+</div>
+ 	<!-- Insercion del fragmento footer utilizando thymeleaf  -->
+	<div th:insert="layout/footer :: footer"></div>
 </body>
+
 </html>
