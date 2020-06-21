@@ -30,7 +30,7 @@ public class RegistroTracking {
 	@Autowired
 	private Vehiculo vehiculos;
 
-
+	
 	private List<Tripulante> tripulantes = new ArrayList <Tripulante>();
 
 	/**

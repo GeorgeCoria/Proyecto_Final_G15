@@ -1,9 +1,13 @@
 .fondo{
-	width:104%;
-	background-image: url("/images/fondoReg.jpg");
+	background-image: url("/images/fondoReg.png");
 	background-repeat: no-repeat; /*  La imagen no se repetira  */
 	background-size: cover; /*  La imagen cubrira el contenedor  */
 	background-attachment: fixed; /*  La imagen quedara fija en el fondo y no se movera  */
+}
+
+.fondoUno{
+	 background: rgba(34,34,34,0.75); !important;
+	 box-shadow: 6px 6px 6px black;
 }
 
 .cabecera{
@@ -32,10 +36,6 @@ div > label {
 	border-radius: 2em;
 	width: 33%;
 	margin: 1em auto;
-}
-
-.fondoLista {
-	  background: rgba(0,255,0,0.1);
 }
 
 .fondoLista select {
