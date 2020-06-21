@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+	<link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/admin.css">
+    <title>Admin</title>
+  </head>
+
+  <body class="container-fluid fondo">
+  
+  <!-- ********************    ******************************** -->
+ <!-- ********** Insercion del header **************** -->
+  	<div th:insert="layout/header :: header"></div>
+  	
+
+  <!-- **************** insercion de la barra de navegacion*********************  -->
+  
+  <!--  <div th:instert="layout/adminNav::nav"></div>-->
+ <div class="nav bg-dark pt-3 pb-3 font-weight-bold">
+	<div class="col-8">
+		<ul class="nav nav-tabs ">
+			<li class="nav-item"><a class="nav-link text-white " href="adminPrincipal">Ver
+					Todo</a></li>
+
+			<li class="nav-item"><a class="nav-link text-white" href="#">Registradores</a>
+			</li>
+
+			<li class="nav-item"><a class="nav-link text-white" href="#">Consultores</a>
+			</li>
+
+			<li class="nav-item"><a
+				class="btn btn-primary font-weight-bold " href="#">Añadir
+					Usuario</a></li>
+		</ul>
+
+	</div>
+
+	<div class="col-4 pr-4">
+		<form class=" float-right form-inline my-2 my-lg-0">
+			<input class="form-control mr-sm-2" type="search"
+				placeholder="Search by dni" aria-label="Search">
+			<button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
+		</form>
+	</div>
+</div>
+  			
+<!-- ******** Formulario Registro de Usuario ****************-->
+
+			<div class="row justify-content-center mt-4">
+				<div class="col-7 formulario">
+					<div class="row text-white justify-content-center">
+						<div class="p-3 mt-3 mb-4 text-center">
+							<h1>FORMULARIO DE REGISTRO</h1>
+						</div>
+					</div>
+					<div class="row justify-content-center text-white">
+						<form class="col-sm-12 col-md-10 pb-3 pr-4 pl-4">
+							<div class="form-group ">
+								<label for="formGroupExampleInput ">NOMBRE DE USUARIO</label> <input
+									type="text" class="form-control" id="formGroupExampleInput"
+									placeholder="Nombre de Usuario">
+							</div>
+							<div class="form-group">
+								<label for="formGroupExampleInput2">PASSWORD</label> <input
+									type="text" class="form-control" id="formGroupExampleInput2"
+									placeholder="Password">
+							</div>
+							<div class="form-group ">
+								<label for="formGroupExampleInput2">NOMBRE REAL</label> <input
+									type="text" class="form-control" id="formGroupExampleInput2"
+									placeholder="Nombre real del Usuario">
+							</div>
+							<div class="form-group ">
+								<label for="formGroupExampleInput2">APELLIDO REAL</label> <input
+									type="text" class="form-control" id="formGroupExampleInput2"
+									placeholder="Apellido del Usuario">
+							</div>
+
+							<fieldset class="form-group">
+								<div class="row">
+									<legend class="col-form-label col-12 col-md-3 pt-0">Tipo
+										de Usuario</legend>
+									<div class="col-12 col-md-9">
+										<div class="form-check">
+											<input class="form-check-input" type="radio"
+												name="gridRadios" id="gridRadios1" value="option1" checked>
+											<label class="form-check-label" for="gridRadios1">
+												REGISTRADOR </label>
+										</div>
+										<div class="form-check">
+											<input class="form-check-input" type="radio"
+												name="gridRadios" id="gridRadios2" value="option2">
+											<label class="form-check-label" for="gridRadios2">
+												CONSULTOR </label>
+										</div>
+									</div>
+								</div>
+							</fieldset>
+
+							<div class="form-group row">
+								<div class="col-sm-10">
+									<button type="submit" class="btn btn-primary">GUARDAR</button>
+									<button type="button" class="btn btn-danger">CANCELAR</button>
+								</div>
+							</div>
+						</form>
+
+					</div>
+				</div>
+			</div>
+
+			<!-- ******** Fin de Formulario ****************-->
+
+  	
+	<!-- Insercion del fragmento footer utlizando thymeleaf  -->
+	<div th:insert="layout/footer :: footer"></div>
+  	
+  </body>
+</html>

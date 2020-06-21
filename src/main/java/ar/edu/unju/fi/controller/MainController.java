@@ -32,13 +32,13 @@ public class MainController {
 	
 	
 	
-	@GetMapping("/listaDeUsuarios")
+	@GetMapping("/adminPrincipal")
 	public String mostrarListaAdmin() {
 		
-		return "listaTiposDeUsuarios";
+		return "adminPrincipal";
 	}
-	@GetMapping("/ventanaAdmin")
+	@GetMapping("/adminFormulario")
 	public String mostrarFormAdmin() {
-		return "agregarEditarUsuario";
+		return "adminFormulario";
 	}
 }
