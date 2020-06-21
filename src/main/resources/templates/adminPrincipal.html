@@ -7,46 +7,53 @@
 
     <!-- Bootstrap CSS -->
 	<link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.5.0/css/bootstrap.min.css">
-    
+    <link rel="stylesheet" type="text/css" href="css/admin.css">
     <title>Hello, world!</title>
   </head>
 
-  <body class="container">
+  <body class="container-fluid">
 
 	<div th:insert="layout/header :: header"></div>
+	
+	  	<div class=" pb-5 contenedor-cuerpo">
 
-	<div class="jumbotron jumbotron-fluid">
-		<div class="container">
-			<h1 class="display-4">Lista de Usuarios</h1>
+  		<div class="nav bg-dark pt-3 pb-3 font-weight-bold">
+  			<div class="col-8">
+  			<ul class="nav nav-tabs ">
+		  		<li class="nav-item">
+		   		 	<a class="nav-link text-white " href="#">Ver Todo</a>
+		  		</li>
+
+		  		<li class="nav-item">
+		    		<a class="nav-link text-white" href="#">Registradores</a>
+		  		</li>
+
+		  		<li class="nav-item">
+		   			 <a class="nav-link text-white" href="#">Consultores</a>
+		  		</li>
+
+		 		<li class="nav-item">
+		   			 <a class="btn btn-primary font-weight-bold " href="adminFormulario">Añadir Usuario</a>
+		  		</li>  
+			</ul>
+
+  		</div>
+  		
+		<div class="col-4 pr-4">
+			<form class=" float-right form-inline my-2 my-lg-0">
+	     		<input class="form-control mr-sm-2" type="search" placeholder="Search by dni" aria-label="Search">
+	    	  	<button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
+	    	</form>
 		</div>
-	</div>
-
-	<div class="table table-borderless">
-	  <div class="row">
-	    <div class="col-9">
-	      <ul class="nav nav-tabs" >
-			  <li class="nav-item">
-			    <a class="nav-link active" href="#">Ver Todo</a>
-			  </li>
-			  <li class="nav-item">
-			    <a class="nav-link" href="#">Registradores</a>
-			  </li>
-			  <li class="nav-item">
-			    <a class="nav-link" href="#">Consultores</a>
-			  </li>
-			   
-		</ul>
-	    </div>
-	    <div class="col 3">
-	      <button type="button" class="btn btn-primary">Añadir Usuario</button>
-	    </div>
-	  </div>
-	 </div>
-
-	 
-
-
-	<table class="table table-striped">
+	  	</div>
+  	<div class="container tablaa">
+  		<div class="row mt-4 mb-3 justify-content-center ">
+  			<!--<div class="col-12 align-items-center">-->
+  				<h1 class="text-white "> Lista de Usuarios</h1>
+  			<!--</div>-->
+  			
+  		</div>
+  		<table class="table table-reponsive-sm text-white ">
 	  <thead>
 	    <tr>
 	      <th scope="col">Nombre De Usuario</th>
@@ -89,6 +96,11 @@
 	    </tr>
 	  </tbody>
 	</table>
+  	</div>
+  		
+  	</div>
+
+
 	
 	<!-- Insercion del fragmento footer utlizando thymeleaf  -->
 	<div th:insert="layout/footer :: footer"></div>

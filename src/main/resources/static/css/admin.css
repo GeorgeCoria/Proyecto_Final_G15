@@ -1,0 +1,45 @@
+.fondo{
+	background-image: url("../images/fondo.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+	position: relative;
+
+}
+fondo::before{
+	content:"";
+	opacity: 0.6;
+	width: 100%;
+	height: 100%;
+	background: black;
+	position: absolute;
+	
+}
+.formulario{
+	background: rgba(0,0,0,0.6);
+
+}
+.bordes{
+	border: 2px red solid;
+}
+/* ****** Clases para la ventana principal de admin ***** */
+.contenedor-cuerpo{
+	background-image: url("../images/fondo-admin.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+	position: relative;
+	width: 100%;
+	
+}
+
+contenedor-cuerpo:before{
+	content: "";
+	opacity: 0.6;
+	background-color: black;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+.tablaa{
+	background: rgba(0,0,0,0.6);
+	
+}
