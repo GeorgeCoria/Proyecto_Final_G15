@@ -1,5 +1,14 @@
 package ar.edu.unju.fi.model;
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import org.springframework.stereotype.Component;
 
 /**
@@ -12,16 +21,35 @@ import org.springframework.stereotype.Component;
  *
  */
 @Component
-public class Localidad {
+@Entity
+@Table(name = "localidades")
+public class Localidad implements Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	// ---------------VARIABLES MIEMBRO---------------//
+	
+	/**
+	 * Atributo de tipo Long para identificar cada registro (objetos) de esta clase con un valor univoco
+	 */
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column
+	private Long id;
+	
 	/**
 	 * Atributo de la clase Localidad
 	 * que almacena el nombre de la 
 	 * Localidad 
 	 */
+	@Column
 	private String nombre;
 	
 	
-	//---------- METODOS CONSTRUCTORES ------
+	// -----------------CONSTRUCTORES-----------------//
 	
 	/**
 	 * Constructor por defecto sin 
@@ -43,7 +71,25 @@ public class Localidad {
 		this.nombre = nombre;
 	}
 	
-	//--------- METODOS ACCESORES ------
+	// ---------------METODOS ACCESORES---------------//
+	
+	/**
+	 * Devuelve el valor del atributo id
+	 * 
+	 * @return the id
+	 */
+	public Long getId() {
+		return id;
+	}
+
+	/**
+	 * Asigna un valor al atributo id
+	 * 
+	 * @param id the id to set
+	 */
+	public void setId(Long id) {
+		this.id = id;
+	}
 	
 	/**
 	 * Permite la capturar
@@ -78,7 +124,7 @@ public class Localidad {
 	 */
 	@Override
 	public String toString() {
-		return "Localidad [nombre=" + nombre + "]";
+		return "Localidad [id=" + id + ", nombre=" + nombre + "]";
 	}
 
 	

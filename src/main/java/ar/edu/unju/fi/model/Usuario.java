@@ -3,6 +3,15 @@
  */
 package ar.edu.unju.fi.model;
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import org.springframework.stereotype.Component;
 
 /**
@@ -12,32 +21,53 @@ import org.springframework.stereotype.Component;
  */
 
 @Component
-public class Usuario {
+@Entity
+@Table(name = "usuarios")
+public class Usuario implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	//----------------- Variables Miembros o Atributos -----------------//
+	
+	/**
+	 * Atributo de tipo Long para identificar cada registro (objetos) de esta clase con un valor univoco
+	 */
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column
+	private Long id;
+	
 	/**
 	 * Representa el nombre de la clase Usuario.
 	 */
+	@Column(name = "NOMBRE_USUARIO")
 	private String nombreUsuario;
 	
 	/**
 	 * Representa la contraseña de la clase Usuario.
 	 */
+	@Column
 	private String password;
 	
 	/**
 	 * Representa el nombre Real de la clase Usuario.
 	 */
+	@Column(name = "NOMBRE_REAL")
 	private String nombreReal;
 	
 	/**
 	 * Representa el apellido Real de la clase Usuario.
 	 */
+	@Column(name = "APELLIDO_REAL")
 	private String apellidoReal;
 	
 	/**
 	 * Representa el tipo de usuario de la clase Usuario. (consultor-registrador-adm)
 	 */
+	@Column(name = "TIPO_USUARIO")
 	private String tipoUsuario;
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -71,6 +101,24 @@ public class Usuario {
 	//////////////////////////////////////////////////////////////////////////////////////////////////////
 	//----------------- Metodos Accesores -----------------//
 
+	/**
+	 * Devuelve el valor del atributo id
+	 * 
+	 * @return the id
+	 */
+	public Long getId() {
+		return id;
+	}
+
+	/**
+	 * Asigna un valor al atributo id
+	 * 
+	 * @param id the id to set
+	 */
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
 	/**
 	 * Devuelve el nombreUsuario de la clase Usuario.
 	 * @return the nombreUsuario
@@ -171,7 +219,7 @@ public class Usuario {
 	 */
 	@Override
 	public String toString() {
-		return "Usuario [nombreUsuario=" + nombreUsuario + ", password=" + password + ", nombreReal=" + nombreReal
+		return "Usuario [id=" + id + ", nombreUsuario=" + nombreUsuario + ", password=" + password + ", nombreReal=" + nombreReal
 				+ ", apellidoReal=" + apellidoReal + ", tipoUsuario=" + tipoUsuario + "]";
 	}	
 }

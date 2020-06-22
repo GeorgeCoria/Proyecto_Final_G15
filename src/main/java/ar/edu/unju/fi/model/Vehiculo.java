@@ -1,5 +1,14 @@
 package ar.edu.unju.fi.model;
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import org.springframework.stereotype.Component;
 
 /**
@@ -8,49 +17,73 @@ import org.springframework.stereotype.Component;
  * @author Marcia Velarde
  *
  */
-@Component
-public class Vehiculo {
 
+@Component
+@Entity
+@Table(name = "vehiculos")
+public class Vehiculo implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	// ---------------VARIABLES MIEMBRO---------------//
 
 	/**
+	 * Atributo de tipo Long para identificar cada registro (objetos) de esta clase con un valor univoco
+	 */
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column
+	private Long id;
+	
+	/**
 	 * Variable de tipo String para gestionar la patente del vehiculo
 	 */
+	@Column
 	private String patente;
 	
 	/**
 	 * Variable de tipo String para gestionar el color del vehiculo
 	 */
+	@Column
 	private String color;
 	
 	/**
 	 * Variable de tipo String para gestionar el nombre del titular del vehiculo
 	 */
+	@Column
 	private String titular;
 	
 	/**
 	 *  Variable de tipo String para gestionar la marca del vehiculo
 	 */
+	@Column
 	private String marca;
 	
 	/**
 	 * Variable de tipo String para gestionar el modelo del vehiculo
 	 */
+	@Column
 	private String modelo;
 	
 	/**
 	 * Variable de tipo String para gestionar el tipo del vehiculo
 	 */
+	@Column
 	private String tipo;
 	
 	/**
 	 * Variable de tipo String para gestionar el numero de chasis del vehiculo
 	 */
+	@Column(name = "NUMERO_CHASIS")
 	private String numeroChasis;
 	
 	/**
 	 * Variable de tipo String para gestionar el numero de motor del vehiculo
 	 */
+	@Column(name = "NUMERO_MOTOR")
 	private String numeroMotor;
 	
 	// -----------------CONSTRUCTORES-----------------//
@@ -87,6 +120,24 @@ public class Vehiculo {
 	}
 
 	// ---------------METODOS ACCESORES---------------//
+	
+	/**
+	 * Devuelve el valor del atributo id
+	 * 
+	 * @return the id
+	 */
+	public Long getId() {
+		return id;
+	}
+
+	/**
+	 * Asigna un valor al atributo id
+	 * 
+	 * @param id the id to set
+	 */
+	public void setId(Long id) {
+		this.id = id;
+	}
 	
 	/**
 	 * Devuelve el valor del atributo patente
@@ -239,7 +290,7 @@ public class Vehiculo {
 	 */
 	@Override
 	public String toString() {
-		return "Vehiculo [patente=" + patente + ", color=" + color + ", titular=" + titular + ", marca=" + marca
+		return "Vehiculo [id=" + id + ", patente=" + patente + ", color=" + color + ", titular=" + titular + ", marca=" + marca
 				+ ", modelo=" + modelo + ", tipo=" + tipo + ", numeroChasis=" + numeroChasis + ", numeroMotor="
 				+ numeroMotor + "]";
 	}
