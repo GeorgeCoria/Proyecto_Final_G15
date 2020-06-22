@@ -3,11 +3,9 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
 	<link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.5.0/css/bootstrap.min.css">
 	
-	<link rel="stylesheet" type="text/css"
-	href="static/css/registrador2.css" th:href="@{/css/registrador2.css}">
+	<link rel="stylesheet" type="text/css" href="static/css/registrador2.css" th:href="@{/css/registrador2.css}">
 
 	<title>Registrador de usuarios</title>
 </head>
@@ -15,43 +13,97 @@
 <body>
 	<div th:insert="layout/header :: header"></div>
 
-	<div class="modal-dialog text-center">
-		<div class="col-sm-12 formulario">
-			<div class="modal-content">
-
-				<div class="col-12 user-img">
-					<img src="/images/user.png">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-11 text-center mx-auto bg-light fondoUno mb-2">
+			 <hr>
+			 <h1> REGISTRO DE TRIPULANTES </h1>
+			 <hr>
+			 </div>
+		</div>
+	<div class="row mx-auto">
+		<div class="col-md-4 text-center mx-auto mb-2">
+			<div class="row">
+				<div class=" col-md-12 table-primary fondoUno mb-2">
+					<h1 class="texto"> INSTRUCCIONES </h1>
 				</div>
-
-				<form class="col-12">
-					<div class="form-group" id="user-group">
-						<input type="text" class="form-control" placeholder="Nombre"
-							name="username" />
-					</div>
-
-					<div class="form-group" id="apellido-group">
-						<input type="text" class="form-control" placeholder="Apellido "
-							name="surname" />
-					</div>
-
-					<div class="form-group" id="nacionalidad-group">
-						<input type="text" class="form-control" placeholder="Nacionalidad"
-							name="nacionality" />
-					</div>
-
-					<div class="form-group" id="dni-group">
-						<input type="number" class="form-control" placeholder="D.N.I."
-							name="dni" />
-					</div>
-
-
-					<button type="submit" class="btn btn-primary">Registrar
-						usuario</button>
-					<button type="submit" class="btn btn-primary">Terminar
-						registro</button>
-				</form>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-12 mx-auto mt-1 mb-3 bg-warning borde">
+					<p class="texto text-center"> Ha ingresado en el formulario de carga de tripulantes</p>
+					<p class="texto text-center"> llenado el formulario podra realizar algunas acciones </p>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class=" col-md-12 table-primary fondoUno mb-2">
+					<h1 class="texto"> CARGAR TRIPULANTE </h1>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-12 mx-auto mt-1 mb-3 bg-warning borde">
+					<p class="texto text-justify"> <i class="fas fa-user-plus"></i> Tras llenar el formulario, podra cargar un tripulante usnado cualquiera de los botones pero el boton REGISTRAR TRIPULANTE limpiara los campos para poder ingresar otro tripulante mientras FINALIZAR REGISTRO ingresara el nuevo tripulante y finalizara la carga</p>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class=" col-md-12 table-primary fondoUno mb-2">
+					<h1 class="texto"> FINALIZAR REGISTRO </h1>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-12 mx-auto mt-1 mb-3 bg-info borde">
+					<p class="texto text-justify"> <i class="fas fa-user-plus"></i> Si el registro del vehiculo tiene al menos un tripulante podra usar este boton para finalizar la carga de tripulantes, si el formulario esta incompleto el nuevo tripulante no se cargara caso contrario se ingresara el nuevo tripualante y se finalizara el registro</p>
+				</div>
 			</div>
 		</div>
+		
+		<div class="col-md-7 text-center mx-auto  mb-2">
+			<div class="row">
+				<div class=" col-md-12 table-primary fondoUno mb-2">
+					<h1 class="texto"> DETALLES DEL USUARIO </h1>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-12 bg-success borde">
+					<div class="form-group row my-4">
+						<label for="nombre" class="col-sm-2 col-form-label my-auto "> <i class="far fa-user"></i></label>
+						<div class="col-sm-10">
+						<input type="text" class="form-control" id="nombre" placeholder="NOMBRE">
+						</div>
+					</div>
+					
+					<div class="form-group row my-4">
+						<label for="apellido" class="col-sm-2 col-form-label my-auto "> <i class="far fa-user"></i></label>
+						<div class="col-sm-10">
+						<input type="text" class="form-control" id="apellido" placeholder="APELLIDO">
+						</div>
+					</div>
+					
+					<div class="form-group row my-4">
+						<label for="nacionalidad" class="col-sm-2 col-form-label my-auto "> <i class="fab fa-font-awesome-flag"></i></label>
+						<div class="col-sm-10">
+						<input type="text" class="form-control" id="nacionalidad" placeholder="NACIONALIDAD">
+						</div>
+					</div>
+					
+					<div class="form-group row my-4">
+						<label for="documento" class="col-sm-2 col-form-label my-auto "> <i class="fas fa-id-card"></i></label>
+						<div class="col-sm-10">
+						<input type="text" class="form-control" id="documento" placeholder="DOCUMENTO">
+						</div>
+					</div>
+					
+					<button type="submit" class="btn btn-primary texto"> <i class="fas fa-user-plus"></i> REGISTRAR TRIPULANTE</button>
+					<button type="submit" class="btn btn-primary texto"> <i class="fas fa-ban"></i> TERMINAR REGISTRO</button>
+				</div>
+			</div>	
+		</div>		
+	</div>
 	</div>
 	<div th:insert="layout/footer :: footer"></div>
 </body>

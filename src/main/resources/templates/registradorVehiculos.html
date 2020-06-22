@@ -7,6 +7,7 @@
 	<link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.5.0/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="css/registrador.css"/>
 	
+	
 	<title>Registrador de Vehiculos </title>
 </head>
 	
@@ -14,115 +15,157 @@
 	<div th:insert="layout/header :: header"></div>
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col-md-11 bg-light mx-auto my-1 fondoUno"> <!-- CONTENEDOR-FORMULARIO -->
-					<div class="row">
-							<div class="col-md-12 text-center mx-auto">
-			 					<hr>
-			 					<h1> REGISTRO DE VEHICULOS </h1>
-			 					<hr>
-			 				</div>
-					</div>
-					
-					<div class="row ">
-						<div class="col-md-4 my-2 mx-auto" >
-								<div class="form-group" id="patente">
-								<input type="text" class="form-control" placeholder="PATENTE"
-								name="pat" />
-								</div>
-							
-								<div class="form-group" id="color">
-								<input type="text" class="form-control" placeholder="COLOR"
-								name="clr" />
-								</div>
-						</div>
-						
-						<div class="col-md-4 mb-3">
-							<select class="custom-select text-black "  size="4"  multiple>
-								<option class="bg-dark text-white text-center font-weight-bold"
-								selected disabled value="">LOCALIDAD</option>
-								<option value="1">Uno</option>
-								<option value="2">Dos</option>
-								<option value="3">Tres</option>
-								<option value="4">Cuatro</option>
-								<option value="5">Cinco</option>
-								<option value="6">Seis</option>
-								<option value="7">Siete</option>
-								<option value="8">Ocho</option>
-							</select>
-						</div>
-						
-						<div class="col-md-4 my-1 mx-auto" >
-								<div class="form-group " id="chasis">
-								<input type="text" class="form-control" placeholder="N° CHASIS"
-								name="chas" />
-								</div>
-
-								<div class="form-group" id="motor">
-								<input type="text" class="form-control" placeholder="N° MOTOR"
-								name="mtr" />
-								</div>
-						</div>
-					</div> <!--  FIN DE ROW DE LISTA -->
+				<div class="col-md-11 text-center mx-auto bg-light fondoUno mb-2">
+			 	<hr>
+			 	<h1> REGISTRO DE VEHICULOS </h1>
+			 	<hr>
+			 	</div>
+			</div>
+			<div class="row mx-auto">
+				<div class="col-md-6 text-center mx-auto borde mb-2">
 					
 					<div class="row">
-						<div class="col-md-4">
-							<div class="form-group" id="titular">
-								<input type="text" class="form-control" placeholder="TITULAR"
-								name="tit" />
-							</div>
-						</div>
-						
-						<div class="col-md-4">
-							<div class="form-group" id="marca">
-								<input type="text" class="form-control" placeholder="MARCA"
-								name="mar" />
-							</div>
-						</div>
-						
-						<div class="col-md-4">
-							<div class="form-group" id="modelo">
-								<input type="text" class="form-control" placeholder="MODELO"
-								name="mod" />
-							</div>
+						<div class=" col-md-12 table-primary fondoUno mb-2">
+							<h1 class="texto"> DETALLES DEL VEHÍCULO </h1>
 						</div>
 					</div>
 					
-				<div class="row">
-					<div class="col-md-8 mx-auto">
-						<div class="row">
-							<div class="col-md-6 mx-auto">
-								<select class="custom-select mb-5" id="validationTipo" required>
-									<option selected disabled value="">Seleccion el tipo del vehiculo</option>
-									<option>Automovil</option>
-									<option>Motocileta</option>
-									<option>Camion</option>
-								</select>
+					<div class="row">
+						<div class=" col-md-12 bg-danger">
+						
+							<div class="form-group row my-4">
+							    <label for="patente" class="col-sm-2 col-form-label my-auto texto">PATENTE</label>
+							    <div class="col-sm-10">
+							      <input type="text" class="form-control" id="patente" placeholder="PATENTE">
+							    </div>
 							</div>
 							
-							<div class="col-md-6 mx-auto">
-								<div class="form-group" id="detalles">
-								<input type="text" class="form-control" placeholder="DETALLES"
-								name="det" />
+							<div class="form-group row mb-4">
+							    <label for="marca" class="col-sm-2 col-form-label my-auto texto">MARCA</label>
+							    <div class="col-sm-10">
+							      <input type="text" class="form-control" id="marca" placeholder="MARCA">
+							    </div>
 							</div>
+							
+							<div class="form-group row mb-4">
+							    <label for="modelo" class="col-sm-2 col-form-label my-auto texto">MODELO</label>
+							    <div class="col-sm-10">
+							      <input type="text" class="form-control" id="modelo" placeholder="MODELO">
+							    </div>
 							</div>
-						
+							
+							<div class="form-group row mb-4">
+							    <label for="chasis" class="col-sm-2 col-form-label my-auto texto">CHASIS</label>
+							    <div class="col-sm-10">
+							      <input type="text" class="form-control" id="chasis" placeholder="N° DE CHASIS">
+							    </div>
+							</div>
+							
+							<div class="form-group row mb-4">
+							    <label for="motor" class="col-sm-2 col-form-label my-auto texto">MOTOR</label>
+							    <div class="col-sm-10">
+							      <input type="text" class="form-control" id="motor" placeholder="N° DE MOTOR">
+							    </div>
+							</div>
+							
+							<div class="form-group row mb-4">
+							    <label for="color" class="col-sm-2 col-form-label my-auto texto">COLOR</label>
+							    <div class="col-sm-10">
+							      <input type="text" class="form-control" id="color" placeholder="COLOR">
+							    </div>
+							</div>
+							
+							<div class="form-group row mb-4">
+							    <label for="tipo" class="col-sm-2 col-form-label my-auto texto">TIPO</label>
+							    <div class="col-sm-10">
+							      <input type="text" class="form-control" id="tipo" placeholder="TIPO">
+							    </div>
+							</div>
+							
+							<div class="form-group row mb-4">
+							    <label for="titular" class="col-sm-2 col-form-label my-auto texto">TITULAR</label>
+							    <div class="col-sm-10">
+							      <input type="text" class="form-control" id="titular" placeholder="TITULAR">
+							    </div>
+							</div>
 							
 						</div>
-					</div>	
+					</div>
 				</div>
 				
+				<div class="col-md-5 text-center mx-auto  mb-2">
+					<div class="row">
+						<div class=" col-md-12 table-primary fondoUno mb-2">
+							<h1 class="texto"> LOCALIDAD </h1>
+						</div>
+					</div>
+					
+					<div class="row mb-2">
+						<div class=" col-md-12 bg-danger borde">
+							<div class="row">
+								<div class="col-md-12 mx-auto">
+									<select class="custom-select text-black lista"  size="7"  multiple>
+										<option class="bg-dark text-white text-center font-weight-bold"
+										selected disabled value="">LOCALIDAD</option>
+										<option value="1">Uno</option>
+										<option value="2">Dos</option>
+										<option value="3">Tres</option>
+										<option value="4">Cuatro</option>
+										<option value="5">Cinco</option>
+										<option value="6">Seis</option>
+										<option value="7">Siete</option>
+										<option value="8">Ocho</option>
+									</select>
+								</div>
+							</div>	
+						</div>
+					</div>
 					
 				<div class="row">
-					<div class="col-md-8 mx-auto mt-1 mb-3">
-						<button type="button" class="btn btn-primary btn-lg btn-block">REGISTRAR VEHICULO</button>
+						<div class="col-md-12 mx-auto">
+								<div class="row">
+									<div class=" col-md-12 table-primary fondoUno mb-2">
+										<h1 class="texto"> DETALLES DEL LUGAR </h1>
+									</div>
+								</div>
+						</div>			
+				</div>
+				
+				<div class="row">
+						<div class="col-md-12 mx-auto bg-danger">
+								<div class="form-group row mb-4 my-3">
+							    <label for="detalles" class="col-sm-2 col-form-label my-auto texto">DETALLES</label>
+							    <div class="col-sm-10">
+							      <input type="text" class="form-control" id="detalles" placeholder="DETALLES DEL LUGAR DEL REGISTRO">
+							    </div>
+							</div>
+						</div>			
+				</div>
+				
+				<div class="row">
+					<div class="col-md-8 mx-auto mt-3 mb-2">
+						<button type="button" class=" texto btn btn-primary btn-lg btn-block"> <i class="fas fa-car"></i> REGISTRAR VEHICULO</button>
 					</div>
-				</div>	
-					
-						
-				</div> <!-- contenedor principal -->
-			
+				</div>
+				
+				<div class="row">
+						<div class="col-md-12 mx-auto">
+								<div class="row">
+									<div class=" col-md-12 table-primary fondoUno mb-2">
+										<h1 class="texto"> INSTRUCCIONES </h1>
+									</div>
+								</div>
+						</div>			
+				</div>
+				
+				<div class="row">
+						<div class="col-md-12 mx-auto mt-1 mb-3 table-danger borde">
+							<p class="texto"> Ingrese los datos del vehiculo que cruce por un puesto</p>
+							<p class="texto"> Tras llenar el formulario, use el boton REGISTRAR VEHICULO para ingresar los datos de los tripulantes</p>
+						</div>
+					</div>
+				</div>
 			</div>
-			
 		</div>
 	<div th:insert="layout/footer :: footer"></div>
 </body>
