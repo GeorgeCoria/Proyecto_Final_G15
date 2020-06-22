@@ -9,78 +9,79 @@
 	
 	<body>
 		<header th:insert="layout/header :: header"></header>
-		<!-- Propiedades destacada: container-sm min-with 576px = max-with 540px, flex-wrap | mb= margin bottom-->
-		<section class="container-sm mb-5">
-		
-			<!-- Propiedades destacada: nav= flex-wrap, d.flex | nav-tabs=colorBorder -->
-			<nav class="nav nav-tabs mt-3">
+		<!--mb= margin bottom-->
+		<section class="col-12 mb-5">
+			<!-- Propiedades destacada: nav= d.flex | nav-tabs=colorBorder | mt=margin top-->
+			<nav class="col-10 m-auto nav nav-tabs mt-3">
 			 	<!-- Propiedades a destacar: nav-item= flex| nav-link y active= borderColor | -->
-			  	<a class="nav-item nav-link active" href="localidad">Localidad</a>
+			  	<a class="nav-item nav-link active text-success" href="localidad">Localidad</a>
 				<a class="nav-link active" href="tripulante">Tripulante</a>
 				<a class="nav-link active" href="patente">Patente</a>
 			</nav>
 			
-			<!-- mt/b = margin top/bottom -->
-			<h2 class="text-center mt-5 mb-5">Listado de Vehiculo Por Localidad y Fecha-Hora</h2>
-		
-			<!-- mb= margin bottom -->
-			<form class="col-12 mb-5">
-				<!--Propiedades destacar: row=flex-wrap, d.flex-->
-				<div class="row overflow-auto justify-content-center">
-					<div class="col-sm-4 order-1 min-width-xsm">
-					 	<!-- Propiedad destacar: card= d.flex, border/colores | m-3= margin -->
-					  	<div class="card m-3">
-					  		<!-- Propiedad destacar: card-header= colores  -->
-					  		<h2 class="card-header text-center">Inicio Fecha-Hora</h2>
-					  		<!-- Propiedad destacar: card-body= flex, padding -->
-					   		<div class="card-body">
-								<label for="validationDefault01"></label>
-								<!-- required obliga q el campo se complete --> 
-								<input type="datetime-local" class="form-control" id="validationDefault01" required>
-					  		</div>
-					   	</div>
+			<!-- mt/b = margin top/bottom | btn-link= subrayado-->
+			<h2 class="col-sm-12 text-center mt-5 mb-5 btn-link text-dark font-weight-normal">Listado de Vehiculo Por Localidad y Fecha-Hora</h2>
+			<!-- Propiedades a destacar: row= d.flex, flex-wrap | m=margin-->
+			<form class="col-12 mb-5 row m-0  justify-content-center">
+				<div class="col-lg-3 col-sm-6 order-md-1">
+					<!-- Propiedades destacar: card/border-success= borderColor -->
+					<div class="card m-3 shadow-sm border-success">
+					  	<!-- Propiedad destacar: card-header= padding  -->
+					  	<h4 class="card-header text-center bg-success font-weight-normal">Inicio<br>Fecha Hora</h4>
+					  	<!-- Propiedad destacar: card-body= padding -->
+					   	<div class="card-body">
+							<label for="validationDefault01"></label>
+							<!-- required obliga q el campo se complete --> 
+							<input type="datetime-local" class="form-control text-center border-success" id="validationDefault01" required>
+					  	</div>
 					</div>
+				</div>
 					  
-					<div class="col-sm-4 order-3 min-width-xsm">
-					 	<div class="card m-3">
-					   		<h2 class="card-header text-center">Fin Fecha-Hora</h2>
-					     	<div class="card-body">
-								<label for="validationDefault02"></label> 
-								<input type="datetime-local" class="form-control" id="validationDefault02" required>
-					      	</div>
-					    </div>
-					</div>
-						  
-					<div class="col-sm-4 order-2 min-width-xsm">
-						   <div class="card m-3">
-						    <h2 class="card-header text-center">Localidades</h2>
-						   	<div class="card-body">
-						   		<!-- Propiedad destacar: custom-select= color/border/letras/ -->
-								<select class="custom-select mt-3" id="validationDefault04" required>
-									<option selected disabled>Sin Seleccionar</option>
-									<option>S.S. Jujuy</option>
-								</select>
-							</div>
+				<div class="col-lg-3 col-sm-6 order-sm-3 order-lg-2">
+					<div class="card m-3 shadow-sm border-success">
+						<h4 class="card-header text-center bg-success font-weight-normal">Localidades</h4>
+						<div class="card-body ">
+							<!-- Propiedad destacar: custom-select= color/border/letras/ -->
+							<select class="custom-select mt-3 border-success" id="validationDefault04" required>
+								<option selected disabled>Sin Seleccionar</option>
+								<option>S.S. Jujuy</option>
+							</select>
 						</div>
 					</div>
 				</div>
+					  
+				<div class="col-lg-3 col-sm-6 order-md-2">
+					<!-- Propiedades destacar: card/border-success= borderColor -->
+					<div class="card m-3 shadow-sm border-success">
+						<!-- Propiedad destacar: card-header= padding-->
+						<h4 class="card-header text-center bg-success font-weight-normal">Fin<br>Fecha Hora</h4>
+						<!-- Propiedad destacar: card-body= padding-->
+						<div class="card-body">
+							<label for="validationDefault02"></label> 
+							<input type="datetime-local" class="form-control text-center border-success" id="validationDefault02" required>
+						</div>
+					</div>
+				</div>
+				
 						
 				<!-- w= width | d= display | mb=margin bottom | h=hight | pb= padding bottom | m=margin -->
-				<div class="w-100 d-flex h-100p">
-					<button class="btn btn-primary w-50 m-auto" type="submit"><b>Buscar</b></button>
+				<div class="col-12 h-100p order-sm-4 align-items-center  d-flex ">
+					<!-- rounded/success= borderRedondeo/color -->
+					<button class="rounded-pill border-success col-sm-3 m-auto" type="submit"><b>Buscar</b></button>
 				</div>
 			</form>
-					
-			<div class="col-sm-12 d-flex overflow-auto">
-				<div class="col-sm-7 min-width-md ">
-					<!-- Propiedad destacar: card= d.flex, colores/bordes -->
-					<div class="card">
-					  	<!-- Propiedad destacar: card-header= colores  -->
-					   	<h2 class="card-header text-center">Datos de los Vehiculos</h2>
-					   	<!-- Propiedad destacar: card-body= flex, padding -->
+			
+			<!-- Propiedad destacar: table-responsive-xl= overflow -->		
+			<div class="d-flex table-responsive-xl">
+				<div class="col-auto min-width-1 mx-auto">
+					<!-- Propiedad destacar: card/border-= coloresBordes -->
+					<div class="card shadow-sm  border-lighter-dark">
+					  	<!-- Propiedad destacar: card-header= colores | bg= background-color -->
+					   	<h2 class="card-header text-center font-weight-normal bg-lighter-dark">Datos de los Vehiculos</h2>
+					   	<!-- Propiedad destacar: card-body= padding -->
 					   	<div class="card-body">
-					      	<!-- Propiedad destacar: table= color/bordes | table-sm padding -->
-							<table class="table table-hover table-sm">
+					      	<!-- Propiedad destacar: table= color/bordes-->
+							<table class="table table-hover ">
 								<thead>
 									<tr>
 										<th scope="col">Titular</th>
@@ -107,11 +108,15 @@
 					 </div>
 				</div>
 					  	
-				<div class="col-sm-5 min-width-sm">
-					<div class="card">
-					    <h2 class="card-header text-center">Datos de los Tripulantes</h2>
+				<div class="col-auto mx-auto min-width-2">
+					<!-- Propiedad destacar: card/border-= coloresBordes -->
+					<div class="card shadow-sm border-lighter-dark">
+						<!-- Propiedad destacar: card-header= colores | bg= background-color -->
+					    <h2 class="card-header text-center font-weight-normal bg-lighter-dark">Datos de los Tripulantes</h2>
+					    <!-- Propiedad destacar: card-body= padding -->
 					    <div class="card-body">
-							<table class="table table-hover table-sm">
+					    	<!-- Propiedad destacar: table= color/bordes -->
+							<table class="table table-hover">
 								<thead>
 									<tr>
 										<th scope="col">DNI</th>
@@ -122,7 +127,7 @@
 								</thead>
 										
 								<tbody>
-										<tr>
+									<tr>
 										<td>23165465</td>
 										<td>A1</td>
 										<td>N1</td>

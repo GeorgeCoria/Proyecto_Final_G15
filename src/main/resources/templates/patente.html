@@ -9,75 +9,88 @@
 	
 	<body>
 		<header th:insert="layout/header :: header"></header>
-		<!-- Propiedades destacada: container-sm min-with 576px = max-with 540px, flex-wrap | mb= margin bottom-->
-		<section class="container-sm mb-5 ">
-			<!-- Propiedades destacada: nav= flex-wrap, d.flex | nav-tabs=colorBorder -->
-			<nav class="nav nav-tabs mt-3" >
+		<!-- Propiedades destacada: mb= margin bottom-->
+		<section class="mb-5">
+			<!-- Propiedades destacada: nav=d.flex | nav-tabs=colorBorder -->
+			<nav class="col-10 m-auto nav nav-tabs mt-3">
 				<!-- Propiedades a destacar: nav-item= flex| nav-link y active= borderColor | w=width-->
 				<a class="nav-link active" href="localidad">Localidad</a>
 				<a class="nav-link active" href="tripulante">Tripulante</a>
-				<a class="nav-item nav-link active" href="patente">Patente</a>
+				<a class="nav-item nav-link active text-danger" href="patente">Patente</a>
 			</nav>
 			
-			<!-- mt/b = margin top/bottom -->
-			<h2 class="text-center mt-5 mb-5">Listado Recorrido por Patente</h2>
+			<!-- mt/b = margin top/bottom | btn-link= subrayado-->
+			<h2 class="col-sm-12 text-center mt-5 mb-5 btn-link text-dark font-weight-normal">Listado Recorrido por Patente</h2>
 				
-			<!-- Propiedades a destacar: form-inline= d.flex, flex-wrap -->	
-			<form class="form-inline justify-content-end mt-5 mb-5" method="get">
-				<!-- Propiedades a destacar: form-group/form-control= color/border/font -->
-				<input type="text" class="form-group form-control mx-sm-3" placeholder="nombrePatente">
-				<!-- btn/primary= colores/bordes -->
-				<button type="submit" class="btn btn-primary" >Buscar Patente</button>
+			<!-- Propiedades a destacar: form-inline= d.flex | mr= margin right-->
+			<form class="col-12 row form-inline justify-content-end  mt-5 mb-5 mr-sm-4" method="get">
+				<!-- rounded= redondeo | border/secondary= border/Color -->
+				<div class="d-flex rounded-left border border-secondary">
+					<!-- Propiedades a destacar: form-group/form-control= color/border/font-->
+					<input type="text" class="form-group form-control  rounded-0 m-0 border-0" placeholder="numeroPatente">
+					<!-- btn/primary= colores/bordes-->
+					<button type="submit" class="btn btn-danger rounded-0 border-0">
+						<svg class="bi bi-search" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+							<path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+							<path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+						</svg>
+					</button>
+				</div>
 			</form>
 			
-			<!-- Propiedad destacar: card= d.flex, border/colores ,p= padding | row= flex-wrap | p/m= paddin/margin-->
-			<div class="col-sm-12 card overflow-auto row p-0 m-0">
-				<!-- Propiedad destacar: card-header= colores  -->
-				<h2 class="card-header text-center">Informacion del Vehiculo</h2>
-				<!-- Propiedad destacar: card-body= flex, padding -->
-				<div class="card-body">
-					<!-- Propiedad destacar: table= color/bordes | table-sm padding -->
-					<table class="table table-sm table-hover">
-						<thead>
-							<tr>
-								<th scope="col">Titular</th>
-								<th scope="col">Patente</th>
-								<th scope="col">Modelo</th>
-								<th scope="col">Marca</th>
-								<th scope="col">Tipo</th>
-								<th scope="col">NumeroChasis</th>
-								<th scope="col">NumeroMotor</th>
-								<th scope="col">Color</th>
-							</tr>
-						</thead>
-							
-						<tbody>
-							<tr>
-								<td>Rrrrrrrrr</td>
-								<td>ARG 1575 4</td>
-								<td>G21</td>
-								<td>Ford</td>
-								<td>RGBSA</td>
-								<td>50</td>
-								<td>Ltr156</td>
-								<td>Blanco</td>
-							</tr>
-						</tbody>
-					</table>
+			<!-- Propiedades destacar: table-responsive-xl= overflow | d-flex= display flex -->
+			<div class="col-sm-12 mt-5 d-flex table-responsive-xl">
+				<div class="col-auto mx-auto min-width-0">
+					<!-- Propiedad destacar: card= border/colores | border-danger= color-->
+					<div class="card shadow-sm border-danger">
+						<!-- Propiedad destacar: card-header= colores  -->
+						<h2 class="card-header text-center bg-danger font-weight-normal">Informacion del Vehiculo</h2>
+						<!-- Propiedad destacar: card-body= padding -->
+						<div class="card-body">
+							<!-- Propiedad destacar: table= color,bordes-->
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th scope="col">Titular</th>
+										<th scope="col">Patente</th>
+										<th scope="col">Modelo</th>
+										<th scope="col">Marca</th>
+										<th scope="col">Tipo</th>
+										<th scope="col">NumeroChasis</th>
+										<th scope="col">NumeroMotor</th>
+										<th scope="col">Color</th>
+									</tr>
+								</thead>
+									
+								<tbody>
+									<tr>
+										<td>Rrrrrrrrr</td>
+										<td>ARG 1575 4</td>
+										<td>G21</td>
+										<td>Ford</td>
+										<td>RGBSA</td>
+										<td>50</td>
+										<td>Ltr156</td>
+										<td>Blanco</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
 				</div>
 			</div>	
 				
-			<!--Propiedades destacar: d-flex= display flex | p= padding-->	
-			<div class="col-sm-12 mt-5 d-flex overflow-auto  p-1">
-				<div class="col-sm-7 min-width-md">	
-					<!-- Propiedad destacar: card= d.flex, border/colores -->
-					<div class="card">
+			<!--Propiedades destacar: table-responsive-xl= overflow | m= margin | d-flex= display flex-->	
+			<div class="col-sm-12 mt-5 d-flex table-responsive-xl">
+				<div class="col-auto mx-auto min-width-2">	
+					<!-- Propiedad destacar: card= border/colores -->
+					<div class="card shadow-sm border-lighter-dark-red">
 						<!-- Propiedad destacar: card-header= colores  -->
-						<h2 class="card-header text-center ">Recorrido de la Patente</h2>
-						<!-- Propiedad destacar: card-body= flex, padding -->
+						<h2 class="card-header text-center bg-lighter-dark-red font-weight-normal">Recorrido de la Patente</h2>
+						<!-- Propiedad destacar: card-body=padding -->
 						<div class="card-body ">	
-							<!-- Propiedad destacar: table= color/bordes | table-sm padding -->
-							<table class="table table-sm table-hover">
+							<!-- Propiedad destacar: table= color/bordes-->
+							<table class="table table-hover">
 								<thead>
 									<tr>
 										<th scope="col">Fecha-Hora</th>
@@ -104,11 +117,15 @@
 					</div>
 				</div>		
 					
-				<div class="col-sm-5 min-width-sm">	
-					<div class="card ">	
-						<h2 class="card-header text-center">Tripulantes</h2>
+				<div class="col-auto mx-auto min-width-2">	
+					<!-- Propiedad destacar: card/border-..= border/colores-->
+					<div class="card shadow-sm border-lighter-dark-red">
+						<!-- Propiedad destacar: card-header= colores-->	
+						<h2 class="card-header text-center bg-lighter-dark-red font-weight-normal">Tripulantes</h2>
+						<!-- Propiedad destacar: card-body=padding -->
 						<div class="card-body">	
-							<table class="table table-sm table-hover">
+							<!-- Propiedad destacar: table= color/bordes-->
+							<table class="table table-hover">
 								<thead>
 									<tr>
 										<th scope="col">DNI</th>

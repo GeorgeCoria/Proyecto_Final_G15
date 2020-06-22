@@ -15,25 +15,48 @@
 	outline: 5px solid black;
 }
 
+.h-50p{
+	max-height: 50px;
+}
+
 .h-100p{
 	height: 100px;
 }
 
-.min-width-xsm{
+.min-width-4{
 	min-width: 300px;
 }
 
-.min-width-sm{
+.min-width-3{
 	min-width: 400px;
 }
 
-.min-width-md{
+.min-width-2{
 	min-width: 500px;
 }
 
+.min-width-1{
+	min-width: 700px;
+}
+
+.min-width-0{
+	min-width: 800px;
+}
 
 
+.bg-lighter-dark{
+	background-color: #008080;
+}
 
+.border-lighter-dark{
+	border-color: #008080;
+}
 
+.bg-lighter-dark-red{
+	background-color: #e05260;
+}
 
+.border-lighter-dark-red{
+	border-color: #e05260;
+}
 
