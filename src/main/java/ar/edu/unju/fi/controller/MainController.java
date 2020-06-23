@@ -41,4 +41,16 @@ public class MainController {
 	public String mostrarFormAdmin() {
 		return "adminFormulario";
 	}
+	@GetMapping("/adminLocalidad")
+	public String mostrarLocalidad() {
+		return "adminLocalidad";
+	}
+	@GetMapping("/adminRegistrador")
+	public String mostrarRegistrador() {
+		return "adminRegistrador";
+	}
+	@GetMapping("/adminConsultor")
+	public String mostrarConsultor() {
+		return "adminConsultor";
+	}
 }

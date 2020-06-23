@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+	  <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+	<link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/admin.css">
+	<title>Localidad</title>
+</head>
+<body >
+
+<!-- ********** Insercion del header **************** -->
+  	<div th:insert="layout/header :: header"></div> 
+
+<!-- ************** PANEL DE NAVEGACION ******************* -->
+  <div class="nav bg-dark pt-3 pb-3 font-weight-bold mb-5 fuente">
+  			<div class="col-8">
+	  			<ul class="nav nav-tabs ">
+			  		<li class="nav-item">
+			   		 	<a class="nav-link text-white " href="adminPrincipal">Ver Todo</a>
+			  		</li>
+
+			  		<li class="nav-item">
+			    		<a class="nav-link text-white" href="adminRegistrador">Registradores</a>
+			  		</li>
+
+			  		<li class="nav-item">
+			   			 <a class="nav-link text-white" href="adminConsultor">Consultores</a>
+			  		</li>
+			  		<li class="nav-item">
+			   			 <a class="nav-link text-white" href="adminLocalidad">Localidades</a>
+			  		</li>
+
+			 		<li class="nav-item">
+			   			 <a class="btn btn-primary font-weight-bold " href="adminFormulario">Añadir Usuario</a>
+			  		</li>  
+				</ul>
+
+  			</div>
+  		
+			<div class="col-4 pr-4">
+				<form class=" float-right form-inline my-2 my-lg-0">
+		     		<input class="form-control mr-sm-2" type="search" placeholder="Search by dni" aria-label="Search">
+		    	  	<button class="btn btn-primary my-2 my-sm-0 disabled" type="submit">Search</button>
+		    	</form>
+			</div>
+	  	</div>
+<!-- ************** FIN DE PANEL DE NAVEGACION ******************* -->
+
+<!-- **************** Cuerpo de la Pagina Principal *********************  -->
+	<div class="container-fluid fuente">
+
+		<div class="row justify-content-center mb-4">
+			<h1 class=" w-50 p-2 text-center " style="border-top:  3px dodgerblue solid; border-bottom:  3px dodgerblue solid;">GESTOR DE LOCALIDADES</h1>
+		</div>
+
+		<div class="row justify-content-center">
+			<div class="col-12 col-md-4">
+				<div class="text-center text-white bg-dark pt-2 pb-2">
+					<h4>AÑADIR </h4>
+				</div>
+				<form class="form pt-4">
+					<div class="form-group"> 
+						 <label for="Localidad">Nombre de Localidad</label>
+   						 <input type="text" class="form-control border border-dark border-top-0 border-left-0 border-right-0 " id="localidad" placeholder="Ingrese Nombre">
+						
+					</div>
+					<input type="submit" name="Registrar" value="Guardar" class="  col-12 btn btn-primary btn-lg float-right">
+					
+				</form>
+			</div>
+
+			<div class="col-12 col-md-6 pt-4 pt-md-0">
+				<div class="text-center text-white bg-dark pt-2 pb-2">
+					<h4>LISTA</h4>
+				</div>
+				<div class="table-wrapper-scroll-y my-custom-scrollbar">
+				<table class="table table-reponsive table-striped">
+					<thead>
+						<th>Localidad</th>
+						<th class="text-center">Accion</th>
+					</thead>
+					<tbody>
+						<tr>
+							<td> Localidad1</td>
+							<td class="text-center">
+								<button type="button" class="btn btn-primary">Editar</button>
+								<button type="button" class="btn btn-danger">Eliminar</button>
+							</td>
+						</tr>
+						<tr>
+							<td> Localidad1</td>
+							<td class="text-center">
+								<button type="button" class="btn btn-primary">Editar</button>
+								<button type="button" class="btn btn-danger">Eliminar</button>
+							</td>
+						</tr>
+						<tr>
+							<td> Localidad1</td>
+							<td class="text-center">
+								<button type="button" class="btn btn-primary">Editar</button>
+								<button type="button" class="btn btn-danger">Eliminar</button>
+							</td>
+						</tr>
+						<tr>
+							<td> Localidad1</td>
+							<td class="text-center">
+								<button type="button" class="btn btn-primary">Editar</button>
+								<button type="button" class="btn btn-danger">Eliminar</button>
+							</td>
+						</tr>
+						<tr>
+							<td> Localidad1</td>
+							<td class="text-center">
+								<button type="button" class="btn btn-primary">Editar</button>
+								<button type="button" class="btn btn-danger">Eliminar</button>
+							</td>
+						</tr>
+					</tbody>
+					
+				</table>
+				</div>
+			</div>
+			
+		</div>
+		<div class="row">
+
+			
+			<div class="col-12 col-md-6">
+				
+			</div>
+			
+		</div>
+	</div>
+
+	<!-- Insercion del fragmento footer utlizando thymeleaf   -->
+	<div th:insert="layout/footer :: footer"></div>
+
+</body>
+</html>

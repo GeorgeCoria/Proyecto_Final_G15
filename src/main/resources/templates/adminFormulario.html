@@ -8,80 +8,101 @@
     <!-- Bootstrap CSS -->
 	<link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/admin.css">
+    <!-- Fontawesome 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+-->
     <title>Admin</title>
   </head>
 
-  <body class="container-fluid fondo">
+  <body >
   
   <!-- ********************    ******************************** -->
  <!-- ********** Insercion del header **************** -->
-  	<div th:insert="layout/header :: header"></div>
+  	<div th:insert="layout/header :: header"></div> 
+
+
   	
 
   <!-- **************** insercion de la barra de navegacion*********************  -->
   
-  <!--  <div th:instert="layout/adminNav::nav"></div>-->
- <div class="nav bg-dark pt-3 pb-3 font-weight-bold">
+ <div class="nav bg-dark pt-3 pb-3 font-weight-bold fuente">
 	<div class="col-8">
 		<ul class="nav nav-tabs ">
-			<li class="nav-item"><a class="nav-link text-white " href="adminPrincipal">Ver
-					Todo</a></li>
-
-			<li class="nav-item"><a class="nav-link text-white" href="#">Registradores</a>
+			<li class="nav-item">
+				<a class="nav-link text-white " href="adminPrincipal">Ver
+					Todo
+				</a>
 			</li>
 
-			<li class="nav-item"><a class="nav-link text-white" href="#">Consultores</a>
+			<li class="nav-item">
+				<a class="nav-link text-white" href="adminRegistrador">Registradores
+				</a>
 			</li>
 
-			<li class="nav-item"><a
-				class="btn btn-primary font-weight-bold " href="#">Añadir
-					Usuario</a></li>
+			<li class="nav-item">
+				<a class="nav-link text-white" href="adminConsultor">Consultores
+				</a>
+			</li>
+
+			<li class="nav-item">
+			    <a class="nav-link text-white" href="adminLocalidad">Localidades
+			    </a>
+			</li>
+
+			<li class="nav-item">
+				<a class="btn btn-primary font-weight-bold disabled" href="adminFormulario">Añadir
+					Usuario
+				</a>
+			</li>
 		</ul>
 
 	</div>
 
 	<div class="col-4 pr-4">
 		<form class=" float-right form-inline my-2 my-lg-0">
-			<input class="form-control mr-sm-2" type="search"
+			<input class="form-control mr-sm-2 " type="search"
 				placeholder="Search by dni" aria-label="Search">
-			<button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
+			<button class="btn btn-primary my-2 my-sm-0 desabled" type="submit">Search</button>
 		</form>
 	</div>
 </div>
-  			
+<!-- **************** Find de la barra de navegacion*********************  -->
+
 <!-- ******** Formulario Registro de Usuario ****************-->
+<div class="container-fluid bg-white">
+<div class="row justify-content-center fuente pt-4 pb-4 ">
+	<div class="col-11 col-md-4 bg-primary text-center text-white lateral">
+		<div>
+			<i class="fas fa-user-plus fa-7x" ></i>
+				<h3>FORMULARIO<br> NUEVO USUARIO</h3>	
+		</div>	
+	</div>
 
-			<div class="row justify-content-center mt-4">
-				<div class="col-7 formulario">
-					<div class="row text-white justify-content-center">
-						<div class="p-3 mt-3 mb-4 text-center">
-							<h1>FORMULARIO DE REGISTRO</h1>
-						</div>
-					</div>
-					<div class="row justify-content-center text-white">
-						<form class="col-sm-12 col-md-10 pb-3 pr-4 pl-4">
-							<div class="form-group ">
-								<label for="formGroupExampleInput ">NOMBRE DE USUARIO</label> <input
-									type="text" class="form-control" id="formGroupExampleInput"
-									placeholder="Nombre de Usuario">
-							</div>
-							<div class="form-group">
-								<label for="formGroupExampleInput2">PASSWORD</label> <input
-									type="text" class="form-control" id="formGroupExampleInput2"
-									placeholder="Password">
-							</div>
-							<div class="form-group ">
-								<label for="formGroupExampleInput2">NOMBRE REAL</label> <input
-									type="text" class="form-control" id="formGroupExampleInput2"
-									placeholder="Nombre real del Usuario">
-							</div>
-							<div class="form-group ">
-								<label for="formGroupExampleInput2">APELLIDO REAL</label> <input
-									type="text" class="form-control" id="formGroupExampleInput2"
-									placeholder="Apellido del Usuario">
-							</div>
+	<div class="col-11 col-md-6 border border-primary pt-4 pb-4">
+		<h4>Informacion del Usuario</h4>
+		<form class="form col-11 ">
 
-							<fieldset class="form-group">
+		  <div class="form-group">
+		      <label for="nombreUsuario">Nombre de Usuario</label>
+		      <input type="text" placeholder="Nombre de Usuario" class="form-control border-primary border-top-0 border-left-0 border-right-0 " id="nombreUsuario1" value="" required>
+		   </div>
+
+		    <div class="form-group">
+		      <label for="password">Password</label>
+		      <input type="text" placeholder="Password" class="form-control border-primary border-top-0 border-left-0 border-right-0" id="password" value="" required>
+		   </div>
+
+		   <div class="form-group">
+		      <label for="nombreReal">Nombre Real del Usuario</label>
+		      <input type="text" placeholder="Nombre Real del Usuario" class="form-control border-primary border-top-0 border-left-0 border-right-0" id="nombreReal" value="" required>
+		   </div>
+
+		    <div class="form-group">
+		      <label for="apellidoReal">Apellido Real del Usuario</label>
+		      <input type="text" placeholder="Apellido Real del Usuario" class="form-control border-primary border-top-0 border-left-0 border-right-0" id="apellidoReal" value="" required>
+		   	</div>
+
+		   	<fieldset class="form-group">
 								<div class="row">
 									<legend class="col-form-label col-12 col-md-3 pt-0">Tipo
 										de Usuario</legend>
@@ -102,23 +123,23 @@
 								</div>
 							</fieldset>
 
-							<div class="form-group row">
-								<div class="col-sm-10">
+							<div class="form-group row justify-content-end">
+								<div class="">
 									<button type="submit" class="btn btn-primary">GUARDAR</button>
 									<button type="button" class="btn btn-danger">CANCELAR</button>
 								</div>
 							</div>
-						</form>
+		</form>
 
-					</div>
-				</div>
-			</div>
+	</div>
+	
+</div>
+</div>
 
-			<!-- ******** Fin de Formulario ****************-->
+<!-- ******** Fin de Formulario ****************-->
 
-  	
-	<!-- Insercion del fragmento footer utlizando thymeleaf  -->
+	<!-- Insercion del fragmento footer utlizando thymeleaf --> 
 	<div th:insert="layout/footer :: footer"></div>
-  	
+
   </body>
 </html>

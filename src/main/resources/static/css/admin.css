@@ -5,24 +5,16 @@
 	position: relative;
 
 }
-fondo::before{
-	content:"";
-	opacity: 0.6;
-	width: 100%;
-	height: 100%;
-	background: black;
-	position: absolute;
-	
-}
-.formulario{
-	background: rgba(0,0,0,0.6);
+/* Fuente */	
+.fuente{
+	font-family: 'Open sans';
 
 }
 .bordes{
 	border: 2px red solid;
 }
 /* ****** Clases para la ventana principal de admin ***** */
-.contenedor-cuerpo{
+contenedor-cuerpo{
 	background-image: url("../images/fondo-admin.png");
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -30,16 +22,35 @@ fondo::before{
 	width: 100%;
 	
 }
-
-contenedor-cuerpo:before{
-	content: "";
-	opacity: 0.6;
-	background-color: black;
-	position: absolute;
-	width: 100%;
-	height: 100%;
+.altura-tabla{
+	max-height: 200px; 
+	overflow: scroll;
 }
 .tablaa{
 	background: rgba(0,0,0,0.6);
 	
+}
+.contenedor{
+	width: 100%;
+	background: linear-gradient(dodgerblue,#3EF514,dodgerblue);
+}
+.lateral{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* configuraciones de la seccion Localidades */
+.my-custom-scrollbar {
+position: relative;
+height: 400px;
+overflow: auto;
+}
+.my-custom-scrollbar1{
+	position: relative;
+	height: 600px;
+	overflow: auto;
+}
+.table-wrapper-scroll-y {
+display: block;
 }
