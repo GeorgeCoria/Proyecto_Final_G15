@@ -26,10 +26,7 @@ contenedor-cuerpo{
 	max-height: 200px; 
 	overflow: scroll;
 }
-.tablaa{
-	background: rgba(0,0,0,0.6);
-	
-}
+
 .contenedor{
 	width: 100%;
 	background: linear-gradient(dodgerblue,#3EF514,dodgerblue);
