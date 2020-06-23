@@ -1,43 +1,23 @@
-body{
-   background-image: url("/images/fondoReg.png");
-	background-repeat: no-repeat; /*  La imagen no se repetira  */
-	background-size: cover; /*  La imagen cubrira el contenedor  */
-	background-attachment: fixed; /*  La imagen quedara fija en el fondo y no se movera  */
+.fuente{
+	font-family: 'Open sans';
 }
 
-.formulario{
-    margin:0 auto;
-    margin-top:25%;
-    margin-bottom: 25%;
-    padding: 0;
-}
-
-.modal-content{
-    background-color: #3b4652;
-    opacity: .85;
-    padding: 0 20px;
-    box-shadow: 6px 6px 6px black;
-}
-
-.user-img{
-    margin-top: -50px;
-    margin-bottom: 35px;
-}
-
-.user-img img{
-    width: 100xp;
-    height: 100px;
-   box-shadow: 6px 6px 6px black;
-    border-radius: 50%;
+.fondoVer1{
+	color:white;
+	background-color: #09b4a3;
+	border-top: 3px black solid; 
+	border-bottom: 3px black solid; 
 }
 
 .form-group input{
-    height: 42px;
+    height: 35px;
     font-size: 18px;
-    border:0;
     padding-left: 54px;
-    border-radius: 5px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
+    border-bottom: 2px black solid;
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
 }
 
 button{
@@ -47,25 +27,24 @@ button{
 }
 
 input{
-	box-shadow: 6px 6px 6px tomato;
+	border-bottom: 2px black solid;
 }
 
 .fondoUno{
 	 box-shadow: 6px 6px 6px black;
 }
 
-hr {
-	background-color: blue;
-	margin: 2em;
-	box-shadow: 6px 6px 6px blue;
+button{
+    width: 40%;
+    margin: 15px 0 2px;
 }
 
-.texto{
-	font-size: 100%;
-	font-family: cursive;
-	font-weight: bolder;
+.botonUno{
+	width: 60%;
+    margin: 15px 0 2px;
 }
 
-.borde{
-	box-shadow: 6px 6px 6px black;
+.botonDos{
+	width: 20%;
+    margin: 15px 0 2px;
 }

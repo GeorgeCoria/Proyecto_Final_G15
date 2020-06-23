@@ -11,27 +11,23 @@
 	<title>Registrador de Vehiculos </title>
 </head>
 	
-	<body class="fondo" >
+	<body  >
 	<div th:insert="layout/header :: header"></div>
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-md-11 text-center mx-auto bg-light fondoUno mb-2">
-			 	<hr>
-			 	<h1> REGISTRO DE VEHICULOS </h1>
-			 	<hr>
-			 	</div>
-			</div>
+		
+		<div class="container-fluid fuente">
+			<div class="row justify-content-center mb-4 mt-4">
+			<h1 class=" w-60 p-2 text-center " style="border-top:  3px dodgerblue solid; border-bottom:  3px dodgerblue solid;">REGISTRO DE VEHICULOS</h1>
+		</div>
+			
 			<div class="row mx-auto">
-				<div class="col-md-6 text-center mx-auto borde mb-2">
+				<div class="col-md-6 text-center mx-auto mb-2">
 					
-					<div class="row">
-						<div class=" col-md-12 table-primary fondoUno mb-2">
-							<h1 class="texto"> DETALLES DEL VEHÍCULO </h1>
-						</div>
+					<div class="row justify-content-center bg-info mb-2" style="border-top:  3px black solid; border-bottom:  3px black solid;">
+						<h4 class=" w-60 p-2 text-center " >DETALLES DEL VEHICULO</h4>
 					</div>
 					
 					<div class="row">
-						<div class=" col-md-12 bg-danger">
+						<div class=" col-md-12 fondoVer1">
 						
 							<div class="form-group row my-4">
 							    <label for="patente" class="col-sm-2 col-form-label my-auto texto">PATENTE</label>
@@ -94,17 +90,15 @@
 				</div>
 				
 				<div class="col-md-5 text-center mx-auto  mb-2">
-					<div class="row">
-						<div class=" col-md-12 table-primary fondoUno mb-2">
-							<h1 class="texto"> LOCALIDAD </h1>
-						</div>
+					<div class="row justify-content-center bg-info mb-2" style="border-top:  3px black solid; border-bottom:  3px black solid;">
+						<h4 class=" w-60 p-2 text-center " >DETALLES DE LA LOCALIDAD </h4>
 					</div>
 					
 					<div class="row mb-2">
-						<div class=" col-md-12 bg-danger borde">
+						<div class=" col-md-12 fondoVer1 ">
 							<div class="row">
 								<div class="col-md-12 mx-auto">
-									<select class="custom-select text-black lista"  size="7"  multiple>
+									<select class="custom-select text-black lista"  size="5"  multiple>
 										<option class="bg-dark text-white text-center font-weight-bold"
 										selected disabled value="">LOCALIDAD</option>
 										<option value="1">Uno</option>
@@ -123,18 +117,16 @@
 					
 				<div class="row">
 						<div class="col-md-12 mx-auto">
-								<div class="row">
-									<div class=" col-md-12 table-primary fondoUno mb-2">
-										<h1 class="texto"> DETALLES DEL LUGAR </h1>
-									</div>
+								<div class="row justify-content-center bg-info mb-2" style="border-top:  3px black solid; border-bottom:  3px black solid;">
+									<h4 class=" w-60 p-2 text-center " >DETALLES DEL LUGAR</h4>
 								</div>
 						</div>			
 				</div>
 				
 				<div class="row">
-						<div class="col-md-12 mx-auto bg-danger">
+						<div class="col-md-12 mx-auto fondoVer1">
 								<div class="form-group row mb-4 my-3">
-							    <label for="detalles" class="col-sm-2 col-form-label my-auto texto">DETALLES</label>
+							    <label for="detalles" class="col-sm-2 col-form-label my-auto">DETALLES</label>
 							    <div class="col-sm-10">
 							      <input type="text" class="form-control" id="detalles" placeholder="DETALLES DEL LUGAR DEL REGISTRO">
 							    </div>
@@ -150,18 +142,15 @@
 				
 				<div class="row">
 						<div class="col-md-12 mx-auto">
-								<div class="row">
-									<div class=" col-md-12 table-primary fondoUno mb-2">
-										<h1 class="texto"> INSTRUCCIONES </h1>
-									</div>
+								<div class="row justify-content-center bg-info mb-2" style="border-top:  3px black solid; border-bottom:  3px black solid;">
+									<h4 class=" w-60 p-2 text-center " >INSTRUCCIONES</h4>
 								</div>
 						</div>			
 				</div>
 				
 				<div class="row">
-						<div class="col-md-12 mx-auto mt-1 mb-3 table-danger borde">
-							<p class="texto"> Ingrese los datos del vehiculo que cruce por un puesto</p>
-							<p class="texto"> Tras llenar el formulario, use el boton REGISTRAR VEHICULO para ingresar los datos de los tripulantes</p>
+						<div class="col-md-12 mx-auto mt-1 mb-3 fondoVer1 ">
+							<p class="texto"> Ingrese los datos del vehiculo que cruce por un puesto y presione el boton REGISTRAR VEHICULO</p>
 						</div>
 					</div>
 				</div>
