@@ -1,5 +1,14 @@
 package ar.edu.unju.fi.model;
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import org.springframework.stereotype.Component;
 
 /**
@@ -12,26 +21,51 @@ import org.springframework.stereotype.Component;
  *
  */
 @Component
-public class Tripulante {
+@Entity
+@Table(name = "tripulantes")
+public class Tripulante implements Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	// ---------------VARIABLES MIEMBRO---------------//
+
+	/**
+	 * Atributo de tipo Long para identificar cada registro (objetos) de esta clase con un valor univoco
+	 */
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column
+	private Long id;
+	
 	/**
 	 * Numero de documento del tripulante
 	 */
+	@Column
 	private String documento;
+	
 	/**
 	 * Apellido del tripulante
 	 */
+	@Column
 	private String apellido;
+	
 	/**
 	 * Nombres del Tripulante
 	 */
+	@Column
 	private String nombres;
+	
 	/**
 	 * Nacionalidad del Tripulante
 	 */
+	@Column
 	private String nacionalidad;
 	
 	
-	//----------- CONSTRUCTORES ----------------
+	// -----------------CONSTRUCTORES-----------------//
 	
 	/**
 	 * Constructor por defecto sin 
@@ -60,7 +94,26 @@ public class Tripulante {
 		this.nacionalidad = nacionalidad;
 	}
 	
-	//--------- METODOS ACCESORES ------
+	// ---------------METODOS ACCESORES---------------//
+	
+	/**
+	 * Devuelve el valor del atributo id
+	 * 
+	 * @return the id
+	 */
+	public Long getId() {
+		return id;
+	}
+
+	/**
+	 * Asigna un valor al atributo id
+	 * 
+	 * @param id the id to set
+	 */
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
 	/**
 	 * Realiza captura del numero de documento del tripulante.
 	 * 
@@ -146,7 +199,7 @@ public class Tripulante {
 	 */
 	@Override
 	public String toString() {
-		return "Tripulante [documento=" + documento + ", apellido=" + apellido + ", nombres=" + nombres
+		return "Tripulante [id=" + id + ", documento=" + documento + ", apellido=" + apellido + ", nombres=" + nombres
 				+ ", nacionalidad=" + nacionalidad + "]";
 	}
 	

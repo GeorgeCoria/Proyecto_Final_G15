@@ -20,33 +20,35 @@
 	<!-- Insercion del fragmento header utilizando thymeleaf  -->
 	<div th:insert="layout/header :: header"></div>
 
-	<div class="contenido mb-2">
-	
-		<div class="presentacion col-sm-6  bg-dark text-white">
-			<h1>Bienvenidos al Sistema de monitoreo de vehículos.</h1>
-			<p>Una aplicación destinada a ayudar con el control de los
-				vehículos, sus pasajeros y recorridos dentro de la provincia.</p>
+	<div class="contenido mt-2">
+		<div class="contenido-capa">
+		
+			<div class="presentacion col-sm-6 text-center text-white">
+				<h1>Bienvenidos al Sistema de monitoreo de vehículos.</h1>
+				<p>Una aplicación destinada a ayudar con el control de los
+					vehículos, sus pasajeros y recorridos dentro de la provincia.</p>
+			</div>
+		
+			<div class="modal-dialog col-sm-6 text-center">
+	                <div class="main-section">
+	                    <div class="modal-content2 col-sm-10">
+	                        <div class="col-12 user-img">
+	                            <img class="img-responsive" src="images/avatar_login.png" th:src="@{/images/avatar_login.png}"/>
+	                        </div>
+	                        <form class="col-12" th:action="@{/login}" method="get">
+	                            <div class="form-group" id="user-group">
+	                                <input type="text" class="form-control" placeholder="Usuario" name="username"/>
+	                            </div>
+	                            <div class="form-group" id="contrasena-group">
+	                                <input type="password" class="form-control" placeholder="Contraseña" name="password"/>
+	                            </div>
+	                            <button type="submit" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i>  Ingresar </button>
+	                        </form>
+	                    </div>
+	                </div>
+	        </div>
+	        
 		</div>
-	
-		<div class="modal-dialog col-sm-6 text-center">
-                <div class="main-section">
-                    <div class="modal-content2">
-                        <div class="col-12 user-img">
-                            <img class="img-responsive" src="images/avatar_login.png" th:src="@{/images/avatar_login.png}"/>
-                        </div>
-                        <form class="col-12" th:action="@{/login}" method="get">
-                            <div class="form-group" id="user-group">
-                                <input type="text" class="form-control" placeholder="Usuario" name="username"/>
-                            </div>
-                            <div class="form-group" id="contrasena-group">
-                                <input type="password" class="form-control" placeholder="Contraseña" name="password"/>
-                            </div>
-                            <button type="submit" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i>  Ingresar </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-	
 	</div>
 
 	<!-- Insercion del fragmento footer utilizando thymeleaf  -->

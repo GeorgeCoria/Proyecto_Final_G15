@@ -1,10 +1,25 @@
 package ar.edu.unju.fi.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 /**
@@ -16,32 +31,59 @@ import org.springframework.stereotype.Component;
  */
 
 @Component
-public class RegistroTracking {
+@Entity
+@Table( name = "registroTracking")
+public class RegistroTracking implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	//----------------- Variables Miembro -----------------//
+	
+	/**
+	 * Atributo de tipo Long para identificar cada registro (objetos) de esta clase con un valor univoco
+	 */
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column
+	private Long id;
+	
 	/**
 	 * Atributo que representa la fecha y hora del registro.
 	 */
+	@Column(name = "FECHA_HORA")
+	@DateTimeFormat(pattern = "dd/MM/yyyy hh:mm")
 	private LocalDateTime fechaHora;
 
 	/**
 	 * Atributo que representa un vehiculo y sus caracteristicas.
 	 */
 	@Autowired
+	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	@JoinColumn(name = "ID_VEHICULO")
 	private Vehiculo vehiculos;
 
-	
+	/**
+	 * Atributo de tipo List<Tripulante> que representa un listado de tripulantes por vehiculo
+	 */
+	@ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "REGISTROTRAKING_TRIPULANTES", joinColumns = @JoinColumn(name= "ID_REGISTRO"), inverseJoinColumns = @JoinColumn(name= "ID_TRIPULANTE"))
 	private List<Tripulante> tripulantes = new ArrayList <Tripulante>();
 
 	/**
 	 * Atributo que representa la localidad donde se realizo el registro.
 	 */
 	@Autowired
+	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	@JoinColumn(name = "ID_LOCALIDAD")
 	private Localidad localidad;
 
 	/**
 	 * Atributo que representa obervaciones del lugar donde se realizo el registro. 
 	 */
+	@Column(name = "DETALLE_LUGAR_REGISTRO", length = 1000)
 	private String detalleLugarRegistro;
 
 	//----------------- Constructores -----------------//
@@ -73,6 +115,24 @@ public class RegistroTracking {
 
 	//----------------- Metodos accesores-----------------// 
 
+	/**
+	 * Devuelve el valor del atributo id
+	 * 
+	 * @return the id
+	 */
+	public Long getId() {
+		return id;
+	}
+
+	/**
+	 * Asigna un valor al atributo id
+	 * 
+	 * @param id the id to set
+	 */
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
 	/**
 	 * Permite capturar fecha y hora del registro
 	 * @return fechaHora
@@ -159,7 +219,7 @@ public class RegistroTracking {
 	 */
 	@Override
 	public String toString() {
-		return "RegistroTracking [fechaHora=" + fechaHora + ", vehiculos=" + vehiculos + ", tripulantes=" + tripulantes
+		return "RegistroTracking [id=" + id + ", fechaHora=" + fechaHora + ", vehiculos=" + vehiculos + ", tripulantes=" + tripulantes
 				+ ", localidad=" + localidad + ", detalleLugarRegistro=" + detalleLugarRegistro + "]";
 	}
 	
