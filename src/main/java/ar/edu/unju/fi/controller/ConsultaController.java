@@ -17,18 +17,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class ConsultaController {
 
 
-	@GetMapping("/localidad")
+	@GetMapping("/vehiculo")
 	public String getListLocalidad() {
-		return "localidad";
+		
+		return "buscarVehiculo";
 	}
 	
 	@GetMapping("/tripulante")
 	public String getListTripulante() {
-		return "tripulante";
+		return "buscarTripulante";
 	}
 	
 	@GetMapping("/patente")
 	public String getListPatente() {
-		return "patente";
+		return "buscarPatente";
 	}
 }

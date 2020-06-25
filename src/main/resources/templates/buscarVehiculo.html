@@ -9,41 +9,46 @@
 	
 	<body>
 		<header th:insert="layout/header :: header"></header>
+		
+		<!-- Propiedades destacada: nav= d.flex | nav-tabs=colorBorder | mt=margin top-->
+		<nav class="col-11 m-auto nav nav-tabs pt-3">
+		 	<!-- Propiedades a destacar: nav-item= flex| nav-link y active= borderColor | -->
+		  	<a class="nav-item nav-link active btn-primary" href="vehiculo">Vehiculos</a>
+			<a class="nav-link active" href="tripulante">Tripulante</a>
+			<a class="nav-link active" href="patente">Patente</a>
+		</nav>
+			
 		<!--mb= margin bottom-->
 		<section class="col-12 mb-5">
-			<!-- Propiedades destacada: nav= d.flex | nav-tabs=colorBorder | mt=margin top-->
-			<nav class="col-10 m-auto nav nav-tabs mt-3">
-			 	<!-- Propiedades a destacar: nav-item= flex| nav-link y active= borderColor | -->
-			  	<a class="nav-item nav-link active text-success" href="localidad">Localidad</a>
-				<a class="nav-link active" href="tripulante">Tripulante</a>
-				<a class="nav-link active" href="patente">Patente</a>
-			</nav>
+			<!-- my = margin top/bottom | btn-link= subrayado-->
+			<div class="col-sm-12 text-center my-5 btn-link text-dark px-5">
+				<h2 class="col-xl-9 col-lg-11  p-4 m-auto border-info border-c1 font-c1">Listado de Vehiculos por Localidad-Fecha-Hora</h2>
+				<!-- Propiedades a destacar: row= d.flex, flex-wrap | m=margin-->
+			</div>
 			
-			<!-- mt/b = margin top/bottom | btn-link= subrayado-->
-			<h2 class="col-sm-12 text-center mt-5 mb-5 btn-link text-dark font-weight-normal">Listado de Vehiculo Por Localidad y Fecha-Hora</h2>
-			<!-- Propiedades a destacar: row= d.flex, flex-wrap | m=margin-->
 			<form class="col-12 mb-5 row m-0  justify-content-center">
 				<div class="col-lg-3 col-sm-6 order-md-1">
 					<!-- Propiedades destacar: card/border-success= borderColor -->
-					<div class="card m-3 shadow-sm border-success">
+					<div class="card m-3 shadow-sm border-info">
 					  	<!-- Propiedad destacar: card-header= padding  -->
-					  	<h4 class="card-header text-center bg-success font-weight-normal">Inicio<br>Fecha Hora</h4>
+					  	<h4 class="card-header text-center bg-info font-weight-normal">Inicio<br>Fecha Hora</h4>
 					  	<!-- Propiedad destacar: card-body= padding -->
 					   	<div class="card-body">
 							<label for="validationDefault01"></label>
 							<!-- required obliga q el campo se complete --> 
-							<input type="datetime-local" class="form-control text-center border-success" id="validationDefault01" required>
+							<input type="datetime-local" class="form-control text-center border-info" id="validationDefault01" required>
 					  	</div>
 					</div>
 				</div>
 					  
 				<div class="col-lg-3 col-sm-6 order-sm-3 order-lg-2">
-					<div class="card m-3 shadow-sm border-success">
-						<h4 class="card-header text-center bg-success font-weight-normal">Localidades</h4>
+					<div class="card m-3 shadow-sm border-info">
+						<h4 class="card-header text-center bg-info font-weight-normal">Localidades</h4>
 						<div class="card-body ">
+							<label for="validationDefault04"></label> 
 							<!-- Propiedad destacar: custom-select= color/border/letras/ -->
-							<select class="custom-select mt-3 border-success" id="validationDefault04" required>
-								<option selected disabled>Sin Seleccionar</option>
+							<select class="custom-select mt-3 border-info" id="validationDefault04" required>
+								<option selected disabled value="">Sin Seleccionar</option>
 								<option>S.S. Jujuy</option>
 							</select>
 						</div>
@@ -52,13 +57,13 @@
 					  
 				<div class="col-lg-3 col-sm-6 order-md-2">
 					<!-- Propiedades destacar: card/border-success= borderColor -->
-					<div class="card m-3 shadow-sm border-success">
+					<div class="card m-3 shadow-sm border-info">
 						<!-- Propiedad destacar: card-header= padding-->
-						<h4 class="card-header text-center bg-success font-weight-normal">Fin<br>Fecha Hora</h4>
+						<h4 class="card-header text-center bg-info font-weight-normal">Final<br>Fecha Hora</h4>
 						<!-- Propiedad destacar: card-body= padding-->
 						<div class="card-body">
 							<label for="validationDefault02"></label> 
-							<input type="datetime-local" class="form-control text-center border-success" id="validationDefault02" required>
+							<input type="datetime-local" class="form-control text-center border-info" id="validationDefault02" required>
 						</div>
 					</div>
 				</div>
@@ -67,7 +72,7 @@
 				<!-- w= width | d= display | mb=margin bottom | h=hight | pb= padding bottom | m=margin -->
 				<div class="col-12 h-100p order-sm-4 align-items-center  d-flex ">
 					<!-- rounded/success= borderRedondeo/color -->
-					<button class="rounded-pill border-success col-sm-3 m-auto" type="submit"><b>Buscar</b></button>
+					<button class="rounded-pill border-info col-sm-3 m-auto" type="submit"><b>Buscar</b></button>
 				</div>
 			</form>
 			
@@ -154,7 +159,8 @@
 				</div>
 			</div>
 		</section>
-	 
-		<div th:insert="layout/footer :: footer"></div>
+	 	
+	 	<aside></aside>
+		<footer th:insert="layout/footer :: footer"></footer>
 	</body>
 </html>

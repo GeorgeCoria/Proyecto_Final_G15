@@ -9,18 +9,22 @@
 	
 	<body>
 		<header th:insert="layout/header :: header"></header>
+		
+		<!-- Propiedades destacada: nav= d.flex | nav-tabs=colorBorder | m= margin-->
+		<nav class="col-11 m-auto nav nav-tabs pt-3">
+			<!-- Propiedades a destacar: nav-item= flex| nav-link y active= borderColor | -->
+		    <a class="nav-link active" href="vehiculo">Vehiculos</a>
+		    <a class="nav-item nav-link active btn-primary" href="tripulante">Tripulante</a>
+		    <a class="nav-link active" href="patente">Patente</a>
+		</nav>
+			
+			
 		<!--mb= margin bottom-->
 		<section class="mb-5">
-			<!-- Propiedades destacada: nav= d.flex | nav-tabs=colorBorder | m= margin-->
-			<nav class="col-10 m-auto nav nav-tabs mt-3">
-				<!-- Propiedades a destacar: nav-item= flex| nav-link y active= borderColor | -->
-			    <a class="nav-link active" href="localidad">Localidad</a>
-			    <a class="nav-item nav-link active text-info" href="tripulante">Tripulante</a>
-			    <a class="nav-link active" href="patente">Patente</a>
-			</nav>
-			
-			<!-- mt/b = margin top/bottom | btn-link= subrayado-->
-			<h2 class="col-sm-12 text-center mt-5 mb-5 btn-link text-dark font-weight-normal">Listado de recorrido por Tripulante</h2>
+			<!-- my = margin top/bottom | btn-link= subrayado-->
+			<div class="col-md-12 text-center my-5 btn-link text-dark px-5">
+				<h2 class="col-xl-6 col-lg-8 col-md-10 m-auto p-4 border-info font-c1 border-c1">Listado de recorrido por Tripulante</h2>
+			</div>
 			
 			<!-- Propiedades a destacar: form-inline= d.flex | mr= margin right-->
 			<form class="col-12 row form-inline justify-content-end  mt-5 mb-5 mr-sm-4" method="get">
@@ -111,6 +115,7 @@
 			</div>
 		</section>
 		
-		<div th:insert="layout/footer :: footer"></div>
+		<aside></aside>
+		<footer th:insert="layout/footer :: footer"></footer>
 	</body>
 </html>

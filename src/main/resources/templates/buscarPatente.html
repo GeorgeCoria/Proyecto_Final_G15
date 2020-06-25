@@ -9,19 +9,24 @@
 	
 	<body>
 		<header th:insert="layout/header :: header"></header>
+		
+		<!-- Propiedades destacada: nav=d.flex | nav-tabs=colorBorder -->
+		<nav class="col-11 m-auto nav nav-tabs pt-3">
+			<!-- Propiedades a destacar: nav-item= flex| nav-link y active= borderColor | w=width-->
+			<a class="nav-link active" href="vehiculo">Vehiculos</a>
+			<a class="nav-link active" href="tripulante">Tripulante</a>
+			<a class="nav-item nav-link active btn-primary" href="patente">Patente</a>
+		</nav>
+		
+		
 		<!-- Propiedades destacada: mb= margin bottom-->
 		<section class="mb-5">
-			<!-- Propiedades destacada: nav=d.flex | nav-tabs=colorBorder -->
-			<nav class="col-10 m-auto nav nav-tabs mt-3">
-				<!-- Propiedades a destacar: nav-item= flex| nav-link y active= borderColor | w=width-->
-				<a class="nav-link active" href="localidad">Localidad</a>
-				<a class="nav-link active" href="tripulante">Tripulante</a>
-				<a class="nav-item nav-link active text-danger" href="patente">Patente</a>
-			</nav>
 			
-			<!-- mt/b = margin top/bottom | btn-link= subrayado-->
-			<h2 class="col-sm-12 text-center mt-5 mb-5 btn-link text-dark font-weight-normal">Listado Recorrido por Patente</h2>
-				
+			<!-- my = margin top/bottom | btn-link= subrayado-->
+			<div class="col-sm-12 text-center my-5 btn-link text-dark px-5">
+				<h2 class="col-xl-6 col-lg-7 col-md-9 m-auto p-4 border-info font-c1 border-c1">Listado de recorrido por Patente</h2>
+			</div>
+			
 			<!-- Propiedades a destacar: form-inline= d.flex | mr= margin right-->
 			<form class="col-12 row form-inline justify-content-end  mt-5 mb-5 mr-sm-4" method="get">
 				<!-- rounded= redondeo | border/secondary= border/Color -->
@@ -29,7 +34,7 @@
 					<!-- Propiedades a destacar: form-group/form-control= color/border/font-->
 					<input type="text" class="form-group form-control  rounded-0 m-0 border-0" placeholder="numeroPatente">
 					<!-- btn/primary= colores/bordes-->
-					<button type="submit" class="btn btn-danger rounded-0 border-0">
+					<button type="submit" class="btn btn-info rounded-0 border-0">
 						<svg class="bi bi-search" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 							<path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
 							<path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
@@ -42,9 +47,9 @@
 			<div class="col-sm-12 mt-5 d-flex table-responsive-xl">
 				<div class="col-auto mx-auto min-width-0">
 					<!-- Propiedad destacar: card= border/colores | border-danger= color-->
-					<div class="card shadow-sm border-danger">
+					<div class="card shadow-sm border-info">
 						<!-- Propiedad destacar: card-header= colores  -->
-						<h2 class="card-header text-center bg-danger font-weight-normal">Informacion del Vehiculo</h2>
+						<h2 class="card-header text-center bg-info font-weight-normal">Informacion del Vehiculo</h2>
 						<!-- Propiedad destacar: card-body= padding -->
 						<div class="card-body">
 							<!-- Propiedad destacar: table= color,bordes-->
@@ -82,11 +87,11 @@
 				
 			<!--Propiedades destacar: table-responsive-xl= overflow | m= margin | d-flex= display flex-->	
 			<div class="col-sm-12 mt-5 d-flex table-responsive-xl">
-				<div class="col-auto mx-auto min-width-2">	
+				<div class="col-auto min-width-2 ml-auto">	
 					<!-- Propiedad destacar: card= border/colores -->
-					<div class="card shadow-sm border-lighter-dark-red">
+					<div class="card shadow-sm border-lighter-dark">
 						<!-- Propiedad destacar: card-header= colores  -->
-						<h2 class="card-header text-center bg-lighter-dark-red font-weight-normal">Recorrido de la Patente</h2>
+						<h2 class="card-header text-center bg-lighter-dark font-weight-normal">Recorrido de la Patente</h2>
 						<!-- Propiedad destacar: card-body=padding -->
 						<div class="card-body ">	
 							<!-- Propiedad destacar: table= color/bordes-->
@@ -117,11 +122,11 @@
 					</div>
 				</div>		
 					
-				<div class="col-auto mx-auto min-width-2">	
+				<div class="col-auto min-width-2 mr-auto">	
 					<!-- Propiedad destacar: card/border-..= border/colores-->
-					<div class="card shadow-sm border-lighter-dark-red">
+					<div class="card shadow-sm border-lighter-dark">
 						<!-- Propiedad destacar: card-header= colores-->	
-						<h2 class="card-header text-center bg-lighter-dark-red font-weight-normal">Tripulantes</h2>
+						<h2 class="card-header text-center bg-lighter-dark font-weight-normal">Tripulantes</h2>
 						<!-- Propiedad destacar: card-body=padding -->
 						<div class="card-body">	
 							<!-- Propiedad destacar: table= color/bordes-->
@@ -150,6 +155,7 @@
 			</div>
 		</section>
 		
-		<div th:insert="layout/footer :: footer"></div>		
+		<aside></aside>
+		<footer th:insert="layout/footer :: footer"></footer>		
 	</body>
 </html>

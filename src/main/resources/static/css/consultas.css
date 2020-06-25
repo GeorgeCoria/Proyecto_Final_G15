@@ -60,3 +60,17 @@
 	border-color: #e05260;
 }
 
+.font-c1{
+	font-family: 'Open sans';
+	font-size: 40px;
+}
+
+.border-c1{
+	border-style: double;
+	border-width: 10px;
+	border-left: none;
+	border-right: none;
+}
+
+
+
