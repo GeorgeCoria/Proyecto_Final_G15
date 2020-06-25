@@ -24,7 +24,6 @@ import org.springframework.stereotype.Component;
 @Entity
 @Table(name = "localidades")
 public class Localidad implements Serializable{
-	
 	/**
 	 * 
 	 */
@@ -37,7 +36,7 @@ public class Localidad implements Serializable{
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column
+	@Column (name="ID")
 	private Long id;
 	
 	/**
@@ -45,7 +44,7 @@ public class Localidad implements Serializable{
 	 * que almacena el nombre de la 
 	 * Localidad 
 	 */
-	@Column
+	@Column(name="NOMBRE",length=40,nullable=true)
 	private String nombre;
 	
 	
