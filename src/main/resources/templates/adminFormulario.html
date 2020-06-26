@@ -1,16 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-	<link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<!-- 	<link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.5.0/css/bootstrap.min.css"> -->
     <link rel="stylesheet" type="text/css" href="css/admin.css">
-    <!-- Fontawesome 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
--->
+    
     <title>Admin</title>
   </head>
 
@@ -80,55 +79,68 @@
 
 	<div class="col-11 col-md-6 border border-primary pt-4 pb-4">
 		<h4>Informacion del Usuario</h4>
-		<form class="form col-11 ">
+		<form class="form col-11 " role="form" autocomplete="off" th:object="${usuarioDelForm}" th:action="${editMode}?@{/editarUsuario}:@{/adminFormulario}" method="post">
 
-		  <div class="form-group">
+			<input type="hidden" class="form-control border-primary border-top-0 border-left-0 border-right-0 " th:field="${usuarioDelForm.id}" th:if="${editMode}">
+			<input type="hidden" class="form-control border-primary border-top-0 border-left-0 border-right-0 " th:field="${usuarioDelForm.nombreUsuario}" th:if="${editMode}">
+			<input type="hidden" class="form-control border-primary border-top-0 border-left-0 border-right-0" th:field="${usuarioDelForm.password}" th:if="${editMode}">
+			<input type="hidden" class="form-control border-primary border-top-0 border-left-0 border-right-0" th:field="${usuarioDelForm.tipoUsuario}" th:if="${editMode}">
+
+		  <div class="form-group"  th:if="${editMode==null or editMode==false}">
 		      <label for="nombreUsuario">Nombre de Usuario</label>
-		      <input type="text" placeholder="Nombre de Usuario" class="form-control border-primary border-top-0 border-left-0 border-right-0 " id="nombreUsuario1" value="" required>
+		      <input type="text" placeholder="Nombre de Usuario" class="form-control border-primary border-top-0 border-left-0 border-right-0 " th:field="${usuarioDelForm.nombreUsuario}">
+		   	  <div class="alert-danger" th:if="${#fields.hasErrors('nombreUsuario')}" th:errors="*{nombreUsuario}">Name Error</div>
 		   </div>
 
-		    <div class="form-group">
+		    <div class="form-group" th:if="${editMode==null or editMode==false}">
 		      <label for="password">Password</label>
-		      <input type="text" placeholder="Password" class="form-control border-primary border-top-0 border-left-0 border-right-0" id="password" value="" required>
+		      <input type="password" placeholder="Password" class="form-control border-primary border-top-0 border-left-0 border-right-0" th:field="${usuarioDelForm.password}">
+ 		   	  <div class="alert-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Name Error</div>
 		   </div>
 
 		   <div class="form-group">
 		      <label for="nombreReal">Nombre Real del Usuario</label>
-		      <input type="text" placeholder="Nombre Real del Usuario" class="form-control border-primary border-top-0 border-left-0 border-right-0" id="nombreReal" value="" required>
+		      <input type="text" placeholder="Nombre Real del Usuario" class="form-control border-primary border-top-0 border-left-0 border-right-0" th:field="${usuarioDelForm.nombreReal}">
+		   	  <div class="alert-danger" th:if="${#fields.hasErrors('nombreReal')}" th:errors="*{nombreReal}">Name Error</div>
 		   </div>
 
 		    <div class="form-group">
 		      <label for="apellidoReal">Apellido Real del Usuario</label>
-		      <input type="text" placeholder="Apellido Real del Usuario" class="form-control border-primary border-top-0 border-left-0 border-right-0" id="apellidoReal" value="" required>
+		      <input type="text" placeholder="Apellido Real del Usuario" class="form-control border-primary border-top-0 border-left-0 border-right-0" th:field="${usuarioDelForm.apellidoReal}">
+		   	  <div class="alert-danger" th:if="${#fields.hasErrors('apellidoReal')}" th:errors="*{apellidoReal}">Name Error</div>
 		   	</div>
 
-		   	<fieldset class="form-group">
+		   	<fieldset class="form-group" th:if="${editMode==null or editMode==false}">
 								<div class="row">
 									<legend class="col-form-label col-12 col-md-3 pt-0">Tipo
 										de Usuario</legend>
 									<div class="col-12 col-md-9">
 										<div class="form-check">
 											<input class="form-check-input" type="radio"
-												name="gridRadios" id="gridRadios1" value="option1" checked>
+												name="gridRadios" id="gridRadios1" value="REGISTRADOR" th:field="${usuarioDelForm.tipoUsuario}" checked>
 											<label class="form-check-label" for="gridRadios1">
 												REGISTRADOR </label>
 										</div>
 										<div class="form-check">
 											<input class="form-check-input" type="radio"
-												name="gridRadios" id="gridRadios2" value="option2">
+												name="gridRadios" id="gridRadios2" value="CONSULTOR" th:field="${usuarioDelForm.tipoUsuario}">
 											<label class="form-check-label" for="gridRadios2">
 												CONSULTOR </label>
 										</div>
+										<div class="alert-danger" th:if="${#fields.hasErrors('tipoUsuario')}" th:errors="*{tipoUsuario}">Name Error</div>
 									</div>
 								</div>
 							</fieldset>
 
 							<div class="form-group row justify-content-end">
 								<div class="">
-									<button type="submit" class="btn btn-primary">GUARDAR</button>
-									<button type="button" class="btn btn-danger">CANCELAR</button>
+									<input type="submit" class="btn btn-primary" value="Save Changes" th:value="${editMode}?'GUARDAR USUARIO':'CREAR USUARIO'">
+									<a th:href="@{/editarUsuario/cancelar}" type="button" class="btn btn-danger">CANCELAR</a>
 								</div>
 							</div>
+							
+							<div class="alert-danger text-center" th:if="${formError}" th:text="${formError}" >Name Error</div>
+
 		</form>
 
 	</div>

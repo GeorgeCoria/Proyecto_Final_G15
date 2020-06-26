@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 	  <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -62,10 +62,10 @@
 				<div class="text-center text-white bg-dark pt-2 pb-2">
 					<h4>AÑADIR </h4>
 				</div>
-				<form class="form pt-4">
+				<form class="form pt-4" th:object="${localidadForm}" th:action="@{/adminLocalidad}" method="post">
 					<div class="form-group"> 
 						 <label for="Localidad">Nombre de Localidad</label>
-   						 <input type="text" class="form-control border border-dark border-top-0 border-left-0 border-right-0 " id="localidad" placeholder="Ingrese Nombre">
+   						 <input type="text" class="form-control border border-dark border-top-0 border-left-0 border-right-0 " placeholder="Ingrese Nombre" th:field="${localidadForm.nombre}">
 						
 					</div>
 					<input type="submit" name="Registrar" value="Guardar" class="  col-12 btn btn-primary btn-lg float-right">
@@ -80,50 +80,18 @@
 				<div class="table-wrapper-scroll-y my-custom-scrollbar">
 				<table class="table table-reponsive table-striped">
 					<thead>
+						<th>ID</th>
 						<th>Localidad</th>
 						<th class="text-center">Accion</th>
 					</thead>
+					
 					<tbody>
-						<tr>
-							<td> Localidad1</td>
+						<tr th:each="localidad : ${listaLocalidades}">
+							<td th:text="${localidad.id}"></td>
+							<td th:text="${localidad.nombre}"></td>
 							<td class="text-center">
-								<button type="button" class="btn btn-primary">Editar</button>
-								<button type="button" class="btn btn-danger">Eliminar</button>
-							</td>
-						</tr>
-						<tr>
-							<td> Localidad1</td>
-							<td class="text-center">
-								<button type="button" class="btn btn-primary">Editar</button>
-								<button type="button" class="btn btn-danger">Eliminar</button>
-							</td>
-						</tr>
-						<tr>
-							<td> Localidad1</td>
-							<td class="text-center">
-								<button type="button" class="btn btn-primary">Editar</button>
-								<button type="button" class="btn btn-danger">Eliminar</button>
-							</td>
-						</tr>
-						<tr>
-							<td> Localidad1</td>
-							<td class="text-center">
-								<button type="button" class="btn btn-primary">Editar</button>
-								<button type="button" class="btn btn-danger">Eliminar</button>
-							</td>
-						</tr>
-						<tr>
-							<td> Localidad1</td>
-							<td class="text-center">
-								<button type="button" class="btn btn-primary">Editar</button>
-								<button type="button" class="btn btn-danger">Eliminar</button>
-							</td>
-						</tr>
-						<tr>
-							<td> Localidad1</td>
-							<td class="text-center">
-								<button type="button" class="btn btn-primary">Editar</button>
-								<button type="button" class="btn btn-danger">Eliminar</button>
+								<a type="button" class="btn btn-primary">Editar</a>
+								<a type="button" class="btn btn-danger">Eliminar</a>
 							</td>
 						</tr>
 					</tbody>

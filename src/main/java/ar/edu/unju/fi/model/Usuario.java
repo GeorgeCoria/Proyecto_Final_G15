@@ -11,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import org.springframework.stereotype.Component;
 
@@ -44,30 +46,36 @@ public class Usuario implements Serializable{
 	 * Representa el nombre de la clase Usuario.
 	 */
 	@Column(name = "NOMBRE_USUARIO")
+	@NotBlank(message="Debe ingresar un nombre de usuario")
 	private String nombreUsuario;
 	
 	/**
 	 * Representa la contraseña de la clase Usuario.
 	 */
 	@Column
+	@NotBlank(message="No puede estar vacío")
+	@Size(min=8, message="La contraseña debe tener como minimo 8 caracteres")
 	private String password;
 	
 	/**
 	 * Representa el nombre Real de la clase Usuario.
 	 */
 	@Column(name = "NOMBRE_REAL")
+	@NotBlank(message="Debe ingresar el nombre real del usuario")
 	private String nombreReal;
 	
 	/**
 	 * Representa el apellido Real de la clase Usuario.
 	 */
 	@Column(name = "APELLIDO_REAL")
+	@NotBlank(message="Debe ingresar el apellido real del usuario")
 	private String apellidoReal;
 	
 	/**
 	 * Representa el tipo de usuario de la clase Usuario. (consultor-registrador-adm)
 	 */
 	@Column(name = "TIPO_USUARIO")
+	@NotBlank(message="Debe seleccionar un tipo de usuario")
 	private String tipoUsuario;
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////

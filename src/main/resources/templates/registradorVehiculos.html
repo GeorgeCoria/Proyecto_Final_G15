@@ -91,24 +91,15 @@
 				
 				<div class="col-md-5 text-center mx-auto  mb-2">
 					<div class="row justify-content-center bg-info mb-2" style="border-top:  3px black solid; border-bottom:  3px black solid;">
-						<h4 class=" w-60 p-2 text-center " >DETALLES DE LA LOCALIDAD </h4>
+						<h4 class=" w-60 p-2 text-center " >LOCALIDAD </h4>
 					</div>
 					
 					<div class="row mb-2">
 						<div class=" col-md-12 fondoVer1 ">
 							<div class="row">
 								<div class="col-md-12 mx-auto">
-									<select class="custom-select text-black lista"  size="5"  multiple>
-										<option class="bg-dark text-white text-center font-weight-bold"
-										selected disabled value="">LOCALIDAD</option>
-										<option value="1">Uno</option>
-										<option value="2">Dos</option>
-										<option value="3">Tres</option>
-										<option value="4">Cuatro</option>
-										<option value="5">Cinco</option>
-										<option value="6">Seis</option>
-										<option value="7">Siete</option>
-										<option value="8">Ocho</option>
+									<select class="custom-select text-black lista"size="5">
+										<option th:each="localidad :${listaLocalidades}" th:value="${localidad.id}" th:text="${localidad.nombre}"></option>
 									</select>
 								</div>
 							</div>	

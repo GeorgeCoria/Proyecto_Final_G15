@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -63,139 +63,34 @@
   
 		<div class="my-custom-scrollbar1 table-wrapper-scroll-y">
   		<table class="table table-reponsive-sm table-striped">
+		  
 		  <thead >
 		    <tr >
-		      <th scope="col">Nombre De Usuario</th>
+		      <th scope="col">ID</th>
+		      <th scope="col">Usuario</th>
 		      <th scope="col">Password</th>
-		      <th scope="col">Nombre Real</th>
+		      <th scope="col">Nombre</th>
 		      <th scope="col">Apellido</th>
 		      <th scope="col">Tipo de Usuario</th>
 		      <th scope="col">Accion</th>
 		    </tr>
 		  </thead>
+		  
 		  <tbody>
-		    <tr>
-		      <th scope="row">1</th>
-		      <td>Mark</td>
-		      <td>Otto</td>
-		      <td>@mdo</td>
-		      <td>@mdo</td>
-		      <td>
-		      	<button type="button" class="btn btn-primary">Editar</button>
-				<button type="button" class="btn btn-danger">Eliminar</button>
-		      </td>
-		    </tr>
-		    <tr>
-		      <th scope="row">2</th>
-		      <td>Jacob</td>
-		      <td>Thornton</td>
-		      <td>@fat</td>
-		      <td>@mdo</td>
-		       <td>
-		      	<button type="button" class="btn btn-primary">Editar</button>
-				<button type="button" class="btn btn-danger">Eliminar</button>
-		      </td>
-		    </tr>
-		    <tr>
-		      <th scope="row">3</th>
-		      <td>Larry</td>
-		      <td>the Bird</td>
-		      <td>@twitter</td>
-		      <td>@mdo</td>
-		       <td>
-		      	<button type="button" class="btn btn-primary">Editar</button>
-				<button type="button" class="btn btn-danger">Eliminar</button>
-		      </td>
-		    </tr>
-		    <tr>
-		      <th scope="row">1</th>
-		      <td>Mark</td>
-		      <td>Otto</td>
-		      <td>@mdo</td>
-		      <td>@mdo</td>
-		      <td>
-		      	<button type="button" class="btn btn-primary">Editar</button>
-				<button type="button" class="btn btn-danger">Eliminar</button>
-		      </td>
-		    </tr>
-		    <tr>
-		      <th scope="row">2</th>
-		      <td>Jacob</td>
-		      <td>Thornton</td>
-		      <td>@fat</td>
-		      <td>@mdo</td>
-		       <td>
-		      	<button type="button" class="btn btn-primary">Editar</button>
-				<button type="button" class="btn btn-danger">Eliminar</button>
-		      </td>
-		    </tr>
-		    <tr>
-		      <th scope="row">3</th>
-		      <td>Larry</td>
-		      <td>the Bird</td>
-		      <td>@twitter</td>
-		      <td>@mdo</td>
-		       <td>
-		      	<button type="button" class="btn btn-primary">Editar</button>
-				<button type="button" class="btn btn-danger">Eliminar</button>
-		      </td>
-		    </tr>
-		    <tr>
-		      <th scope="row">1</th>
-		      <td>Mark</td>
-		      <td>Otto</td>
-		      <td>@mdo</td>
-		      <td>@mdo</td>
-		      <td>
-		      	<button type="button" class="btn btn-primary">Editar</button>
-				<button type="button" class="btn btn-danger">Eliminar</button>
-		      </td>
-		    </tr>
-		    <tr>
-		      <th scope="row">2</th>
-		      <td>Jacob</td>
-		      <td>Thornton</td>
-		      <td>@fat</td>
-		      <td>@mdo</td>
-		       <td>
-		      	<button type="button" class="btn btn-primary">Editar</button>
-				<button type="button" class="btn btn-danger">Eliminar</button>
-		      </td>
-		    </tr>
-		    <tr>
-		      <th scope="row">3</th>
-		      <td>Larry</td>
-		      <td>the Bird</td>
-		      <td>@twitter</td>
-		      <td>@mdo</td>
-		       <td>
-		      	<button type="button" class="btn btn-primary">Editar</button>
-				<button type="button" class="btn btn-danger">Eliminar</button>
-		      </td>
-		    </tr>
-		    <tr>
-		      <th scope="row">1</th>
-		      <td>Mark</td>
-		      <td>Otto</td>
-		      <td>@mdo</td>
-		      <td>@mdo</td>
-		      <td>
-		      	<button type="button" class="btn btn-primary">Editar</button>
-				<button type="button" class="btn btn-danger">Eliminar</button>
-		      </td>
-		    </tr>
-		    <tr>
-		      <th scope="row">1</th>
-		      <td>george</td>
-		      <td>Otto</td>
-		      <td>@mdo</td>
-		      <td>@mdo</td>
+		    <tr th:each="usuario : ${listaUsuariosCon}">
+		      <th th:text="${usuario.id}"></th>
+		      <td th:text="${usuario.nombreUsuario}"></td>
+		      <td th:text="${usuario.password}"></td>
+		      <td th:text="${usuario.nombreReal}"></td>
+		      <td th:text="${usuario.apellidoReal}"></td>
+		      <td th:text="${usuario.tipoUsuario}"></td>
 		      <td>
 		      	<button type="button" class="btn btn-primary">Editar</button>
 				<button type="button" class="btn btn-danger">Eliminar</button>
 		      </td>
 		    </tr>
 		  </tbody>
+		  
 		</table>
 		</div>
   	</div>

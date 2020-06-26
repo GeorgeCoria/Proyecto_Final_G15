@@ -1,14 +1,20 @@
 package ar.edu.unju.fi.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import ar.edu.unju.fi.service.ILocalidadService;
 
 
 
 @Controller
 public class MainController {
+	
+	@Autowired
+	private ILocalidadService localidadService;
 	
 	@GetMapping("/")
 	public String logIn() {
@@ -16,7 +22,8 @@ public class MainController {
 	}
 	
 	@GetMapping("/registrador")
-	public String registradorVehiculo() {
+	public String registradorVehiculo(Model model) {
+		model.addAttribute("listaLocalidades", localidadService.listarLocalidades());
 		return "registradorVehiculos";
 	}
 	
@@ -30,27 +37,4 @@ public class MainController {
 		return "login2";
 	}
 	
-	
-	
-	@GetMapping("/adminPrincipal")
-	public String mostrarListaAdmin() {
-		
-		return "adminPrincipal";
-	}
-	@GetMapping("/adminFormulario")
-	public String mostrarFormAdmin() {
-		return "adminFormulario";
-	}
-	@GetMapping("/adminLocalidad")
-	public String mostrarLocalidad() {
-		return "adminLocalidad";
-	}
-	@GetMapping("/adminRegistrador")
-	public String mostrarRegistrador() {
-		return "adminRegistrador";
-	}
-	@GetMapping("/adminConsultor")
-	public String mostrarConsultor() {
-		return "adminConsultor";
-	}
 }
