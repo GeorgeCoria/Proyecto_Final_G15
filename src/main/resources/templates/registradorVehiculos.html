@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
-	<link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.5.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">	
 	<link rel="stylesheet" type="text/css" href="css/registrador.css"/>
 	
 	
@@ -12,14 +12,34 @@
 </head>
 	
 	<body  >
-	<div th:insert="layout/header :: header"></div>
+	
+	  	<!-- ********** Insercion del header **************** -->
+		<div th:insert="layout/header :: header"></div>
 		
+		<!-- ************************** -->
+		<!-- CUERPO PRINCIPAL -->
+		<!-- ************************** -->
 		<div class="container-fluid fuente">
+		
+		<!-- ************************** -->
+		<!--  TITULO -->
+		<!-- ************************** -->
+		
 			<div class="row justify-content-center mb-4 mt-4">
 			<h1 class=" w-60 p-2 text-center " style="border-top:  3px dodgerblue solid; border-bottom:  3px dodgerblue solid;">REGISTRO DE VEHICULOS</h1>
 		</div>
 			
+			
+		<!-- ************************** -->
+		<!--  INICIO FORMULARIO VEHICULO -->
+		<!-- ************************** -->
+			
+			
 			<div class="row mx-auto">
+			
+				<!-- ************************************************* -->
+				<!--  CAMPOS FORMULARIO VEHICULO COLUMNA IZQUIERDA -->
+				<!-- ************************************************* -->
 				<div class="col-md-6 text-center mx-auto mb-2">
 					
 					<div class="row justify-content-center bg-info mb-2" style="border-top:  3px black solid; border-bottom:  3px black solid;">
@@ -28,6 +48,10 @@
 					
 					<div class="row">
 						<div class=" col-md-12 fondoVer1">
+						
+							<!-- ************************************************* -->
+							<!--  CAMPOS FORMULARIO VEHICULO  -->
+							<!-- ************************************************* -->
 						
 							<div class="form-group row my-4">
 							    <label for="patente" class="col-sm-2 col-form-label my-auto texto">PATENTE</label>
@@ -85,14 +109,36 @@
 							    </div>
 							</div>
 							
+							
+								<div class="form-group row mb-4 my-3">
+							    <label for="detalles" class="col-sm-2 col-form-label my-auto">DETALLES</label>
+							    <div class="col-sm-10">
+							      <input type="text" class="form-control" id="detalles" placeholder="DETALLES DEL LUGAR DEL REGISTRO">
+							    </div>
+							</div>
+						
+							
 						</div>
 					</div>
 				</div>
+				
+				<!-- ************************************************* -->
+				<!--  FIN CAMPOS FORMULARIO VEHICULO Y COLUMNA IZQUIERDA  -->
+				<!-- ************************************************* -->
+				
+				
+				<!-- ************************************************* -->
+				<!--  COLUMNA DERECHA  -->
+				<!-- ************************************************* -->
 				
 				<div class="col-md-5 text-center mx-auto  mb-2">
 					<div class="row justify-content-center bg-info mb-2" style="border-top:  3px black solid; border-bottom:  3px black solid;">
 						<h4 class=" w-60 p-2 text-center " >DETALLES DE LA LOCALIDAD </h4>
 					</div>
+					
+					<!-- ************************************************* -->
+					<!--  LISTA DE LOCALIDADES  -->
+					<!-- ************************************************* -->
 					
 					<div class="row mb-2">
 						<div class=" col-md-12 fondoVer1 ">
@@ -102,59 +148,95 @@
 										<option class="bg-dark text-white text-center font-weight-bold"
 										selected disabled value="">LOCALIDAD</option>
 										<option value="1">Uno</option>
-										<option value="2">Dos</option>
-										<option value="3">Tres</option>
-										<option value="4">Cuatro</option>
-										<option value="5">Cinco</option>
-										<option value="6">Seis</option>
-										<option value="7">Siete</option>
-										<option value="8">Ocho</option>
 									</select>
 								</div>
 							</div>	
 						</div>
 					</div>
 					
+				<!-- ************************************************* -->
+				<!-- FIN LISTA DE LOCALIDADES  -->
+				<!-- ************************************************* -->	
+					
+				
+				<!-- ************************************************* -->
+				<!-- INICIO FORMULARIO TRIPULANTES  -->
+				<!-- ************************************************* -->
+					
 				<div class="row">
 						<div class="col-md-12 mx-auto">
 								<div class="row justify-content-center bg-info mb-2" style="border-top:  3px black solid; border-bottom:  3px black solid;">
-									<h4 class=" w-60 p-2 text-center " >DETALLES DEL LUGAR</h4>
+									<h4 class=" w-60 p-2 text-center " >DETALLES DEL TRIPULANTE </h4>
 								</div>
-						</div>			
-				</div>
-				
-				<div class="row">
-						<div class="col-md-12 mx-auto fondoVer1">
-								<div class="form-group row mb-4 my-3">
-							    <label for="detalles" class="col-sm-2 col-form-label my-auto">DETALLES</label>
-							    <div class="col-sm-10">
-							      <input type="text" class="form-control" id="detalles" placeholder="DETALLES DEL LUGAR DEL REGISTRO">
-							    </div>
+						</div>	
+						
+				<!-- ************************************************* -->
+				<!-- CONTENEDOR DE CAMPOS DEL FORMULARIO DE TRIPULANTES  -->
+				<!-- ************************************************* -->		
+							<div class="col-md-12 fondoVer1">
+							
+								<!-- ************************************************* -->
+								<!-- INICIO CAMPOS DE TRIPULANTE -->
+								<!-- ************************************************* -->	
+							
+								<div class="form-group row my-4">
+									<label for="nombre" class="col-sm-1 col-form-label my-auto "> <i class="far fa-user"></i></label>
+									<div class="col-sm-11">
+									<input type="text" class="form-control" id="nombre" placeholder="Ingrese el nombre del tripulante">
+									</div>
+								</div>
+								
+								<div class="form-group row my-4">
+									<label for="apellido" class="col-sm-1 col-form-label my-auto "> <i class="far fa-user"></i></label>
+									<div class="col-sm-11">
+									<input type="text" class="form-control" id="apellido" placeholder="Ingrese el apellido del tripulante">
+									</div>
+								</div>
+								
+								<div class="form-group row my-4">
+									<label for="nacionalidad" class="col-sm-1 col-form-label my-auto "> <i class="fab fa-font-awesome-flag"></i></label>
+									<div class="col-sm-11">
+									<input type="text" class="form-control" id="nacionalidad" placeholder="Ingrese la nacionalidad del tripulante">
+									</div>
+								</div>
+								
+								<div class="form-group row my-4">
+									<label for="documento" class="col-sm-1 col-form-label my-auto "> <i class="fas fa-id-card"></i></label>
+									<div class="col-sm-11">
+									<input type="text" class="form-control" id="documento" placeholder="Ingrese el D.N.I. del tripulante">
+									</div>
+								</div>
+								
+								<!-- ************************************************* -->
+								<!-- FIN CAMPOS TRIPULANTE  -->
+								<!-- ************************************************* -->
+								
+								<!-- ************************************************* -->
+								<!-- BOTONES TRIPULANTE  -->
+								<!-- ************************************************* -->
+								<div class="row">
+									<div class="col-md-8 mx-auto mb-2">
+										
+											<button type="button" class="btn btn-warning"> REGISTRAR TRIPULANTE </button>
+										
+											<!-- <button type="button" class="btn btn-primary botonDos"> <i class="fas fa-user-plus"></i></button> -->
+									</div>
+								</div>
 							</div>
-						</div>			
-				</div>
-				
-				<div class="row">
-					<div class="col-md-8 mx-auto mt-3 mb-2">
-						<button type="button" class=" texto btn btn-primary btn-lg btn-block"> <i class="fas fa-car"></i> REGISTRAR VEHICULO</button>
-					</div>
-				</div>
-				
-				<div class="row">
-						<div class="col-md-12 mx-auto">
-								<div class="row justify-content-center bg-info mb-2" style="border-top:  3px black solid; border-bottom:  3px black solid;">
-									<h4 class=" w-60 p-2 text-center " >INSTRUCCIONES</h4>
-								</div>
-						</div>			
-				</div>
-				
-				<div class="row">
-						<div class="col-md-12 mx-auto mt-1 mb-3 fondoVer1 ">
-							<p class="texto"> Ingrese los datos del vehiculo que cruce por un puesto y presione el boton REGISTRAR VEHICULO</p>
-						</div>
-					</div>
-				</div>
+				</div>	
+			
 			</div>
+
+		</div>
+	</div>
+	
+	
+		<div class="row justify-content-center ">
+				<button type="button" class="btn btn-primary"> <i class="fas fa-car"></i> REGISTRAR VEHICULO</button>
+		</div>
+		
+		<div class="row justify-content-center  my-3">
+				<button type="button" class="btn btn-danger "> <i class="fas fa-ban"></i> CENCELAR </button>
 		</div>
 	<div th:insert="layout/footer :: footer"></div>
 </body>
