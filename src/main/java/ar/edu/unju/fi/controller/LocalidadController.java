@@ -1,11 +1,14 @@
 package ar.edu.unju.fi.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import ar.edu.unju.fi.model.Localidad;
@@ -31,6 +34,20 @@ public class LocalidadController {
 		model.addAttribute("listaLocalidades", localidadService.listarLocalidades());
 		return "adminLocalidad";
 	}
+	
+	@GetMapping("/eliminarLoc/{id}")
+	public String eliminar (@PathVariable Long id, Model model) {
+		localidadService.eliminarLocalidad(id);
+		return "redirect:/adminLocalidad";
+	}
+	
+	@GetMapping("/editarLoc/{id}")
+	public String editar(@PathVariable Long id, Model model) {
+		Optional<Localidad>localidadForm=localidadService.EditarLoc(id);
+		model.addAttribute("localidadForm", localidadForm);
+		return "adminLocalidad";
+	}
+
 	
 	
 	

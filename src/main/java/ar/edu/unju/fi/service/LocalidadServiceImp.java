@@ -1,5 +1,7 @@
 package ar.edu.unju.fi.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +28,16 @@ public class LocalidadServiceImp implements ILocalidadService{
 	@Override
 	public Iterable<Localidad> listarLocalidades() {
 		return iLocalidad.findAll();
+	}
+
+	@Override
+	public void eliminarLocalidad(Long id) {
+		iLocalidad.deleteById(id);		
+	}
+
+	@Override
+	public Optional<Localidad> EditarLoc(Long id) {
+		return iLocalidad.findById(id);
 	}
 
 }

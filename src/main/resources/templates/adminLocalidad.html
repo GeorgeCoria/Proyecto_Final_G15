@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-	<link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/admin.css">
 	<title>Localidad</title>
 </head>
@@ -62,7 +62,10 @@
 				<div class="text-center text-white bg-dark pt-2 pb-2">
 					<h4>AÑADIR </h4>
 				</div>
-				<form class="form pt-4" th:object="${localidadForm}" th:action="@{/adminLocalidad}" method="post">
+				<form class="form pt-4" th:object="${localidadForm}" th:action="@{/adminLocalidad}" method="post" autocomplete="off">
+					
+					<input type="hidden" th:field="*{id}" /> 
+					
 					<div class="form-group"> 
 						 <label for="Localidad">Nombre de Localidad</label>
    						 <input type="text" class="form-control border border-dark border-top-0 border-left-0 border-right-0 " placeholder="Ingrese Nombre" th:field="${localidadForm.nombre}">
@@ -90,8 +93,8 @@
 							<td th:text="${localidad.id}"></td>
 							<td th:text="${localidad.nombre}"></td>
 							<td class="text-center">
-								<a type="button" class="btn btn-primary">Editar</a>
-								<a type="button" class="btn btn-danger">Eliminar</a>
+								<a th:href="@{/editarLoc/}+${localidad.id}" type="button" class="btn btn-primary"> Editar</a>
+								<a th:href="@{/eliminarLoc/}+${localidad.id}" type="button" class="btn btn-danger">Eliminar</a>
 							</td>
 						</tr>
 					</tbody>
