@@ -21,16 +21,6 @@ public class MainController {
 		return "login2";
 	}
 	
-	@GetMapping("/registrador")
-	public String registradorVehiculo(Model model) {
-		model.addAttribute("listaLocalidades", localidadService.listarLocalidades());
-		return "registradorVehiculos";
-	}
-	
-	@GetMapping("/registrador2")
-	public String RegistradorUsuario() {
-		return "registradorusuario";
-	}
 	
 	@RequestMapping("/login")
 	public String login() {

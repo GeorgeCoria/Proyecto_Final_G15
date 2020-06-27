@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">	
+
+	<title>Vistas</title>
+	</head>
+		<body>
+			<div th:insert="layout/header :: header"></div> 
+			<div class="container">
+				<div class="row my-4">
+					<div class="col-md-9 mx-auto">
+			
+			<div class="row justify-content-center mb-4">
+			<h1 class=" w-100 p-2 text-center " style="border-top:  3px dodgerblue solid; border-bottom:  3px dodgerblue solid;">VEHICULO</h1>
+		</div>
+			
+					
+			<table class="table table-reponsive-sm table-striped"> 
+			  <thead class="bg-info">
+			    <tr>
+			      <th scope="col">PATENTE</th>
+			      <th scope="col">COLOR</th>
+			      <th scope="col">TITULAR</th>
+			      <th scope="col">MARCA </th>
+			      <th scope="col">MODELO</th>
+			      <th scope="col">TIPO</th>
+			      <th scope="col">N° DE CHASIS</th>
+			      <th scope="col">NUMERO DE MOTOR</th>
+			    </tr>
+			  </thead>
+			  
+			  <tbody>
+			    <tr>
+			      <td>Mark</td>
+			      <td>Otto</td>
+			      <td>@mdo</td>
+			      <td>Mark</td>
+			      <td>Otto</td>
+			      <td>@mdo</td>
+			      <td>Mark</td>
+			      <td>Otto</td>
+			    </tr>
+			  </tbody>
+			</table>
+					
+					</div>
+				</div>
+				
+			<div class="row">
+				<div class="col-md-4 mx-auto">
+					<div class="row justify-content-center mb-4">
+						<h1 class=" w-100 p-2 text-center " style="border-top:  3px dodgerblue solid; border-bottom:  3px dodgerblue solid;">LUGAR</h1>
+					</div>
+				
+					<table class="table table-reponsive-sm table-striped"> 
+					  <thead class="bg-info">
+					    <tr>
+					      <th scope="col">LOCALIDAD</th>
+					      <th scope="col">DETALLES</th>
+					    </tr>
+					  </thead>
+					  
+					  <tbody>
+					    <tr>
+					      <td>Mark</td>
+					      <td>Otto</td>
+					    </tr>
+					  </tbody>
+					</table>
+				</div>
+				
+				
+					<div class="col-md-7 mx-auto">
+						<div class="row justify-content-center mb-4">
+							<h1 class=" w-100 p-2 text-center " style="border-top:  3px dodgerblue solid; border-bottom:  3px dodgerblue solid;">TRIPULANTES</h1>
+						</div>
+					<table class="table table-reponsive-sm table-striped"> 
+					  <thead class="bg-info">
+					    <tr>
+					      <th scope="col">DOCUMENTO</th>
+					      <th scope="col">APELLIDO</th>
+					      <th scope="col">NOMBRE</th>
+					      <th scope="col">NACIONALIDAD</th>
+					    </tr>
+					  </thead>
+					  
+					  <tbody>
+					    <tr>
+					      <td>Mark</td>
+					      <td>Otto</td>
+					      <td>Mark</td>
+					      <td>Otto</td>
+					    </tr>
+					  </tbody>
+					</table>
+				</div>
+			
+			
+			
+			
+			</div>
+				
+				
+				
+			</div>
+			
+			
+			<div th:insert="layout/footer :: footer"></div>
+			</body>
+</html>
