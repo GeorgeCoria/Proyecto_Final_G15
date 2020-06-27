@@ -14,6 +14,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import ar.edu.unju.fi.model.Localidad;
 import ar.edu.unju.fi.service.LocalidadServiceImp;
 
+/**
+ * @author Velarde Marcia, Toconas Juan
+ * 
+ */
 @Controller
 public class LocalidadController {
 

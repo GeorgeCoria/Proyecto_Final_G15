@@ -15,6 +15,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import ar.edu.unju.fi.model.Usuario;
 import ar.edu.unju.fi.service.UsuarioServiceImp;
 
+/**
+ * @author Velarde Marcia
+ * 
+ */
 @Controller
 public class UsuarioController {
 
