@@ -20,20 +20,10 @@
   	<div th:insert="layout/header :: header"></div> 
 
 <!-- **************** insercion de la barra de navegacion*********************  -->
-  		<div class="nav bg-dark pt-3 pb-3 font-weight-bold mb-5">
+  		<div class="nav bg-dark pt-3 pb-3 font-weight-bold mb-5 fuente">
   			<div class="col-8">
 	  			<ul class="nav nav-tabs ">
-			  		<li class="nav-item">
-			   		 	<a class="nav-link text-white " href="adminPrincipal">Ver Todo</a>
-			  		</li>
-
-			  		<li class="nav-item">
-			    		<a class="nav-link text-white" href="adminRegistrador">Registradores</a>
-			  		</li>
-
-			  		<li class="nav-item">
-			   			 <a class="nav-link text-white" href="adminConsultor">Consultores</a>
-			  		</li>
+					
 			  		<li class="nav-item">
 			   			 <a class="nav-link text-white" href="adminLocalidad">Localidades</a>
 			  		</li>
@@ -54,49 +44,193 @@
 	  	</div>
 <!-- **************** Find de la barra de navegacion*********************  -->
 
-<!-- **************** Cuerpo de la Pagina Principal *********************  -->
-  	<div class="container">
-  		
-  		<div class="row justify-content-center mb-4">
-			<h1 class=" w-100 p-2 text-center " style="border-top:  3px dodgerblue solid; border-bottom:  3px dodgerblue solid;">GESTOR DE USUARIOS</h1>
+
+
+<!-- **************** Cuerpo Gestor de Usuarios *********************  -->
+
+<div class="container fuente">
+
+		<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+			<li class="nav-item" role="presentation">
+				<a class="nav-link active" id="pills-principal-tab" data-toggle="pill"
+				href="#Principal" role="tab" aria-controls="pills-principal"
+				aria-selected="true">All-Usuarios</a>
+			</li>
+			<li class="nav-item" role="presentation">
+				<a class="nav-link" id="pills-registrador-tab" data-toggle="pill" href="#Registrador"
+				role="tab" aria-controls="pills-registrador" aria-selected="false">Registrador
+				</a>
+			</li>
+			<li class="nav-item" role="presentation">
+				<a class="nav-link" id="pills-consultor-tab" data-toggle="pill" href="#Consultor"
+				role="tab" aria-controls="pills-consultor" aria-selected="false">Consultor
+				</a>
+			</li>
+		</ul>
+
+		<div class="tab-content" id="pills-tabContent">
+		
+<!-- **************** Cuerpo Gestor de Usuarios *********************  -->
+		
+			<div class="tab-pane fade show active" id="Principal"
+				role="tabpanel" aria-labelledby="pills-Principal-tab">
+				
+				<div>
+			  		
+			  		<div class="row justify-content-center mb-4">
+						<h1 class=" w-100 p-2 text-center " style="border-top:  3px dodgerblue solid; 
+						border-bottom:  3px dodgerblue solid;">GESTOR DE USUARIOS</h1>
+					</div>	
+			  
+					<div class="my-custom-scrollbar1 table-wrapper-scroll-y">
+			  		<table class="table table-reponsive-sm table-striped">
+					  <thead >
+					    <tr >
+					      <th scope="col">ID</th>
+					      <th scope="col">Usuario</th>
+					      <th scope="col">Password</th>
+					      <th scope="col">Nombre</th>
+					      <th scope="col">Apellido</th>
+					      <th scope="col">Tipo de Usuario</th>
+					      <th scope="col">Accion</th>
+					    </tr>
+					  </thead>
+					  
+					  <tbody>
+					  
+					    <tr th:each="usuario : ${listaUsuarios}">
+					      <th th:text="${usuario.id}"></th>
+					      <td th:text="${usuario.nombreUsuario}"></td>
+					      <td th:text="${usuario.password}"></td>
+					      <td th:text="${usuario.nombreReal}"></td>
+					      <td th:text="${usuario.apellidoReal}"></td>
+					      <td th:text="${usuario.tipoUsuario}"></td>
+					      <td>
+					      	<a class="btn btn-primary" th:href="@{'/editarUsuario/'+${usuario.id}}">Editar</a>
+							<a class="btn btn-danger" th:href="@{'/eliminarUsuario/'+${usuario.id}}">>Eliminar</a>
+					      </td>
+					    </tr>
+					    
+					  </tbody>
+					  
+					</table>
+					</div>
+					<div class="alert alert-danger text-center" th:if="${listErrorMessage}" th:text="${listErrorMessage}">Error MEssage</div>
+			  	</div>		
+			</div>
+
+	 <!-- ********** FIn Gestor de Usuarios **************** -->	
+	 
+	   <!-- ********** Gestor De Usuario Registradores  **************** -->
+	 
+			<div class="tab-pane fade " id="Registrador" role="tabpanel"
+				aria-labelledby="pills-Regitrador-tab">
+
+				<div >
+
+					<div class="row justify-content-center mb-4">
+						<h1 class=" w-100 p-2 text-center "
+							style="border-top: 3px dodgerblue solid; border-bottom: 3px dodgerblue solid;">USUARIOS
+							REGISTRADORES</h1>
+					</div>
+
+
+					<div class="my-custom-scrollbar1 table-wrapper-scroll-y">
+						<table class="table table-reponsive-sm table-striped">
+							<thead>
+								<tr>
+									<th scope="col">ID</th>
+									<th scope="col">Usuario</th>
+									<th scope="col">Password</th>
+									<th scope="col">Nombre</th>
+									<th scope="col">Apellido</th>
+									<th scope="col">Tipo de Usuario</th>
+									<th scope="col">Accion</th>
+								</tr>
+							</thead>
+
+							<tbody>
+
+								<tr th:each="usuario : ${listaUsuariosReg}">
+									<th th:text="${usuario.id}"></th>
+									<td th:text="${usuario.nombreUsuario}"></td>
+									<td th:text="${usuario.password}"></td>
+									<td th:text="${usuario.nombreReal}"></td>
+									<td th:text="${usuario.apellidoReal}"></td>
+									<td th:text="${usuario.tipoUsuario}"></td>
+									<td>
+										<a class="btn btn-primary" th:href="@{'/editarUsuario/'+${usuario.id}}">Editar</a>
+										<a class="btn btn-danger" th:href="@{'/eliminarUsuario/'+${usuario.id}}">>Eliminar</a>
+									</td>
+								</tr>
+
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+
+
+
+			</div>
+				
+		  <!-- ********** FIn Gestor de Usuarios Registradores **************** -->	
+		  
+	 	 <!-- ********** Gestor De Usuario Consultores  **************** -->	  
+			<div class="tab-pane fade" id="Consultor" role="tabpanel"
+				aria-labelledby="pills-Consultor-tab">
+
+				<div class="show" th:classappend="${Consultor}">
+
+					<div class="row justify-content-center mb-4">
+						<h1 class=" w-100 p-2 text-center "
+							style="border-top: 3px dodgerblue solid; border-bottom: 3px dodgerblue solid;">USUARIOS
+							CONSULTORES</h1>
+					</div>
+
+
+					<div class="my-custom-scrollbar1 table-wrapper-scroll-y">
+						<table class="table table-reponsive-sm table-striped">
+
+							<thead>
+								<tr>
+									<th scope="col">ID</th>
+									<th scope="col">Usuario</th>
+									<th scope="col">Password</th>
+									<th scope="col">Nombre</th>
+									<th scope="col">Apellido</th>
+									<th scope="col">Tipo de Usuario</th>
+									<th scope="col">Accion</th>
+								</tr>
+							</thead>
+
+							<tbody>
+								<tr th:each="usuario : ${listaUsuariosCon}">
+									<th th:text="${usuario.id}"></th>
+									<td th:text="${usuario.nombreUsuario}"></td>
+									<td th:text="${usuario.password}"></td>
+									<td th:text="${usuario.nombreReal}"></td>
+									<td th:text="${usuario.apellidoReal}"></td>
+									<td th:text="${usuario.tipoUsuario}"></td>
+									<td>
+										<a class="btn btn-primary" th:href="@{'/editarUsuario/'+${usuario.id}}">Editar</a>
+										<a class="btn btn-danger" th:href="@{'/eliminarUsuario/'+${usuario.id}}">>Eliminar</a>
+									</td>
+								</tr>
+							</tbody>
+
+						</table>
+					</div>
+				</div>
+
+
+			</div>
 		</div>
-  			
-  
-		<div class="my-custom-scrollbar1 table-wrapper-scroll-y">
-  		<table class="table table-reponsive-sm table-striped">
-		  <thead >
-		    <tr >
-		      <th scope="col">ID</th>
-		      <th scope="col">Usuario</th>
-		      <th scope="col">Password</th>
-		      <th scope="col">Nombre</th>
-		      <th scope="col">Apellido</th>
-		      <th scope="col">Tipo de Usuario</th>
-		      <th scope="col">Accion</th>
-		    </tr>
-		  </thead>
-		  
-		  <tbody>
-		  
-		    <tr th:each="usuario : ${listaUsuarios}">
-		      <th th:text="${usuario.id}"></th>
-		      <td th:text="${usuario.nombreUsuario}"></td>
-		      <td th:text="${usuario.password}"></td>
-		      <td th:text="${usuario.nombreReal}"></td>
-		      <td th:text="${usuario.apellidoReal}"></td>
-		      <td th:text="${usuario.tipoUsuario}"></td>
-		      <td>
-		      	<a class="btn btn-primary" th:href="@{'/editarUsuario/'+${usuario.id}}">Editar</a>
-				<a class="btn btn-danger" th:href="@{'/eliminarUsuario/'+${usuario.id}}">>Eliminar</a>
-		      </td>
-		    </tr>
-		    
-		  </tbody>
-		  
-		</table>
-		</div>
-		<div class="alert alert-danger text-center" th:if="${listErrorMessage}" th:text="${listErrorMessage}">Error MEssage</div>
-  	</div>
+		
+ 
+
+ 	</div>
+  	
   			
 	<!-- Insercion del fragmento footer utlizando thymeleaf --> 
 	<div th:insert="layout/footer :: footer"></div> 

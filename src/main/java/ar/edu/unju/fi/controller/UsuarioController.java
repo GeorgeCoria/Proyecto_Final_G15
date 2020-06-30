@@ -41,6 +41,8 @@ public class UsuarioController {
 				usuarioService.crear(usuario);
 				model.addAttribute("usuarioDelForm", new Usuario());
 				model.addAttribute("listaUsuarios", usuarioService.listarUsuarios());
+				model.addAttribute("listaUsuariosReg", usuarioService.findByTipoUsuario("REGISTRADOR"));
+				model.addAttribute("listaUsuariosCon", usuarioService.findByTipoUsuario("CONSULTOR"));
 				return "adminPrincipal";
 			}catch (Exception e){
 				model.addAttribute("formError", e.getMessage());
@@ -104,17 +106,9 @@ public class UsuarioController {
 	@GetMapping("/adminPrincipal")
 	public String mostrarListaAdmin(Model model) {
 		model.addAttribute("listaUsuarios", usuarioService.listarUsuarios());
+		model.addAttribute("listaUsuariosReg", usuarioService.findByTipoUsuario("REGISTRADOR"));
+		model.addAttribute("listaUsuariosCon", usuarioService.findByTipoUsuario("CONSULTOR"));
 		return "adminPrincipal";
 	}
 	
-	@GetMapping("/adminRegistrador")
-	public String mostrarRegistrador(Model model) {
-		model.addAttribute("listaUsuariosReg", usuarioService.findByTipoUsuario("REGISTRADOR"));
-		return "adminRegistrador";
-	}
-	@GetMapping("/adminConsultor")
-	public String mostrarConsultor(Model model) {
-		model.addAttribute("listaUsuariosCon", usuarioService.findByTipoUsuario("CONSULTOR"));
-		return "adminConsultor";
-	}
 }
