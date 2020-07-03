@@ -22,28 +22,16 @@
   	
 
   <!-- **************** insercion de la barra de navegacion*********************  -->
-  
- <div class="nav bg-dark pt-3 pb-3 font-weight-bold fuente">
+  <div class="nav bg-dark pt-3 pb-3 font-weight-bold fuente">
 	<div class="col-8">
 		<ul class="nav nav-tabs ">
 			<li class="nav-item">
-				<a class="nav-link text-white " href="adminPrincipal">Ver
-					Todo
-				</a>
+			    <a class="nav-link text-white" th:href="@{/adminPrincipal}">Home
+			    </a>
 			</li>
-
+		
 			<li class="nav-item">
-				<a class="nav-link text-white" href="adminRegistrador">Registradores
-				</a>
-			</li>
-
-			<li class="nav-item">
-				<a class="nav-link text-white" href="adminConsultor">Consultores
-				</a>
-			</li>
-
-			<li class="nav-item">
-			    <a class="nav-link text-white" href="adminLocalidad">Localidades
+			    <a class="nav-link text-white" th:href="@{adminLocalidad}">Localidades
 			    </a>
 			</li>
 
@@ -52,18 +40,12 @@
 					Usuario
 				</a>
 			</li>
+			
 		</ul>
 
 	</div>
-
-	<div class="col-4 pr-4">
-		<form class=" float-right form-inline my-2 my-lg-0">
-			<input class="form-control mr-sm-2 " type="search"
-				placeholder="Search by dni" aria-label="Search">
-			<button class="btn btn-primary my-2 my-sm-0 desabled" type="submit">Search</button>
-		</form>
-	</div>
 </div>
+
 <!-- **************** Find de la barra de navegacion*********************  -->
 
 <!-- ******** Formulario Registro de Usuario ****************-->
