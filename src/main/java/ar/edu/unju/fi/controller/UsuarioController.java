@@ -41,12 +41,12 @@ public class UsuarioController {
 				usuarioService.crear(usuario);
 				model.addAttribute("usuarioDelForm", new Usuario());
 				model.addAttribute("listaUsuarios", usuarioService.listarUsuarios());
-				model.addAttribute("listaUsuariosReg", usuarioService.findByTipoUsuario("REGISTRADOR"));
-				model.addAttribute("listaUsuariosCon", usuarioService.findByTipoUsuario("CONSULTOR"));
+				model.addAttribute("usuarioBuscado", new Usuario());
 				return "adminPrincipal";
 			}catch (Exception e){
 				model.addAttribute("formError", e.getMessage());
 				model.addAttribute("usuarioDelForm", usuario);
+				model.addAttribute("usuarioBuscado", new Usuario());
 				return "adminFormulario";
 			}
 		}
@@ -104,11 +104,63 @@ public class UsuarioController {
 	}
 	
 	@GetMapping("/adminPrincipal")
-	public String mostrarListaAdmin(Model model) {
-		model.addAttribute("listaUsuarios", usuarioService.listarUsuarios());
-		model.addAttribute("listaUsuariosReg", usuarioService.findByTipoUsuario("REGISTRADOR"));
-		model.addAttribute("listaUsuariosCon", usuarioService.findByTipoUsuario("CONSULTOR"));
+	public String mostrarListaAdmin(Model model) throws Exception {
+		try {
+			model.addAttribute("listaUsuarios", usuarioService.listarUsuarios());	
+			
+		}catch(Exception e){
+			model.addAttribute("listErrorMessage", e.getMessage());
+		}
+		model.addAttribute("principal","active");
+		model.addAttribute("usuarioBuscado", new Usuario());
 		return "adminPrincipal";
 	}
+	
+	@GetMapping("/adminPrincipal/Registrador")
+	public String mostrarListaRegistrador(Model model) throws Exception {
+		try {
+			model.addAttribute("listaUsuarios", usuarioService.findByTipoUsuario("REGISTRADOR"));
+		}catch(Exception e) {
+			model.addAttribute("listErrorMessage", e.getMessage());
+		}
+		
+		model.addAttribute("registrador","active");
+		model.addAttribute("usuarioBuscado", new Usuario());
+		return "adminPrincipal";
+	}
+	
+	@GetMapping("/adminPrincipal/Consultor")
+	public String mostrarListaConsultores(Model model) throws Exception{
+		try {
+			model.addAttribute("listaUsuarios", usuarioService.findByTipoUsuario("CONSULTOR"));
+		}catch(Exception e) {
+			model.addAttribute("listErrorMessage", e.getMessage());
+		}
+		
+		model.addAttribute("consultor","active");
+		model.addAttribute("usuarioBuscado", new Usuario());
+		return "adminPrincipal";
+	}
+	
+	
+	@PostMapping("/adminBusqueda")
+	public String buscarUsuario(@ModelAttribute("usuarioBuscado") Usuario usuario, ModelMap model) throws Exception {
+		if(usuario.getNombreUsuario().length()==0) {
+			model.addAttribute("errorBusqueda","Ingrese Nombre de Usuario para realizar la Busqueda" );
+		}else {
+			try {
+			Usuario buscado=usuarioService.buscarUsuario(usuario.getNombreUsuario());
+			model.addAttribute("listaUsuarios",buscado);
+		
+			}catch(Exception e) {
+				model.addAttribute("errorBusqueda",e.getMessage());
+				
+			}
+		}
+		
+	model.addAttribute("usuarioBuscado", new Usuario());
+	return "adminPrincipal";	
+	}
+	
 	
 }

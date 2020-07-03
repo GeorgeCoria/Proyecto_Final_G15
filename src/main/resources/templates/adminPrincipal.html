@@ -25,20 +25,20 @@
 	  			<ul class="nav nav-tabs ">
 					
 			  		<li class="nav-item">
-			   			 <a class="nav-link text-white" href="adminLocalidad">Localidades</a>
+			   			 <a class="nav-link text-white" th:href="@{/adminLocalidad}">Localidades</a>
 			  		</li>
 
 			 		<li class="nav-item">
-			   			 <a class="btn btn-primary font-weight-bold " href="adminFormulario">Añadir Usuario</a>
+			   			 <a class="btn btn-primary font-weight-bold " th:href="@{/adminFormulario}">Añadir Usuario</a>
 			  		</li>  
 				</ul>
 
   			</div>
   		
-			<div class="col-4 pr-4">
-				<form class=" float-right form-inline my-2 my-lg-0"> <!-- th:object="${usuarioBuscado}" th:action="@{/buscarDni}" method="post" --> 
-		     		<input class="form-control mr-sm-2" type="search" placeholder="Search by dni" aria-label="Search"> <!--  th:field="${usuarioBuscado.dni}" -->
-		    	  	<button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
+			<div class="col-4 pr-4" th:if="${principal}">
+				<form class=" float-right form-inline my-2 my-lg-0" th:object="${usuarioBuscado}" th:action="@{/adminBusqueda}" method="post"> <!-- th:object="${usuarioBuscado}" th:action="@{/buscarDni}" method="post" --> 
+		     		<input class="form-control mr-sm-2" th:field="${usuarioBuscado.nombreUsuario}" type="search" placeholder="Search by Nombre Usuario" aria-label="Search"> <!--  th:field="${usuarioBuscado.dni}" -->
+		    	  	<input class="btn btn-primary my-2 my-sm-0" type="submit" value="BUSCAR">
 		    	</form>
 			</div>
 	  	</div>
@@ -47,188 +47,92 @@
 
 
 <!-- **************** Cuerpo Gestor de Usuarios *********************  -->
+<div class="alert alert-danger text-center" th:if="${errorBusqueda}" th:text="${errorBusqueda}">Message Error</div>
 
 <div class="container fuente">
 
-		<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-			<li class="nav-item" role="presentation">
-				<a class="nav-link active" id="pills-principal-tab" data-toggle="pill"
-				href="#Principal" role="tab" aria-controls="pills-principal"
-				aria-selected="true">All-Usuarios</a>
-			</li>
-			<li class="nav-item" role="presentation">
-				<a class="nav-link" id="pills-registrador-tab" data-toggle="pill" href="#Registrador"
-				role="tab" aria-controls="pills-registrador" aria-selected="false">Registrador
-				</a>
-			</li>
-			<li class="nav-item" role="presentation">
-				<a class="nav-link" id="pills-consultor-tab" data-toggle="pill" href="#Consultor"
-				role="tab" aria-controls="pills-consultor" aria-selected="false">Consultor
-				</a>
-			</li>
-		</ul>
+	<div class="btn-group mb-5 ">
+		<a class="btn btn-primary btn-lg" th:href="@{/adminPrincipal}" >
+		Lista de usuarios
+		</a>
+		
+		<a class="btn btn-primary btn-lg" th:href="@{/adminPrincipal/Registrador}">
+		Registradores
+		</a>
+		
+		<a class="btn btn-primary btn-lg" th:href="@{/adminPrincipal/Consultor}" >
+		Consultores
+		</a>
+	</div>
 
-		<div class="tab-content" id="pills-tabContent">
 		
 <!-- **************** Cuerpo Gestor de Usuarios *********************  -->
-		
-			<div class="tab-pane fade show active" id="Principal"
-				role="tabpanel" aria-labelledby="pills-Principal-tab">
+
+
+
+		<div>
+
+			<div class="row justify-content-center mb-4" th:if="${principal}">
+				<h1 class=" w-100 p-2 text-center "
+					style="border-top: 3px dodgerblue solid; border-bottom: 3px dodgerblue solid;">GESTOR
+					DE USUARIOS</h1>
+			</div>
+			
+			<div class="row justify-content-center mb-4" th:if="${registrador}">
+				<h1 class=" w-100 p-2 text-center "
+					style="border-top: 3px dodgerblue solid; border-bottom: 3px dodgerblue solid;">REGISTRADORES</h1>
+			</div>
+			
+			<div class="row justify-content-center mb-4" th:if="${consultor}">
+				<h1 class=" w-100 p-2 text-center "
+					style="border-top: 3px dodgerblue solid; border-bottom: 3px dodgerblue solid;">CONSULTORES</h1>
+			</div>
+			
+			
+			<div class="my-custom-scrollbar1 table-wrapper-scroll-y">
+				<table class="table table-reponsive-sm table-striped">
+					<thead>
+						<tr>
+							<th scope="col">ID</th>
+							<th scope="col">Usuario</th>
+							<th scope="col">Password</th>
+							<th scope="col">Nombre</th>
+							<th scope="col">Apellido</th>
+							<th scope="col">Tipo de Usuario</th>
+							<th scope="col">Accion</th>
+						</tr>
+					</thead>
+
+					<tbody>
+						
+						
+						<tr th:each="usuario : ${listaUsuarios}">
+							<th th:text="${usuario.id}"></th>
+							<td th:text="${usuario.nombreUsuario}"></td>
+							<td th:text="${usuario.password}"></td>
+							<td th:text="${usuario.nombreReal}"></td>
+							<td th:text="${usuario.apellidoReal}"></td>
+							<td th:text="${usuario.tipoUsuario}"></td>
+							<td><a class="btn btn-primary"
+								th:href="@{'/editarUsuario/'+${usuario.id}}">Editar</a> <a
+								class="btn btn-danger"
+								th:href="@{'/eliminarUsuario/'+${usuario.id}}">Eliminar</a></td>
+						</tr>
+
+					</tbody>
 				
-				<div>
-			  		
-			  		<div class="row justify-content-center mb-4">
-						<h1 class=" w-100 p-2 text-center " style="border-top:  3px dodgerblue solid; 
-						border-bottom:  3px dodgerblue solid;">GESTOR DE USUARIOS</h1>
-					</div>	
-			  
-					<div class="my-custom-scrollbar1 table-wrapper-scroll-y">
-			  		<table class="table table-reponsive-sm table-striped">
-					  <thead >
-					    <tr >
-					      <th scope="col">ID</th>
-					      <th scope="col">Usuario</th>
-					      <th scope="col">Password</th>
-					      <th scope="col">Nombre</th>
-					      <th scope="col">Apellido</th>
-					      <th scope="col">Tipo de Usuario</th>
-					      <th scope="col">Accion</th>
-					    </tr>
-					  </thead>
-					  
-					  <tbody>
-					  
-					    <tr th:each="usuario : ${listaUsuarios}">
-					      <th th:text="${usuario.id}"></th>
-					      <td th:text="${usuario.nombreUsuario}"></td>
-					      <td th:text="${usuario.password}"></td>
-					      <td th:text="${usuario.nombreReal}"></td>
-					      <td th:text="${usuario.apellidoReal}"></td>
-					      <td th:text="${usuario.tipoUsuario}"></td>
-					      <td>
-					      	<a class="btn btn-primary" th:href="@{'/editarUsuario/'+${usuario.id}}">Editar</a>
-							<a class="btn btn-danger" th:href="@{'/eliminarUsuario/'+${usuario.id}}">>Eliminar</a>
-					      </td>
-					    </tr>
-					    
-					  </tbody>
-					  
-					</table>
-					</div>
-					<div class="alert alert-danger text-center" th:if="${listErrorMessage}" th:text="${listErrorMessage}">Error MEssage</div>
-			  	</div>		
+				</table>
+			
+				<div class="alert alert-danger text-center"
+				th:if="${listErrorMessage}" th:text="${listErrorMessage}">Error
+				MEssage</div>
 			</div>
+			
 
-	 <!-- ********** FIn Gestor de Usuarios **************** -->	
-	 
-	   <!-- ********** Gestor De Usuario Registradores  **************** -->
-	 
-			<div class="tab-pane fade " id="Registrador" role="tabpanel"
-				aria-labelledby="pills-Regitrador-tab">
-
-				<div >
-
-					<div class="row justify-content-center mb-4">
-						<h1 class=" w-100 p-2 text-center "
-							style="border-top: 3px dodgerblue solid; border-bottom: 3px dodgerblue solid;">USUARIOS
-							REGISTRADORES</h1>
-					</div>
-
-
-					<div class="my-custom-scrollbar1 table-wrapper-scroll-y">
-						<table class="table table-reponsive-sm table-striped">
-							<thead>
-								<tr>
-									<th scope="col">ID</th>
-									<th scope="col">Usuario</th>
-									<th scope="col">Password</th>
-									<th scope="col">Nombre</th>
-									<th scope="col">Apellido</th>
-									<th scope="col">Tipo de Usuario</th>
-									<th scope="col">Accion</th>
-								</tr>
-							</thead>
-
-							<tbody>
-
-								<tr th:each="usuario : ${listaUsuariosReg}">
-									<th th:text="${usuario.id}"></th>
-									<td th:text="${usuario.nombreUsuario}"></td>
-									<td th:text="${usuario.password}"></td>
-									<td th:text="${usuario.nombreReal}"></td>
-									<td th:text="${usuario.apellidoReal}"></td>
-									<td th:text="${usuario.tipoUsuario}"></td>
-									<td>
-										<a class="btn btn-primary" th:href="@{'/editarUsuario/'+${usuario.id}}">Editar</a>
-										<a class="btn btn-danger" th:href="@{'/eliminarUsuario/'+${usuario.id}}">>Eliminar</a>
-									</td>
-								</tr>
-
-							</tbody>
-						</table>
-					</div>
-				</div>
-
-
-
-
-			</div>
-				
-		  <!-- ********** FIn Gestor de Usuarios Registradores **************** -->	
-		  
-	 	 <!-- ********** Gestor De Usuario Consultores  **************** -->	  
-			<div class="tab-pane fade" id="Consultor" role="tabpanel"
-				aria-labelledby="pills-Consultor-tab">
-
-				<div class="show" th:classappend="${Consultor}">
-
-					<div class="row justify-content-center mb-4">
-						<h1 class=" w-100 p-2 text-center "
-							style="border-top: 3px dodgerblue solid; border-bottom: 3px dodgerblue solid;">USUARIOS
-							CONSULTORES</h1>
-					</div>
-
-
-					<div class="my-custom-scrollbar1 table-wrapper-scroll-y">
-						<table class="table table-reponsive-sm table-striped">
-
-							<thead>
-								<tr>
-									<th scope="col">ID</th>
-									<th scope="col">Usuario</th>
-									<th scope="col">Password</th>
-									<th scope="col">Nombre</th>
-									<th scope="col">Apellido</th>
-									<th scope="col">Tipo de Usuario</th>
-									<th scope="col">Accion</th>
-								</tr>
-							</thead>
-
-							<tbody>
-								<tr th:each="usuario : ${listaUsuariosCon}">
-									<th th:text="${usuario.id}"></th>
-									<td th:text="${usuario.nombreUsuario}"></td>
-									<td th:text="${usuario.password}"></td>
-									<td th:text="${usuario.nombreReal}"></td>
-									<td th:text="${usuario.apellidoReal}"></td>
-									<td th:text="${usuario.tipoUsuario}"></td>
-									<td>
-										<a class="btn btn-primary" th:href="@{'/editarUsuario/'+${usuario.id}}">Editar</a>
-										<a class="btn btn-danger" th:href="@{'/eliminarUsuario/'+${usuario.id}}">>Eliminar</a>
-									</td>
-								</tr>
-							</tbody>
-
-						</table>
-					</div>
-				</div>
-
-
-			</div>
 		</div>
-		
- 
 
+		<!-- ********** FIn Gestor de Usuarios **************** -->	
+	 
  	</div>
   	
   			

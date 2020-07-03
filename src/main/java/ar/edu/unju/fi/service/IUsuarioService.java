@@ -18,7 +18,8 @@ public interface IUsuarioService {
 	public Usuario modificar(Usuario unUsuario) throws Exception;
 	public Usuario encontrarUsuario(Long id) throws Exception;
 	public void eliminar(Long id);
-	public Iterable<Usuario> listarUsuarios();
-	public List<Usuario> findByTipoUsuario(String tipoUsuario);
+	public Iterable<Usuario> listarUsuarios() throws Exception;
+	public List<Usuario> findByTipoUsuario(String tipoUsuario) throws Exception;
+	public Usuario buscarUsuario(String buscado) throws Exception;
 
 }

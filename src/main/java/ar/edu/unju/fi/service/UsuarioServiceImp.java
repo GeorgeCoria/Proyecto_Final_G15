@@ -60,14 +60,30 @@ public class UsuarioServiceImp implements IUsuarioService{
 	}
 
 	@Override
-	public Iterable<Usuario> listarUsuarios() {
-		return iUsuario.findAll();
+	public Iterable<Usuario> listarUsuarios() throws Exception{
+		Iterable<Usuario> listaUsuarios=iUsuario.findAll();
+		if(!listaUsuarios.iterator().hasNext()) {
+			throw new Exception("Lista Vacia ");
+		}
+		
+		return listaUsuarios; 
 	}
 
 	@Override
-	public List<Usuario> findByTipoUsuario(String tipoUsuario) {
+	public List<Usuario> findByTipoUsuario(String tipoUsuario) throws Exception {
 		List<Usuario> usuarios = iUsuario.findByTipoUsuario(tipoUsuario);
+		if(usuarios.size()==0) {
+			throw new Exception("No hay registros de este tipo de Usuarios");
+		}
 		return usuarios;
+	}
+	
+	@Override
+	public Usuario buscarUsuario(String buscado) throws Exception {
+		// TODO Auto-generated method stub	
+		Usuario encontrado = iUsuario.findByNombreUsuario(buscado).orElseThrow(()->new Exception ("El usuario buscado no Existe en nuestra base de Datos"));
+		
+		return encontrado;
 	}
 
 }
