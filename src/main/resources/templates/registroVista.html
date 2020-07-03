@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="css/registrador.css"/>
+	
+	<title>Registrador</title>
+	
+</head>
+<body>
+
+<!-- ********** Insercion del header **************** -->
+	<div th:insert="layout/header :: header"></div>
+	
+	<div class="container">
+                    <div class="row my-4">
+                        <div class="col-md-9 mx-auto">
+
+                            <div class="row justify-content-center mb-4">
+                                <h1 class=" w-100 p-2 text-center " style="border-top:  3px dodgerblue solid; border-bottom:  3px dodgerblue solid;">VEHICULO</h1>
+                            </div>
+
+
+                            <table class="table table-reponsive-sm table-striped"> 
+                                  <thead class="bg-info">
+	                                    <tr>
+		                                      <th scope="col">ID</th>
+		                                      <th scope="col">PATENTE</th>
+		                                      <th scope="col">COLOR</th>
+		                                      <th scope="col">TITULAR</th>
+		                                      <th scope="col">MARCA </th>
+		                                      <th scope="col">MODELO</th>
+		                                      <th scope="col">TIPO</th>
+		                                      <th scope="col">N° DE CHASIS</th>
+		                                      <th scope="col">NUMERO DE MOTOR</th>
+	                                    </tr>
+                                  </thead>
+
+                                  <tbody>
+	                                    <tr th:each="vehiculo : ${listaVehiculo}">
+	                                    	  <td th:text="${vehiculo.id}"></td>
+		                                      <td th:text="${vehiculo.patente}"></td>
+		                                      <td th:text="${vehiculo.color}"></td>
+		                                      <td th:text="${vehiculo.titular}"></td>
+		                                      <td th:text="${vehiculo.marca}"></td>
+		                                      <td th:text="${vehiculo.modelo}"></td>
+		                                      <td th:text="${vehiculo.tipo}"></td>
+		                                      <td th:text="${vehiculo.numeroChasis}"></td>
+		                                      <td th:text="${vehiculo.numeroMotor}"></td>
+	                                    </tr>
+                                  </tbody>
+                            </table>
+
+
+
+                        </div>
+                    </div>
+
+                <div class="row">
+                   
+                    <div class="col-md-4 mx-auto">
+                       
+                        <div class="row justify-content-center mb-4">
+                            <h1 class=" w-100 p-2 text-center " style="border-top:  3px dodgerblue solid; border-bottom:  3px dodgerblue solid;">LUGAR</h1>
+                        </div>
+
+                        <table class="table table-reponsive-sm table-striped"> 
+                          <thead class="bg-info">
+                            <tr>
+                              <th scope="col">LOCALIDAD</th>
+                              <th scope="col">DETALLES</th>
+                            </tr>
+                          </thead>
+
+                          <tbody>
+                            <tr th:each="localidad : ${listaLocalidad}">
+                              <td th:text="${localidad.id}"></td>
+                              <td th:text="${localidad.nombre}"></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        
+                    </div>
+
+
+                    <div class="col-md-7 mx-auto">
+                           
+                        <div class="row justify-content-center mb-4">
+                            <h1 class=" w-100 p-2 text-center " style="border-top:  3px dodgerblue solid; border-bottom:  3px dodgerblue solid;">TRIPULANTES</h1>
+                        </div>
+                            
+                        <table class="table table-reponsive-sm table-striped"> 
+		                         <thead class="bg-info">
+		                            <tr>
+		                              <th scope="col">ID</th>
+		                              <th scope="col">DOCUMENTO</th>
+		                              <th scope="col">APELLIDO</th>
+		                              <th scope="col">NOMBRE</th>
+		                              <th scope="col">NACIONALIDAD</th>
+		                            </tr>
+		                       </thead>
+		
+		                       <tbody>
+		                              <tr th:each="tripulante : ${listaTrip}">
+		                              <td th:text="${tripulante.id}"></td>
+		                              <td th:text="${tripulante.documento}"></td>
+		                              <td th:text="${tripulante.apellido}"></td>
+		                              <td th:text="${tripulante.nombres}"></td>
+		                              <td th:text="${tripulante.nacionalidad}"></td>
+		                            </tr>
+		                       </tbody>
+		              </table>
+                        
+                    </div>
+
+                </div>
+                
+                <div class="form-group row justify-content-center">
+ 						<a class="btn btn-primary mb-2" th:href="@{/registroNuevo}">CARGAR OTRO REGISTRO</a>
+                </div>
+               
+
+            </div>
+
+<div th:insert="layout/footer :: footer"></div>
+
+
+</body>
+</html>

@@ -21,10 +21,22 @@ public class LocalidadServiceImp implements ILocalidadService{
 	private ILocalidadDAO iLocalidad;
 	
 	@Override
-	public void crearLocalidad(Localidad localidad) {
-		iLocalidad.save(localidad);
+	public void crearLocalidad(Localidad localidad) throws Exception {
+		String localidadMayuscula = localidad.getNombre().toUpperCase();
+		localidad.setNombre(localidadMayuscula);
+		if(checkNombreLocalidad(localidad)) {
+			iLocalidad.save(localidad);
+		}
 	}
 
+	private boolean checkNombreLocalidad (Localidad localidad) throws Exception {
+		Optional<Localidad> localidadEncontrada = iLocalidad.findByNombre(localidad.getNombre());
+		if (localidadEncontrada.isPresent()) {
+			throw new Exception("La localidad ya esta registrada");
+		}
+		return true;
+	}
+	
 	@Override
 	public Iterable<Localidad> listarLocalidades() {
 		return iLocalidad.findAll();
@@ -36,7 +48,12 @@ public class LocalidadServiceImp implements ILocalidadService{
 	}
 
 	@Override
-	public Optional<Localidad> EditarLoc(Long id) {
+	public Localidad EditarLoc(Long id) throws Exception {
+		return iLocalidad.findById(id).orElseThrow(()-> new Exception("La localidad no existe"));
+	}
+
+	@Override
+	public Optional<Localidad> buscarLocalidad(Long id) {
 		return iLocalidad.findById(id);
 	}
 

@@ -5,7 +5,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -32,7 +31,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Entity
-@Table( name = "registroTracking")
+@Table( name = "registrosTracking")
 public class RegistroTracking implements Serializable {
 
 	/**
@@ -47,7 +46,7 @@ public class RegistroTracking implements Serializable {
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column
+	@Column(name = "ID_REGISTRO_TR")
 	private Long id;
 	
 	/**
@@ -61,22 +60,22 @@ public class RegistroTracking implements Serializable {
 	 * Atributo que representa un vehiculo y sus caracteristicas.
 	 */
 	@Autowired
-	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ID_VEHICULO")
 	private Vehiculo vehiculos;
 
 	/**
 	 * Atributo de tipo List<Tripulante> que representa un listado de tripulantes por vehiculo
 	 */
-	@ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "REGISTROTRAKING_TRIPULANTES", joinColumns = @JoinColumn(name= "ID_REGISTRO"), inverseJoinColumns = @JoinColumn(name= "ID_TRIPULANTE"))
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "regis_tracking_tripulantes", joinColumns = @JoinColumn(name = "ID_REGISTRO_TR"), inverseJoinColumns =  @JoinColumn(name = "ID_TRIPULANTE"))
 	private List<Tripulante> tripulantes = new ArrayList <Tripulante>();
 
 	/**
 	 * Atributo que representa la localidad donde se realizo el registro.
 	 */
 	@Autowired
-	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ID_LOCALIDAD")
 	private Localidad localidad;
 

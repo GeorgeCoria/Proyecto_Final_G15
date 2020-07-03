@@ -60,7 +60,7 @@
 		<div class="row justify-content-center">
 			<div class="col-12 col-md-4">
 				<div class="text-center text-white bg-dark pt-2 pb-2">
-					<h4>AÑADIR </h4>
+					<h4 th:text="${titulo}"></h4>
 				</div>
 				<form class="form pt-4" th:object="${localidadForm}" th:action="@{/adminLocalidad}" method="post" autocomplete="off">
 					
@@ -69,10 +69,13 @@
 					<div class="form-group"> 
 						 <label for="Localidad">Nombre de Localidad</label>
    						 <input type="text" class="form-control border border-dark border-top-0 border-left-0 border-right-0 " placeholder="Ingrese Nombre" th:field="${localidadForm.nombre}">
-						
+						<div class="alert-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">Name Error</div>
 					</div>
-					<input type="submit" name="Registrar" value="Guardar" class="  col-12 btn btn-primary btn-lg float-right">
-					
+					<div class="row col-12">
+						<input type="submit" name="Registrar" th:value="${editMode}?'Guardar':'Agregar'" class="col-6 btn btn-primary btn-lg float-left">
+						<a th:href="@{/cancelar}" type="button" class=" col-6 btn btn-danger btn-lg float-right">Cancelar</a>
+					</div>
+					<div class="alert-danger text-center" th:if="${formErrorMessage}" th:text="${formErrorMessage}" >Name Error</div>
 				</form>
 			</div>
 

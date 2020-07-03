@@ -37,7 +37,7 @@ public class Tripulante implements Serializable{
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column
+	@Column(name = "ID_TRIPULANTE")
 	private Long id;
 	
 	/**

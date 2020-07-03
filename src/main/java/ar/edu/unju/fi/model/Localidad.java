@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import org.springframework.stereotype.Component;
 
@@ -36,7 +37,7 @@ public class Localidad implements Serializable{
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column (name="ID")
+	@Column (name = "ID_LOCALIDAD")
 	private Long id;
 	
 	/**
@@ -45,6 +46,7 @@ public class Localidad implements Serializable{
 	 * Localidad 
 	 */
 	@Column(name="NOMBRE",length=40,nullable=true)
+	@NotBlank(message="Debe ingresar un nombre de localidad")
 	private String nombre;
 	
 	
@@ -66,7 +68,6 @@ public class Localidad implements Serializable{
 	 * @param nombre de Localidad
 	 */
 	public Localidad(String nombre) {
-		
 		this.nombre = nombre;
 	}
 	
@@ -126,16 +127,5 @@ public class Localidad implements Serializable{
 		return "Localidad [id=" + id + ", nombre=" + nombre + "]";
 	}
 
-	
-	
-	
-	
-
-
-	
-	
-	
-	
-	
 
 }

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="css/registrador.css"/>
+	
+	<title>Registrador</title>
+	
+</head>
+
+<body>
+
+<!-- ********** Insercion del header **************** -->
+	<div th:insert="layout/header :: header"></div>
+
+
+ <div class="card">
+                   
+                    <div class="row justify-content-center mb-4 mt-4">
+				        <h1 class=" w-60 p-2 text-center " style="border-top:  3px dodgerblue solid; border-bottom:  3px dodgerblue solid;">REGISTRO DE VEHICULOS</h1>
+			        </div>
+                   
+                    <div class="card-body row" >
+                        <div class="col-10 col-sm-9 col-md-6 text-center mx-auto mb-2">
+					
+                            <div class="row justify-content-center bg-info mb-2" style="border-top:  3px black solid; border-bottom:  3px black solid;">
+                                <h4 class=" w-60 p-2 text-center " >DETALLES DEL VEHICULO</h4>
+                            </div>
+					
+                            <div class="row">
+                               
+                                <form class=" col-md-12 fondoVer1" th:object="${vehiculo}" th:action="@{/registroTracking}" method="post">
+
+
+                                        	<input type="hidden" th:field="*{id}"> 
+
+                                            <div class="form-group row my-4">
+                                                <label for="patente" class="col-sm-3 col-form-label my-auto texto">PATENTE</label>
+                                                <div class="col-sm-9">
+                                                  <input type="text" th:field="*{patente}" class="form-control" id="patente" placeholder="Ej: AAA123 / AA123EE" select disabled>
+                                                </div>
+                                            </div>
+                            				<div class="alert-danger text-center" th:if="${formError}" th:text="${formError}">Name Error</div>
+                            				
+                   
+                                                <div class="form-group row mb-4">
+                                                    <label for="marca" class="col-sm-3 col-form-label my-auto texto">MARCA</label>
+                                                    <div class="col-sm-9">
+                                                      <input type="text" th:field="*{marca}" class="form-control" id="marca" placeholder="MARCA">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row mb-4">
+                                                    <label for="modelo" class="col-sm-3 col-form-label my-auto texto">MODELO</label>
+                                                    <div class="col-sm-9">
+                                                      <input type="text" th:field="*{modelo}" class="form-control" id="modelo" placeholder="MODELO">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row mb-4">
+                                                    <label for="chasis" class="col-sm-3 col-form-label my-auto texto">CHASIS</label>
+                                                    <div class="col-sm-9">
+                                                      <input type="text" th:field="*{numeroChasis}" class="form-control" id="chasis" placeholder="N° DE CHASIS">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row mb-4">
+                                                    <label for="motor" class="col-sm-3 col-form-label my-auto texto">MOTOR</label>
+                                                    <div class="col-sm-9">
+                                                      <input type="text" th:field="*{numeroMotor}" class="form-control" id="motor" placeholder="N° DE MOTOR">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row mb-4">
+                                                    <label for="color" class="col-sm-3 col-form-label my-auto texto">COLOR</label>
+                                                    <div class="col-sm-9">
+                                                      <input type="text" th:field="*{color}" class="form-control" id="color" placeholder="COLOR">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row mb-4">
+                                                    <label for="tipo" class="col-sm-3 col-form-label my-auto texto">TIPO</label>
+                                                    <div class="col-sm-9">
+                                                      <input type="text" th:field="*{tipo}" class="form-control" id="tipo" placeholder="TIPO">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row mb-4">
+                                                    <label for="titular" class="col-sm-3 col-form-label my-auto texto">TITULAR</label>
+                                                    <div class="col-sm-9">
+                                                      <input type="text"th:field="*{titular}"  class="form-control" id="titular" placeholder="TITULAR">
+                                                    </div>
+                                                </div>
+
+                                                <input type="submit" class="btn btn-primary mb-2" value="SIGUIENTE" th:value="SIGUIENTE">
+                                        
+                                        
+                                </form>
+                            </div>
+                        </div>
+            
+                    </div>
+                </div>
+
+
+<div th:insert="layout/footer :: footer"></div>
+
+
+</body>
+</html>

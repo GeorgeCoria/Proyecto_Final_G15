@@ -1,11 +1,12 @@
 package ar.edu.unju.fi.controller;
 
-import java.util.Optional;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,17 +27,36 @@ public class LocalidadController {
 	
 	@GetMapping("/adminLocalidad")
 	public String mostrarLocalidad(Model model) {
+		model.addAttribute("titulo", "LOCALIDAD");
 		model.addAttribute("localidadForm", new Localidad());
 		model.addAttribute("listaLocalidades", localidadService.listarLocalidades());
 		return "adminLocalidad";
 	}
 	
 	@PostMapping("/adminLocalidad")
-	public String crearLocalidad(@ModelAttribute("localidadForm") Localidad localidad, ModelMap model) {
-		localidadService.crearLocalidad(localidad);
-		model.addAttribute("localidadForm", new Localidad());
-		model.addAttribute("listaLocalidades", localidadService.listarLocalidades());
+	public String crearLocalidad(@Valid @ModelAttribute("localidadForm") Localidad localidad, BindingResult result, ModelMap model) {
+		if(result.hasErrors()) {
+			model.addAttribute("localidadForm", localidad);
+			model.addAttribute("listaLocalidades", localidadService.listarLocalidades());
+		}else {
+			try {
+				localidadService.crearLocalidad(localidad);
+				model.addAttribute("localidadForm", new Localidad());
+				model.addAttribute("listaLocalidades", localidadService.listarLocalidades());
+			}catch (Exception e){
+				model.addAttribute("formErrorMessage", e.getMessage());
+				model.addAttribute("listaLocalidades", localidadService.listarLocalidades());
+				model.addAttribute("localidadForm", localidad);
+			}
+		}
+		model.addAttribute("titulo", "LOCALIDAD");
+		model.addAttribute("editMode", "false");
 		return "adminLocalidad";
+	}
+	
+	@GetMapping("/cancelar")
+	public String cancelar() {
+		return "redirect:/adminLocalidad";
 	}
 	
 	@GetMapping("/eliminarLoc/{id}")
@@ -46,13 +66,18 @@ public class LocalidadController {
 	}
 	
 	@GetMapping("/editarLoc/{id}")
-	public String editar(@PathVariable Long id, Model model) {
-		Optional<Localidad>localidadForm=localidadService.EditarLoc(id);
-		model.addAttribute("localidadForm", localidadForm);
+	public String editar(@PathVariable Long id, Model model) throws Exception {
+		try{
+			Localidad localidadForm=localidadService.EditarLoc(id);
+			model.addAttribute("localidadForm", localidadForm);
+			model.addAttribute("listaLocalidades", localidadService.listarLocalidades());
+		}catch(Exception e) {
+			model.addAttribute("formErrorMessage", e.getMessage());
+			model.addAttribute("localidadForm", new Localidad());
+		}
+		model.addAttribute("editMode", "true");
+		model.addAttribute("titulo", "EDITAR LOCALIDAD");
 		return "adminLocalidad";
 	}
 
-	
-	
-	
 }

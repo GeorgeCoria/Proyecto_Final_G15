@@ -14,8 +14,9 @@ import ar.edu.unju.fi.model.Localidad;
  */
 public interface ILocalidadService {
 
-	public void crearLocalidad(Localidad localidad);
+	public void crearLocalidad(Localidad localidad) throws Exception;
 	public Iterable<Localidad> listarLocalidades();
-	public void eliminarLocalidad (Long id);
-	public Optional <Localidad> EditarLoc(Long id);
+	public void eliminarLocalidad (Long id) ;
+	public Localidad EditarLoc(Long id) throws Exception;
+	public Optional<Localidad> buscarLocalidad(Long id);
 }
