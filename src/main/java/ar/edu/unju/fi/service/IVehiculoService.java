@@ -13,6 +13,8 @@ import ar.edu.unju.fi.model.Vehiculo;
 public interface IVehiculoService {
 
 	public void crearVehiculo(Vehiculo vehiculo);
+	
 	public boolean chekPatente(Vehiculo vehiculo) throws Exception;
+	
 	public Vehiculo buscarVehiculo(String patente) throws Exception;
 }

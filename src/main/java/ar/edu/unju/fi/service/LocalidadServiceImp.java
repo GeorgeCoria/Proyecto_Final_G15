@@ -11,7 +11,7 @@ import ar.edu.unju.fi.repository.ILocalidadDAO;
 /**
  * Clase que va a implementar la interface ILocalidadService.
  * 
- * @author Marcia Velarde, Juan Toconas
+ * @author Marcia Velarde, Juan Toconas, Jorge E. Castillo.
  *
  */
 @Service
@@ -55,6 +55,12 @@ public class LocalidadServiceImp implements ILocalidadService{
 	@Override
 	public Optional<Localidad> buscarLocalidad(Long id) {
 		return iLocalidad.findById(id);
+	}
+
+	@Override
+	public Localidad buscarNombreLocalidad(String nombre) throws Exception {
+		
+		return iLocalidad.findByNombre(nombre).orElseThrow();
 	}
 
 }

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+	<head>
+		<meta charset="utf-8">
+		<link th:rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css}">
+		<link th:rel="stylesheet" type="text/css" th:href="@{/css/consultas.css}">
+		<title>Localidad</title>
+	</head>
+	
+	<body>
+	
+		<!-- ------------------------------ -->
+		<!-- ********** CABEZERA ********** -->
+		<!-- ------------------------------ -->
+		<header th:insert="layout/header :: header"></header>
+		
+		
+		<!-- -------------------------------- -->
+		<!-- ********** NAVEGACION ********** -->
+		<!-- -------------------------------- -->
+		<!-- Propiedades destacada: nav= d.flex | nav-tabs=colorBorder | mt=margin top-->
+		<nav class="col-11 m-auto nav nav-tabs pt-3">
+		 	<!-- Propiedades a destacar: nav-item= flex| nav-link y active= borderColor | -->
+		  	<a class="nav-item nav-link active btn-primary" href="vehiculos">Vehiculos</a>
+			<a class="nav-link active" href="tripulante">Tripulante</a>
+			<a class="nav-link active" href="patente">Patente</a>
+		</nav>
+			 
+	
+		<!-- ----------------------------- -->
+		<!-- ********** SECCION ********** -->
+		<!-- ----------------------------- -->		
+		<!--mb= margin bottom-->
+		<section class="col-12 mb-5">
+			<!-- my = margin top/bottom | btn-link= subrayado-->
+			<div class="col-sm-12 text-center my-5 btn-link text-dark px-5">
+				<h2 class="col-xl-9 col-lg-11  p-4 m-auto border-info border-c1 font-c1">Listado de Vehiculos por Localidad-Fecha-Hora</h2>
+				<!-- Propiedades a destacar: row= d.flex, flex-wrap | m=margin-->
+			</div>
+			
+			
+			<!-- ------------------------------------------------------------------------- -->
+			<!-- ********** FORMULARIO-BUSQUEDA -> FECHA-INICIO/FINAL/LOCALIDAD ********** -->
+			<!-- ------------------------------------------------------------------------- -->
+			<form th:action="@{/buscarVehiculosPorLocalidadDateTime}"  method="post" class="col-12 mb-5 row m-0  justify-content-center">
+			
+			
+				<!-- --------------------------------------------- -->
+				<!-- ********** CONTENEDOR FECHA-INICIO ********** -->
+				<!-- --------------------------------------------- -->
+				<div class="col-lg-3 col-sm-6 order-md-1">
+					<!-- Propiedades destacar: card/border-success= borderColor -->
+					<div class="card m-3 shadow-sm border-info">
+					  	<!-- Propiedad destacar: card-header= padding  -->
+					  	<h4 class="card-header text-center bg-info font-weight-normal">Desde<br>Fecha Hora</h4>
+					  	<!-- Propiedad destacar: card-body= padding -->
+					   	<div  class="card-body">
+							<!-- required obliga q el campo se complete --> 
+							<input  type="datetime-local" class="form-control text-center border-info">
+					  	</div>
+					</div>
+				</div>
+					
+					
+				<!-- ------------------------------------------ -->
+				<!-- ********** CONTENEDOR LOCALIDAD ********** -->
+				<!-- ------------------------------------------ -->		  
+				<div class="col-lg-3 col-sm-6 order-sm-3 order-lg-2">
+					<div class="card m-3 shadow-sm border-info">
+						<h4 class="card-header text-center bg-info font-weight-normal">Localidades</h4>
+						<div class="card-body ">
+							<!-- Propiedad destacar: custom-select= color/border/letras/ -->
+							<select th:field="${modeloLocalidad.nombre}" class="custom-select mt-3 border-info">
+								<option th:each="l:${localidades}" th:text="${l.nombre}" th:value="${l.nombre}"></option>
+							</select>
+						</div>
+					</div>
+				</div>
+					
+					
+				<!-- --------------------------------------------- -->
+				<!-- ********** CONTENEDOR FECHA-FINAL  ********** -->
+				<!-- --------------------------------------------- -->	  
+				<div class="col-lg-3 col-sm-6 order-md-2">
+					<!-- Propiedades destacar: card/border-success= borderColor -->
+					<div class="card m-3 shadow-sm border-info">
+						<!-- Propiedad destacar: card-header= padding-->
+						<h4 class="card-header text-center bg-info font-weight-normal">Hasta<br>Fecha Hora</h4>
+						<!-- Propiedad destacar: card-body= padding-->
+						<div class="card-body">
+							<input type="datetime-local" class="form-control text-center border-info">
+						</div>
+					</div>
+				</div>
+				
+				
+				<!-- -------------------------------------- -->
+				<!-- ********** BOTON-FORMULARIO ********** -->
+				<!-- -------------------------------------- -->			
+				<!-- w= width | d= display | mb=margin bottom | h=hight | pb= padding bottom | m=margin -->
+				<div class="col-12 h-100p order-sm-4 align-items-center  d-flex ">
+					<!-- rounded/success= borderRedondeo/color -->
+					<button class="rounded-pill border-info col-sm-3 m-auto" type="submit"><b>Buscar</b></button>
+				</div>
+			</form>
+			
+			
+			<!-- ---------------------------------------- -->
+			<!-- ********** MENSAJES DE ERROES ********** -->
+			<!-- ---------------------------------------- -->
+			<div th:if="${errorMessage}" th:text="${errorMessage}" class="alert-danger text-center">Error si no encuentra localidad o Registro de la localidad o Registro ID</div>
+			
+			<!-- ---------------------------------------------- -->
+			<!-- ********** CONTENEDOR INFO-VEHICULO ********** -->
+			<!-- ---------------------------------------------- -->
+			<!-- Propiedad destacar: table-responsive-xl= overflow -->		
+			<div th:if="${activoLocalidad==true}" class="d-flex table-responsive-xl">
+				<div class="col-auto min-width-1 mx-auto">
+					<!-- Propiedad destacar: card/border-= coloresBordes -->
+					<div class="card shadow-sm  border-lighter-dark">
+					  	<!-- Propiedad destacar: card-header= colores | bg= background-color -->
+					   	<h2 class="card-header text-center font-weight-normal bg-lighter-dark">Datos de los Vehiculos</h2>
+					   	<!-- Propiedad destacar: card-body= padding -->
+					   	<div class="card-body">
+					      	<!-- Propiedad destacar: table= color/bordes-->
+							<table class="table table-hover ">
+								<thead>
+									<tr>
+										<th scope="col">Fecha-Hora</th>
+										<th scope="col">Titular</th>
+										<th scope="col">Patente</th>
+										<th scope="col">Modelo</th>
+										<th scope="col">Marca</th>
+										<th scope="col">Localidad</th>
+										<th scope="col" colspan="2">ID-Buscar</th>
+									</tr>
+								</thead>
+								
+								<tbody>
+									<tr th:each="r:${registrosLocalidad}">
+										<td th:text="${r.fechaHora}"></td>
+										<td th:text="${r.vehiculos.titular}"></td>
+										<td th:text="${r.vehiculos.patente}"></td>
+										<td th:text="${r.vehiculos.modelo}"></td>
+										<td th:text="${r.vehiculos.marca}"></td>
+										<td th:text="${r.localidad.nombre}"></td>
+										<td th:text="${r.id}"></td>
+										<td>
+											<a th:href="@{/buscar/}+${r.id}" class="btn bg-lighter-dark">
+												<svg class="bi bi-search" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+													<path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+													<path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+												</svg>
+											</a>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+					 	</div>
+					 </div>
+				</div>
+				
+				
+				<!-- ------------------------------------------------ -->
+				<!-- ********** CONTENEDOR INFO-TRIPULANTE ********** -->
+				<!-- ------------------------------------------------ -->	  	
+				<div th:if="${activoLocalidad==true}" class="col-auto mx-auto min-width-2">
+					<!-- Propiedad destacar: card/border-= coloresBordes -->
+					<div class="card shadow-sm border-lighter-dark">
+						<!-- Propiedad destacar: card-header= colores | bg= background-color -->
+					    <h2 class="card-header text-center font-weight-normal bg-lighter-dark">Datos de los Tripulantes</h2>
+					    <!-- Propiedad destacar: card-body= padding -->
+					    <div class="card-body">
+					    	<!-- Propiedad destacar: table= color/bordes -->
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th scope="col">DNI</th>
+										<th scope="col">Apellido</th>
+										<th scope="col">Nombre</th>
+										<th scope="col">Nacionalidad</th>
+										<th scope="col">ID-Registro</th>
+									</tr>
+								</thead>
+										
+								<tbody>
+									<tr th:each="r:${tripulantesLocalidad}">
+										<td th:text="${r.documento}"></td>
+										<td th:text="${r.apellido}"></td>
+										<td th:text="${r.nombres}"></td>
+										<td th:text="${r.nacionalidad}"></td>
+										<td th:text="${idRegistro}"></td>
+									</tr>
+								</tbody>
+							</table>
+					  	</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	 	
+	 	<!-- -------------------------------- -->
+		<!-- ********** PUBLICIDAD ********** -->
+		<!-- -------------------------------- -->
+	 	<aside></aside>
+	 	
+	 	<!-- -------------------------------- -->
+		<!-- ********** PIE-PAGINA ********** -->
+		<!-- -------------------------------- -->	
+		<footer th:insert="layout/footer :: footer"></footer>
+	</body>
+</html>

@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import org.springframework.stereotype.Component;
 
@@ -44,6 +45,7 @@ public class Tripulante implements Serializable{
 	 * Numero de documento del tripulante
 	 */
 	@Column
+	@NotBlank(message = "Ingrese el numero del Documento")
 	private String documento;
 	
 	/**

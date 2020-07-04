@@ -9,17 +9,28 @@
 	</head>
 	
 	<body>
+	
+		<!-- ------------------------------ -->
+		<!-- ********** CABEZERA ********** -->
+		<!-- ------------------------------ -->
 		<header th:insert="layout/header :: header"></header>
 		
+		
+		<!-- -------------------------------- -->
+		<!-- ********** NAVEGACION ********** -->
+		<!-- -------------------------------- -->
 		<!-- Propiedades destacada: nav= d.flex | nav-tabs=colorBorder | m= margin-->
 		<nav class="col-11 m-auto nav nav-tabs pt-3">
 			<!-- Propiedades a destacar: nav-item= flex| nav-link y active= borderColor | -->
-		    <a class="nav-link active" href="vehiculo">Vehiculos</a>
+		    <a class="nav-link active" href="vehiculos">Vehiculos</a>
 		    <a class="nav-item nav-link active btn-primary" href="tripulante">Tripulante</a>
 		    <a class="nav-link active" href="patente">Patente</a>
 		</nav>
 			
-			
+		
+		<!-- ----------------------------- -->
+		<!-- ********** SECCION ********** -->
+		<!-- ----------------------------- -->		
 		<!--mb= margin bottom-->
 		<section class="mb-5">
 			<!-- my = margin top/bottom | btn-link= subrayado-->
@@ -27,12 +38,16 @@
 				<h2 class="col-xl-6 col-lg-8 col-md-10 m-auto p-4 border-info font-c1 border-c1">Listado de recorrido por Tripulante</h2>
 			</div>
 			
+			
+			<!-- ----------------------------------------- -->
+			<!-- ********** FORMULARIO-BUSQUEDA ********** -->
+			<!-- ----------------------------------------- -->
 			<!-- Propiedades a destacar: form-inline= d.flex | mr= margin right-->
-			<form class="col-12 row form-inline justify-content-end  mt-5 mb-5 mr-sm-4" method="get">
+			<form th:action="@{/searchTripulante}" th:object="${modeloTripulante}" method="post" class="col-12 row form-inline justify-content-end  mt-5 mb-5 mr-sm-4">
 				<!-- rounded= redondeo | border/secondary= border/Color -->
 				<div class="d-flex rounded-left border border-secondary">
 					<!-- Propiedades a destacar: form-group/form-control= color/border/font-->
-					<input type="text" class="form-group form-control  rounded-0 m-0 border-0" placeholder="ingresarDNI">
+					<input th:field="${modeloTripulante.documento}"  type="text" class="form-group form-control  rounded-0 m-0 border-0" placeholder="ingresarDocumento">
 					<!-- btn/primary= colores/bordes-->
 					<button type="submit" class="btn btn-info rounded-0 border-0">
 						<svg class="bi bi-search" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -43,8 +58,24 @@
 				</div>
 			</form>
 			
+			<!-- ---------------------------------------- -->
+			<!-- ********** MENSAJES DE ERROES ********** -->
+			<!-- ---------------------------------------- -->
+			
+			<div th:if="${#fields.hasErrors('modeloTripulante.documento')}" th:errors="${modeloTripulante.documento}" class="alert-danger text-center">Error si el objeto esta vacio</div>
+			<div th:if="${errorMessage}" th:text="${errorMessage}" class="alert-danger text-center">Error si no encuentra el objeto</div>
+			
+			
+			<!-- -------------------------------------------------------------------------- -->
+			<!-- ********** CONTENERDOR -> INFO-TRIPULANTE / REGISTRO-TRIPULANTE ********** -->
+			<!-- -------------------------------------------------------------------------- -->
 			<!--Propiedades destacar: table-responsive-xl= overflow | m= margin-->	
-			<div class="col-sm-12 mt-5 d-flex table-responsive-xl">
+			<div th:if="${activoTripulante==true}" class="col-sm-12 mt-5 d-flex table-responsive-xl">
+				
+				
+				<!-- ------------------------------------------------- -->
+				<!-- ********** CONTENERDOR -> INFO-TRIPULANTE ********** -->
+				<!-- ------------------------------------------------- -->
 				<div class="col-auto mx-auto min-width-2">
 					<!-- Propiedad destacar: card/border= border/Colores -->
 					<div class="card shadow-sm border-info">
@@ -64,11 +95,11 @@
 								</thead>
 									
 								<tbody>
-									<tr>
-										<td>12455123</td>
-										<td>Ccccccccc1</td>
-										<td>Eeeeeeee1</td>
-										<td>Argentinaa</td>
+									<tr th:each="t:${datoTripulante}">
+										<td th:text="${t.documento}"></td>
+										<td th:text="${t.apellido}"></td>
+										<td th:text="${t.nombres}"></td>
+										<td th:text="${t.nacionalidad}"></td>
 									</tr>
 								</tbody>
 							</table>
@@ -76,6 +107,10 @@
 					</div>
 				</div>
 				
+				
+				<!-- ------------------------------------------------------ -->
+				<!-- ********** CONTENERDOR -> RECORRIDO-TRIPULANTE ********** -->
+				<!-- ------------------------------------------------------ -->
 				<div class="col-sm-7 min-width-1">
 					<!-- Propiedad destacar: card/border= border/Colores -->	
 					<div class="card border-info shadow-sm">
@@ -95,18 +130,11 @@
 								</thead>
 									
 								<tbody>
-									<tr>
-										<td>ARS 154 15</td>
-										<td>15/06/2020 17:35 hs</td>
-										<td>S.S. Jujuy</td>
-										<td>Hola hola hola...</td>
-									</tr>
-					
-									<tr>
-										<td>BR 154 15</td>
-										<td>15/06/2020 22:54 hs</td>
-										<td>Humahuaca</td>
-										<td>Hola hola hola...</td>
+									<tr th:each="r:${registroTripulante}">
+										<td th:text="${r.vehiculos.patente}"></td>
+										<td th:text="${r.fechaHora}"></td>
+										<td th:text="${r.localidad.nombre}"></td>
+										<td th:text="${r.detalleLugarRegistro}"></td>
 									</tr>
 								</tbody>
 							</table>

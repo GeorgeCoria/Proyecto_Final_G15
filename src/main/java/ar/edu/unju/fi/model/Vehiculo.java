@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import org.springframework.stereotype.Component;
 
@@ -42,6 +43,7 @@ public class Vehiculo implements Serializable {
 	 * Variable de tipo String para gestionar la patente del vehiculo
 	 */
 	@Column
+	@NotBlank( message = "Ingrese el numero de la patente")
 	private String patente;
 	
 	/**

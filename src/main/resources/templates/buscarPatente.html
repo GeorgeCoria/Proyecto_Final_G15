@@ -8,17 +8,28 @@
 	</head>
 	
 	<body>
+	
+		<!-- ------------------------------ -->
+		<!-- ********** CABEZERA ********** -->
+		<!-- ------------------------------ -->
 		<header th:insert="layout/header :: header"></header>
 		
+		
+		<!-- -------------------------------- -->
+		<!-- ********** NAVEGACION ********** -->
+		<!-- -------------------------------- -->
 		<!-- Propiedades destacada: nav=d.flex | nav-tabs=colorBorder -->
 		<nav class="col-11 m-auto nav nav-tabs pt-3">
 			<!-- Propiedades a destacar: nav-item= flex| nav-link y active= borderColor | w=width-->
-			<a class="nav-link active" href="vehiculo">Vehiculos</a>
+			<a class="nav-link active" href="vehiculos">Vehiculos</a>
 			<a class="nav-link active" href="tripulante">Tripulante</a>
 			<a class="nav-item nav-link active btn-primary" href="patente">Patente</a>
 		</nav>
 		
 		
+		<!-- ----------------------------- -->
+		<!-- ********** SECCION ********** -->
+		<!-- ----------------------------- -->
 		<!-- Propiedades destacada: mb= margin bottom-->
 		<section class="mb-5">
 			
@@ -27,12 +38,16 @@
 				<h2 class="col-xl-6 col-lg-7 col-md-9 m-auto p-4 border-info font-c1 border-c1">Listado de recorrido por Patente</h2>
 			</div>
 			
+			
+			<!-- ----------------------------------------- -->
+			<!-- ********** FORMULARIO-BUSQUEDA ********** -->
+			<!-- ----------------------------------------- -->
 			<!-- Propiedades a destacar: form-inline= d.flex | mr= margin right-->
-			<form class="col-12 row form-inline justify-content-end  mt-5 mb-5 mr-sm-4" method="get">
+			<form th:action="@{/searchPatente}" th:object="${modeloVehiculo}" method="post" class="col-12 row form-inline justify-content-end  mt-5 mb-5 mr-sm-4">
 				<!-- rounded= redondeo | border/secondary= border/Color -->
 				<div class="d-flex rounded-left border border-secondary">
 					<!-- Propiedades a destacar: form-group/form-control= color/border/font-->
-					<input type="text" class="form-group form-control  rounded-0 m-0 border-0" placeholder="numeroPatente">
+					<input th:field="${modeloVehiculo.patente}" type="text" class="form-group form-control  rounded-0 m-0 border-0" placeholder="numeroPatente">
 					<!-- btn/primary= colores/bordes-->
 					<button type="submit" class="btn btn-info rounded-0 border-0">
 						<svg class="bi bi-search" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -43,8 +58,19 @@
 				</div>
 			</form>
 			
+			
+			<!-- ---------------------------------------- -->
+			<!-- ********** MENSAJES DE ERROES ********** -->
+			<!-- ---------------------------------------- -->
+			<div class="alert-danger text-center" th:if="${#fields.hasErrors('modeloVehiculo.patente')}" th:errors="${modeloVehiculo.patente}">Error si el objeto enviado esta vacio</div>
+			<div class="alert-danger text-center" th:if="${errorMessage}" th:text="${errorMessage}">Error si no encontro el objeto</div>
+			
+			
+			<!-- -------------------------------------------------- -->
+			<!-- ********** CONTENERDOR -> INFO VEHICULO ********** -->
+			<!-- -------------------------------------------------- -->
 			<!-- Propiedades destacar: table-responsive-xl= overflow | d-flex= display flex -->
-			<div class="col-sm-12 mt-5 d-flex table-responsive-xl">
+			<div th:if="${activoVehiculo==true}" class="col-sm-12 mt-5 d-flex table-responsive-xl">
 				<div class="col-auto mx-auto min-width-0">
 					<!-- Propiedad destacar: card= border/colores | border-danger= color-->
 					<div class="card shadow-sm border-info">
@@ -68,15 +94,15 @@
 								</thead>
 									
 								<tbody>
-									<tr>
-										<td>Rrrrrrrrr</td>
-										<td>ARG 1575 4</td>
-										<td>G21</td>
-										<td>Ford</td>
-										<td>RGBSA</td>
-										<td>50</td>
-										<td>Ltr156</td>
-										<td>Blanco</td>
+									<tr th:each="v:${vehiculo}">
+										<td th:text="${v.titular}"></td>
+										<td th:text="${v.patente}"></td>
+										<td th:text="${v.modelo}"></td>
+										<td th:text="${v.marca}"></td>
+										<td th:text="${v.tipo}"></td>
+										<td th:text="${v.numeroChasis}"></td>
+										<td th:text="${v.numeroMotor}"></td>
+										<td th:text="${v.color}"></td>
 									</tr>
 								</tbody>
 							</table>
@@ -84,9 +110,17 @@
 					</div>
 				</div>
 			</div>	
-				
+			
+			
+			<!-- ------------------------------------------------------------------------ -->
+			<!-- ********** CONTENERDOR -> RECORRIDO PATENTE / INFO TRIPULANTE ********** -->
+			<!-- ------------------------------------------------------------------------ -->		
 			<!--Propiedades destacar: table-responsive-xl= overflow | m= margin | d-flex= display flex-->	
-			<div class="col-sm-12 mt-5 d-flex table-responsive-xl">
+			<div th:if="${activoVehiculo==true}" class="col-sm-12 mt-5 d-flex table-responsive-xl">
+			
+				<!-- ------------------------------------------------------ -->
+				<!-- ********** CONTENERDOR -> RECORRIDO PATENTE ********** -->
+				<!-- ------------------------------------------------------ -->	
 				<div class="col-auto min-width-2 ml-auto">	
 					<!-- Propiedad destacar: card= border/colores -->
 					<div class="card shadow-sm border-lighter-dark">
@@ -101,28 +135,36 @@
 										<th scope="col">Fecha-Hora</th>
 										<th scope="col">Localidad</th>
 										<th scope="col">Detalle-Registro</th>
+										<th scope="col" colspan="2">ID-Buscar</th>
 									</tr>
 								</thead>
 								
 								<tbody>
-									<tr>
-										<td>15/06/2020 17:35 hs</td>
-										<td>S.S. Jujuy</td>
-										<td>Hola hola hola...</td>
-									</tr>
-				
-									<tr>
-										<td>15/06/2020 22:54 hs</td>
-										<td>Humahuaca</td>
-										<td>Hola hola hola...</td>
+									<tr th:each="r:${registroVehiculo}">
+										<td th:text="${r.fechaHora}"></td>
+										<td th:text="${r.localidad.nombre}"></td>
+										<td th:text="${r.detalleLugarRegistro}"></td>
+										<td th:text="${r.id}"></td>
+										<td>
+											<a class="btn bg-lighter-dark">
+												<svg class="bi bi-search" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+													<path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+													<path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+												</svg>
+											</a>
+										</td>
 									</tr>
 								</tbody>
 							</table>
 						</div>
 					</div>
 				</div>		
-					
-				<div class="col-auto min-width-2 mr-auto">	
+				
+				
+				<!-- ---------------------------------------------------- -->
+				<!-- ********** CONTENERDOR -> INFO TRIPULANTE ********** -->
+				<!-- ---------------------------------------------------- -->	
+				<div th:if="${activoVehiculo==true}" class="col-auto min-width-2 mr-auto">	
 					<!-- Propiedad destacar: card/border-..= border/colores-->
 					<div class="card shadow-sm border-lighter-dark">
 						<!-- Propiedad destacar: card-header= colores-->	
@@ -141,11 +183,11 @@
 								</thead>
 								
 								<tbody>
-									<tr>
-										<td>15458759</td>
-										<td>Ccccc1</td>
-										<td>Eeeee1</td>
-										<td>Argentinaa</td>
+									<tr th:each="r:${tripulanteVehiculo}">
+										<td th:text="${r.documento}"></td>
+										<td th:text="${r.apellido}"></td>
+										<td th:text="${r.nombres}"></td>
+										<td th:text="${r.nacionalidad}"></td>
 									</tr>
 								</tbody>
 							</table>
@@ -155,7 +197,14 @@
 			</div>
 		</section>
 		
+		<!-- -------------------------------- -->
+		<!-- ********** PUBLICIDAD ********** -->
+		<!-- -------------------------------- -->
 		<aside></aside>
+		
+		<!-- -------------------------------- -->
+		<!-- ********** PIE-PAGINA ********** -->
+		<!-- -------------------------------- -->
 		<footer th:insert="layout/footer :: footer"></footer>		
 	</body>
 </html>
