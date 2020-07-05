@@ -38,9 +38,10 @@ public class UsuarioController {
 			return "adminFormulario";
 		}else {
 			try {
+				usuario.setEstado(true);
 				usuarioService.crear(usuario);
 				model.addAttribute("usuarioDelForm", new Usuario());
-				model.addAttribute("listaUsuarios", usuarioService.listarUsuarios());
+				model.addAttribute("listaUsuarios", usuarioService.listarUsuarios(true));
 				model.addAttribute("usuarioBuscado", new Usuario());
 				return "adminPrincipal";
 			}catch (Exception e){
@@ -75,16 +76,16 @@ public class UsuarioController {
 			return "adminFormulario";
 		}else {
 			try {
-				usuarioService.modificar(usuario);
-				model.addAttribute("usuarioDelForm", new Usuario());
-				model.addAttribute("editMode", "false");
-				return "redirect:/adminPrincipal";
-			}catch(Exception e) {
-				model.addAttribute("formError", e.getMessage());
-				model.addAttribute("usuarioDelForm", usuario);
-				model.addAttribute("editMode", "true");
-				return "adminFormulario";
-			}
+					usuarioService.modificar(usuario);
+					model.addAttribute("usuarioDelForm", new Usuario());
+					model.addAttribute("editMode", "false");
+					return "redirect:/adminPrincipal";
+				}catch(Exception e) {
+					model.addAttribute("formError", e.getMessage());
+					model.addAttribute("usuarioDelForm", usuario);
+					model.addAttribute("editMode", "true");
+					return "adminFormulario";
+				}
 		}
 	}
 	
@@ -96,6 +97,7 @@ public class UsuarioController {
 	@GetMapping("/eliminarUsuario/{id}")
 	public String eliminarUsuario(Model model, @PathVariable(name="id") Long id) {
 		try {
+			//Usuario usuarioEncontrado = usuarioService.encontrarUsuario(id);
 			usuarioService.eliminar(id);
 		}catch(Exception e) {
 				model.addAttribute("listErrorMessage",e.getMessage());
@@ -106,7 +108,7 @@ public class UsuarioController {
 	@GetMapping("/adminPrincipal")
 	public String mostrarListaAdmin(Model model) throws Exception {
 		try {
-			model.addAttribute("listaUsuarios", usuarioService.listarUsuarios());	
+			model.addAttribute("listaUsuarios", usuarioService.listarUsuarios(true));	
 			
 		}catch(Exception e){
 			model.addAttribute("listErrorMessage", e.getMessage());
@@ -119,7 +121,7 @@ public class UsuarioController {
 	@GetMapping("/adminPrincipal/Registrador")
 	public String mostrarListaRegistrador(Model model) throws Exception {
 		try {
-			model.addAttribute("listaUsuarios", usuarioService.findByTipoUsuario("REGISTRADOR"));
+			model.addAttribute("listaUsuarios", usuarioService.findByTipoUsuario("REGISTRADOR",true));
 		}catch(Exception e) {
 			model.addAttribute("listErrorMessage", e.getMessage());
 		}
@@ -132,7 +134,7 @@ public class UsuarioController {
 	@GetMapping("/adminPrincipal/Consultor")
 	public String mostrarListaConsultores(Model model) throws Exception{
 		try {
-			model.addAttribute("listaUsuarios", usuarioService.findByTipoUsuario("CONSULTOR"));
+			model.addAttribute("listaUsuarios", usuarioService.findByTipoUsuario("CONSULTOR", true));
 		}catch(Exception e) {
 			model.addAttribute("listErrorMessage", e.getMessage());
 		}
@@ -152,14 +154,31 @@ public class UsuarioController {
 			Usuario buscado=usuarioService.buscarUsuario(usuario.getNombreUsuario());
 			model.addAttribute("listaUsuarios",buscado);
 		
-			}catch(Exception e) {
+			}
+			catch(Exception e) {
 				model.addAttribute("errorBusqueda",e.getMessage());
 				
 			}
 		}
+		model.addAttribute("busqueda", "active");
+		model.addAttribute("principal","active");
+		model.addAttribute("usuarioBuscado", new Usuario());
+		return "adminPrincipal";
 		
-	model.addAttribute("usuarioBuscado", new Usuario());
-	return "adminPrincipal";	
+		
+		}
+	
+	@GetMapping("/adminPrincipal/Suspendido")
+	public String mostrarBajas(Model model) {
+		try {
+			model.addAttribute("listaUsuarios",usuarioService.listarUsuarios(false));
+			
+		}catch(Exception e) {
+			model.addAttribute("listErrorMessage", e.getMessage());
+		}
+		model.addAttribute("suspendido","active");
+		
+		return "adminPrincipal";
 	}
 	
 	

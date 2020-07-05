@@ -16,8 +16,10 @@ import ar.edu.unju.fi.model.Usuario;
  */
 public interface IUsuarioDAO extends JpaRepository<Usuario, Long> {
 
-	public List<Usuario> findByTipoUsuario(String tipoUsuario);
+	public List<Usuario> findByTipoUsuarioAndEstado(String tipoUsuario,boolean estado);
 
 	public Optional<Usuario> findByNombreUsuario(String nombreUsuario);
+	
+	public List<Usuario> findByEstado(boolean estado);
 
 }

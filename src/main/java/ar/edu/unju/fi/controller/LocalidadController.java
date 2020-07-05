@@ -30,6 +30,7 @@ public class LocalidadController {
 		model.addAttribute("titulo", "LOCALIDAD");
 		model.addAttribute("localidadForm", new Localidad());
 		model.addAttribute("listaLocalidades", localidadService.listarLocalidades());
+		model.addAttribute("guardarLocalidad","active");
 		return "adminLocalidad";
 	}
 	
@@ -37,24 +38,23 @@ public class LocalidadController {
 	public String crearLocalidad(@Valid @ModelAttribute("localidadForm") Localidad localidad, BindingResult result, ModelMap model) {
 		if(result.hasErrors()) {
 			model.addAttribute("localidadForm", localidad);
-			model.addAttribute("listaLocalidades", localidadService.listarLocalidades());
 		}else {
 			try {
 				localidadService.crearLocalidad(localidad);
-				model.addAttribute("localidadForm", new Localidad());
-				model.addAttribute("listaLocalidades", localidadService.listarLocalidades());
+				model.addAttribute("localidadForm", new Localidad());	
 			}catch (Exception e){
 				model.addAttribute("formErrorMessage", e.getMessage());
-				model.addAttribute("listaLocalidades", localidadService.listarLocalidades());
 				model.addAttribute("localidadForm", localidad);
 			}
 		}
+		model.addAttribute("listaLocalidades", localidadService.listarLocalidades());
 		model.addAttribute("titulo", "LOCALIDAD");
+		model.addAttribute("guardarLocalidad", "active");
 		model.addAttribute("editMode", "false");
 		return "adminLocalidad";
 	}
 	
-	@GetMapping("/cancelar")
+	@GetMapping("/editarLoc/cancelar")
 	public String cancelar() {
 		return "redirect:/adminLocalidad";
 	}
@@ -75,6 +75,7 @@ public class LocalidadController {
 			model.addAttribute("formErrorMessage", e.getMessage());
 			model.addAttribute("localidadForm", new Localidad());
 		}
+		model.addAttribute("editarLocalidad", "active");
 		model.addAttribute("editMode", "true");
 		model.addAttribute("titulo", "EDITAR LOCALIDAD");
 		return "adminLocalidad";

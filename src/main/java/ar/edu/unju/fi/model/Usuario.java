@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.springframework.stereotype.Component;
@@ -78,6 +79,15 @@ public class Usuario implements Serializable{
 	@NotBlank(message="Debe seleccionar un tipo de usuario")
 	private String tipoUsuario;
 	
+	/**
+	 * Atributo utilizado para determinar si un usuario esta dado de baja.
+	 * true indicara que esta habilitado en la base de datos
+	 * false: Usuario dado de baja
+	 */
+	@Column
+	@NotNull(message="Debe seleccionar un estado para el Usuario")
+	private boolean estado;
+	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////
 	//----------------- Contructores -----------------//
 	
@@ -97,13 +107,15 @@ public class Usuario implements Serializable{
 	 * @param nombreReal, valor que se le asignara a la variable miembro this.nombreReal
 	 * @param apellidoReal, valor que se le asignara a la variable miembro this.apellidoReal
 	 * @param tipoUsuario, valor que se le asignara a la variable miembro this.tipoUsuario
+	 * @param estado, variable que asignara el valor que determina si el usuario esta habilitado (true) o dado de baja(false)
 	 */
-	public Usuario(String nombreUsuario, String password, String nombreReal, String apellidoReal, String tipoUsuario) {
+	public Usuario(String nombreUsuario, String password, String nombreReal, String apellidoReal, String tipoUsuario,boolean estado) {
 		this.nombreUsuario = nombreUsuario;
 		this.password = password;
 		this.nombreReal = nombreReal;
 		this.apellidoReal = apellidoReal;
 		this.tipoUsuario = tipoUsuario;
+		this.estado=estado;
 	}
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -216,6 +228,29 @@ public class Usuario implements Serializable{
 	public void setTipoUsuario(String tipoUsuario) {
 		this.tipoUsuario = tipoUsuario;
 	}
+	
+	/**
+	 * Captura el estado actual de un usuario en la base de datos
+	 * puede retornar true o false, dependiendien del valor se asumira 
+	 * si el usuario esta dado de baja  o no
+	 * 
+	 * @return estado del Usuario
+	 */
+	public boolean isEstado() {
+		return estado;
+	}
+
+	/**
+	 * Permite asignar un estado al Usuario
+	 * Solo estara en falso si el admin recurre 
+	 * a dar de baja al usuario
+	 * 
+	 * @param estado del Usuario
+	 */
+	public void setEstado(boolean estado) {
+		this.estado = estado;
+	}
+
 
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -228,6 +263,6 @@ public class Usuario implements Serializable{
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", nombreUsuario=" + nombreUsuario + ", password=" + password + ", nombreReal=" + nombreReal
-				+ ", apellidoReal=" + apellidoReal + ", tipoUsuario=" + tipoUsuario + "]";
-	}	
+				+ ", apellidoReal=" + apellidoReal + ", tipoUsuario=" + tipoUsuario + ", estado=" + estado + "]";
+	}
 }

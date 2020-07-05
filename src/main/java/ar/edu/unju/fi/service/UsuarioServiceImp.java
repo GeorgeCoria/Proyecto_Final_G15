@@ -47,6 +47,8 @@ public class UsuarioServiceImp implements IUsuarioService{
 	private void mapearUsuario(Usuario desde, Usuario hacia) {
 		hacia.setNombreReal(desde.getNombreReal());
 		hacia.setApellidoReal(desde.getApellidoReal());
+		hacia.setEstado(desde.isEstado());
+		hacia.setTipoUsuario(desde.getTipoUsuario());
 	}
 
 	@Override
@@ -55,13 +57,16 @@ public class UsuarioServiceImp implements IUsuarioService{
 	}
 	
 	@Override
-	public void eliminar(Long id) {
-		iUsuario.deleteById(id);
+	public void eliminar(Long id) throws Exception {
+		Usuario usuario= encontrarUsuario(id);
+		usuario.setEstado(false);
+		iUsuario.save(usuario);	
+		
 	}
 
 	@Override
-	public Iterable<Usuario> listarUsuarios() throws Exception{
-		Iterable<Usuario> listaUsuarios=iUsuario.findAll();
+	public Iterable<Usuario> listarUsuarios(boolean estado) throws Exception{
+		Iterable<Usuario> listaUsuarios=iUsuario.findByEstado(estado);
 		if(!listaUsuarios.iterator().hasNext()) {
 			throw new Exception("Lista Vacia ");
 		}
@@ -70,14 +75,14 @@ public class UsuarioServiceImp implements IUsuarioService{
 	}
 
 	@Override
-	public List<Usuario> findByTipoUsuario(String tipoUsuario) throws Exception {
-		List<Usuario> usuarios = iUsuario.findByTipoUsuario(tipoUsuario);
-		if(usuarios.size()==0) {
-			throw new Exception("No hay registros de este tipo de Usuarios");
+	public Iterable<Usuario> findByTipoUsuario(String tipoUsuario, boolean estado) throws Exception {
+		Iterable<Usuario> usuarios = iUsuario.findByTipoUsuarioAndEstado(tipoUsuario, estado);
+		if(!usuarios.iterator().hasNext()) {
+			throw new Exception("No hay registros de este tipo de Usuario");
 		}
 		return usuarios;
 	}
-	
+
 	@Override
 	public Usuario buscarUsuario(String buscado) throws Exception {
 		// TODO Auto-generated method stub	

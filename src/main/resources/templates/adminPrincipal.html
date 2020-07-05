@@ -15,11 +15,11 @@
   <body>
   	
   		
-  	<!-- ********** Insercion del header **************** -->
+  <!-- ********** Insercion del header **************** -->
   	<div th:insert="layout/header :: header"></div> 
 
-<!-- **************** insercion de la barra de navegacion*********************  -->
-  		<div class="nav bg-dark pt-3 pb-3 font-weight-bold mb-5 fuente">
+<!-- ****************  Panel de navegacion*********************  -->
+   		<div class="nav bg-dark pt-3 pb-3 font-weight-bold mb-5 fuente">
   			<div class="col-8">
 	  			<ul class="nav nav-tabs ">
 					
@@ -46,28 +46,30 @@
 
 
 <!-- **************** Cuerpo Gestor de Usuarios *********************  -->
-<div class="alert alert-danger text-center" th:if="${errorBusqueda}" th:text="${errorBusqueda}">Message Error</div>
-
-<div class="container fuente">
-
-	<div class="btn-group mb-5 ">
-		<a class="btn btn-primary btn-lg" th:href="@{/adminPrincipal}" >
-		Lista de usuarios
-		</a>
-		
-		<a class="btn btn-primary btn-lg" th:href="@{/adminPrincipal/Registrador}">
-		Registradores
-		</a>
-		
-		<a class="btn btn-primary btn-lg" th:href="@{/adminPrincipal/Consultor}" >
-		Consultores
-		</a>
-	</div>
+	<div class="alert alert-danger text-center" th:if="${errorBusqueda}" th:text="${errorBusqueda}">Message Error</div>
+	
+	<div class="container fuente">
+	
+		<div class="btn-group mb-5 ">
+			<a class="btn btn-primary btn-lg" th:href="@{/adminPrincipal}" >
+			Lista de usuarios
+			</a>
+			
+			<a class="btn btn-primary btn-lg" th:href="@{/adminPrincipal/Registrador}">
+			Registradores
+			</a>
+			
+			<a class="btn btn-primary btn-lg" th:href="@{/adminPrincipal/Consultor}" >
+			Consultores
+			</a>
+			
+			<a class="btn btn-danger btn-lg" th:href="@{/adminPrincipal/Suspendido}" >
+			Suspendidos
+			</a>
+		</div>
 
 		
 <!-- **************** Cuerpo Gestor de Usuarios *********************  -->
-
-
 
 		<div>
 
@@ -87,6 +89,10 @@
 					style="border-top: 3px dodgerblue solid; border-bottom: 3px dodgerblue solid;">CONSULTORES</h1>
 			</div>
 			
+			<div class="row justify-content-center mb-4" th:if="${suspendido}">
+				<h1 class=" w-100 p-2 text-center "
+					style="border-top: 3px dodgerblue solid; border-bottom: 3px dodgerblue solid;">Usuarios dados de baja</h1>
+			</div>
 			
 			<div class="my-custom-scrollbar1 table-wrapper-scroll-y">
 				<table class="table table-reponsive-sm table-striped">
@@ -98,6 +104,7 @@
 							<th scope="col">Nombre</th>
 							<th scope="col">Apellido</th>
 							<th scope="col">Tipo de Usuario</th>
+							<th th:if="${busqueda} or ${suspendido}"scope="col">Estado</th>
 							<th scope="col">Accion</th>
 						</tr>
 					</thead>
@@ -112,10 +119,11 @@
 							<td th:text="${usuario.nombreReal}"></td>
 							<td th:text="${usuario.apellidoReal}"></td>
 							<td th:text="${usuario.tipoUsuario}"></td>
-							<td><a class="btn btn-primary"
-								th:href="@{'/editarUsuario/'+${usuario.id}}">Editar</a> <a
-								class="btn btn-danger"
-								th:href="@{'/eliminarUsuario/'+${usuario.id}}">Eliminar</a></td>
+							<td th:if="${busqueda} or ${suspendido}" th:text="${usuario.estado==true}?'Habilitado':'Inhabilitado'"></td>
+							<td>
+								<a class="btn btn-primary" th:href="@{'/editarUsuario/'+${usuario.id}}">Editar</a> 
+								<a th:if="not ${suspendido} and not ${busqueda}" href="#"  class="btn btn-danger" th:onclick="'javascript:confirmarEliminar(\''+${usuario.id}+'\');'">Eliminar</a>
+								</td>
 						</tr>
 
 					</tbody>
@@ -126,8 +134,45 @@
 				th:if="${listErrorMessage}" th:text="${listErrorMessage}">Error
 				MEssage</div>
 			</div>
+			<!-- ***** Script para efectuar la baja de un Usuario ****** -->
 			
-
+		<script type="text/javascript">
+			function confirmarEliminar(id){
+				$('#bajaUsuario').modal('show');
+				$("#idModalBajaUsuario").val(id);
+			}
+			
+			function eliminarUsuario(){
+				var id= $("#idModalBajaUsuario").val();
+				window.location= "eliminarUsuario/"+id;
+			}
+		
+		</script>
+	
+		<!-- Modal utilizado al eliminar un Usuario -->
+		
+		<div class="modal fade" id="bajaUsuario" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog modal-dialog-centered">
+		    <div class="modal-content">
+		      <div class="modal-header bg-dark text-white">
+		        <h5 class="modal-title" id="exampleModalLabel">Eliminar Usuario</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body">
+		        Presione confirmar para dar de baja al usuario
+		      </div>
+		      <input type="hidden" id="idModalBajaUsuario" name="userIdHiddenInput"/>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		       	<button class="btn btn-primary" th:onclick="eliminarUsuario()">Confirmar</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		<!-- Termina Modal -->
+		
 		</div>
 
 		<!-- ********** FIn Gestor de Usuarios **************** -->	

@@ -18,12 +18,10 @@
  <!-- ********** Insercion del header **************** -->
   	<div th:insert="layout/header :: header"></div> 
 
-
-  	
-
-  <!-- **************** insercion de la barra de navegacion*********************  -->
+  <!-- **************** Barra de navegacion*********************  -->
   <div class="nav bg-dark pt-3 pb-3 font-weight-bold fuente">
 	<div class="col-8">
+	
 		<ul class="nav nav-tabs ">
 			<li class="nav-item">
 			    <a class="nav-link text-white" th:href="@{/adminPrincipal}">Home
@@ -39,14 +37,13 @@
 				<a class="btn btn-primary font-weight-bold disabled" href="adminFormulario">Añadir
 					Usuario
 				</a>
-			</li>
-			
+			</li>	
 		</ul>
 
 	</div>
 </div>
 
-<!-- **************** Find de la barra de navegacion*********************  -->
+<!-- **************** Fin de la barra de navegacion*********************  -->
 
 <!-- ******** Formulario Registro de Usuario ****************-->
 <div class="container-fluid bg-white">
@@ -65,7 +62,7 @@
 			<input type="hidden" class="form-control border-primary border-top-0 border-left-0 border-right-0 " th:field="${usuarioDelForm.id}" th:if="${editMode}">
 			<input type="hidden" class="form-control border-primary border-top-0 border-left-0 border-right-0 " th:field="${usuarioDelForm.nombreUsuario}" th:if="${editMode}">
 			<input type="hidden" class="form-control border-primary border-top-0 border-left-0 border-right-0" th:field="${usuarioDelForm.password}" th:if="${editMode}">
-			<input type="hidden" class="form-control border-primary border-top-0 border-left-0 border-right-0" th:field="${usuarioDelForm.tipoUsuario}" th:if="${editMode}">
+			
 
 		  <div class="form-group"  th:if="${editMode==null or editMode==false}">
 		      <label for="nombreUsuario">Nombre de Usuario</label>
@@ -90,42 +87,96 @@
 		      <input type="text" placeholder="Apellido Real del Usuario" class="form-control border-primary border-top-0 border-left-0 border-right-0" th:field="${usuarioDelForm.apellidoReal}">
 		   	  <div class="alert-danger" th:if="${#fields.hasErrors('apellidoReal')}" th:errors="*{apellidoReal}">Name Error</div>
 		   	</div>
-
-		   	<fieldset class="form-group" th:if="${editMode==null or editMode==false}">
-								<div class="row">
-									<legend class="col-form-label col-12 col-md-3 pt-0">Tipo
-										de Usuario</legend>
-									<div class="col-12 col-md-9">
-										<div class="form-check">
-											<input class="form-check-input" type="radio"
-												name="gridRadios" id="gridRadios1" value="REGISTRADOR" th:field="${usuarioDelForm.tipoUsuario}" checked>
-											<label class="form-check-label" for="gridRadios1">
-												REGISTRADOR </label>
-										</div>
-										<div class="form-check">
-											<input class="form-check-input" type="radio"
-												name="gridRadios" id="gridRadios2" value="CONSULTOR" th:field="${usuarioDelForm.tipoUsuario}">
-											<label class="form-check-label" for="gridRadios2">
-												CONSULTOR </label>
-										</div>
-										<div class="alert-danger" th:if="${#fields.hasErrors('tipoUsuario')}" th:errors="*{tipoUsuario}">Name Error</div>
+		   	
+		   	
+			<div class="row">
+			
+			<!-- **************** SELECCION DE TIPO DE USUARIO  (Consultor-Registrador )******************* -->		
+		   				
+								
+					<div class=" form-group col-12 col-md-6 ">
+						<div class="col-form-label text-center"><h5>Tipo
+							de Usuario</h5></div>
+						<div class="col-12 ">
+							<div class="form-check">
+								<input class="form-check-input" type="radio"
+									name="gridRadios" id="gridRadios1" value="REGISTRADOR" th:field="${usuarioDelForm.tipoUsuario}" checked>
+								<label class="form-check-label" for="gridRadios1">
+									REGISTRADOR </label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="radio"
+									name="gridRadios" id="gridRadios2" value="CONSULTOR" th:field="${usuarioDelForm.tipoUsuario}">
+								<label class="form-check-label" for="gridRadios2">
+									CONSULTOR </label>
+							</div>
+							<div class="alert-danger" th:if="${#fields.hasErrors('tipoUsuario')}" th:errors="*{tipoUsuario}">Name Error</div>
+							
+						</div>
+					</div>
+										
+					<!-- ********* SELECCION DE ESTADO DE USUARIO  (TRUE->ACTIVO / FALSE->DADO DE BAJA ************ -->
+									
+									
+							<div th:if="${editMode}" class="col-12 col-md-6 ">
+								
+								<div class="form-group col-form-label text-center"><h5>Estado de Usuario</h5></div>
+								<div class="col-12 ">
+									<div class="form-check">
+										<input class="form-check-input" type="radio"
+											name="estado" id="estadoRadios1" value="true" th:field="${usuarioDelForm.estado}" >
+										<label class="form-check-label" for="estadoRadios1">
+											HABILITADO </label>
+									</div>
+									<div class="form-check">
+										<input class="form-check-input" type="radio"
+											name="estado" id="estadoRadios2" value="false" th:field="${usuarioDelForm.estado}">
+										<label class="form-check-label" for="estadoRadios2">
+											INHABILITADO </label>
 									</div>
 								</div>
-							</fieldset>
+					
+							<div class="alert-danger" th:if="${#fields.hasErrors('estado')}" th:errors="*{estado}">Name Error</div>
+							</div>
+									
+				</div>
+							
 
-							<div class="form-group row justify-content-end">
-								<div class="">
-									<input type="submit" class="btn btn-primary" value="Save Changes" th:value="${editMode}?'GUARDAR USUARIO':'CREAR USUARIO'">
+							<div class="form-group row justify-content-end mt-4">
+								<div >
+									
 									<a th:href="@{/editarUsuario/cancelar}" type="button" class="btn btn-danger">CANCELAR</a>
+									<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#guardarUsuario" th:text="${editMode}?'GUARDAR CAMBIOS':'REGISTRAR'">texto</button>
 								</div>
 							</div>
+
 							
-							<div class="alert-danger text-center" th:if="${formError}" th:text="${formError}" >Name Error</div>
+					<div class="alert-danger text-center" th:if="${formError}" th:text="${formError}" >Name Error</div>
+							
+<!-- ******************************* Modal *************************************** -->
+						<div class="modal fade" id="guardarUsuario" tabindex="-1" role="dialog" aria-labelledby="agregarModalTitulo"	aria-hidden="true">
+								<div class="modal-dialog modal-dialog-centered" role="document">
+									<div class="modal-content">
+										<div class="modal-header bg-dark text-white">
+											<h5 class="modal-title " id="agregarModalTitulo">CONFIRMAR TRANSACCION</h5>
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<div class="modal-body" th:if="${editMode}"><h6>Presione "CONFIRMAR" para guardar cambios en el registro</h6></div>
+										<div class="modal-body" th:if="!${editMode}"><h6>Presione "CONFIRMAR" para crear nuevo usuario</h6></div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-danger" data-dismiss="modal">CANCELAR</button>
+											<input type="submit" class="btn btn-primary" value="Save Changes"  th:value="CONFIRMAR">
+										</div>
+									</div>
+								</div>
+							</div>
 
-		</form>
 
+<!-- ****************************** Fin del Modal ******************************** -->
+		</form>	
 	</div>
-	
 </div>
 </div>
 
