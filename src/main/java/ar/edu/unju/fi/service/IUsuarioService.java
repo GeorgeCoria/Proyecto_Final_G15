@@ -13,7 +13,6 @@ import ar.edu.unju.fi.model.Usuario;
  *
  */
 public interface IUsuarioService {
-	
 	public Usuario crear(Usuario unUsuario) throws Exception;
 	public Usuario modificar(Usuario unUsuario) throws Exception;
 	public Usuario encontrarUsuario(Long id) throws Exception;
