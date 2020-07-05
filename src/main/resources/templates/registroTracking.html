@@ -19,22 +19,24 @@
 	
 	<div class="card">
                    
-                     <div class="row justify-content-center mb-4 mt-4">
-				        <h1 class=" w-60 p-2 text-center " style="border-top:  3px dodgerblue solid; border-bottom:  3px dodgerblue solid;">REGISTRO TRACKING</h1>
-			        </div>
+                     <div class=" col-12 col-sm-12 text-center mt-5 mb-2 text-dark"><!-- ****** -->
+				                    <h2 class="col-xl-9 col-lg-11 p-3 m-auto border-info border-c1 font-c1">REGISTRO TRACKING</h2>
+			     	</div>
                         
                     <div class="card-body row border-info" >
                         <div class="col-12 col-sm-10 col-md-8 text-center mx-auto mb-2">
 					
-                            <div class="row justify-content-center bg-info mb-2" style="border-top:  3px black solid; border-bottom:  3px black solid;">
-                                <h4 class=" w-60 p-2 text-center " >DETALLES DEL REGISTRO</h4>
+                            <div class="row justify-content-center bg-info mb-2 text-white" style="border-radius: 10px">
+                                <h4 class=" w-60 p-2 text-center ">DETALLES DEL REGISTRO</h4>
                             </div>
+                            
+                            <div class="row">
 
                              <form class=" col-md-12 fondoVer1" th:object="${registroTracking}" th:action="@{/registroFinalizado}"  method="post">
                                     
                                     
                                     <div class="row justify-content-center mb-4 mt-2">
-			                        	<h1 class="col-md-12 mx-auto w-100 p-2 text-center " style="border-top:  3px dodgerblue solid; border-bottom:  3px dodgerblue solid;">VEHICULO</h1>
+			                        	<h3 class=" w-100 p-2 text-center " style="border-top:  2px dodgerblue solid; border-bottom:  2px dodgerblue solid; color: black">VEHICULO</h3><!-- ****** -->
 			                        </div>
                                     <div class="table-responsive">
                                     <table class="table table-reponsive-sm table-striped"> 
@@ -52,7 +54,7 @@
 				                            </tr>
 		                                </thead>
 		
-		                                <tbody>
+		                                <tbody class="bg-light" style="color: black"><!-- ****** -->
 				                            <tr th:each="vehiculo : ${listaVehiculo}">
 					                            <td th:text="${vehiculo.id}"></td>
 						                        <td th:text="${vehiculo.patente}"></td>
@@ -69,7 +71,7 @@
                                     </div>
                                     
 	                                <div class="row justify-content-center mb-4 mt-2">
-			                        	<h1 class="col-md-12 mx-auto w-100 p-2 text-center " style="border-top:  3px dodgerblue solid; border-bottom:  3px dodgerblue solid;">TRIPULANTES</h1>
+			                        	<h3 class=" w-100 p-2 text-center " style="border-top:  2px dodgerblue solid; border-bottom:  2px dodgerblue solid; color: black">TRIPULANTES</h3><!-- ****** -->
 			                        </div>
 			                        
 			                        <div class="row justify-content-center d-flex">
@@ -90,7 +92,7 @@
 				                            </tr>
 				                        </thead>
 			
-			                            <tbody>
+			                            <tbody class="bg-light" style="color: black"><!-- ****** -->
 			                              	<tr th:each="tripulante : ${listaTrip}">
 					                            <td th:text="${tripulante.id}"></td>
 					                            <td th:text="${tripulante.documento}"></td>
@@ -102,7 +104,7 @@
 		                            </table>
                                     </div>
                                         <div class="form-group row mb-4 my-3">
-                                               <label for="detalles" class="col-sm-3 col-form-label my-auto">LOCALIDAD</label>
+                                               <label for="detalles" class="col-sm-3 col-form-label my-auto text-dark"><h5>LOCALIDAD</h5></label><!-- ****** -->
                                                 <div class="col-sm-9">
 
                                                     <select th:field="${registroTracking.localidad.id}" class="custom-select mt-3 mb-3 border-info" required>
@@ -112,7 +114,7 @@
                                         </div>	
                                             
                                         <div class="form-group row mb-4 my-3">
-                                                <label for="detalles" class="col-sm-3 col-form-label my-auto">DETALLES</label>
+                                                <label for="detalles" class="col-sm-3 col-form-label my-auto text-dark"><h5>DETALLES</h5></label><!-- ****** -->
                                                 <div class="col-sm-9">
                                                   <textarea th:field="${registroTracking.detalleLugarRegistro}" class="form-control" id="detalles" placeholder="DETALLES DEL LUGAR DEL REGISTRO" rows="3"></textarea>
                                                 </div>
@@ -120,6 +122,8 @@
                                         
  										<input type="submit" th:if="${botonFinalRegistro}" class="btn btn-primary mb-2" value="TERMINAR REGISTRO">
                             </form>
+                            
+                            </div>
                             
                             <div class="modal fade" id="modalBuscarTripulante" tabindex="-1" role="dialog" aria-labelledby="agregarTripulanteModal" aria-hidden="true">
                             	<div class="modal-dialog modal-dialog-centered" role ="document">
@@ -148,8 +152,7 @@
                             
                         </div>
                     </div>
-</div>
-
+	</div>
 
 <div th:insert="layout/footer :: footer"></div>
 	

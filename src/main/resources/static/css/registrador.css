@@ -4,10 +4,9 @@
 }
 
 .fondoVer1{
-	color:white;
-	background-color: #09b4a3;
-	border-top: 3px black solid; 
-	border-bottom: 3px black solid; 
+	color: white;
+	background-color: #bbedfb;
+	border: 2px #5bc0de solid;
 }
 
 .cabecera{
@@ -20,7 +19,6 @@ select{
 }
 
 div > label {
-	font-family: cursive;
 	color: white;
 	border-radius: 2em;
 	margin-top: 1em;
@@ -58,10 +56,13 @@ select {
     height: 35px;
     font-size: 18px;
     padding-left: 54px;
-    border-bottom: 2px black solid;
-    border-top: 2px black solid;
-    border-left: 0px;
-    border-right: 0px;
+    border: 1px black solid;
+}
+
+.form-group textarea{
+    font-size: 18px;
+    padding-left: 54px;
+    border: 1px black solid;
 }
 
 -button{
@@ -75,6 +76,15 @@ select {
     margin-bottom: 1em;
 }
 
+.font-c1{
+	font-size: 40px;
+}
 
+.border-c1{
+	border-style: double;
+	border-width: 10px;
+	border-left: none;
+	border-right: none;
+}
 
 
