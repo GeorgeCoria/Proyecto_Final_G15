@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import org.springframework.stereotype.Component;
 
@@ -45,25 +46,29 @@ public class Tripulante implements Serializable{
 	 * Numero de documento del tripulante
 	 */
 	@Column
-	@NotBlank(message = "Ingrese el numero del Documento")
+	@NotBlank(message = "Debe ingresar el numero de documento")
+	@Size(min=6, max=8, message="El dni debe tener entre 6 y 8 numeros")
 	private String documento;
 	
 	/**
 	 * Apellido del tripulante
 	 */
 	@Column
+	@NotBlank(message="Debe ingresar el apellido del tripulante")
 	private String apellido;
 	
 	/**
 	 * Nombres del Tripulante
 	 */
 	@Column
+	@NotBlank(message="Debe ingresar el nombre del tripulante")
 	private String nombres;
 	
 	/**
 	 * Nacionalidad del Tripulante
 	 */
 	@Column
+	@NotBlank(message="Debe ingresar la nacionalidad tripulante")
 	private String nacionalidad;
 	
 	

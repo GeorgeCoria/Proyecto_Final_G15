@@ -43,49 +43,55 @@ public class Vehiculo implements Serializable {
 	 * Variable de tipo String para gestionar la patente del vehiculo
 	 */
 	@Column
-	@NotBlank( message = "Ingrese el numero de la patente")
 	private String patente;
 	
 	/**
 	 * Variable de tipo String para gestionar el color del vehiculo
 	 */
 	@Column
+	@NotBlank(message="Debe ingresar el color del vehiculo")
 	private String color;
 	
 	/**
 	 * Variable de tipo String para gestionar el nombre del titular del vehiculo
 	 */
 	@Column
+	@NotBlank(message="Debe ingresar el nombre del titular del vehiculo")
 	private String titular;
 	
 	/**
 	 *  Variable de tipo String para gestionar la marca del vehiculo
 	 */
 	@Column
+	@NotBlank(message="Debe ingresar la marca del vehiculo")
 	private String marca;
 	
 	/**
 	 * Variable de tipo String para gestionar el modelo del vehiculo
 	 */
 	@Column
+	@NotBlank(message="Debe ingresar el modelo del vehiculo")
 	private String modelo;
 	
 	/**
 	 * Variable de tipo String para gestionar el tipo del vehiculo
 	 */
 	@Column
+	@NotBlank(message="Debe ingresar el tipo de vehiculo")
 	private String tipo;
 	
 	/**
 	 * Variable de tipo String para gestionar el numero de chasis del vehiculo
 	 */
 	@Column(name = "NUMERO_CHASIS")
+	@NotBlank(message="Debe ingresar el numero de chasis")
 	private String numeroChasis;
 	
 	/**
 	 * Variable de tipo String para gestionar el numero de motor del vehiculo
 	 */
 	@Column(name = "NUMERO_MOTOR")
+	@NotBlank(message="Debe ingresar el numero de motor")
 	private String numeroMotor;
 	
 	// -----------------CONSTRUCTORES-----------------//

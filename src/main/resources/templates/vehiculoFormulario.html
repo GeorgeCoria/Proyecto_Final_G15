@@ -19,16 +19,16 @@
 	<div th:insert="layout/header :: header"></div>
 
 
- <div class="card">
+ 		   <div class="card">
                    
-                    <div class="row justify-content-center mb-4 mt-4">
-				        <h1 class=" w-60 p-2 text-center " style="border-top:  3px dodgerblue solid; border-bottom:  3px dodgerblue solid;">REGISTRO DE VEHICULOS</h1>
+                    <div class=" col-12 col-sm-12 text-center mt-5 mb-2 text-dark">
+				          <h2 class="col-xl-9 col-lg-11 p-3 m-auto border-info border-c1 font-c1">REGISTRO VEHICULO</h2>
 			        </div>
                    
-                    <div class="card-body row" >
-                        <div class="col-10 col-sm-9 col-md-6 text-center mx-auto mb-2">
-					
-                            <div class="row justify-content-center bg-info mb-2" style="border-top:  3px black solid; border-bottom:  3px black solid;">
+                    <div class="card-body row border-info" >
+                        <div class="col-md-9 col-lg-8 col-xl-7 text-center mx-auto mb-2">
+
+                            <div class="row justify-content-center bg-info mb-2 text-white" style="border-radius: 10px">
                                 <h4 class=" w-60 p-2 text-center " >DETALLES DEL VEHICULO</h4>
                             </div>
 					
@@ -39,73 +39,88 @@
 
                                         	<input type="hidden" th:field="*{id}"> 
 
-                                            <div class="form-group row my-4">
-                                                <label for="patente" class="col-sm-3 col-form-label my-auto texto">PATENTE</label>
+                                            <div class="form-group row mb-4 my-4">
+                                                <label for="patente" class="col-sm-3 col-form-label my-auto text-dark"><h5>PATENTE</h5></label>
                                                 <div class="col-sm-9">
-                                                  <input type="text" th:field="*{patente}" class="form-control" id="patente" placeholder="Ej: AAA123 / AA123EE" select disabled>
+                                                    <input type="text" th:field="*{patente}" class="form-control" id="patente" placeholder="Ej: AAA123 / AA123EE" select disabled>
+                                                    <div class="alert-danger" th:if="${#fields.hasErrors('patente')}" th:errors="*{patente}">Name Error</div>
                                                 </div>
                                             </div>
                             				<div class="alert-danger text-center" th:if="${formError}" th:text="${formError}">Name Error</div>
                             				
                    
-                                                <div class="form-group row mb-4">
-                                                    <label for="marca" class="col-sm-3 col-form-label my-auto texto">MARCA</label>
-                                                    <div class="col-sm-9">
-                                                      <input type="text" th:field="*{marca}" class="form-control" id="marca" placeholder="MARCA">
-                                                    </div>
+                                            <div class="form-group row mb-4">
+                                                <label for="marca" class="col-sm-3 col-form-label my-auto text-dark"><h5>MARCA</h5></label>
+                                                <div class="col-sm-9">
+                                                  	<input type="text" th:field="*{marca}" class="form-control" id="marca" placeholder="MARCA">
+                                                  	<div class="alert-danger" th:if="${#fields.hasErrors('marca')}" th:errors="*{marca}">Name Error</div>
                                                 </div>
+                                            </div>
 
-                                                <div class="form-group row mb-4">
-                                                    <label for="modelo" class="col-sm-3 col-form-label my-auto texto">MODELO</label>
-                                                    <div class="col-sm-9">
-                                                      <input type="text" th:field="*{modelo}" class="form-control" id="modelo" placeholder="MODELO">
-                                                    </div>
+                                            <div class="form-group row mb-4">
+                                                <label for="modelo" class="col-sm-3 col-form-label my-auto text-dark"><h5>MODELO</h5></label>
+                                                <div class="col-sm-9">
+                                                   	<input type="text" th:field="*{modelo}" class="form-control" id="modelo" placeholder="MODELO">
+                                                   	<div class="alert-danger" th:if="${#fields.hasErrors('modelo')}" th:errors="*{modelo}">Name Error</div>
                                                 </div>
+                                            </div>
 
-                                                <div class="form-group row mb-4">
-                                                    <label for="chasis" class="col-sm-3 col-form-label my-auto texto">CHASIS</label>
-                                                    <div class="col-sm-9">
-                                                      <input type="text" th:field="*{numeroChasis}" class="form-control" id="chasis" placeholder="N° DE CHASIS">
-                                                    </div>
+                                            <div class="form-group row mb-4">
+                                                <label for="chasis" class="col-sm-3 col-form-label my-auto text-dark"><h5>N° CHASIS</h5></label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" th:field="*{numeroChasis}" class="form-control" id="chasis" placeholder="N° DE CHASIS">
+                                                    <div class="alert-danger" th:if="${#fields.hasErrors('numeroChasis')}" th:errors="*{numeroChasis}">Name Error</div>
                                                 </div>
+                                            </div>
 
-                                                <div class="form-group row mb-4">
-                                                    <label for="motor" class="col-sm-3 col-form-label my-auto texto">MOTOR</label>
-                                                    <div class="col-sm-9">
-                                                      <input type="text" th:field="*{numeroMotor}" class="form-control" id="motor" placeholder="N° DE MOTOR">
-                                                    </div>
+                                            <div class="form-group row mb-4">
+                                                <label for="motor" class="col-sm-3 col-form-label my-auto text-dark"><h5>N° MOTOR</h5></label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" th:field="*{numeroMotor}" class="form-control" id="motor" placeholder="N° DE MOTOR">
+                                                    <div class="alert-danger" th:if="${#fields.hasErrors('numeroMotor')}" th:errors="*{numeroMotor}">Name Error</div>
                                                 </div>
+                                            </div>
 
-                                                <div class="form-group row mb-4">
-                                                    <label for="color" class="col-sm-3 col-form-label my-auto texto">COLOR</label>
-                                                    <div class="col-sm-9">
-                                                      <input type="text" th:field="*{color}" class="form-control" id="color" placeholder="COLOR">
-                                                    </div>
+                                            <div class="form-group row mb-4">
+                                                <label for="color" class="col-sm-3 col-form-label my-auto text-dark"><h5>COLOR</h5></label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" th:field="*{color}" class="form-control" id="color" placeholder="COLOR">
+                                                    <div class="alert-danger" th:if="${#fields.hasErrors('color')}" th:errors="*{color}">Name Error</div>
                                                 </div>
+                                            </div>
 
-                                                <div class="form-group row mb-4">
-                                                    <label for="tipo" class="col-sm-3 col-form-label my-auto texto">TIPO</label>
-                                                    <div class="col-sm-9">
-                                                      <input type="text" th:field="*{tipo}" class="form-control" id="tipo" placeholder="TIPO">
-                                                    </div>
+                                            <div class="form-group row mb-4">
+                                                <label for="tipo" class="col-sm-3 col-form-label my-auto text-dark"><h5>TIPO</h5></label>
+                                                <div class="col-sm-9">
+                                                    <select id="tipo" th:field="*{tipo}" class="form-control">
+                                                            <option selected value=""></option>
+                                                            <option value="Auto">Auto</option>
+                                                            <option value="Camión">Camión</option>
+                                                            <option value="Camioneta">Camioneta</option>
+                                                            <option value="Colectivo">Colectivo</option>
+                                                            <option value="Moto">Moto</option>
+                                                    </select>
+                                                    <div class="alert-danger" th:if="${#fields.hasErrors('tipo')}" th:errors="*{tipo}">Name Error</div>
+                                                </div> 
+                                            </div>
+
+                                            <div class="form-group row mb-4">
+                                                <label for="titular" class="col-sm-3 col-form-label my-auto text-dark"><h5>TITULAR</h5></label>
+                                                <div class="col-sm-9">
+                                                    <input type="text"th:field="*{titular}"  class="form-control" id="titular" placeholder="NOMBRE DEL TITULAR">
+                                                    <div class="alert-danger" th:if="${#fields.hasErrors('titular')}" th:errors="*{titular}">Name Error</div>
                                                 </div>
-
-                                                <div class="form-group row mb-4">
-                                                    <label for="titular" class="col-sm-3 col-form-label my-auto texto">TITULAR</label>
-                                                    <div class="col-sm-9">
-                                                      <input type="text"th:field="*{titular}"  class="form-control" id="titular" placeholder="TITULAR">
-                                                    </div>
-                                                </div>
-
-                                                <input type="submit" class="btn btn-primary mb-2" value="SIGUIENTE" th:value="SIGUIENTE">
-                                        
-                                        
+                                            </div>
+                                            <div class="row justify-content-center mb-2">
+	                                            <input type="submit" class="btn btn-primary mr-1" value="AGREGAR" th:value="AGREGAR">
+	                                            <a th:href="@{/registros}" type="button" class="btn btn-danger">CANCELAR</a>
+											</div>
                                 </form>
                             </div>
                         </div>
             
                     </div>
-                </div>
+           </div>
 
 
 <div th:insert="layout/footer :: footer"></div>

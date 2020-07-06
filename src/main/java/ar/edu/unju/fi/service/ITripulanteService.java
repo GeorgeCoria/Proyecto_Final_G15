@@ -14,7 +14,7 @@ import ar.edu.unju.fi.model.Tripulante;
  */
 public interface ITripulanteService {
 
-public void crearTripulante(Tripulante tripulante);
+	public void crearTripulante(Tripulante tripulante) throws Exception;
 	
 	public List<Tripulante> buscarTodosTripulantes();
 	

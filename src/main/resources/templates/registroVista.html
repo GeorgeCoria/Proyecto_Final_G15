@@ -18,114 +18,143 @@
 	<div th:insert="layout/header :: header"></div>
 	
 	<div class="container">
+                   
+                   
+                   <div class="col-12 col-sm-12 text-center mt-5 text-dark">
+				          <h2 class="col-xl-9 col-lg-11 p-3 m-auto border-info border-c1 font-c1">REGISTRO FINALIZADO</h2>
+			       </div>
+                   
                     <div class="row my-4">
                         <div class="col-md-9 mx-auto">
+                            
 
-                            <div class="row justify-content-center mb-4">
-                                <h1 class=" w-100 p-2 text-center " style="border-top:  3px dodgerblue solid; border-bottom:  3px dodgerblue solid;">VEHICULO</h1>
+                           <div class="form-group row my-4 justify-content-center">
+                                <label for="fechaHora" class="col-sm-4 col-xl-2 col-form-label my-auto" style="color:black"><h6>FECHA Y HORA</h6></label>
+                                <div class="col-sm-4">
+                                    <textarea th:text="${fechaHora}" class="form-control" rows="1" select disabled></textarea>
+                                </div> 
+                          </div>
+                           
+                            <div class="row justify-content-center">
+                                <h3 class=" w-100 p-2 text-center " style="border: 2px dodgerblue solid">VEHICULO</h3>
+
+	                            <div class="table-responsive">
+		                            <table class="table table-reponsive-sm table-striped"> 
+		                                  <thead class="bg-info">
+			                                    <tr>
+				                                      <th scope="col">ID</th>
+				                                      <th scope="col">PATENTE</th>
+				                                      <th scope="col">COLOR</th>
+				                                      <th scope="col">TITULAR</th>
+				                                      <th scope="col">MARCA </th>
+				                                      <th scope="col">MODELO</th>
+				                                      <th scope="col">TIPO</th>
+				                                      <th scope="col">N° DE CHASIS</th>
+				                                      <th scope="col">NUMERO DE MOTOR</th>
+			                                    </tr>
+		                                  </thead>
+		
+		                                  <tbody>
+			                                    <tr th:each="vehiculo : ${listaVehiculo}">
+			                                    	  <td th:text="${vehiculo.id}"></td>
+				                                      <td th:text="${vehiculo.patente}"></td>
+				                                      <td th:text="${vehiculo.color}"></td>
+				                                      <td th:text="${vehiculo.titular}"></td>
+				                                      <td th:text="${vehiculo.marca}"></td>
+				                                      <td th:text="${vehiculo.modelo}"></td>
+				                                      <td th:text="${vehiculo.tipo}"></td>
+				                                      <td th:text="${vehiculo.numeroChasis}"></td>
+				                                      <td th:text="${vehiculo.numeroMotor}"></td>
+			                                    </tr>
+		                                  </tbody>
+		                            </table>
+	                            </div>
                             </div>
 
-
-                            <table class="table table-reponsive-sm table-striped"> 
-                                  <thead class="bg-info">
-	                                    <tr>
-		                                      <th scope="col">ID</th>
-		                                      <th scope="col">PATENTE</th>
-		                                      <th scope="col">COLOR</th>
-		                                      <th scope="col">TITULAR</th>
-		                                      <th scope="col">MARCA </th>
-		                                      <th scope="col">MODELO</th>
-		                                      <th scope="col">TIPO</th>
-		                                      <th scope="col">N° DE CHASIS</th>
-		                                      <th scope="col">NUMERO DE MOTOR</th>
-	                                    </tr>
-                                  </thead>
-
-                                  <tbody>
-	                                    <tr th:each="vehiculo : ${listaVehiculo}">
-	                                    	  <td th:text="${vehiculo.id}"></td>
-		                                      <td th:text="${vehiculo.patente}"></td>
-		                                      <td th:text="${vehiculo.color}"></td>
-		                                      <td th:text="${vehiculo.titular}"></td>
-		                                      <td th:text="${vehiculo.marca}"></td>
-		                                      <td th:text="${vehiculo.modelo}"></td>
-		                                      <td th:text="${vehiculo.tipo}"></td>
-		                                      <td th:text="${vehiculo.numeroChasis}"></td>
-		                                      <td th:text="${vehiculo.numeroMotor}"></td>
-	                                    </tr>
-                                  </tbody>
-                            </table>
-
-
-
                         </div>
                     </div>
-
-                <div class="row">
-                   
-                    <div class="col-md-4 mx-auto">
-                       
-                        <div class="row justify-content-center mb-4">
-                            <h1 class=" w-100 p-2 text-center " style="border-top:  3px dodgerblue solid; border-bottom:  3px dodgerblue solid;">LUGAR</h1>
-                        </div>
-
-                        <table class="table table-reponsive-sm table-striped"> 
-                          <thead class="bg-info">
-                            <tr>
-                              <th scope="col">LOCALIDAD</th>
-                              <th scope="col">DETALLES</th>
-                            </tr>
-                          </thead>
-
-                          <tbody>
-                            <tr th:each="localidad : ${listaLocalidad}">
-                              <td th:text="${localidad.id}"></td>
-                              <td th:text="${localidad.nombre}"></td>
-                            </tr>
-                          </tbody>
-                        </table>
-                        
-                    </div>
-
-
-                    <div class="col-md-7 mx-auto">
-                           
-                        <div class="row justify-content-center mb-4">
-                            <h1 class=" w-100 p-2 text-center " style="border-top:  3px dodgerblue solid; border-bottom:  3px dodgerblue solid;">TRIPULANTES</h1>
-                        </div>
-                            
-                        <table class="table table-reponsive-sm table-striped"> 
-		                         <thead class="bg-info">
-		                            <tr>
-		                              <th scope="col">ID</th>
-		                              <th scope="col">DOCUMENTO</th>
-		                              <th scope="col">APELLIDO</th>
-		                              <th scope="col">NOMBRE</th>
-		                              <th scope="col">NACIONALIDAD</th>
-		                            </tr>
-		                       </thead>
-		
-		                       <tbody>
-		                              <tr th:each="tripulante : ${listaTrip}">
-		                              <td th:text="${tripulante.id}"></td>
-		                              <td th:text="${tripulante.documento}"></td>
-		                              <td th:text="${tripulante.apellido}"></td>
-		                              <td th:text="${tripulante.nombres}"></td>
-		                              <td th:text="${tripulante.nacionalidad}"></td>
-		                            </tr>
-		                       </tbody>
-		              </table>
-                        
-                    </div>
-
-                </div>
-                
-                <div class="form-group row justify-content-center">
- 						<a class="btn btn-primary mb-2" th:href="@{/registroNuevo}">CARGAR OTRO REGISTRO</a>
-                </div>
+                    
+				<div class="row justify-content-center">
+	              		<div class="col-md-9 col-lg-7 mx-auto">
+	                           
+		                      <div class="row justify-content-center">
+		                            <h3 class=" w-100 p-2 text-center " style="border: 2px dodgerblue solid">TRIPULANTES</h3>
+		                        
+			                      <div class="table-responsive">
+				                      <table class="table table-reponsive-sm table-striped"> 
+						                         <thead class="bg-info">
+						                            <tr>
+						                              <th scope="col">ID</th>
+						                              <th scope="col">DOCUMENTO</th>
+						                              <th scope="col">APELLIDO</th>
+						                              <th scope="col">NOMBRE</th>
+						                              <th scope="col">NACIONALIDAD</th>
+						                            </tr>
+						                       </thead>
+						
+						                       <tbody>
+						                              <tr th:each="tripulante : ${listaTrip}">
+						                              <td th:text="${tripulante.id}"></td>
+						                              <td th:text="${tripulante.documento}"></td>
+						                              <td th:text="${tripulante.apellido}"></td>
+						                              <td th:text="${tripulante.nombres}"></td>
+						                              <td th:text="${tripulante.nacionalidad}"></td>
+						                            </tr>
+						                       </tbody>
+						              </table>
+			                      </div>
+			                      
+		                      </div>  
+	                        
+	                    </div>
+				</div>      
                
+                <div class="row mt-4 justify-content-center">
+                    <div class="col-sm-12 col-md-9 col-lg-4 mx-4">
+                       
+	                      <div class="row justify-content-center">
+	                            <h3 class=" w-100 p-2 text-center " style="border: 2px dodgerblue solid">LUGAR</h3>
+	                        
+		                        <div class="table-responsive">
+			                        <table class="table table-reponsive-sm table-striped"> 
+				                          <thead class="bg-info">
+				                            <tr>
+				                              <th scope="col">LOCALIDAD</th>
+				                              <th scope="col">DETALLES</th>
+				                            </tr>
+				                          </thead>
+				
+				                          <tbody>
+				                            <tr th:each="localidad : ${listaLocalidad}">
+				                              <td th:text="${localidad.id}"></td>
+				                              <td th:text="${localidad.nombre}"></td>
+				                            </tr>
+				                          </tbody>
+			                        </table>
+		                        </div>
+	                      </div>
+	                      
+                    </div>
+            
+                <div class=" col-sm-12 col-md-9 col-lg-4 mx-4" style="height: auto">
+                
+                    <div class="form-group row mb-4 my-3">
+                          <label for="detalles" class="col-sm-3 col-form-label my-auto" style="color:black"><h6>DETALLES DEL LUGAR</h6></label>
+                          <div class="col-sm-9">
+                              <textarea th:text="${detalleLugar}" class="form-control" rows="3" select disabled></textarea>
+                          </div>
+                   </div>
 
-            </div>
+                </div>
+            
+           </div>           
+           
+          <div class="form-group row justify-content-center mt-3">
+ 				<a class="btn btn-primary mb-2 text-white" th:href="@{/registroNuevo}">CARGAR OTRO REGISTRO</a>
+          </div>
+               
+        
+	</div>
 
 <div th:insert="layout/footer :: footer"></div>
 

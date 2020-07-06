@@ -19,88 +19,140 @@
 	
 	<div class="card">
                    
-                   <div class="row justify-content-center mb-4 mt-4">
-				        <h1 class=" w-60 p-2 text-center " style="border-top:  3px dodgerblue solid; border-bottom:  3px dodgerblue solid;">REGISTRO TRIPULANTES</h1>
-			        </div>     
+                    <div class=" col-12 col-sm-12 text-center mt-5 mb-2 text-dark">
+				        <h2 class="col-xl-9 col-lg-11 p-3 m-auto border-info border-c1 font-c1">REGISTRO TRIPULANTE</h2>
+			        </div>  
                                                           
                     <div class="card-body row border-info" >
-                        <div class="col-10 col-sm-9 col-md-6 text-center mx-auto mb-2">
+                        <div class="col-md-9 col-lg-8 col-xl-7 text-center mx-auto mb-2">
 
-                                <div class="row justify-content-center bg-info mb-2" style="border-top:  3px black solid; border-bottom:  3px black solid;">
-                                    <h4 class=" w-60 p-2 text-center " >DETALLES DEL TRIPULANTE</h4>
+                               <div class="row justify-content-center bg-info mb-2 text-white" style="border-radius: 10px">
+                                <h4 class=" w-60 p-2 text-center " >DETALLES DEL TRIPULANTE</h4>
                                 </div>
-
-                                 <form class=" col-md-12 fondoVer1" th:object="${tripulanteForm}" th:action="@{/formTripulante}" method="post">
                                  
-                                 <input type="hidden" th:field="${tripulanteForm.id}" class="form-control">
-                                 
-                                    <div class="form-group row mb-4 my-3">
-                                        <label for="nombre" class="col-sm-4 col-form-label my-auto"><i class="far fa-user"></i>  NOMBRE</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" th:field="${tripulanteForm.nombres}" class="form-control" id="nombre" placeholder="Ingrese el nombre">
-                                        </div>
-                                    </div>
+                                 <div class="row">
 
-                                    <div class="form-group row mb-4 my-3">
-                                        <label for="apellido" class="col-sm-4 col-form-label my-auto"> <i class="far fa-user"></i>  APELLIDO</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" th:field="${tripulanteForm.apellido}" class="form-control" id="apellido" placeholder="Ingrese el apellido">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group row mb-4 my-3">
-                                        <label for="nacionalidad" class="col-sm-4 col-form-label my-auto"> <i class="fab fa-font-awesome-flag"></i>  NACIONALIDAD</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" th:field="${tripulanteForm.nacionalidad}" class="form-control" id="nacionalidad" placeholder="Ingrese la nacionalidad">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group row mb-4 my-3">
-                                        <label for="documento" class="col-sm-4 col-form-label my-auto"> <i class="fas fa-id-card"></i>  D.N.I</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" th:field="${tripulanteForm.documento}" class="form-control" id="documento" placeholder="Ingrese el D.N.I.">
-                                        </div>
-                                    </div>
-                                    <div class="my-2">
-                                        <input type="submit" class="btn btn-primary botonDos" value="AGREGAR">
-                                    </div>
-                                    
-
-                                </form>
-                                
-                                
-		                        <div class="row justify-content-center mb-4 mt-2">
-		                            <h1 class="col-md-12 mx-auto w-100 p-2 text-center " style="border-top:  3px dodgerblue solid; border-bottom:  3px dodgerblue solid;">TRIPULANTES</h1>
-		                        </div>
-		                            
-		                        <table class="table table-reponsive-sm table-striped"> 
-		                          <thead class="bg-info">
-		                            <tr>
-		                              <th scope="col">ID</th>
-		                              <th scope="col">DOCUMENTO</th>
-		                              <th scope="col">APELLIDO</th>
-		                              <th scope="col">NOMBRE</th>
-		                              <th scope="col">NACIONALIDAD</th>
-		                            </tr>
-		                       </thead>
-		
-		                          <tbody>
-		                              <tr th:each="tripulante : ${listaTrip}">
-		                              <td th:text="${tripulante.id}"></td>
-		                              <td th:text="${tripulante.documento}"></td>
-		                              <td th:text="${tripulante.apellido}"></td>
-		                              <td th:text="${tripulante.nombres}"></td>
-		                              <td th:text="${tripulante.nacionalidad}"></td>
-		                            </tr>
-		                          </tbody>
-		                        </table>
-		                        
-		                    <a  th:if="${botonTerminar}" class="btn btn-primary mb-2" th:href="@{/registroFinal}">TERMINAR REGISTRO</a>
+	                                 <form class=" col-md-12 fondoVer1" th:object="${tripulanteForm}" th:action="@{/formTripulante}" method="post">
+	                                 
+	                                 <input type="hidden" th:field="${tripulanteForm.id}" class="form-control">
+	                                 
+	                                    <div class="form-group row mb-4 my-3">
+	                                        <label for="nombre" class="col-sm-4 col-form-label my-auto text-dark"><h5><i class="far fa-user"></i>  NOMBRE</h5></label>
+	                                        <div class="col-sm-8">
+	                                            <input type="text" th:field="${tripulanteForm.nombres}" class="form-control" id="nombre" placeholder="Ingrese el nombre">
+	                                            <div class="alert-danger" th:if="${#fields.hasErrors('nombres')}" th:errors="*{nombres}">Name Error</div>
+	                                        </div>
+	                                    </div>
+	
+	                                    <div class="form-group row mb-4 my-3">
+	                                        <label for="apellido" class="col-sm-4 col-form-label my-auto text-dark"><h5><i class="far fa-user"></i>  APELLIDO</h5></label>
+	                                        <div class="col-sm-8">
+	                                            <input type="text" th:field="${tripulanteForm.apellido}" class="form-control" id="apellido" placeholder="Ingrese el apellido">
+	                                            <div class="alert-danger" th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}">Name Error</div>
+	                                        </div>
+	                                    </div>
+	
+	                                    <div class="form-group row mb-4 my-3">
+	                                        <label for="nacionalidad" class="col-sm-4 col-form-label my-auto text-dark"><h5><i class="fab fa-font-awesome-flag"></i>  NACIONALIDAD</h5></label>
+	                                        <div class="col-sm-8">
+	                                            <select id="nacionalidad" th:field="${tripulanteForm.nacionalidad}" class="form-control">
+	                                                            <option selected value=""></option>
+	                                                            <option value="Afgano">Afgano</option>
+	                                                            <option value="Alemana">Alemana</option>
+	                                                            <option value="Arabe">Arabe</option>
+	                                                            <option value="Argentina">Argentina</option>
+	                                                            <option value="Australiana">Australiana</option>
+	                                                            <option value="Belga">Belga</option>
+	                                                            <option value="Boliviana">Boliviana</option>
+	                                                            <option value="Brasileña">Brasileña</option>
+	                                                            <option value="Camboyana">Camboyana</option>
+	                                                            <option value="Canadiense">Canadiense</option>
+	                                                            <option value="Chilena">Chilena</option>
+	                                                            <option value="China">China</option>
+	                                                            <option value="Colombiana">Colombiana</option>
+	                                                            <option value="Coreana">Coreana</option>
+	                                                            <option value="Costarricense">Costarricense</option>
+	                                                            <option value="Cuabana">Cuabana</option>
+	                                                            <option value="Danesa">Danesa</option>
+	                                                            <option value="Ecuatoriana">Ecuatoriana</option>
+	                                                            <option value="Egipcia">Egipcia</option>
+	                                                            <option value="Salvadoreña">Salvadoreña</option>
+	                                                            <option value="Escocesa">Escocesa</option>
+	                                                            <option value="EstadounidenseEspañola">Española</option>
+	                                                            <option value="Estadounidense">Estadounidense</option>
+	                                                            <option value="Estonia">Estonia</option>
+	                                                            <option value="Etiope">Etiope</option>
+	                                                            <option value="Filipina">Filipina</option>
+	                                                            <option value="Finlandesa">Finlandesa</option>
+	                                                            <option value="Francesa">Francesa</option>
+	                                                            <option value="Galesa">Galesa</option>
+	                                                            <option value="Griega">Griega</option>
+	                                                            <option value="Guatemalteca">Guatemalteca</option>
+	                                                            <option value="Haitiana">Haitiana</option>
+	                                                            <option value="Holandesa">Holandesa</option>
+	                                                            <option value="Hondureña">Hondureña</option>
+	                                                            <option value="Indonesa">Indonesa</option>
+	                                                            <option value="Inglesa">Inglesa</option>
+	                                                            <option value="Iraqui">Iraqui</option>
+	                                                            <option value="Irani">Irani</option>
+	                                                            <option value="Irlandesa">Irlandesa</option>
+	                                                            <option value="Israeli">Israeli</option>
+	                                                            <option value="Italiana">Italiana</option>
+	                                                            <option value="Japonesa">Japonesa</option>
+	                                                            <option value="Jordana">Jordana</option>
+	                                                            <option value="Letona">Letona</option>
+	                                                            <option value="Letonesa">Letonesa</option>
+	                                                            <option value="Malaya">Malaya</option>
+	                                                            <option value="Marroqui">Marroqui</option>
+	                                                            <option value="Mexicana">Mexicana</option>
+	                                                            <option value="Nicaragüense">Nicaragüense</option>
+	                                                            <option value="Noruega">Noruega</option>
+	                                                            <option value="Neozelandesa">Neozelandesa</option>
+	                                                            <option value="Panameña">Panameña</option>
+	                                                            <option value="Paraguaya">Paraguaya</option>
+	                                                            <option value="Peruana">Peruana</option>
+	                                                            <option value="Polaca">Polaca</option>
+	                                                            <option value="Portuguesa">Portuguesa</option>
+	                                                            <option value="Puertorriqueña">Puertorriqueña</option>
+	                                                            <option value="Dominicana">Dominicana</option>
+	                                                            <option value="Rumana">Rumana</option>
+	                                                            <option value="Rusa">Rusa</option>
+	                                                            <option value="Sueca">Sueca</option>
+	                                                            <option value="Suiza">Suiza</option>
+	                                                            <option value="Tailandesa">Tailandesa</option>
+	                                                            <option value="Taiwanesa">Taiwanesa</option>
+	                                                            <option value="Turca">Turca</option>
+	                                                            <option value="Ucraniana">Ucraniana</option>
+	                                                            <option value="Uruguaya">Uruguaya</option>
+	                                                            <option value="Venezolana">Venezolana</option>
+	                                                            <option value="Vietnamita">Vietnamita</option>
+	                                            </select>	
+	                                            <div class="alert-danger" th:if="${#fields.hasErrors('nacionalidad')}" th:errors="*{nacionalidad}">Name Error</div>
+	
+	                                        </div>
+	                                    </div>
+	
+	                                    <div class="form-group row mb-4 my-3">
+	                                        <label for="documento" class="col-sm-4 col-form-label my-auto text-dark"><h5><i class="fas fa-id-card"></i>  D.N.I</h5></label>
+	                                        <div class="col-sm-8">
+	                                            <input type="text" th:field="${tripulanteForm.documento}" class="form-control" id="documento" placeholder="Ingrese el DNI sin puntos">
+	                                            <div class="alert-danger" th:if="${#fields.hasErrors('documento')}" th:errors="*{documento}">Name Error</div>
+	                                        </div>
+	                                    </div>
+	                                    
+	                                    <div class="my-2">
+	                                        <input type="submit" class="btn btn-primary botonDos mr-1" value="AGREGAR">
+	                                        <a th:href="@{/registroTracking}" type="button" class="btn btn-danger">CANCELAR</a>
+	                                    </div>
+	                                    
+											<div class="alert-danger text-center" th:if="${formErrorTrip}" th:text="${formErrorTrip}" >Name Error</div>
+										
+	                                </form>
+                            </div>	                      
                                 
                         </div>                
                     </div>
-                   
-                    
+      
     </div>
 
 
