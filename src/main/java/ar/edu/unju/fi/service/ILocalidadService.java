@@ -20,9 +20,11 @@ public interface ILocalidadService {
 	
 	public void eliminarLocalidad (Long id) ;
 	
-	public Localidad EditarLoc(Long id) throws Exception;
+	public Localidad buscarLocalidad1(Long id) throws Exception;
 	
 	public Optional<Localidad> buscarLocalidad(Long id);
 	
 	public Localidad buscarNombreLocalidad(String nombre) throws Exception;
+	
+	public void editarLocalidad(Localidad localidad) throws Exception;
 }

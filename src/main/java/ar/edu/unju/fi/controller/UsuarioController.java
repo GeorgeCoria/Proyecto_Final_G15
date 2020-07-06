@@ -118,7 +118,7 @@ public class UsuarioController {
 		return "adminPrincipal";
 	}
 	
-	@GetMapping("/adminPrincipal/Registrador")
+	@GetMapping("/Registrador")
 	public String mostrarListaRegistrador(Model model) throws Exception {
 		try {
 			model.addAttribute("listaUsuarios", usuarioService.findByTipoUsuario("REGISTRADOR",true));
@@ -131,7 +131,7 @@ public class UsuarioController {
 		return "adminPrincipal";
 	}
 	
-	@GetMapping("/adminPrincipal/Consultor")
+	@GetMapping("/Consultor")
 	public String mostrarListaConsultores(Model model) throws Exception{
 		try {
 			model.addAttribute("listaUsuarios", usuarioService.findByTipoUsuario("CONSULTOR", true));
@@ -168,7 +168,7 @@ public class UsuarioController {
 		
 		}
 	
-	@GetMapping("/adminPrincipal/Suspendido")
+	@GetMapping("/Suspendido")
 	public String mostrarBajas(Model model) {
 		try {
 			model.addAttribute("listaUsuarios",usuarioService.listarUsuarios(false));

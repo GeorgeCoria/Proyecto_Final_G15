@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.stereotype.Component;
 
@@ -49,6 +50,15 @@ public class Localidad implements Serializable{
 	@NotBlank(message="Debe ingresar un nombre de localidad")
 	private String nombre;
 	
+	/**
+	 * Atributo que permite definir el estado de una Localidad
+	 * true->habilitado
+	 * false->Inhabilitado
+	 */
+	@Column(name="ESTADO")
+	@NotNull(message="Seleccione estado de Localidad")
+	private boolean estado;
+	
 	
 	// -----------------CONSTRUCTORES-----------------//
 	
@@ -64,13 +74,19 @@ public class Localidad implements Serializable{
 	/**
 	 * Constructor Parametrizado
 	 * Se asigna nombre de Localidad
+	 * Se asigna un estado
 	 * 
 	 * @param nombre de Localidad
+	 * @param estado de Localidad
 	 */
-	public Localidad(String nombre) {
-		this.nombre = nombre;
-	}
 	
+	public Localidad( String nombre, boolean estado) {
+		
+		this.nombre = nombre;
+		this.estado = estado;
+	}
+
+
 	// ---------------METODOS ACCESORES---------------//
 	
 	/**
@@ -111,6 +127,29 @@ public class Localidad implements Serializable{
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+	
+/**
+ * Captura el valor del estado de la localidad
+ * true implica que la localidad esta habilitada
+ * false implica una localidad inactiva o inhabilitada
+ * @return estado
+ */
+	public boolean isEstado() {
+		return estado;
+	}
+
+	/**
+	 * Este metodo permite incializar el estado de la 
+	 * Localidad
+	 * <br>true implica que la localidad esta activa, entoces
+	 * por otra lado el valor false, hace referenci a una localidad 
+	 * inhabilitada
+	 * @param valor de estado
+	 */
+	public void setEstado(boolean estado) {
+		this.estado = estado;
+	}
+
 
 	//--------------- Metodos y/o funciones -------------------
 	/**
@@ -124,7 +163,7 @@ public class Localidad implements Serializable{
 	 */
 	@Override
 	public String toString() {
-		return "Localidad [id=" + id + ", nombre=" + nombre + "]";
+		return "Localidad [id=" + id + ", nombre=" + nombre +", estado= "+ estado+ "]";
 	}
 
 

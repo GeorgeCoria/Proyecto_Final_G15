@@ -55,15 +55,15 @@
 			Lista de usuarios
 			</a>
 			
-			<a class="btn btn-primary btn-lg" th:href="@{/adminPrincipal/Registrador}">
+			<a class="btn btn-primary btn-lg" th:href="@{/Registrador}">
 			Registradores
 			</a>
 			
-			<a class="btn btn-primary btn-lg" th:href="@{/adminPrincipal/Consultor}" >
+			<a class="btn btn-primary btn-lg" th:href="@{/Consultor}" >
 			Consultores
 			</a>
 			
-			<a class="btn btn-danger btn-lg" th:href="@{/adminPrincipal/Suspendido}" >
+			<a class="btn btn-danger btn-lg" th:href="@{/Suspendido}" >
 			Suspendidos
 			</a>
 		</div>
@@ -100,7 +100,6 @@
 						<tr>
 							<th scope="col">ID</th>
 							<th scope="col">Usuario</th>
-							<th scope="col">Password</th>
 							<th scope="col">Nombre</th>
 							<th scope="col">Apellido</th>
 							<th scope="col">Tipo de Usuario</th>
@@ -115,7 +114,6 @@
 						<tr th:each="usuario : ${listaUsuarios}">
 							<th th:text="${usuario.id}"></th>
 							<td th:text="${usuario.nombreUsuario}"></td>
-							<td th:text="${usuario.password}"></td>
 							<td th:text="${usuario.nombreReal}"></td>
 							<td th:text="${usuario.apellidoReal}"></td>
 							<td th:text="${usuario.tipoUsuario}"></td>

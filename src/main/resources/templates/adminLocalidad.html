@@ -52,7 +52,7 @@
 				<div class="text-center text-white bg-dark pt-2 pb-2">
 					<h4 th:text="${titulo}"></h4>
 				</div>
-				<form class="form pt-4" th:object="${localidadForm}" th:action="@{/adminLocalidad}" method="post" autocomplete="off">
+				<form class="form pt-4" th:object="${localidadForm}" th:action="${editarLocalidad}?@{/editarLocalidad}:@{/adminLocalidad}" method="post" autocomplete="off">
 					
 					<input type="hidden" th:field="*{id}" /> 
 					
@@ -60,6 +60,27 @@
 						 <label for="Localidad">Nombre de Localidad</label>
    						 <input type="text" class="form-control border border-dark border-top-0 border-left-0 border-right-0 " placeholder="Ingrese Nombre" th:field="${localidadForm.nombre}">
 						<div class="alert-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">Name Error</div>
+					</div>
+					
+					<div th:if="${editarLocalidad}" class="col-12 col-md-6 ">
+								
+								<div class="form-group col-form-label text-center"><h5>Estado de Localidad</h5></div>
+								<div class="col-12 ">
+									<div class="form-check">
+										<input class="form-check-input" type="radio"
+											name="estado" id="estadoRadios1" value="true" th:field="*{estado}" >
+										<label class="form-check-label" for="estadoRadios1">
+											HABILITADO </label>
+									</div>
+									<div class="form-check">
+										<input class="form-check-input" type="radio"
+											name="estado" id="estadoRadios2" value="false" th:field="*{estado}" >
+										<label class="form-check-label" for="estadoRadios2">
+											INHABILITADO </label>
+									</div>
+								</div>
+					
+							<div class="alert-danger" th:if="${#fields.hasErrors('estado')}" th:errors="*{estado}">Name Error</div>
 					</div>
 					
 					<div class="form-group" th:if="${editarLocalidad}" >
@@ -113,6 +134,7 @@
 						<tr>
 							<th>ID</th>
 							<th>Localidad</th>
+							<th>Estado</th>
 							<th class="text-center">Accion</th>
 						</tr>
 					</thead>
@@ -121,6 +143,7 @@
 						<tr th:each="localidad : ${listaLocalidades}">
 							<td th:text="${localidad.id}"></td>
 							<td th:text="${localidad.nombre}"></td>
+							<td th:text="${localidad.estado}"></td>
 							<td class="text-center">
 								<a th:href="@{/editarLoc/}+${localidad.id}" type="button" class="btn btn-primary"> Editar</a>
 								<a href="#"  th:onclick="'javascript:confirmarEliminar(\''+${localidad.id}+'\');'" type="button" class="btn btn-danger">Eliminar</a>

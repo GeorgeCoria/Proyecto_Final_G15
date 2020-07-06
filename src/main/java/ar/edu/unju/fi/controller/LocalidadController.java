@@ -68,7 +68,7 @@ public class LocalidadController {
 	@GetMapping("/editarLoc/{id}")
 	public String editar(@PathVariable Long id, Model model) throws Exception {
 		try{
-			Localidad localidadForm=localidadService.EditarLoc(id);
+			Localidad localidadForm=localidadService.buscarLocalidad1(id);
 			model.addAttribute("localidadForm", localidadForm);
 			model.addAttribute("listaLocalidades", localidadService.listarLocalidades());
 		}catch(Exception e) {
@@ -78,6 +78,28 @@ public class LocalidadController {
 		model.addAttribute("editarLocalidad", "active");
 		model.addAttribute("editMode", "true");
 		model.addAttribute("titulo", "EDITAR LOCALIDAD");
+		return "adminLocalidad";
+	}
+	@PostMapping("/editarLocalidad")
+	public String editarLocalidad(@Valid @ModelAttribute("localidadForm") Localidad localidad, ModelMap model, BindingResult result) {
+		if(result.hasErrors()) {
+			model.addAttribute("localidadForm", localidad);
+		}try {
+			localidadService.editarLocalidad(localidad);
+			model.addAttribute("locaidadForm", new Localidad());
+			
+		}catch(Exception e) {
+			model.addAttribute("formErrorMessage", e.getMessage());
+			model.addAttribute("localidadForm", localidad);
+			model.addAttribute("editarLocalidad", "active");
+			model.addAttribute("editMode", "true");
+			model.addAttribute("titulo", "EDITAR LOCALIDAD");
+		}
+		
+		model.addAttribute("listaLocalidades", localidadService.listarLocalidades());
+		model.addAttribute("titulo", "LOCALIDAD");
+		model.addAttribute("guardarLocalidad", "active");
+		model.addAttribute("editMode", "false");
 		return "adminLocalidad";
 	}
 

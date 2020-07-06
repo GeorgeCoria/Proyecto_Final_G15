@@ -24,6 +24,7 @@ public class LocalidadServiceImp implements ILocalidadService{
 	public void crearLocalidad(Localidad localidad) throws Exception {
 		String localidadMayuscula = localidad.getNombre().toUpperCase();
 		localidad.setNombre(localidadMayuscula);
+		localidad.setEstado(true);
 		if(checkNombreLocalidad(localidad)) {
 			iLocalidad.save(localidad);
 		}
@@ -32,7 +33,7 @@ public class LocalidadServiceImp implements ILocalidadService{
 	private boolean checkNombreLocalidad (Localidad localidad) throws Exception {
 		Optional<Localidad> localidadEncontrada = iLocalidad.findByNombre(localidad.getNombre());
 		if (localidadEncontrada.isPresent()) {
-			throw new Exception("La localidad ya esta registrada");
+			throw new Exception("Error: Ya existe una locadidad con el nombre Ingrado");
 		}
 		return true;
 	}
@@ -48,7 +49,7 @@ public class LocalidadServiceImp implements ILocalidadService{
 	}
 
 	@Override
-	public Localidad EditarLoc(Long id) throws Exception {
+	public Localidad buscarLocalidad1(Long id) throws Exception {
 		return iLocalidad.findById(id).orElseThrow(()-> new Exception("La localidad no existe"));
 	}
 
@@ -62,5 +63,16 @@ public class LocalidadServiceImp implements ILocalidadService{
 		
 		return iLocalidad.findByNombre(nombre).orElseThrow();
 	}
+
+	@Override
+	public void editarLocalidad(Localidad localidad) throws Exception {
+		String localidadMayuscula = localidad.getNombre().toUpperCase();
+		localidad.setNombre(localidadMayuscula);
+		if(checkNombreLocalidad(localidad)) {
+			iLocalidad.save(localidad);
+		}	
+	}
+	
+	
 
 }
