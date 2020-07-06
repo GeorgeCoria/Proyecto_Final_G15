@@ -41,47 +41,47 @@
 <!-- ************** FIN DE PANEL DE NAVEGACION ******************* -->
 
 <!-- **************** Cuerpo de la Pagina Principal *********************  -->
-	<div class="container-fluid fuente">
-
+	<div class="container fuente">
+		<div class="btn-group mb-3">
+			<a class="btn btn-dark btn-lg" th:href="@{/adminLocalidad}" >
+			Lista de Localidades
+			</a>
+			
+			<a class="btn btn-danger btn-lg" th:href="@{/suspendido}" >
+			Suspendidos
+			</a>
+		</div>
+		
 		<div class="row justify-content-center mb-4">
 			<h1 class=" w-50 p-2 text-center " style="border-top:  3px dodgerblue solid; border-bottom:  3px dodgerblue solid;">GESTOR DE LOCALIDADES</h1>
 		</div>
+		
+		
 
 		<div class="row justify-content-center">
-			<div class="col-12 col-md-4">
+			<div class="col-12 col-md-5">
+			
+			<div th:if="not ${suspendido}">
+				
 				<div class="text-center text-white bg-dark pt-2 pb-2">
 					<h4 th:text="${titulo}"></h4>
 				</div>
+				
+				
 				<form class="form pt-4" th:object="${localidadForm}" th:action="${editarLocalidad}?@{/editarLocalidad}:@{/adminLocalidad}" method="post" autocomplete="off">
 					
 					<input type="hidden" th:field="*{id}" /> 
+					
+					<input type="hidden" class="form-control border-primary border-top-0 border-left-0 border-right-0 " th:field="${localidadForm.estado}" th:if="${editarLocalidad}">
 					
 					<div class="form-group"> 
 						 <label for="Localidad">Nombre de Localidad</label>
    						 <input type="text" class="form-control border border-dark border-top-0 border-left-0 border-right-0 " placeholder="Ingrese Nombre" th:field="${localidadForm.nombre}">
 						<div class="alert-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">Name Error</div>
 					</div>
+					<div class="alert-danger text-center mb-3" th:if="${formErrorMessage}" th:text="${formErrorMessage}" >Name Error</div>
 					
-					<div th:if="${editarLocalidad}" class="col-12 col-md-6 ">
-								
-								<div class="form-group col-form-label text-center"><h5>Estado de Localidad</h5></div>
-								<div class="col-12 ">
-									<div class="form-check">
-										<input class="form-check-input" type="radio"
-											name="estado" id="estadoRadios1" value="true" th:field="*{estado}" >
-										<label class="form-check-label" for="estadoRadios1">
-											HABILITADO </label>
-									</div>
-									<div class="form-check">
-										<input class="form-check-input" type="radio"
-											name="estado" id="estadoRadios2" value="false" th:field="*{estado}" >
-										<label class="form-check-label" for="estadoRadios2">
-											INHABILITADO </label>
-									</div>
-								</div>
 					
-							<div class="alert-danger" th:if="${#fields.hasErrors('estado')}" th:errors="*{estado}">Name Error</div>
-					</div>
 					
 					<div class="form-group" th:if="${editarLocalidad}" >
 						<a th:href="@{/editarLoc/cancelar}" type="button" class="btn btn-danger btn-lg col-5 float-left">Cancelar</a>
@@ -89,7 +89,7 @@
 						th:text="${guardarLocalidad}?'Guardar':'Guardar Cambios'" data-toggle="modal" data-target="#guardarLocalidad"> button</button>
 					</div>
 					
-					<div class="alert-danger text-center mb-3" th:if="${formErrorMessage}" th:text="${formErrorMessage}" >Name Error</div>
+					
 					
 					<div class="form-group" th:if="${guardarLocalidad}" >
 						<button type="button" name="Registrar" value="Guardar" class="btn btn-primary btn-lg col-5 float-right col-12 " 
@@ -120,11 +120,12 @@
 					    </div>
 					  </div>
 					</div>
-		<!-- Termina Modal -->
+		<!-- Termina Modal col-12 col-md-7 pt-4 pt-md-0-->
 				</form>
 			</div>
+			</div>
 
-			<div class="col-12 col-md-6 pt-4 pt-md-0">
+			<div th:class="${suspendido}?'col-12 pt-4 pt-md-0':'col-12 col-md-7 pt-4 pt-md-0'" >
 				<div class="text-center text-white bg-dark pt-2 pb-2">
 					<h4>LISTA</h4>
 				</div>
@@ -134,7 +135,7 @@
 						<tr>
 							<th>ID</th>
 							<th>Localidad</th>
-							<th>Estado</th>
+							<th th:if="${suspendido}">Estado</th>
 							<th class="text-center">Accion</th>
 						</tr>
 					</thead>
@@ -143,15 +144,61 @@
 						<tr th:each="localidad : ${listaLocalidades}">
 							<td th:text="${localidad.id}"></td>
 							<td th:text="${localidad.nombre}"></td>
-							<td th:text="${localidad.estado}"></td>
-							<td class="text-center">
+							<td th:if="${suspendido}" th:text="${localidad.estado}"></td>
+							
+							<td th:if="not ${suspendido}" class="text-center">
 								<a th:href="@{/editarLoc/}+${localidad.id}" type="button" class="btn btn-primary"> Editar</a>
 								<a href="#"  th:onclick="'javascript:confirmarEliminar(\''+${localidad.id}+'\');'" type="button" class="btn btn-danger">Eliminar</a>
+							</td>
+							
+							<td th:if="${suspendido}" class="text-center">
+								<a href="#"  th:onclick="'javascript:confirmarHabilitar(\''+${localidad.id}+'\');'" type="button" class="btn btn-primary">Habilitar Localidad</a>
 							</td>
 						</tr>
 					</tbody>
 					
 				</table>
+				
+				<div class="alert-danger text-center mb-3" th:if="${listErrorMessage}" th:text="${listErrorMessage}" >Name Error</div>
+				
+					<!-- Script para ralizar el alta de una lodalidad -->
+					
+					<script type="text/javascript">
+					
+						function confirmarHabilitar(id){
+							$('#habilitarLocalidad').modal('show');
+							$("#idModalAltaLocalidad").val(id);
+						}
+						
+						function habilitarLocalidad(){
+							var id= $("#idModalAltaLocalidad").val();
+							window.location= "habilitarLocalidad/"+id;
+						}
+					
+					</script>
+					
+					<!-- Modal -->
+					<div class="modal fade" id="habilitarLocalidad" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					  <div class="modal-dialog modal-dialog-centered">
+					    <div class="modal-content">
+					      <div class="modal-header bg-dark text-white">
+					        <h5 class="modal-title" id="exampleModalLabel">Eliminar Registro</h5>
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          <span aria-hidden="true">&times;</span>
+					        </button>
+					      </div>
+					      <div class="modal-body">
+					        ¿Esta seguro de Dar de ALTA Registro?
+					      </div>
+					      <input type="hidden" id="idModalAltaLocalidad" name="userIdHiddenInput"/>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					       	<button class="btn btn-primary" th:onclick="habilitarLocalidad()">Confirmar</button>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+					<!-- Termina Modal -->
 				
 					<!-- Script para ralizar la eliminacion de lodalidad -->
 					

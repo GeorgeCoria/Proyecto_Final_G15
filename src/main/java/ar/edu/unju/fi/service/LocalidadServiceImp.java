@@ -1,5 +1,7 @@
 package ar.edu.unju.fi.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,13 +41,15 @@ public class LocalidadServiceImp implements ILocalidadService{
 	}
 	
 	@Override
-	public Iterable<Localidad> listarLocalidades() {
-		return iLocalidad.findAll();
+	public Iterable<Localidad> listarLocalidades(boolean estado) {
+		return iLocalidad.findByEstado(estado);
 	}
 
 	@Override
-	public void eliminarLocalidad(Long id) {
-		iLocalidad.deleteById(id);		
+	public void eliminarLocalidad(Long id) throws Exception {
+			Localidad unaLocalidad=buscarLocalidad1(id);
+			unaLocalidad.setEstado(false);
+			iLocalidad.save(unaLocalidad);		
 	}
 
 	@Override
@@ -68,11 +72,33 @@ public class LocalidadServiceImp implements ILocalidadService{
 	public void editarLocalidad(Localidad localidad) throws Exception {
 		String localidadMayuscula = localidad.getNombre().toUpperCase();
 		localidad.setNombre(localidadMayuscula);
-		if(checkNombreLocalidad(localidad)) {
+		if(verificarEditarNombre(localidad)) {
 			iLocalidad.save(localidad);
 		}	
 	}
 	
+	public boolean verificarEditarNombre(Localidad localidad)throws Exception{
+		int cont=0;
+		List<Localidad> listaLocalidad = iLocalidad.findAll();
+		for(Localidad loc: listaLocalidad) {
+			if(localidad.getNombre().equals(loc.getNombre())) {
+				if(localidad.getId()!=loc.getId())
+					cont++;
+			}
+		}
+		if(cont!=0) {
+			throw new Exception ("El nombre de Usuario ya existe");
+		}
+		return true;
+	}
+
+	@Override
+	public void habilitarLocalidad(Long id) throws Exception {
+		Localidad habilitado = buscarLocalidad1(id);
+		habilitado.setEstado(true);
+		iLocalidad.save(habilitado);
+		
+	}
 	
 
 }

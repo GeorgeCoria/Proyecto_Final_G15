@@ -96,7 +96,7 @@ public class RegistradorController {
 			model.addAttribute("registroTracking", registro);
 			model.addAttribute("listaVehiculo", vehiculoService.buscarVehiculo(unVehiculo.getPatente()));
 			model.addAttribute("listaTrip",tripulanteService.buscarTodosTripulantes());
-			model.addAttribute("listaLocalidades", localidadService.listarLocalidades());
+			model.addAttribute("listaLocalidades", localidadService.listarLocalidades(true));
 			if(tripulanteService.buscarTodosTripulantes().isEmpty()) {
 				model.addAttribute("botonFinalRegistro", "false");
 			}else {

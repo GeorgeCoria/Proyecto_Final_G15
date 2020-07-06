@@ -29,7 +29,7 @@ public class LocalidadController {
 	public String mostrarLocalidad(Model model) {
 		model.addAttribute("titulo", "LOCALIDAD");
 		model.addAttribute("localidadForm", new Localidad());
-		model.addAttribute("listaLocalidades", localidadService.listarLocalidades());
+		model.addAttribute("listaLocalidades", localidadService.listarLocalidades(true));
 		model.addAttribute("guardarLocalidad","active");
 		return "adminLocalidad";
 	}
@@ -47,7 +47,7 @@ public class LocalidadController {
 				model.addAttribute("localidadForm", localidad);
 			}
 		}
-		model.addAttribute("listaLocalidades", localidadService.listarLocalidades());
+		model.addAttribute("listaLocalidades", localidadService.listarLocalidades(true));
 		model.addAttribute("titulo", "LOCALIDAD");
 		model.addAttribute("guardarLocalidad", "active");
 		model.addAttribute("editMode", "false");
@@ -61,16 +61,31 @@ public class LocalidadController {
 	
 	@GetMapping("/eliminarLoc/{id}")
 	public String eliminar (@PathVariable Long id, Model model) {
-		localidadService.eliminarLocalidad(id);
+		try {
+			localidadService.eliminarLocalidad(id);
+		}catch(Exception e){
+			model.addAttribute("listaErrorMessage", e.getMessage());
+		}
 		return "redirect:/adminLocalidad";
 	}
+	
+	@GetMapping("/habilitarLocalidad/{id}")
+		public String habilitarLocalidad(@PathVariable Long id, Model model) {
+			try {
+				localidadService.habilitarLocalidad(id);
+			}catch(Exception e) {
+				model.addAttribute("listaErrorMessage", e.getMessage());
+			}
+			return "redirect:/adminLocalidad";
+		}
+	
 	
 	@GetMapping("/editarLoc/{id}")
 	public String editar(@PathVariable Long id, Model model) throws Exception {
 		try{
 			Localidad localidadForm=localidadService.buscarLocalidad1(id);
 			model.addAttribute("localidadForm", localidadForm);
-			model.addAttribute("listaLocalidades", localidadService.listarLocalidades());
+			model.addAttribute("listaLocalidades", localidadService.listarLocalidades(true));
 		}catch(Exception e) {
 			model.addAttribute("formErrorMessage", e.getMessage());
 			model.addAttribute("localidadForm", new Localidad());
@@ -86,7 +101,10 @@ public class LocalidadController {
 			model.addAttribute("localidadForm", localidad);
 		}try {
 			localidadService.editarLocalidad(localidad);
-			model.addAttribute("locaidadForm", new Localidad());
+			model.addAttribute("localidadForm", new Localidad());
+			model.addAttribute("titulo", "LOCALIDAD");
+			model.addAttribute("guardarLocalidad", "active");
+			model.addAttribute("editMode", "false");
 			
 		}catch(Exception e) {
 			model.addAttribute("formErrorMessage", e.getMessage());
@@ -96,11 +114,18 @@ public class LocalidadController {
 			model.addAttribute("titulo", "EDITAR LOCALIDAD");
 		}
 		
-		model.addAttribute("listaLocalidades", localidadService.listarLocalidades());
-		model.addAttribute("titulo", "LOCALIDAD");
-		model.addAttribute("guardarLocalidad", "active");
-		model.addAttribute("editMode", "false");
+		model.addAttribute("listaLocalidades", localidadService.listarLocalidades(true));
+		
 		return "adminLocalidad";
+	}
+	
+	@GetMapping("/suspendido")
+	public String listarSuspendido(Model model) {
+		model.addAttribute("listaLocalidades", localidadService.listarLocalidades(false));
+		model.addAttribute("suspendido", "active");
+		
+		return "adminLocalidad";
+		
 	}
 
 }

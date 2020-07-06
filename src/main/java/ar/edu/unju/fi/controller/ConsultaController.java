@@ -57,7 +57,7 @@ public class ConsultaController {
 	public String getListLocalidad(Model modelo) {
 	
 		//Listando todas las localidades
-		Iterable<Localidad> localidades= localidadService.listarLocalidades();
+		Iterable<Localidad> localidades= localidadService.listarLocalidades(true);
 		
 		modelo.addAttribute("activoLocalidad", false);
 		modelo.addAttribute("localidades", localidades);
@@ -76,7 +76,7 @@ public class ConsultaController {
 		
 		
 		//Lista todas las localidades.
-		Iterable<Localidad> localidades= localidadService.listarLocalidades();
+		Iterable<Localidad> localidades= localidadService.listarLocalidades(true);
 		modelo.addAttribute("localidades", localidades);
 		
 		
@@ -167,7 +167,7 @@ public class ConsultaController {
 		modelo.addAttribute("tripulantesLocalidad", registroTripulantes);
 		
 		//Lista todas las localidades.
-		Iterable<Localidad> localidades= localidadService.listarLocalidades();
+		Iterable<Localidad> localidades= localidadService.listarLocalidades(true);
 		modelo.addAttribute("localidades", localidades);
 		
 		//Objeto para capturar el nombre de la localidad

@@ -16,9 +16,11 @@ public interface ILocalidadService {
 
 	public void crearLocalidad(Localidad localidad) throws Exception;
 	
-	public Iterable<Localidad> listarLocalidades();
+	public Iterable<Localidad> listarLocalidades(boolean estado);
 	
-	public void eliminarLocalidad (Long id) ;
+	public void eliminarLocalidad (Long id) throws Exception ;
+	
+	public void habilitarLocalidad(Long id) throws Exception;
 	
 	public Localidad buscarLocalidad1(Long id) throws Exception;
 	

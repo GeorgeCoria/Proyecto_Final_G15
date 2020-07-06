@@ -17,4 +17,6 @@ public interface ILocalidadDAO extends JpaRepository<Localidad, Long>{
 
 	public Optional<Localidad> findByNombre (String nombre);
 	
+	public Iterable<Localidad> findByEstado(boolean estado);
+	
 }
