@@ -126,8 +126,7 @@ public class LocalidadController {
 	@GetMapping("/suspendido")
 	public String listarSuspendido(Model model) {
 		model.addAttribute("listaLocalidades", localidadService.listarLocalidades(false));
-		model.addAttribute("suspendido", "active");
-		
+		model.addAttribute("suspendido", "active");	
 		return "adminLocalidad";
 		
 	}

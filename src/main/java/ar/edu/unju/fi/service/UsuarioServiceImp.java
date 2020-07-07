@@ -19,7 +19,8 @@ public class UsuarioServiceImp implements IUsuarioService{
 
 	@Autowired
 	private IUsuarioDAO iUsuario;
-
+	
+	
 	@Override
 	public Usuario crear(Usuario unUsuario) throws Exception {
 		if(checkNombreUsuario(unUsuario)) {

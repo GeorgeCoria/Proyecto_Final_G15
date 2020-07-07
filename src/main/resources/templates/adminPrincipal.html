@@ -1,99 +1,81 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-	<link th:rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css}">
-    <link th:rel="stylesheet" type="text/css" th:href="@{/css/admin.css}">
+<!-- Bootstrap CSS -->
+<link th:rel="stylesheet" type="text/css"
+	th:href="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css}">
+<link th:rel="stylesheet" type="text/css" th:href="@{/css/admin.css}">
 
-    <title>adminPrincipal</title>
-  </head>
+<title>adminPrincipal</title>
+</head>
 
-  <body>
-  	
-  		
-  <!-- ********** Insercion del header **************** -->
-  	<div th:insert="layout/header :: header"></div> 
-
-<!-- ****************  Panel de navegacion*********************  -->
-   		<div class="nav bg-dark pt-3 pb-3 font-weight-bold mb-5 fuente">
-  			<div class="col-8">
-	  			<ul class="nav nav-tabs ">
-					
-			  		<li class="nav-item">
-			   			 <a class="nav-link text-white" th:href="@{/adminLocalidad}">Localidades</a>
-			  		</li>
-
-			 		<li class="nav-item">
-			   			 <a class="btn btn-primary font-weight-bold " th:href="@{/adminFormulario}">Añadir Usuario</a>
-			  		</li>  
-				</ul>
-
-  			</div>
-  		
-			<div class="col-4 pr-4" th:if="${principal}">
-				<form class=" float-right form-inline my-2 my-lg-0" th:object="${usuarioBuscado}" th:action="@{/adminBusqueda}" method="post"> <!-- th:object="${usuarioBuscado}" th:action="@{/buscarDni}" method="post" --> 
-		     		<input class="form-control mr-sm-2" th:field="${usuarioBuscado.nombreUsuario}" type="search" placeholder="Search by Nombre Usuario" aria-label="Search"> <!--  th:field="${usuarioBuscado.dni}" -->
-		    	  	<input class="btn btn-primary my-2 my-sm-0" type="submit" value="BUSCAR">
-		    	</form>
-			</div>
-	  	</div>
-<!-- **************** Find de la barra de navegacion*********************  -->
+<body>
 
 
+	<!-- ---------------------------------------------------- -->
+	<!-- ********** INSERCION DEL FRAGMENTO HEADER ********** -->
+	<!-- ---------------------------------------------------- -->
+	<div th:insert="layout/header :: header"></div>
 
-<!-- **************** Cuerpo Gestor de Usuarios *********************  -->
-	<div class="alert alert-danger text-center" th:if="${errorBusqueda}" th:text="${errorBusqueda}">Message Error</div>
-	
-	<div class="container fuente">
-	
-		<div class="btn-group mb-5 ">
-			<a class="btn btn-primary btn-lg" th:href="@{/adminPrincipal}" >
-			Lista de usuarios
-			</a>
-			
-			<a class="btn btn-primary btn-lg" th:href="@{/Registrador}">
-			Registradores
-			</a>
-			
-			<a class="btn btn-primary btn-lg" th:href="@{/Consultor}" >
-			Consultores
-			</a>
-			
-			<a class="btn btn-danger btn-lg" th:href="@{/Suspendido}" >
-			Suspendidos
-			</a>
+	<!-- ---------------------------------------------------- -->
+	<!-- ************** PANEL DE NAVEGACION ***************** -->
+	<!-- ---------------------------------------------------- -->
+
+	<div class="nav bg-dark pt-3 pb-3 font-weight-bold mb-5 fuente">
+		<div class="col-8">
+			<ul class="nav nav-tabs ">
+
+				<li class="nav-item"><a class="nav-link text-white" th:href="@{/adminLocalidad}">Localidades</a></li>
+
+				<li class="nav-item"><a class="btn btn-primary font-weight-bold " th:href="@{/adminFormulario}">Añadir Usuario</a></li>
+			</ul>
+
 		</div>
 
+		<!-- ************* FORMULARIO DE BUSQUEDA ********************** -->
+
+		<div class="col-4 pr-4" th:if="${principal}">
+			<form class=" float-right form-inline my-2 my-lg-0"
+				th:object="${usuarioBuscado}" th:action="@{/adminBusqueda}"
+				method="post">
+				<input class="form-control mr-sm-2"
+					th:field="${usuarioBuscado.nombreUsuario}" type="search"
+					placeholder="Search by Nombre Usuario" aria-label="Search">
+				<input class="btn btn-primary my-2 my-sm-0" type="submit"
+					value="BUSCAR">
+			</form>
+		</div>
+	</div>
+	<!-- ************* COMPONENTE DEL FORMULARIO DE BUSQUEDA PARA NOTIFICAR MENSAJES ******************* -->
+	<div class="alert alert-danger text-center" th:if="${errorBusqueda}"
+		th:text="${errorBusqueda}">Message Error</div>
 		
-<!-- **************** Cuerpo Gestor de Usuarios *********************  -->
+	<!-- ---------------------------------------------------- -->
+	<!-- *********** CUERPO GESTOR DE USUARIOS ************** -->
+	<!-- ---------------------------------------------------- -->
+
+	<div class="container fuente">
+
+		<div class="btn-group mb-5 ">
+			<a class="btn btn-primary btn-lg" th:href="@{/adminPrincipal}">Lista de usuarios </a> 
+			<a class="btn btn-primary btn-lg" th:href="@{/Registrador}"> Registradores </a> 
+			<a class="btn btn-primary btn-lg" th:href="@{/Consultor}">Consultores </a> 
+			<a class="btn btn-danger btn-lg" th:href="@{/Suspendido}"> Suspendidos </a>
+		</div>
 
 		<div>
+			<!-- *** SEGUN LA PESTAÑA SOLICITADA SE INSERTA EL TITUO CORRESPONDIENTE  **** -->
+			<div class="row justify-content-center mb-4">
+				<h1 class=" w-100 p-2 text-center " style="border-top: 3px dodgerblue solid; 
+				border-bottom: 3px dodgerblue solid;" th:text="${tituloPrincipal}">GESTOR</h1>
+			</div>
 
-			<div class="row justify-content-center mb-4" th:if="${principal}">
-				<h1 class=" w-100 p-2 text-center "
-					style="border-top: 3px dodgerblue solid; border-bottom: 3px dodgerblue solid;">GESTOR
-					DE USUARIOS</h1>
-			</div>
-			
-			<div class="row justify-content-center mb-4" th:if="${registrador}">
-				<h1 class=" w-100 p-2 text-center "
-					style="border-top: 3px dodgerblue solid; border-bottom: 3px dodgerblue solid;">REGISTRADORES</h1>
-			</div>
-			
-			<div class="row justify-content-center mb-4" th:if="${consultor}">
-				<h1 class=" w-100 p-2 text-center "
-					style="border-top: 3px dodgerblue solid; border-bottom: 3px dodgerblue solid;">CONSULTORES</h1>
-			</div>
-			
-			<div class="row justify-content-center mb-4" th:if="${suspendido}">
-				<h1 class=" w-100 p-2 text-center "
-					style="border-top: 3px dodgerblue solid; border-bottom: 3px dodgerblue solid;">Usuarios dados de baja</h1>
-			</div>
-			
+			<!-- ************** TABLA PARA EFECTUAR EL LISTADO DE USUARIOS **************  -->
 			<div class="my-custom-scrollbar1 table-wrapper-scroll-y">
 				<table class="table table-reponsive-sm table-striped">
 					<thead>
@@ -103,38 +85,45 @@
 							<th scope="col">Nombre</th>
 							<th scope="col">Apellido</th>
 							<th scope="col">Tipo de Usuario</th>
-							<th th:if="${busqueda} or ${suspendido}"scope="col">Estado</th>
+							<th th:if="${busqueda} or ${suspendido}" scope="col">Estado</th>
 							<th scope="col">Accion</th>
 						</tr>
 					</thead>
 
 					<tbody>
-						
-						
+					
 						<tr th:each="usuario : ${listaUsuarios}">
+							<div th:if="${usuario.tipoUsuario ne 'ADMIN'}">
 							<th th:text="${usuario.id}"></th>
 							<td th:text="${usuario.nombreUsuario}"></td>
 							<td th:text="${usuario.nombreReal}"></td>
 							<td th:text="${usuario.apellidoReal}"></td>
 							<td th:text="${usuario.tipoUsuario}"></td>
-							<td th:if="${busqueda} or ${suspendido}" th:text="${usuario.estado==true}?'Habilitado':'Inhabilitado'"></td>
-							<td>
-								<a class="btn btn-primary" th:href="@{'/editarUsuario/'+${usuario.id}}">Editar</a> 
-								<a th:if="not ${suspendido} and not ${busqueda}" href="#"  class="btn btn-danger" th:onclick="'javascript:confirmarEliminar(\''+${usuario.id}+'\');'">Eliminar</a>
-								</td>
+							<td th:if="${busqueda} or ${suspendido}"
+								th:text="${usuario.estado==true}?'Habilitado':'Inhabilitado'"></td>
+							<td><a class="btn btn-primary"
+								th:href="@{'/editarUsuario/'+${usuario.id}}">Editar</a> <a
+								th:if="not ${suspendido} and not ${busqueda}" href="#"
+								class="btn btn-danger"
+								th:onclick="'javascript:confirmarEliminar(\''+${usuario.id}+'\');'">Eliminar</a>
+							</td>
+							</div>
 						</tr>
 
 					</tbody>
-				
+
 				</table>
-			
-				<div class="alert alert-danger text-center"
-				th:if="${listErrorMessage}" th:text="${listErrorMessage}">Error
-				MEssage</div>
+				<!-- ************ COMPONENTE PARA NOTIFICAR EVENTOS **************  -->
+				<div class="alert alert-danger text-center" th:if="${listErrorMessage}" 
+				th:text="${listErrorMessage}">Error MEssage</div>
+				
 			</div>
-			<!-- ***** Script para efectuar la baja de un Usuario ****** -->
 			
-		<script type="text/javascript">
+			<!-- ---------------------------------------------------- -->
+			<!-- *********** SCRIPT DE ELIMINACION  ***************** -->
+			<!-- ---------------------------------------------------- -->
+
+			<script type="text/javascript">
 			function confirmarEliminar(id){
 				$('#bajaUsuario').modal('show');
 				$("#idModalBajaUsuario").val(id);
@@ -145,41 +134,45 @@
 				window.location= "eliminarUsuario/"+id;
 			}
 		
-		</script>
-	
-		<!-- Modal utilizado al eliminar un Usuario -->
-		
-		<div class="modal fade" id="bajaUsuario" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		  <div class="modal-dialog modal-dialog-centered">
-		    <div class="modal-content">
-		      <div class="modal-header bg-dark text-white">
-		        <h5 class="modal-title" id="exampleModalLabel">Eliminar Usuario</h5>
-		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-		          <span aria-hidden="true">&times;</span>
-		        </button>
-		      </div>
-		      <div class="modal-body">
-		        Presione confirmar para dar de baja al usuario
-		      </div>
-		      <input type="hidden" id="idModalBajaUsuario" name="userIdHiddenInput"/>
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-		       	<button class="btn btn-primary" th:onclick="eliminarUsuario()">Confirmar</button>
-		      </div>
-		    </div>
-		  </div>
-		</div>
-		<!-- Termina Modal -->
-		
-		</div>
+			</script>
 
-		<!-- ********** FIn Gestor de Usuarios **************** -->	
-	 
- 	</div>
-  	
-  			
-	<!-- Insercion del fragmento footer utlizando thymeleaf --> 
-	<div th:insert="layout/footer :: footer"></div> 
+			<!-- ---------------------------------------------------- -->
+			<!-- *********** MODAL DE ELIMINACION  ****************** -->
+			<!-- ---------------------------------------------------- -->
 
-	</body>
+			<div class="modal fade" id="bajaUsuario" tabindex="-1" role="dialog"
+				aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-header bg-dark text-white">
+							<h5 class="modal-title" id="exampleModalLabel">Eliminar Usuario</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body mt-3 mb-3">
+							<h4>Presione confirmar para dar de baja al usuario</h4>
+						</div>
+						<input type="hidden" id="idModalBajaUsuario"
+							name="userIdHiddenInput" />
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">Close</button>
+							<button class="btn btn-primary" th:onclick="eliminarUsuario()">Confirmar</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- ********** FIN DE MODAL DE ELIMINACION ********************* -->
+		</div>
+	</div>
+
+	<!-- ---------------------------------------------------- -->
+	<!-- *********** INSERCION DEL FOOTER ******************* -->
+	<!-- ---------------------------------------------------- -->
+
+	<div th:insert="layout/footer :: footer"></div>
+
+</body>
 </html>

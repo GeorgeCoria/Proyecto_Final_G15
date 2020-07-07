@@ -1,252 +1,291 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	  <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-	<link th:rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css}">    
-    <link th:rel="stylesheet" type="text/css" th:href="@{/css/admin.css}">
-	
-	<title>Localidad</title>
+<!-- Bootstrap CSS -->
+<link th:rel="stylesheet" type="text/css"
+	th:href="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css}">
+<link th:rel="stylesheet" type="text/css" th:href="@{/css/admin.css}">
+
+<title>Localidad</title>
 </head>
-<body >
+<body>
+	<!-- -------------------------------------------------------------- -->
+	<!-- ***************** INSERCION DEL HEADER *********************** -->
+	<!-- -------------------------------------------------------------- -->
 
-<!-- ********** Insercion del header **************** -->
-  	<div th:insert="layout/header :: header"></div> 
+	<div th:insert="layout/header :: header"></div>
 
-<!-- ************** PANEL DE NAVEGACION ******************* -->
+	<!-- -------------------------------------------------------------- -->
+	<!-- ***************** PANEL DE NAVEGACION  *********************** -->
+	<!-- -------------------------------------------------------------- -->
 	<div class="nav bg-dark pt-3 pb-3 font-weight-bold mb-5 fuente">
-	
-  			<div class="col-8">
-	  			<ul class="nav nav-tabs " th:if="not ${editarLocalidad}">
-	  				
-	  				<li class="nav-item">
-			   			 <a class="nav-link text-white" href="adminPrincipal">Home</a>
-					</li>
-			
-			  		<li class="nav-item">
-			   			 <a class="nav-link text-white" href="adminLocalidad">Localidades</a>
-			  		</li>
+		<div class="col-8">
+			<ul class="nav nav-tabs " th:if="not ${editarLocalidad}">
 
-			 		<li class="nav-item">
-			   			 <a class="btn btn-primary font-weight-bold " href="adminFormulario"> Añadir Usuario </a>
-			  		</li>  
-			  		
-				</ul>
-  			</div>
+				<li class="nav-item"><a class="nav-link text-white"
+					href="adminPrincipal">Home</a></li>
 
-	  </div>
-<!-- ************** FIN DE PANEL DE NAVEGACION ******************* -->
+				<li class="nav-item"><a class="nav-link text-white"
+					href="adminLocalidad">Localidades</a></li>
 
-<!-- **************** Cuerpo de la Pagina Principal *********************  -->
+				<li class="nav-item"><a
+					class="btn btn-primary font-weight-bold " href="adminFormulario">
+					Añadir Usuario </a></li>
+			</ul>
+		</div>
+	</div>
+	<!-- -------------------------------------------------------------- -->
+	<!-- ***************** CUERPO DE LA PAGINA  *********************** -->
+	<!-- -------------------------------------------------------------- -->
 	<div class="container fuente">
+	
+		<!-- *************** PESTAÑAS DE LOCALIDAD ******************** -->
 		<div class="btn-group mb-3">
-			<a class="btn btn-dark btn-lg" th:href="@{/adminLocalidad}" >
-			Lista de Localidades
-			</a>
-			
-			<a class="btn btn-danger btn-lg" th:href="@{/suspendido}" >
-			Suspendidos
-			</a>
+			<a class="btn btn-dark btn-lg" th:href="@{/adminLocalidad}">
+				Lista de Localidades </a> <a class="btn btn-danger btn-lg"
+				th:href="@{/suspendido}"> Suspendidos </a>
 		</div>
-		
-		<div class="row justify-content-center mb-4">
-			<h1 class=" w-50 p-2 text-center " style="border-top:  3px dodgerblue solid; border-bottom:  3px dodgerblue solid;">GESTOR DE LOCALIDADES</h1>
-		</div>
-		
-		
 
+		<div class="row justify-content-center mb-4">
+			<h1 class=" w-50 p-2 text-center "
+				style="border-top: 3px dodgerblue solid; border-bottom: 3px dodgerblue solid;">GESTOR
+				DE LOCALIDADES</h1>
+		</div>
+		
+		<!-- *************** CONTENEDOR DE FORMULARIO Y TABLA ******************** -->
 		<div class="row justify-content-center">
 			<div class="col-12 col-md-5">
-			
-			<div th:if="not ${suspendido}">
-				
-				<div class="text-center text-white bg-dark pt-2 pb-2">
-					<h4 th:text="${titulo}"></h4>
+
+				<div th:if="not ${suspendido}">
+
+					<div class="text-center text-white bg-dark pt-2 pb-2">
+						<h4 th:text="${titulo}"></h4>
+					</div>
+
+					<!-- -------------------------------------------------------------- -->
+					<!-- ********************** FORMULARIO  *************************** -->
+					<!-- -------------------------------------------------------------- -->
+
+					<form class="form pt-4" th:object="${localidadForm}"
+						th:action="${editarLocalidad}?@{/editarLocalidad}:@{/adminLocalidad}"
+						method="post" autocomplete="off">
+
+						<input type="hidden" th:field="*{id}" /> 
+						<input type="hidden" class="form-control border-primary border-top-0 
+						border-left-0 border-right-0" th:field="${localidadForm.estado}" th:if="${editarLocalidad}">
+
+						<div class="form-group">
+							<label for="Localidad">Nombre de Localidad</label> <input
+								type="text"
+								class="form-control border border-dark border-top-0 border-left-0 border-right-0 "
+								placeholder="Ingrese Nombre" th:field="${localidadForm.nombre}">
+							<div class="alert-danger" th:if="${#fields.hasErrors('nombre')}"
+								th:errors="*{nombre}">Name Error</div>
+						</div>
+						<div class="alert-danger text-center mb-3"
+							th:if="${formErrorMessage}" th:text="${formErrorMessage}">Name
+							Error</div>
+
+						<!-- ******** EN MODO DE EDICIION MUESTRA DOS BOTONES ************ -->
+						<div class="form-group" th:if="${editarLocalidad}">
+							<a th:href="@{/editarLoc/cancelar}" type="button" class="btn btn-danger btn-lg col-5 float-left">Cancelar</a>
+							<button type="button" name="Registrar" value="Guardar" class="btn btn-primary btn-lg col-5 float-right "
+								th:text="${guardarLocalidad}?'Guardar':'Guardar Cambios'" data-toggle="modal" data-target="#guardarLocalidad">
+								button</button>
+						</div>
+
+
+						<!-- ******** EN MODO DE GUARDAR MUESTRA UN BOTON ************ -->
+						<div class="form-group" th:if="${guardarLocalidad}">
+							<button type="button" name="Registrar" value="Guardar"
+								class="btn btn-primary btn-lg col-5 float-right col-12 "
+								th:text="${guardarLocalidad}?'Guardar':'Guardar Cambios'"
+								data-toggle="modal" data-target="#guardarLocalidad">
+								button</button>
+						</div>
+
+
+						<!-- ******* MODAL PARA GUARDAR Y EDITAR LOCALIDAD ************ -->
+
+						<div class="modal fade" id="guardarLocalidad" tabindex="-1"
+							role="dialog" aria-labelledby="exampleModalLabel"
+							aria-hidden="true">
+							<div class="modal-dialog modal-dialog-centered">
+								<div class="modal-content">
+									<div class="modal-header bg-dark text-white">
+										<h5 class="modal-title" id="exampleModalLabel">Guardar
+											Cambios</h5>
+										<button type="button" class="close" data-dismiss="modal"
+											aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body mt-3 mb-3" th:if="${guardarLocalidad}">
+										<h4>Presione "confirmar" para guardar nueva Localidad</h4>
+									</div>
+									<div class="modal-body mt-3 mb-3" th:if="${editarLocalidad}">
+										<h4>Presione "confirmar" para guardar cambios
+											establecidos en el Registro</h4>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary"
+											data-dismiss="modal">Close</button>
+										<input class="btn btn-primary" value="Confirmar "
+											type="submit">
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- Termina Modal -->
+					</form>
 				</div>
-				
-				
-				<form class="form pt-4" th:object="${localidadForm}" th:action="${editarLocalidad}?@{/editarLocalidad}:@{/adminLocalidad}" method="post" autocomplete="off">
-					
-					<input type="hidden" th:field="*{id}" /> 
-					
-					<input type="hidden" class="form-control border-primary border-top-0 border-left-0 border-right-0 " th:field="${localidadForm.estado}" th:if="${editarLocalidad}">
-					
-					<div class="form-group"> 
-						 <label for="Localidad">Nombre de Localidad</label>
-   						 <input type="text" class="form-control border border-dark border-top-0 border-left-0 border-right-0 " placeholder="Ingrese Nombre" th:field="${localidadForm.nombre}">
-						<div class="alert-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">Name Error</div>
-					</div>
-					<div class="alert-danger text-center mb-3" th:if="${formErrorMessage}" th:text="${formErrorMessage}" >Name Error</div>
-					
-					
-					
-					<div class="form-group" th:if="${editarLocalidad}" >
-						<a th:href="@{/editarLoc/cancelar}" type="button" class="btn btn-danger btn-lg col-5 float-left">Cancelar</a>
-						<button type="button" name="Registrar" value="Guardar" class="btn btn-primary btn-lg col-5 float-right " 
-						th:text="${guardarLocalidad}?'Guardar':'Guardar Cambios'" data-toggle="modal" data-target="#guardarLocalidad"> button</button>
-					</div>
-					
-					
-					
-					<div class="form-group" th:if="${guardarLocalidad}" >
-						<button type="button" name="Registrar" value="Guardar" class="btn btn-primary btn-lg col-5 float-right col-12 " 
-						th:text="${guardarLocalidad}?'Guardar':'Guardar Cambios'" data-toggle="modal" data-target="#guardarLocalidad"> button</button>
-					</div>
-					
-					
-				<!-- Modal para guardar y editar Localidad -->
-					<div class="modal fade" id="guardarLocalidad" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-					  <div class="modal-dialog modal-dialog-centered">
-					    <div class="modal-content">
-					      <div class="modal-header bg-dark text-white">
-					        <h5 class="modal-title" id="exampleModalLabel">Guardar Cambios</h5>
-					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					          <span aria-hidden="true">&times;</span>
-					        </button>
-					      </div>
-					      <div class="modal-body" th:if="${guardarLocalidad}">
-					        Presione "confirmar" para guardar nueva Localidad
-					      </div>
-					      <div class="modal-body" th:if="${editarLocalidad}">
-					        Presione "confirmar" para guardar cambios establecidos en el Registro
-					      </div>
-					      <div class="modal-footer">
-					        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					       	<input class="btn btn-primary" value="Confirmar "  type="submit">
-					      </div>
-					    </div>
-					  </div>
-					</div>
-		<!-- Termina Modal col-12 col-md-7 pt-4 pt-md-0-->
-				</form>
-			</div>
 			</div>
 
-			<div th:class="${suspendido}?'col-12 pt-4 pt-md-0':'col-12 col-md-7 pt-4 pt-md-0'" >
+			<!-- -------------------------------------------------------------- -->
+			<!-- ********************** TABLA LOCALIDAD *********************** -->
+			<!-- -------------------------------------------------------------- -->
+			<div
+				th:class="${suspendido}?'col-12 pt-4 pt-md-0':'col-12 col-md-7 pt-4 pt-md-0'">
 				<div class="text-center text-white bg-dark pt-2 pb-2">
 					<h4>LISTA</h4>
 				</div>
 				<div class="table-wrapper-scroll-y my-custom-scrollbar mb-4">
-				<table class="table table-reponsive table-striped ">
-					<thead>
-						<tr>
-							<th>ID</th>
-							<th>Localidad</th>
-							<th th:if="${suspendido}">Estado</th>
-							<th class="text-center">Accion</th>
-						</tr>
-					</thead>
-					
-					<tbody>
-						<tr th:each="localidad : ${listaLocalidades}">
-							<td th:text="${localidad.id}"></td>
-							<td th:text="${localidad.nombre}"></td>
-							<td th:if="${suspendido}" th:text="${localidad.estado}"></td>
-							
-							<td th:if="not ${suspendido}" class="text-center">
-								<a th:href="@{/editarLoc/}+${localidad.id}" type="button" class="btn btn-primary"> Editar</a>
-								<a href="#"  th:onclick="'javascript:confirmarEliminar(\''+${localidad.id}+'\');'" type="button" class="btn btn-danger">Eliminar</a>
-							</td>
-							
-							<td th:if="${suspendido}" class="text-center">
-								<a href="#"  th:onclick="'javascript:confirmarHabilitar(\''+${localidad.id}+'\');'" type="button" class="btn btn-primary">Habilitar Localidad</a>
-							</td>
-						</tr>
-					</tbody>
-					
-				</table>
-				
-				<div class="alert-danger text-center mb-3" th:if="${listErrorMessage}" th:text="${listErrorMessage}" >Name Error</div>
-				
-					<!-- Script para ralizar el alta de una lodalidad -->
-					
+					<table class="table table-reponsive table-striped ">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Localidad</th>
+								<th th:if="${suspendido}">Estado</th>
+								<th class="text-center">Accion</th>
+							</tr>
+						</thead>
+
+						<tbody>
+							<tr th:each="localidad : ${listaLocalidades}">
+								<td th:text="${localidad.id}"></td>
+								<td th:text="${localidad.nombre}"></td>
+								<td th:if="${suspendido}" th:text="${localidad.estado}"></td>
+
+								<td th:if="not ${suspendido}" class="text-center"><a
+									th:href="@{/editarLoc/}+${localidad.id}" type="button"
+									class="btn btn-primary"> Editar</a> <a href="#"
+									th:onclick="'javascript:confirmarEliminar(\''+${localidad.id}+'\');'"
+									type="button" class="btn btn-danger">Eliminar</a></td>
+
+								<td th:if="${suspendido}" class="text-center"><a href="#"
+									th:onclick="'javascript:confirmarHabilitar(\''+${localidad.id}+'\');'"
+									type="button" class="btn btn-primary">Habilitar Localidad</a></td>
+							</tr>
+						</tbody>
+
+					</table>
+					<div class="alert alert-danger text-center"
+						th:if="${listaLocalidades.size()==0}">No se encontraron
+						elementos en la lista</div>
+					<div class="alert-danger text-center mb-3"
+						th:if="${listErrorMessage}" th:text="${listErrorMessage}">Name
+						Error</div>
+
+					<!-- ****** SCRIPT PARA EL ALTA DE UNA LOCALIDAD ****** -->
 					<script type="text/javascript">
-					
-						function confirmarHabilitar(id){
+						function confirmarHabilitar(id) {
 							$('#habilitarLocalidad').modal('show');
 							$("#idModalAltaLocalidad").val(id);
 						}
-						
-						function habilitarLocalidad(){
-							var id= $("#idModalAltaLocalidad").val();
-							window.location= "habilitarLocalidad/"+id;
+
+						function habilitarLocalidad() {
+							var id = $("#idModalAltaLocalidad").val();
+							window.location = "habilitarLocalidad/" + id;
 						}
-					
 					</script>
-					
-					<!-- Modal -->
-					<div class="modal fade" id="habilitarLocalidad" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-					  <div class="modal-dialog modal-dialog-centered">
-					    <div class="modal-content">
-					      <div class="modal-header bg-dark text-white">
-					        <h5 class="modal-title" id="exampleModalLabel">Eliminar Registro</h5>
-					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					          <span aria-hidden="true">&times;</span>
-					        </button>
-					      </div>
-					      <div class="modal-body">
-					        ¿Esta seguro de Dar de ALTA Registro?
-					      </div>
-					      <input type="hidden" id="idModalAltaLocalidad" name="userIdHiddenInput"/>
-					      <div class="modal-footer">
-					        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					       	<button class="btn btn-primary" th:onclick="habilitarLocalidad()">Confirmar</button>
-					      </div>
-					    </div>
-					  </div>
+
+					<!-- ** MODAL PARA LA HABILITACION DE UNA LOCALIDAD ***** -->
+					<div class="modal fade" id="habilitarLocalidad" tabindex="-1"
+						role="dialog" aria-labelledby="exampleModalLabel"
+						aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered">
+							<div class="modal-content">
+								<div class="modal-header bg-dark text-white">
+									<h5 class="modal-title" id="exampleModalLabel">Eliminar
+										Registro</h5>
+									<button type="button" class="close" data-dismiss="modal"
+										aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body mt-3 mb-3">
+									<h4>¿Esta seguro de Dar de ALTA Registro?</h4>
+								</div>
+								<input type="hidden" id="idModalAltaLocalidad"
+									name="userIdHiddenInput" />
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary"
+										data-dismiss="modal">Close</button>
+									<button class="btn btn-primary"
+										th:onclick="habilitarLocalidad()">Confirmar</button>
+								</div>
+							</div>
+						</div>
 					</div>
 					<!-- Termina Modal -->
-				
-					<!-- Script para ralizar la eliminacion de lodalidad -->
-					
+
+					<!-- SCRIPT PARA LLMAR MODAD DE ELIMINACION  -->
 					<script type="text/javascript">
-					
-						function confirmarEliminar(id){
+						function confirmarEliminar(id) {
 							$('#deleteLocalidad').modal('show');
 							$("#idModalBajaLocalidad").val(id);
 						}
-						
-						function eliminarLocalidad(){
-							var id= $("#idModalBajaLocalidad").val();
-							window.location= "eliminarLoc/"+id;
+
+						function eliminarLocalidad() {
+							var id = $("#idModalBajaLocalidad").val();
+							window.location = "eliminarLoc/" + id;
 						}
-					
 					</script>
-						
-					<!-- Modal -->
-					<div class="modal fade" id="deleteLocalidad" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-					  <div class="modal-dialog modal-dialog-centered">
-					    <div class="modal-content">
-					      <div class="modal-header bg-dark text-white">
-					        <h5 class="modal-title" id="exampleModalLabel">Eliminar Registro</h5>
-					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					          <span aria-hidden="true">&times;</span>
-					        </button>
-					      </div>
-					      <div class="modal-body">
-					        ¿Esta seguro de eliminar Registro?
-					      </div>
-					      <input type="hidden" id="idModalBajaLocalidad" name="userIdHiddenInput"/>
-					      <div class="modal-footer">
-					        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					       	<button class="btn btn-primary" th:onclick="eliminarLocalidad()">Confirmar</button>
-					      </div>
-					    </div>
-					  </div>
+
+					<!-- ***** MODAL DE CONFIRMACION PARA ELIMINAR LOCALIDAD ******* -->
+					<div class="modal fade" id="deleteLocalidad" tabindex="-1"
+						role="dialog" aria-labelledby="exampleModalLabel"
+						aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered">
+							<div class="modal-content">
+								<div class="modal-header bg-dark text-white">
+									<h5 class="modal-title" id="exampleModalLabel">Eliminar
+										Registro</h5>
+									<button type="button" class="close" data-dismiss="modal"
+										aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body mt-3 mb-3">
+									<h4>¿Esta seguro de eliminar Registro?</h4>
+								</div>
+								<input type="hidden" id="idModalBajaLocalidad"
+									name="userIdHiddenInput" />
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary"
+										data-dismiss="modal">Close</button>
+									<button class="btn btn-primary"
+										th:onclick="eliminarLocalidad()">Confirmar</button>
+								</div>
+							</div>
+						</div>
 					</div>
 					<!-- Termina Modal -->
-				
+
 				</div>
 			</div>
-			
-		</div>
-	
-	</div>
 
-	<!-- Insercion del fragmento footer utlizando thymeleaf   -->
+		</div>
+
+	</div>
+	<!-- -------------------------------------------------------------- -->
+	<!-- ********************* INSERCION DE FOOTER ******************** -->
+	<!-- -------------------------------------------------------------- -->
 	<div th:insert="layout/footer :: footer"></div>
 
 </body>
