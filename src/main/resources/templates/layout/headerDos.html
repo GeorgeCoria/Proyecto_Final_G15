@@ -1,0 +1,24 @@
+<!-- FRAGMENTO QUE CONTIENE UN HEADER CON UN BOTON DE LOGOUT Y UN MENSAJE QUE CONTIENE EL NOMBRE DEL USUARIO -->
+<html>
+	<body>
+	
+		<div id="headerDos" th:fragment="headerDos" class="header col-sm-12 p-4 bg-dark text-white">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-10">
+						<p class="h3 m-auto text-green">
+						<img class="middle" width="75" height="auto" src="images/logo_header.png" th:src="@{/images/logo_header.png}">Tracking de Personas</p>
+						
+						<!-- SE USA LA VARIABLE AUTHENTICATION PARA MOSTRAR EL NOMBRE DEL USUARIO LOGEADO-->
+						<p>  Bienvenido  " <span th:text=${#authentication.getPrincipal().getUsername()}> </span>  "  </p>
+					</div>
+					
+					<div class="col-md-2">
+						<!-- BOTON DE LOGOUT, EL METODO LOGOUT NO SE ENCUTRA EN LOS CONTROLLER SINO QUE ES MANEJADO POR S.SECURITY EXTRAS -->
+						<a class="btn btn btn-danger mb-5" href="#" th:href="@{/logout}"> LOG OUT </a>			
+					</div>
+				</div>
+			</div>
+		</div>		
+	</body>
+</html>

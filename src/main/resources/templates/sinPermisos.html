@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<!-- HTML QUE SERA AL QUE SE REDIRECCIONARA WEBSECURITYCONFIG AL ENTRAR EN UN ERROR 403 AL NO POSEER LOS PERMISOS PARA ENTRAR -->
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.5.0/css/bootstrap.min.css"> 
+    <link rel="stylesheet" type="text/css" href="css/admin.css" th:href="@{/css/admin.css}" >
+    <title> Sin autorizacion </title>
+  </head>
+		<body class="bg-info fuente">
+			<div class="container-fluid  justify-content-center text-white">
+				<div class="row">
+					<div class="col-md-6 mx-auto my-auto">
+					
+						<!-- DIV QUE CONTIENE UN MENSAJE AL USUARIO LOGEADO INFORMANDO SOBRE SU FALTA DE AUTORIZACION-->
+						<div class="row justify-content-center mt-5 text-center">
+							<h2>Lo sentimos "</h2>
+							<h2 th:text=${#authentication.getPrincipal().getUsername()}> </h2> <h2>"</h2> 
+							<h2> No tienes autorizacion para ingresar en este sitio</h2>
+						</div>
+						
+						<div class="row justify-content-center mb-5 my-auto">
+							<img class="w-50 p-3"  th:src="@{/images/e403.png}"/>  </p>
+						</div>	
+					
+					</div>
+				</div>	
+				
+				<!-- BOTON DE VOLVER ATRAS -->
+				<div class="row justify-content-center my-3">
+					<input type="button" class="btn btn btn-warning mx-auto" onclick="history.back()" name="volver atrás" value="volver atrás">
+				</div>
+			</div>
+		</body>
+</html>

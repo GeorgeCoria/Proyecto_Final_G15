@@ -51,18 +51,25 @@
 	                        <!-- ----------------------------------------- -->
 							<!-- ********** FORMULARIO DE LOGIN ********** -->
 							<!-- ----------------------------------------- -->
-	                        <form class="col-12" th:action="@{/login}" method="get">
+	                        <form class="col-12" th:object="${usuarioLog}"  th:action="@{/login}" method="post">
 	                            <div class="form-group" id="user-group">
+	                            
+	                            
 	                            	<!-- ********** INPUT NOMBRE USUARIO ********** -->
+	                            	<!-- Se declara el objeto UsuarioLog para trabajar con el formulario de login -->
 	                                <input type="text" class="form-control" placeholder="Usuario" name="username"/>
 	                            </div>
+	                            
 	                            <div class="form-group" id="contrasena-group">
+	                            
 	                            	<!-- ********** INPUT CONTRASEÑA ********** -->
+	                            	<!-- El campo password sera utilizado por spring Security como campo de validacion -->
 	                                <input type="password" class="form-control" placeholder="Contraseña" name="password"/>
 	                            </div>
 	                            
 	                            <!-- ********** BOTON PARA INICIAR SESION ********** -->
-	                            <button type="submit" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i>  Ingresar </button>
+	                             <button type="submit" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i>  Ingresar </button>
+	                             <div class="alert-danger text-center" th:if="${formLoginErrorMessage}" th:text="${formLoginErrorMessage}"> Error </div>
 	                        </form>
 	                    </div>
 	                </div>
@@ -70,6 +77,14 @@
 	        
 		</div>
 	</div>
+
+	<!--  CONTROL DE ERRORES AL INGRESAR DATOS DE LOGIN -->
+	<div th:if="${param.error}" class="alert alert-danger" role="alert">
+		La combinacion ingresada es erronea </div>
+	
+	<!--  MENSAJE DE LOGOUT EXITOSO -->
+	<div th:if="${param.logout}" class="alert alert-success" role="alert">  Gracias por utilizar nuestro servicio </div>
+
 
 	<!-- ---------------------------------------------------- -->
 	<!-- ********** INSERCION DEL FRAGMENTO FOOTER ********** -->
