@@ -4,8 +4,10 @@
 <meta charset="UTF-8">
 
 	<meta charset="UTF-8">
+	<!-- Meta requerido para hacer la pagina responsiva -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
+	<!-- Bootstrap CSS -->
 	<link th:rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css}">	
 	<link th:rel="stylesheet" type="text/css" th:href="@{/css/registrador.css}"/>
 	
@@ -14,30 +16,45 @@
 </head>
 <body>
 
-<!-- ********** Insercion del header **************** -->
+	<!-- ---------------------------------------------------- -->
+	<!-- ********** INSERCION DEL FRAGMENTO HEADER ********** -->
+	<!-- ---------------------------------------------------- -->
 	<div th:insert="layout/header :: header"></div>
 	
+	<!-- ------------------------------------------------- -->
+	<!-- ********** CONTENEDOR DE TODA LA VISTA ********** -->
+	<!-- ------------------------------------------------- -->
 	<div class="container">
                    
-                   
-                   <div class="col-12 col-sm-12 text-center mt-5 text-dark">
+                    <!-- ----------------------------------------------------- -->
+					<!-- ********** TITULO DE LA VISTA DEL REGISTRO ********** -->
+					<!-- ----------------------------------------------------- --> 
+                    <div class="col-12 col-sm-12 text-center mt-5 text-dark">
 				          <h2 class="col-xl-9 col-lg-11 p-3 m-auto border-info border-c1 font-c1">REGISTRO FINALIZADO</h2>
-			       </div>
-                   
+			        </div>
+                    
                     <div class="row my-4">
                         <div class="col-md-9 mx-auto">
                             
-
+                           <!-- ------------------------------------------------------------ -->
+						   <!-- ********** VISUALIZACION DE LA FECHA DEL REGISTRO ********** -->
+						   <!-- ------------------------------------------------------------ --> 
                            <div class="form-group row my-4 justify-content-center">
                                 <label for="fechaHora" class="col-sm-4 col-xl-2 col-form-label my-auto" style="color:black"><h6>FECHA Y HORA</h6></label>
                                 <div class="col-sm-4">
                                     <textarea th:text="${fechaHora}" class="form-control" rows="1" select disabled></textarea>
                                 </div> 
                           </div>
-                           
+                            
+                            <!-- ------------------------------------------- -->
+							<!-- ********** TITULO TABLA VEHICULO ********** -->
+							<!-- ------------------------------------------- -->
                             <div class="row justify-content-center">
                                 <h3 class=" w-100 p-2 text-center " style="border: 2px dodgerblue solid">VEHICULO</h3>
 
+	                            <!-- ------------------------------------------ -->
+								<!-- ********** TABLA DATOS VEHICULO ********** -->
+								<!-- ------------------------------------------ -->
 	                            <div class="table-responsive">
 		                            <table class="table table-reponsive-sm table-striped"> 
 		                                  <thead class="bg-info">
@@ -73,13 +90,21 @@
 
                         </div>
                     </div>
-                    
+                <!-- -------------------------------------------------- -->
+				<!-- ********** CONTENEDOR TABLA TRIPULANTES ********** -->
+				<!-- -------------------------------------------------- --> 
 				<div class="row justify-content-center">
 	              		<div class="col-md-9 col-lg-7 mx-auto">
-	                           
+	                          
+	                          <!-- ---------------------------------------------- -->
+							  <!-- ********** TITULO TABLA TRIPULANTES ********** -->
+							  <!-- ---------------------------------------------- -->
 		                      <div class="row justify-content-center">
-		                            <h3 class=" w-100 p-2 text-center " style="border: 2px dodgerblue solid">TRIPULANTES</h3>
+		                          <h3 class=" w-100 p-2 text-center " style="border: 2px dodgerblue solid">TRIPULANTES</h3>
 		                        
+			                      <!-- --------------------------------------------- -->
+								  <!-- ********** TABLA DATOS TRIPULANTES ********** -->
+								  <!-- --------------------------------------------- -->
 			                      <div class="table-responsive">
 				                      <table class="table table-reponsive-sm table-striped"> 
 						                         <thead class="bg-info">
@@ -109,12 +134,21 @@
 	                    </div>
 				</div>      
                
+                <!-- --------------------------------------------------------------------------------------- -->
+				<!-- ********** SECTOR TABLA LOCALIDAD Y CUADRO DE DETALLE DEL LUGAR DEL REGISTRO ********** -->
+				<!-- --------------------------------------------------------------------------------------- -->
                 <div class="row mt-4 justify-content-center">
                     <div class="col-sm-12 col-md-9 col-lg-4 mx-4">
-                       
+                       	  
+                       	  <!-- -------------------------------------------- -->
+						  <!-- ********** TITULO TABLA LOCALIDAD ********** -->
+						  <!-- -------------------------------------------- -->
 	                      <div class="row justify-content-center">
 	                            <h3 class=" w-100 p-2 text-center " style="border: 2px dodgerblue solid">LUGAR</h3>
-	                        
+	                        	
+	                        	<!-- ------------------------------------------- -->
+								<!-- ********** TABLA DATOS LOCALIDAD ********** -->
+								<!-- ------------------------------------------- -->
 		                        <div class="table-responsive">
 			                        <table class="table table-reponsive-sm table-striped"> 
 				                          <thead class="bg-info">
@@ -135,7 +169,10 @@
 	                      </div>
 	                      
                     </div>
-            
+            	
+            	<!-- -------------------------------------------------------------- -->
+				<!-- ********** CUADRO DE DETALLE DEL LUGAR DEL REGISTRO ********** -->
+				<!-- -------------------------------------------------------------- -->
                 <div class=" col-sm-12 col-md-9 col-lg-4 mx-4" style="height: auto">
                 
                     <div class="form-group row mb-4 my-3">
@@ -148,15 +185,21 @@
                 </div>
             
            </div>           
-           
+          
+          <!-- ----------------------------------------------------------------------- -->
+		  <!-- ********** BOTON PARA FINALIZAR VISTA Y CARGAR OTRO REGISTRO ********** -->
+		  <!-- ----------------------------------------------------------------------- -->
           <div class="form-group row justify-content-center mt-3">
  				<a class="btn btn-primary mb-2 text-white" th:href="@{/registroNuevo}">CARGAR OTRO REGISTRO</a>
           </div>
                
         
 	</div>
-
-<div th:insert="layout/footer :: footer"></div>
+	
+	<!-- ---------------------------------------------------- -->
+	<!-- ********** INSERCION DEL FRAGMENTO FOOTER ********** -->
+	<!-- ---------------------------------------------------- -->
+	<div th:insert="layout/footer :: footer"></div>
 
 
 </body>

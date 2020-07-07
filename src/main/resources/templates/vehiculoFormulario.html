@@ -4,8 +4,10 @@
 <meta charset="UTF-8">
 
 	<meta charset="UTF-8">
+	<!-- Meta requerido para hacer la pagina responsiva -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
+	<!-- Bootstrap CSS -->
 	<link th:rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css}">	
 	<link th:rel="stylesheet" type="text/css" th:href="@{/css/registrador.css}"/>
 	
@@ -15,80 +17,106 @@
 
 <body>
 
-<!-- ********** Insercion del header **************** -->
+	<!-- ---------------------------------------------------- -->
+	<!-- ********** INSERCION DEL FRAGMENTO HEADER ********** -->
+	<!-- ---------------------------------------------------- -->
 	<div th:insert="layout/header :: header"></div>
 
-
+		   <!-- ---------------------------------------------------- -->
+		   <!-- ********** CONTENEDOR DE TODO EL REGISTRO ********** -->
+		   <!-- ---------------------------------------------------- -->
  		   <div class="card">
                    
+                    <!-- ----------------------------------------- -->
+					<!-- ********** TITULO DEL REGISTRO ********** -->
+					<!-- ----------------------------------------- --> 
                     <div class=" col-12 col-sm-12 text-center mt-5 mb-2 text-dark">
 				          <h2 class="col-xl-9 col-lg-11 p-3 m-auto border-info border-c1 font-c1">REGISTRO VEHICULO</h2>
 			        </div>
-                   
+                    
+                    
                     <div class="card-body row border-info" >
                         <div class="col-md-9 col-lg-8 col-xl-7 text-center mx-auto mb-2">
 
+                            <!-- ------------------------------------------- -->
+							<!-- ********** TITULO DEL FORMULARIO ********** -->
+							<!-- ------------------------------------------- -->
                             <div class="row justify-content-center bg-info mb-2 text-white" style="border-radius: 10px">
                                 <h4 class=" w-60 p-2 text-center " >DETALLES DEL VEHICULO</h4>
                             </div>
 					
                             <div class="row">
-                               
+                                
+                                <!-- -------------------------------------------------------- -->
+								<!-- ********** FORMULARIO DE REGISTRO DE VEHICULO ********** -->
+								<!-- -------------------------------------------------------- -->
                                 <form class=" col-md-12 fondoVer1" th:object="${vehiculo}" th:action="@{/registroTracking}" method="post">
 
 
                                         	<input type="hidden" th:field="*{id}"> 
 
+                                            <!-- ********** AREA INGRESO PATENTE ********** -->
                                             <div class="form-group row mb-4 my-4">
                                                 <label for="patente" class="col-sm-3 col-form-label my-auto text-dark"><h5>PATENTE</h5></label>
                                                 <div class="col-sm-9">
                                                     <input type="text" th:field="*{patente}" class="form-control" id="patente" placeholder="Ej: AAA123 / AA123EE" select disabled>
+                                                    <!-- ********** MENSAJE ANTE POSIBLE ERROR ********** -->
                                                     <div class="alert-danger" th:if="${#fields.hasErrors('patente')}" th:errors="*{patente}">Name Error</div>
                                                 </div>
                                             </div>
                             				<div class="alert-danger text-center" th:if="${formError}" th:text="${formError}">Name Error</div>
-                            				
-                   
+
+                                            <!-- ********** AREA INGRESO MARCA ********** -->
                                             <div class="form-group row mb-4">
                                                 <label for="marca" class="col-sm-3 col-form-label my-auto text-dark"><h5>MARCA</h5></label>
                                                 <div class="col-sm-9">
                                                   	<input type="text" th:field="*{marca}" class="form-control" id="marca" placeholder="MARCA">
+                                                  	<!-- ********** MENSAJE ANTE POSIBLE ERROR ********** -->
                                                   	<div class="alert-danger" th:if="${#fields.hasErrors('marca')}" th:errors="*{marca}">Name Error</div>
                                                 </div>
                                             </div>
 
+                                            <!-- ********** AREA INGRESO MODELO ********** -->
                                             <div class="form-group row mb-4">
                                                 <label for="modelo" class="col-sm-3 col-form-label my-auto text-dark"><h5>MODELO</h5></label>
                                                 <div class="col-sm-9">
                                                    	<input type="text" th:field="*{modelo}" class="form-control" id="modelo" placeholder="MODELO">
+                                                   	<!-- ********** MENSAJE ANTE POSIBLE ERROR ********** -->
                                                    	<div class="alert-danger" th:if="${#fields.hasErrors('modelo')}" th:errors="*{modelo}">Name Error</div>
                                                 </div>
                                             </div>
 
+                                            <!-- ********** AREA INGRESO NUMERO DE CHASIS ********** -->
                                             <div class="form-group row mb-4">
                                                 <label for="chasis" class="col-sm-3 col-form-label my-auto text-dark"><h5>N° CHASIS</h5></label>
                                                 <div class="col-sm-9">
                                                     <input type="text" th:field="*{numeroChasis}" class="form-control" id="chasis" placeholder="N° DE CHASIS">
+                                                    <!-- ********** MENSAJE ANTE POSIBLE ERROR ********** -->
                                                     <div class="alert-danger" th:if="${#fields.hasErrors('numeroChasis')}" th:errors="*{numeroChasis}">Name Error</div>
                                                 </div>
                                             </div>
 
+                                            <!-- ********** AREA INGRESO NUMERO DE MOTOR ********** -->
                                             <div class="form-group row mb-4">
                                                 <label for="motor" class="col-sm-3 col-form-label my-auto text-dark"><h5>N° MOTOR</h5></label>
                                                 <div class="col-sm-9">
                                                     <input type="text" th:field="*{numeroMotor}" class="form-control" id="motor" placeholder="N° DE MOTOR">
+                                                    <!-- ********** MENSAJE ANTE POSIBLE ERROR ********** -->
                                                     <div class="alert-danger" th:if="${#fields.hasErrors('numeroMotor')}" th:errors="*{numeroMotor}">Name Error</div>
                                                 </div>
                                             </div>
 
+                                            <!-- ********** AREA INGRESO COLOR ********** -->
                                             <div class="form-group row mb-4">
                                                 <label for="color" class="col-sm-3 col-form-label my-auto text-dark"><h5>COLOR</h5></label>
                                                 <div class="col-sm-9">
                                                     <input type="text" th:field="*{color}" class="form-control" id="color" placeholder="COLOR">
+                                                    <!-- ********** MENSAJE ANTE POSIBLE ERROR ********** -->
                                                     <div class="alert-danger" th:if="${#fields.hasErrors('color')}" th:errors="*{color}">Name Error</div>
                                                 </div>
                                             </div>
 
+                                            <!-- ********** AREA INGRESO TIPO ********** -->
                                             <div class="form-group row mb-4">
                                                 <label for="tipo" class="col-sm-3 col-form-label my-auto text-dark"><h5>TIPO</h5></label>
                                                 <div class="col-sm-9">
@@ -100,17 +128,24 @@
                                                             <option value="Colectivo">Colectivo</option>
                                                             <option value="Moto">Moto</option>
                                                     </select>
+                                                    <!-- ********** MENSAJE ANTE POSIBLE ERROR ********** -->
                                                     <div class="alert-danger" th:if="${#fields.hasErrors('tipo')}" th:errors="*{tipo}">Name Error</div>
                                                 </div> 
                                             </div>
 
+                                            <!-- ********** AREA INGRESO TITULAR ********** -->
                                             <div class="form-group row mb-4">
                                                 <label for="titular" class="col-sm-3 col-form-label my-auto text-dark"><h5>TITULAR</h5></label>
                                                 <div class="col-sm-9">
                                                     <input type="text"th:field="*{titular}"  class="form-control" id="titular" placeholder="NOMBRE DEL TITULAR">
+                                                    <!-- ********** MENSAJE ANTE POSIBLE ERROR ********** -->
                                                     <div class="alert-danger" th:if="${#fields.hasErrors('titular')}" th:errors="*{titular}">Name Error</div>
                                                 </div>
                                             </div>
+                                            
+                                            <!-- ------------------------------------------------------------------- -->
+											<!-- ********** BOTONES DE AGREGADO Y CANCELACION DE REGISTRO ********** -->
+											<!-- ------------------------------------------------------------------- -->
                                             <div class="row justify-content-center mb-2">
 	                                            <input type="submit" class="btn btn-primary mr-1" value="AGREGAR" th:value="AGREGAR">
 	                                            <a th:href="@{/registros}" type="button" class="btn btn-danger">CANCELAR</a>
@@ -122,8 +157,10 @@
                     </div>
            </div>
 
-
-<div th:insert="layout/footer :: footer"></div>
+	<!-- ---------------------------------------------------- -->
+	<!-- ********** INSERCION DEL FRAGMENTO FOOTER ********** -->
+	<!-- ---------------------------------------------------- -->
+	<div th:insert="layout/footer :: footer"></div>
 
 
 </body>

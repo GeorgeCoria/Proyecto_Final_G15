@@ -4,8 +4,10 @@
 <meta charset="UTF-8">
 
 	<meta charset="UTF-8">
+	<!-- Meta requerido para hacer la pagina responsiva -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
+	<!-- Bootstrap CSS -->
 	<link th:rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css}">	
 	<link th:rel="stylesheet" type="text/css" th:href="@{/css/registrador.css}"/>
 	
@@ -14,11 +16,19 @@
 </head>
 <body>
 
-<!-- ********** Insercion del header **************** -->
+	<!-- ---------------------------------------------------- -->
+	<!-- ********** INSERCION DEL FRAGMENTO HEADER ********** -->
+	<!-- ---------------------------------------------------- -->
 	<div th:insert="layout/header :: header"></div>
 	
+	<!-- ---------------------------------------------------- -->
+	<!-- ********** CONTENEDOR DE TODO EL REGISTRO ********** -->
+	<!-- ---------------------------------------------------- -->
 	<div class="card">
                    
+                    <!-- ----------------------------------------- -->
+					<!-- ********** TITULO DEL REGISTRO ********** -->
+					<!-- ----------------------------------------- --> 
                     <div class=" col-12 col-sm-12 text-center mt-5 mb-2 text-dark">
 				        <h2 class="col-xl-9 col-lg-11 p-3 m-auto border-info border-c1 font-c1">REGISTRO TRIPULANTE</h2>
 			        </div>  
@@ -26,32 +36,43 @@
                     <div class="card-body row border-info" >
                         <div class="col-md-9 col-lg-8 col-xl-7 text-center mx-auto mb-2">
 
+                               <!-- ------------------------------------------- -->
+							   <!-- ********** TITULO DEL FORMULARIO ********** -->
+							   <!-- ------------------------------------------- -->
                                <div class="row justify-content-center bg-info mb-2 text-white" style="border-radius: 10px">
                                 <h4 class=" w-60 p-2 text-center " >DETALLES DEL TRIPULANTE</h4>
                                 </div>
                                  
                                  <div class="row">
 
+	                                 <!-- ---------------------------------------------------------- -->
+									 <!-- ********** FORMULARIO DE REGISTRO DE TRIPULANTE ********** -->
+									 <!-- ---------------------------------------------------------- -->
 	                                 <form class=" col-md-12 fondoVer1" th:object="${tripulanteForm}" th:action="@{/formTripulante}" method="post">
 	                                 
 	                                 <input type="hidden" th:field="${tripulanteForm.id}" class="form-control">
-	                                 
+	                                 	
+	                                 	<!-- ********** AREA INGRESO NOMBRE ********** -->
 	                                    <div class="form-group row mb-4 my-3">
 	                                        <label for="nombre" class="col-sm-4 col-form-label my-auto text-dark"><h5><i class="far fa-user"></i>  NOMBRE</h5></label>
 	                                        <div class="col-sm-8">
 	                                            <input type="text" th:field="${tripulanteForm.nombres}" class="form-control" id="nombre" placeholder="Ingrese el nombre">
+	                                            <!-- ********** MENSAJE ANTE POSIBLE ERROR ********** -->
 	                                            <div class="alert-danger" th:if="${#fields.hasErrors('nombres')}" th:errors="*{nombres}">Name Error</div>
 	                                        </div>
 	                                    </div>
 	
+	                                    <!-- ********** AREA INGRESO APELLIDO ********** -->
 	                                    <div class="form-group row mb-4 my-3">
 	                                        <label for="apellido" class="col-sm-4 col-form-label my-auto text-dark"><h5><i class="far fa-user"></i>  APELLIDO</h5></label>
 	                                        <div class="col-sm-8">
 	                                            <input type="text" th:field="${tripulanteForm.apellido}" class="form-control" id="apellido" placeholder="Ingrese el apellido">
+	                                            <!-- ********** MENSAJE ANTE POSIBLE ERROR ********** -->
 	                                            <div class="alert-danger" th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}">Name Error</div>
 	                                        </div>
 	                                    </div>
 	
+	                                    <!-- ********** AREA INGRESO NACIONALIDAD ********** -->
 	                                    <div class="form-group row mb-4 my-3">
 	                                        <label for="nacionalidad" class="col-sm-4 col-form-label my-auto text-dark"><h5><i class="fab fa-font-awesome-flag"></i>  NACIONALIDAD</h5></label>
 	                                        <div class="col-sm-8">
@@ -127,25 +148,32 @@
 	                                                            <option value="Venezolana">Venezolana</option>
 	                                                            <option value="Vietnamita">Vietnamita</option>
 	                                            </select>	
+	                                            <!-- ********** MENSAJE ANTE POSIBLE ERROR ********** -->
 	                                            <div class="alert-danger" th:if="${#fields.hasErrors('nacionalidad')}" th:errors="*{nacionalidad}">Name Error</div>
 	
 	                                        </div>
 	                                    </div>
 	
+	                                    <!-- ********** AREA INGRESO DOCUMENTO ********** -->
 	                                    <div class="form-group row mb-4 my-3">
 	                                        <label for="documento" class="col-sm-4 col-form-label my-auto text-dark"><h5><i class="fas fa-id-card"></i>  D.N.I</h5></label>
 	                                        <div class="col-sm-8">
 	                                            <input type="text" th:field="${tripulanteForm.documento}" class="form-control" id="documento" placeholder="Ingrese el DNI sin puntos">
+	                                            <!-- ********** MENSAJE ANTE POSIBLE ERROR ********** -->
 	                                            <div class="alert-danger" th:if="${#fields.hasErrors('documento')}" th:errors="*{documento}">Name Error</div>
 	                                        </div>
 	                                    </div>
 	                                    
+	                                    <!-- ------------------------------------------------------------------- -->
+										<!-- ********** BOTONES DE AGREGADO Y CANCELACION DE REGISTRO ********** -->
+										<!-- ------------------------------------------------------------------- -->
 	                                    <div class="my-2">
 	                                        <input type="submit" class="btn btn-primary botonDos mr-1" value="AGREGAR">
 	                                        <a th:href="@{/registroTracking}" type="button" class="btn btn-danger">CANCELAR</a>
 	                                    </div>
 	                                    
-											<div class="alert-danger text-center" th:if="${formErrorTrip}" th:text="${formErrorTrip}" >Name Error</div>
+	                                    <!-- ********** MENSAJE ANTE POSIBLE ERROR ********** -->
+										<div class="alert-danger text-center" th:if="${formErrorTrip}" th:text="${formErrorTrip}" >Name Error</div>
 										
 	                                </form>
                             </div>	                      
@@ -155,8 +183,10 @@
       
     </div>
 
-
-<div th:insert="layout/footer :: footer"></div>
+	<!-- ---------------------------------------------------- -->
+	<!-- ********** INSERCION DEL FRAGMENTO FOOTER ********** -->
+	<!-- ---------------------------------------------------- -->
+	<div th:insert="layout/footer :: footer"></div>
 
 
 

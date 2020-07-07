@@ -1,23 +1,22 @@
+/* ESTILOS PARA TODAS LAS FUENTES */
 .fuente{
 	font-family: 'Open sans';
 	color: black;
 }
 
+/* ESTILOS PARA EL FONDO DE LOS FORMULARIOS */
 .fondoVer1{
 	color: white;
 	background-color: #bbedfb;
 	border: 2px #5bc0de solid;
 }
 
-.cabecera{
-	margin: auto;
-	width: 10%;
-}
-
+/* ESTILOS PARA LOS SELECT */
 select{
 	size: 101%
 }
 
+/* ESTILOS PARA LOS LABEL DE LOS FORMULARIOS */
 div > label {
 	color: white;
 	border-radius: 2em;
@@ -25,33 +24,12 @@ div > label {
 	text-align: center;
 }
 
-.tituloLista{
-	font-family: cursive;
-	color: white;
-	border-radius: 2em;
-	width: 33%;
-	margin: 1em auto;
-}
-
-.lista {
-	width:102%;
-	border: none;
-    background-color: transparent;
-    background-image: none;
-    appearance: none;
-    color: white;
-    box-shadow:none;
-}
-
-
+/* ESTILOS PARA LOS IMPUT DE LOS FORMULARIOS*/
 input{
 	border-bottom: 2px black solid;
 }
 
-select {
-	box-shadow: 6px 6px 6px black;
-}
-
+/* ESTILOS PARA LOS INPUT DE LOS FORMULARIOS */
 .form-group input{
     height: 35px;
     font-size: 18px;
@@ -59,27 +37,25 @@ select {
     border: 1px black solid;
 }
 
+/* ESTILOS PARA EL TEXTAREA DEL FORMULARIO DE REGISTRO TRACKING */
 .form-group textarea{
     font-size: 18px;
     padding-left: 54px;
     border: 1px black solid;
 }
 
+/* ESTILOS PARA LOS BOTONES DE LOS FORMULARIOS Y VISTAS*/
 -button{
     width: 10%;
     margin: 15px 0 2px;
 }
 
-.botonUno{
-	width: 80%;
-	height: 2em;
-    margin-bottom: 1em;
-}
-
+/* ESTILOS PARA LAS FUENTES DE LOS TITULOS */
 .font-c1{
 	font-size: 40px;
 }
 
+/* ESTILOS PARA LOS BORDES DE LOS TITULOS*/
 .border-c1{
 	border-style: double;
 	border-width: 10px;

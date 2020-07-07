@@ -4,8 +4,10 @@
 <meta charset="UTF-8">
 
 	<meta charset="UTF-8">
+	<!-- Meta requerido para hacer la pagina responsiva -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
+	<!-- Bootstrap CSS -->
 	<link th:rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css}">	
 	<link th:rel="stylesheet" type="text/css" th:href="@{/css/registrador.css}">
 	
@@ -14,11 +16,19 @@
 </head>
 <body>
 
-<!-- ********** Insercion del header **************** -->
+	<!-- ---------------------------------------------------- -->
+	<!-- ********** INSERCION DEL FRAGMENTO HEADER ********** -->
+	<!-- ---------------------------------------------------- -->
 	<div th:insert="layout/header :: header"></div>
 	
+	<!-- ---------------------------------------------------- -->
+	<!-- ********** CONTENEDOR DE TODO EL REGISTRO ********** -->
+	<!-- ---------------------------------------------------- -->
 	<div class="card">
                    
+                    <!-- ----------------------------------------- -->
+					<!-- ********** TITULO DEL REGISTRO ********** -->
+					<!-- ----------------------------------------- --> 
                     <div class=" col-12 col-sm-12 text-center mt-5 mb-2 text-dark">
 				            <h2 class="col-xl-9 col-lg-11 p-3 m-auto border-info border-c1 font-c1">REGISTRO TRACKING</h2>
 			     	</div>
@@ -26,18 +36,30 @@
                     <div class="card-body row border-info" >
                         <div class="col-12 col-sm-10 col-md-8 text-center mx-auto mb-2">
 					
+                            <!-- ------------------------------------------- -->
+							<!-- ********** TITULO DEL FORMULARIO ********** -->
+							<!-- ------------------------------------------- -->
                             <div class="row justify-content-center bg-info mb-2 text-white" style="border-radius: 10px">
                                 <h4 class=" w-60 p-2 text-center ">DETALLES DEL REGISTRO</h4>
                             </div>
                             
                             <div class="row">
 
+	                            <!-- ------------------------------------------------------ -->
+								<!-- ********** FORMULARIO DE REGISTROS TRACKING ********** -->
+								<!-- ------------------------------------------------------ -->
 	                            <form class=" col-md-12 fondoVer1" th:object="${registroTracking}" th:action="@{/registroFinalizado}"  method="post">
 	                                    
+	                                    <!-- ------------------------------------------- -->
+										<!-- ********** TITULO TABLA VEHICULO ********** -->
+										<!-- ------------------------------------------- -->
 	                                    <div class="row justify-content-center mb-4 mt-2">
 				                        	<h3 class=" w-100 p-2 text-center " style="border-top:  2px dodgerblue solid; border-bottom:  2px dodgerblue solid; color: black">VEHICULO</h3>
 				                        </div>
 				                        
+	                                    <!-- ------------------------------------------ -->
+										<!-- ********** TABLA DATOS VEHICULO ********** -->
+										<!-- ------------------------------------------ -->
 	                                    <div class="table-responsive">
 		                                    <table class="table table-reponsive-sm table-striped"> 
 				                                <thead class="bg-info">
@@ -70,16 +92,26 @@
 		                                    </table>
 	                                    </div>
 	                                    
+		                                <!-- --------------------------------------------- -->
+										<!-- ********** TITULO TABLA TRIPULANTE ********** -->
+										<!-- --------------------------------------------- -->
 		                                <div class="row justify-content-center mb-4 mt-2">
 				                        	<h3 class=" w-100 p-2 text-center " style="border-top:  2px dodgerblue solid; border-bottom:  2px dodgerblue solid; color: black">TRIPULANTES</h3>
 				                        </div>
 				                        
+				                        <!-- ------------------------------------------------------------------- -->
+										<!-- ********** BOTONES DE BUSQUEDA Y AGREGADO DE TRIPULANTES ********** -->
+										<!-- ------------------------------------------------------------------- -->
 				                        <div class="row justify-content-center d-flex">
 					                        <button  type="button" class="btn btn-primary mb-2 mr-1" data-toggle="modal" data-target="#modalBuscarTripulante">BUSCAR TRIPULANTE</button>
 					                        <a class="btn btn-primary mb-2" th:href="@{/cargarTripulante}">AGREGAR TRIPULANTE</a>
 				                        </div>
+				                        <!-- MENSAJE DE ERROR AL BUSCAR UN TRIPULANTE -->
 				                        <div class="alert-danger text-center" th:if="${ErrorMessage}" th:text="${ErrorMessage}">Name Error</div>
 	
+	                                    <!-- --------------------------------------------- -->
+										<!-- ********** TABLA DATOS TRIPULANTES ********** -->
+										<!-- --------------------------------------------- -->
 	                                    <div class="table-responsive">
 		                                    <table class="table table-reponsive-sm table-striped"> 
 						                    	<thead class="bg-info">
@@ -103,6 +135,10 @@
 					                            </tbody>
 				                            </table>
 	                                    </div>
+	                                    
+	                                    <!-- --------------------------------------- -->
+										<!-- ********** SECCION LOCALIDAD ********** -->
+										<!-- --------------------------------------- -->
 	                                    <div class="form-group row mb-4 my-3">
 	                                         <label for="detalles" class="col-sm-3 col-form-label my-auto text-dark"><h5>LOCALIDAD</h5></label>
 	                                         <div class="col-sm-9">
@@ -112,6 +148,9 @@
 	                                         </div>
 	                                    </div>	
 	                                            
+	                                    <!-- --------------------------------------------- -->
+										<!-- ********** TABLA DATOS TRIPULANTES ********** -->
+										<!-- --------------------------------------------- -->
 	                                    <div class="form-group row mb-4 my-3">
 	                                         <label for="detalles" class="col-sm-3 col-form-label my-auto text-dark"><h5>DETALLES</h5></label>
 	                                         <div class="col-sm-9">
@@ -119,31 +158,44 @@
 	                                         </div>
 	                                    </div>
 	                                        
+	 									<!-- --------------------------------------------- -->
+										<!-- ********** BOTON TERMINAR REGISTRO ********** -->
+										<!-- --------------------------------------------- -->
 	 									<input type="submit" th:if="${botonFinalRegistro}" class="btn btn-primary mb-2" value="TERMINAR REGISTRO">
 	 									
 	                            </form>
                             
                             </div>
                             
+                            <!-- ----------------------------------------------------------- -->
+							<!-- ********** MODAL PARA LA BUSQUEDA DE TRIPULANTES ********** -->
+							<!-- ----------------------------------------------------------- -->
                             <div class="modal fade" id="modalBuscarTripulante" tabindex="-1" role="dialog" aria-labelledby="agregarTripulanteModal" aria-hidden="true">
                             	<div class="modal-dialog modal-dialog-centered" role ="document">
                             		<div class="modal-content">
+                            			<!-- ********** FORMULARIO DE BUSQUEDA ********** -->
                             			<form id="formTripulante" th:object="${tripulanteDelForm}" th:action="@{/buscarTripulante}" method="post">
+                            				<!-- ********** CABECERA DE LA VENTANA MODAL ********** -->
                             				<div class="modal-header">
                             					<h5 class="modal-tittle" id="agregarTripulanteModal">BUSCAR TRIPULANTE</h5>
+                            					<!-- ********** BOTON PARA CERRAR LA VENTANA MODAL ********** -->
                             					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            					<span aria-hidden="true">&times;</span>
+                            						<span aria-hidden="true">&times;</span>
                             					</button>
                             				</div>
+                            				<!-- ********** AREA INGRESO DNI ********** -->
                             				<div class="modal-body">
                             					<div class="form-group">
                             						<label for="documento">D.N.I.</label>
                             						<input class="form-control" id="documento" th:field="${tripulanteDelForm.documento}" placeholder="Ingresar D.N.I del tripulante">
                             					</div>
                             				</div>
+                            				
                             				<div class="modal-footer">
-                            					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            					<!-- ********** BOTON PARA BUSCAR AL TRIPULANTE ********** -->
                             					<input type="submit" class="btn btn-primary" value="BUSCAR">
+                            					<!-- ********** BOTON PARA CERRAR LA VENTANA MODAL ********** -->
+                            					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                             				</div>
                             			</form>
                             		</div>
@@ -154,7 +206,10 @@
                     </div>
 	</div>
 
-<div th:insert="layout/footer :: footer"></div>
+	<!-- ---------------------------------------------------- -->
+	<!-- ********** INSERCION DEL FRAGMENTO FOOTER ********** -->
+	<!-- ---------------------------------------------------- -->
+	<div th:insert="layout/footer :: footer"></div>
 	
 
 

@@ -16,6 +16,9 @@ import ar.edu.unju.fi.model.Localidad;
 import ar.edu.unju.fi.service.LocalidadServiceImp;
 
 /**
+ * Clase que se encargada de tomar las peticiones y controlar que respuesta debe
+ * ser presentada en la vista (paginas html) de nuestro proyecto.
+ * 
  * @author Velarde Marcia, Toconas Juan
  * 
  */
@@ -24,6 +27,7 @@ public class LocalidadController {
 
 	@Autowired
 	private LocalidadServiceImp localidadService;
+	
 	
 	@GetMapping("/adminLocalidad")
 	public String mostrarLocalidad(Model model) {

@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
 
 	<meta charset="UTF-8">
+	<!-- Meta requerido para hacer la pagina responsiva -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
+	<!-- Bootstrap CSS -->
 	<link th:rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css}">	
 	<link th:rel="stylesheet" type="text/css" th:href="@{/css/registrador.css}"/>
 	
@@ -14,26 +15,41 @@
 </head>
 <body>
 
-<!-- ********** Insercion del header **************** -->
+	<!-- ---------------------------------------------------- -->
+	<!-- ********** INSERCION DEL FRAGMENTO HEADER ********** -->
+	<!-- ---------------------------------------------------- -->
 	<div th:insert="layout/header :: header"></div>
 
-<div class="card">
-                     
+	<!-- ------------------------------------------------- -->
+	<!-- ********** CONTENEDOR DE TODA LA VISTA ********** -->
+	<!-- ------------------------------------------------- -->
+	<div class="card">
+                    
+                    <!-- ---------------------------------------- -->
+					<!-- ********** TITULO DE LA VISTA ********** -->
+					<!-- ---------------------------------------- --> 
                     <div class="col-sm-12 text-center mt-5 mb-3 text-dark">
 						<h2 class="col-xl-9 col-lg-11 p-3 m-auto border-info border-c1 font-c1">REGISTRO DEL VEHICULO</h2>
 					</div>              
                    
                     <div class="card-body row" >
                         <div class="col-10 col-sm-9 col-md-8 col-lg-6 text-center mx-auto mb-2">
-					
+							
+							<!-- ------------------------------------------- -->
+							<!-- ********** TITULO DEL FORMULARIO ********** -->
+							<!-- ------------------------------------------- --> 
                             <div class="row justify-content-center bg-info mb-2 text-white" style="border-radius: 10px">
                                 <h4 class=" w-60 p-2 text-center " >DETALLES DEL VEHICULO</h4>
                             </div>
 					
                             <div class="row">
-                               
+                                
+                                <!-- -------------------------------------------------------- -->
+								<!-- ********** FORMULARIO PARA INGRESO DE PATENTE ********** -->
+								<!-- -------------------------------------------------------- -->
                                 <form class=" col-md-12 fondoVer1" th:object="${vehiculo}" th:action="@{/registros/vehiculoBuscado}" method="post">
 
+                                            <!-- ********** AREA INGRESO PATENTE ********** -->
                                             <div class="form-group row my-4">
                                                 <label for="patente" class="col-sm-3 col-form-label my-auto text-dark"><h5>PATENTE</h5></label>
                                                 <div class="col-sm-8">
@@ -41,12 +57,26 @@
                                                 </div> 
                                             </div>
                                             
+                                            <!-- ----------------------------------------------- -->
+								 			<!-- ********** BOTON PARA BUSCAR PATENTE ********** -->
+								  			<!-- ----------------------------------------------- -->
                                             <input th:if="${botonBuscarVehiculo}" type="submit" class="col-sm-2 btn btn-primary" value="BUSCAR">
+                            				
+                            				<!-- --------------------------------------- -->
+								  			<!-- ********** MENSAJES DE ERROR ********** -->
+								  			<!-- --------------------------------------- -->
                             				<div class="alert-danger text-center" th:if="${formError}" th:text="${formError}">Name Error</div>
                             				<div class="alert-danger text-center" th:if="${formMessage}" th:text="${formMessage}">Name Message</div>
+                   							
+                   							<!-- ----------------------------- -->
+								 			<!-- ********** BOTONES ********** -->
+								  			<!-- ----------------------------- -->
                    							<div class="form-group row justify-content-center">
+	                   							<!-- ********** BOTON PARA IR AL FORMULARIO DE VEHICULO ********** -->
 	                   							<a th:if="${botonGuardar}" class="btn btn-primary mr-1" th:href="@{/vehiculoForm}">GUARDAR</a>
+	                   							<!-- ********** BOTON PARA IR AL REGISTRO TRACKING  ********** -->
 	                   							<a th:if="${botonSiguiente}" class="btn btn-primary mr-1" th:href="@{/registroTracking}">SIGUIENTE</a>
+	                   							<!-- ********** BOTON PARA CAMCELAR LA BUSQUEDA ********** -->
 	                   							<a th:if="${botonCancelarVehiculo}" th:href="@{/registros}" type="button" class="btn btn-danger">CANCELAR</a>
                                         	</div>
                                         
@@ -55,10 +85,12 @@
                         </div>
             
                     </div>
-</div>
+	</div>
 
-
-<div th:insert="layout/footer :: footer"></div>
+	<!-- ---------------------------------------------------- -->
+	<!-- ********** INSERCION DEL FRAGMENTO FOOTER ********** -->
+	<!-- ---------------------------------------------------- -->
+	<div th:insert="layout/footer :: footer"></div>
 
 </body>
 </html>
