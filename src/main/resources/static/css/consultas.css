@@ -1,20 +1,4 @@
 
-.linea-red{
-	outline: 1px solid red;
-}
-
-.linea-blue{
-	outline: 1px solid blue;
-}
-
-.linea-green{
-	outline: 1px solid green;
-}
-
-.linea-black{
-	outline: 5px solid black;
-}
-
 .h-50p{
 	max-height: 50px;
 }
@@ -50,14 +34,6 @@
 
 .border-lighter-dark{
 	border-color: #008080;
-}
-
-.bg-lighter-dark-red{
-	background-color: #e05260;
-}
-
-.border-lighter-dark-red{
-	border-color: #e05260;
 }
 
 .font-c1{

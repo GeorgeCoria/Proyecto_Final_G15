@@ -1,6 +1,7 @@
 package ar.edu.unju.fi.service;
 
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,47 +27,77 @@ public class RegistroTrackingServiceImp implements IRegistroTrackingService {
 	@Autowired
 	private IRegistroTrackingDAO iRegistro;
 
+	/**
+	 * Guarda un registro con su fecha del tipo RegistroTracking
+	 */
 	@Override
 	public void crearRegistro(RegistroTracking nuevoRegistro) {
-		nuevoRegistro.setFechaHora(LocalDateTime.now());
+		nuevoRegistro.setFecha(LocalDate.now());
 		iRegistro.save(nuevoRegistro);
 	}
 
+	/**
+	 * Devuelve todo los registro del mismo id vehiculo.
+	 * Los datos enviados estan ordenado por Fecha.
+	 * Solo devolvera si su localidad esta habilitada (true)
+	 */
 	@Override
 	public List<RegistroTracking> getRegistrosVehiculo(Vehiculo vehiculos) {
 	
-		return iRegistro.findByVehiculos(vehiculos);
+		return iRegistro.findByVehiculosAndLocalidadEstadoOrderByFecha(vehiculos, true);
 	}
 
+	/**
+	 * Devuelve el registro del tripulante
+	 * Los datos enviado son ordenado por Fecha.
+	 * Solo devolvera si su localidad esta habilitada (true)
+	 */
 	@Override
 	public List<RegistroTracking> getRegistrosTripulante(Tripulante tripulante) {
 		
 		List<RegistroTracking> registroTripulante= new ArrayList<>();
 		
-		for ( RegistroTracking registroTracking : iRegistro.findAll()) {
+		for ( RegistroTracking registroTracking : iRegistro.findAllByOrderByFecha()) {
 			
-			for ( Tripulante buscarTripulante : registroTracking.getTripulantes()) {
-				
-				if ( buscarTripulante.getId() == tripulante.getId())
-					registroTripulante.add(registroTracking);
-			}
-				
+			if ( registroTracking.getLocalidad().isEstado() == true) {
+				for ( Tripulante buscarTripulante : registroTracking.getTripulantes()) {
+					
+					if ( buscarTripulante.getId() == tripulante.getId())
+						registroTripulante.add(registroTracking);
+				}
+			}	
 		}
-		
+		 
 		return registroTripulante;
 	}
 
 	
+	/**
+	 * Devuelve el registro de la localidad
+	 */
 	@Override
 	public List<RegistroTracking> getRegistrosLocalidad(Localidad localidad) {
 		
-		return iRegistro.findByLocalidad(localidad);
+		return iRegistro.findByLocalidadOrderByFecha(localidad);
 	}
 
+	/**
+	 * Devuelve el Registro por ID o una Excepcion
+	 */
 	@Override
 	public RegistroTracking getRegistros(Long id) throws Exception {
 		
 		return iRegistro.findById(id).orElseThrow(()-> new Exception("Registro no encontrado"));
 	}
 
+	/**
+	 * Devuelve el resultado buscado por Rango de fechas y Localidad.
+	 */
+	@Override
+	public List<RegistroTracking> getRegistrosRangoFechasAndLocalidad(LocalDate fechaDesde, LocalDate fechaHasta,
+			Localidad localidad) {
+		
+			return iRegistro.findByFechaBetweenAndLocalidadOrderByFecha(fechaDesde, fechaHasta, localidad);
+		
+	}
 }

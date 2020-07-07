@@ -70,7 +70,7 @@
 			<!-- ********** CONTENERDOR -> INFO-TRIPULANTE / REGISTRO-TRIPULANTE ********** -->
 			<!-- -------------------------------------------------------------------------- -->
 			<!--Propiedades destacar: table-responsive-xl= overflow | m= margin-->	
-			<div th:if="${activoTripulante==true}" class="col-sm-12 mt-5 d-flex table-responsive-xl">
+			<div th:if="${activo==true}" class="col-sm-12 mt-5 d-flex table-responsive-xl">
 				
 				
 				<!-- ------------------------------------------------- -->
@@ -132,7 +132,7 @@
 								<tbody>
 									<tr th:each="r:${registroTripulante}">
 										<td th:text="${r.vehiculos.patente}"></td>
-										<td th:text="${r.fechaHora}"></td>
+										<td th:text="${r.fecha}"></td>
 										<td th:text="${r.localidad.nombre}"></td>
 										<td th:text="${r.detalleLugarRegistro}"></td>
 									</tr>

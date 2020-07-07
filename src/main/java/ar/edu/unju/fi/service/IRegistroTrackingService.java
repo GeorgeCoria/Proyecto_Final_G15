@@ -1,5 +1,6 @@
 package ar.edu.unju.fi.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import ar.edu.unju.fi.model.Localidad;
@@ -26,5 +27,7 @@ public interface IRegistroTrackingService {
 	public List<RegistroTracking> getRegistrosLocalidad(Localidad localidad);
 	
 	public RegistroTracking getRegistros(Long id) throws Exception;
+	
+	public List<RegistroTracking> getRegistrosRangoFechasAndLocalidad(LocalDate fechaDesde, LocalDate fechaHasta, Localidad localidad);
 	
 }

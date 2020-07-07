@@ -1,9 +1,18 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
 	<head>
-		<meta charset="utf-8">
 		<link th:rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css}">
 		<link th:rel="stylesheet" type="text/css" th:href="@{/css/consultas.css}">
+		
+		<link th:rel="stylesheet" th:href="@{/css/tempusdominus-bootstrap-4.min.css}"/>
+		<link th:rel="stylesheet" th:href="@{/webjars/font-awesome/5.11.2/css/all.css} "/>
+		
+		<!-- 
+		<script th:src="@{/js/moment.min.js}"></script>	
+		<script th:src="@{/js/tempusdominus-bootstrap-4.min.js}"></script>
+		-->
+		
+		<meta charset="utf-8">
 		<title>Localidad</title>
 	</head>
 	
@@ -42,8 +51,8 @@
 			<!-- ------------------------------------------------------------------------- -->
 			<!-- ********** FORMULARIO-BUSQUEDA -> FECHA-INICIO/FINAL/LOCALIDAD ********** -->
 			<!-- ------------------------------------------------------------------------- -->
-			<form th:action="@{/buscarVehiculosPorLocalidadDateTime}"  method="post" class="col-12 mb-5 row m-0  justify-content-center">
-			
+			<form th:action="@{/buscarVehiculosPorRangoFechaAndLocalidad}" th:object="${modeloConsulta}" 
+			method="post" class="col-12 mb-5 row m-0  justify-content-center form" role="form" autocomplete="off">
 			
 				<!-- --------------------------------------------- -->
 				<!-- ********** CONTENEDOR FECHA-INICIO ********** -->
@@ -53,10 +62,16 @@
 					<div class="card m-3 shadow-sm border-info">
 					  	<!-- Propiedad destacar: card-header= padding  -->
 					  	<h4 class="card-header text-center bg-info font-weight-normal">Desde<br>Fecha Hora</h4>
+					  	<h6 class="text-center">Dia/Mes/Año</h6>
 					  	<!-- Propiedad destacar: card-body= padding -->
 					   	<div  class="card-body">
-							<!-- required obliga q el campo se complete --> 
-							<input  type="datetime-local" class="form-control text-center border-info">
+							<div class="input-group date" id="datetimepicker1"	data-target-input="nearest">
+								<input type="text" class="form-control" data-target="#datetimepicker1" id="fecha01"
+												placeholder="ejm: 31/12/2020" th:field="${modeloConsulta.fechaDesde}" />											
+								<div class="input-group-append"	data-target="#datetimepicker1" data-toggle="datetimepicker">
+									<div class="input-group-text"><i class="fa fa-calendar-alt"></i></div>
+								</div>
+							</div>
 					  	</div>
 					</div>
 				</div>
@@ -70,7 +85,7 @@
 						<h4 class="card-header text-center bg-info font-weight-normal">Localidades</h4>
 						<div class="card-body ">
 							<!-- Propiedad destacar: custom-select= color/border/letras/ -->
-							<select th:field="${modeloLocalidad.nombre}" class="custom-select mt-3 border-info">
+							<select th:field="${modeloConsulta.localidad.nombre}" class="custom-select mt-3 border-info">
 								<option th:each="l:${localidades}" th:text="${l.nombre}" th:value="${l.nombre}"></option>
 							</select>
 						</div>
@@ -86,14 +101,32 @@
 					<div class="card m-3 shadow-sm border-info">
 						<!-- Propiedad destacar: card-header= padding-->
 						<h4 class="card-header text-center bg-info font-weight-normal">Hasta<br>Fecha Hora</h4>
+						<h6 class="text-center">Dia/Mes/Año</h6>
 						<!-- Propiedad destacar: card-body= padding-->
 						<div class="card-body">
-							<input type="datetime-local" class="form-control text-center border-info">
+							<div class="input-group date" id="datetimepicker2"	data-target-input="nearest">
+								<input type="text" class="form-control" data-target="#datetimepicker2" id="fecha02"
+												placeholder="ejm: 31/12/1999" th:field="${modeloConsulta.fechaHasta}" />											
+								<div class="input-group-append"	data-target="#datetimepicker2" data-toggle="datetimepicker">
+									<div class="input-group-text"><i class="fa fa-calendar-alt"></i></div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
 				
-				
+				<script type="text/javascript">
+				$(function() {
+					$('#datetimepicker1').datetimepicker({
+						format : "DD/MM/YYYY"
+					});
+					$('#datetimepicker2').datetimepicker({
+						format : "DD/MM/YYYY"
+					});
+						});
+				</script>
+			
+			
 				<!-- -------------------------------------- -->
 				<!-- ********** BOTON-FORMULARIO ********** -->
 				<!-- -------------------------------------- -->			
@@ -105,16 +138,21 @@
 			</form>
 			
 			
+			
 			<!-- ---------------------------------------- -->
 			<!-- ********** MENSAJES DE ERROES ********** -->
 			<!-- ---------------------------------------- -->
-			<div th:if="${errorMessage}" th:text="${errorMessage}" class="alert-danger text-center">Error si no encuentra localidad o Registro de la localidad o Registro ID</div>
+			<div th:if="${errorMessege}" th:text="${errorMessege}" class="alert-danger text-center">Error si no encuentra localidad o Registro de la localidad o Registro ID</div>
+			<div th:if="${#fields.hasErrors('modeloConsulta.localidad')}" th:errors="${modeloConsulta.localidad}" class="alert-danger text-center" ></div>
+			<div th:if="${#fields.hasErrors('modeloConsulta.fechaDesde')}" th:errors="${modeloConsulta.fechaDesde}" class="alert-danger text-center" ></div>
+			<div th:if="${#fields.hasErrors('modeloConsulta.fechaHasta')}" th:errors="${modeloConsulta.fechaHasta}" class="alert-danger text-center" ></div>
+			
 			
 			<!-- ---------------------------------------------- -->
 			<!-- ********** CONTENEDOR INFO-VEHICULO ********** -->
 			<!-- ---------------------------------------------- -->
 			<!-- Propiedad destacar: table-responsive-xl= overflow -->		
-			<div th:if="${activoLocalidad==true}" class="d-flex table-responsive-xl">
+			<div th:if="${activo==true}" class="d-flex table-responsive-xl">
 				<div class="col-auto min-width-1 mx-auto">
 					<!-- Propiedad destacar: card/border-= coloresBordes -->
 					<div class="card shadow-sm  border-lighter-dark">
@@ -138,7 +176,7 @@
 								
 								<tbody>
 									<tr th:each="r:${registrosLocalidad}">
-										<td th:text="${r.fechaHora}"></td>
+										<td th:text="${r.fecha}"></td>
 										<td th:text="${r.vehiculos.titular}"></td>
 										<td th:text="${r.vehiculos.patente}"></td>
 										<td th:text="${r.vehiculos.modelo}"></td>
@@ -146,7 +184,7 @@
 										<td th:text="${r.localidad.nombre}"></td>
 										<td th:text="${r.id}"></td>
 										<td>
-											<a th:href="@{/buscar/}+${r.id}" class="btn bg-lighter-dark">
+											<a th:href="@{/buscar/vehiculo/}+${r.id}" class="btn bg-lighter-dark">
 												<svg class="bi bi-search" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 													<path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
 													<path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
@@ -164,7 +202,7 @@
 				<!-- ------------------------------------------------ -->
 				<!-- ********** CONTENEDOR INFO-TRIPULANTE ********** -->
 				<!-- ------------------------------------------------ -->	  	
-				<div th:if="${activoLocalidad==true}" class="col-auto mx-auto min-width-2">
+				<div th:if="${activo==true}" class="col-auto mx-auto min-width-2">
 					<!-- Propiedad destacar: card/border-= coloresBordes -->
 					<div class="card shadow-sm border-lighter-dark">
 						<!-- Propiedad destacar: card-header= colores | bg= background-color -->
@@ -179,7 +217,7 @@
 										<th scope="col">Apellido</th>
 										<th scope="col">Nombre</th>
 										<th scope="col">Nacionalidad</th>
-										<th scope="col">ID-Registro</th>
+										<th scope="col">ID</th>
 									</tr>
 								</thead>
 										

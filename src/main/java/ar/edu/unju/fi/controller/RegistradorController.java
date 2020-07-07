@@ -231,7 +231,7 @@ public class RegistradorController {
 		//Se muestra en la tabla el vehiculo agregado en el registro
 		model.addAttribute("listaVehiculo", vehiculoService.buscarVehiculo(unVehiculo.getPatente()));
 		//Se muestra la fecha del registro con el formato elegido
-		String fechaHora = registroT.getFechaHora().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+		String fechaHora = registroT.getFecha().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 		model.addAttribute("fechaHora", fechaHora);
 		//Se muestra el detalle del lugar del registro
 		model.addAttribute("detalleLugar", registroT.getDetalleLugarRegistro());
