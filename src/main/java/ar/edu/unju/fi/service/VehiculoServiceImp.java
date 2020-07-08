@@ -9,7 +9,7 @@ import ar.edu.unju.fi.model.Vehiculo;
 import ar.edu.unju.fi.repository.IVehiculoDAO;
 
 /**
- * Clase que va a implementar la interface IUsuarioService.
+ * Clase que va a implementar la interface IVehiculoService.
  * 
  * @author Marcia Velarde
  *
@@ -17,6 +17,9 @@ import ar.edu.unju.fi.repository.IVehiculoDAO;
 @Service
 public class VehiculoServiceImp implements IVehiculoService{
 
+	/**
+	 * Inyección de un objeto implementador de la clase IVehiculoDAO para la conexión con la capa repository
+	 */
 	@Autowired
 	private IVehiculoDAO iVehiculo;
 	

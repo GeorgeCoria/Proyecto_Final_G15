@@ -17,6 +17,9 @@ import java.util.Optional;
 @Service
 public class UsuarioServiceImp implements IUsuarioService{
 
+	/**
+	 * Inyección de un objeto implementador de la clase IUsuarioDAO para la conexión con la capa repository
+	 */
 	@Autowired
 	private IUsuarioDAO iUsuario;
 

@@ -35,15 +35,31 @@ import ar.edu.unju.fi.service.IVehiculoService;
 @Controller
 public class RegistradorController {
 
+	/**
+	 * Se inyecta una variable de tipo IRegistroTrackingService para poder solicitarle algún
+	 * servicio
+	 */
 	@Autowired
 	private IRegistroTrackingService registroTrackingService;
 	
+	/**
+	 * Se inyecta una variable de tipo ILocalidadService para poder solicitarle algún
+	 * servicio
+	 */
 	@Autowired
 	private ILocalidadService localidadService;
 	
+	/**
+	 * Se inyecta una variable de tipo IVehiculoService para poder solicitarle algún
+	 * servicio
+	 */
 	@Autowired
 	private IVehiculoService vehiculoService; 
 	
+	/**
+	 * Se inyecta una variable de tipo ITripulanteService para poder solicitarle algún
+	 * servicio
+	 */
 	@Autowired
 	private ITripulanteService tripulanteService;
 	

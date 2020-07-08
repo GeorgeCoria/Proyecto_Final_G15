@@ -23,6 +23,9 @@ import ar.edu.unju.fi.repository.IRegistroTrackingDAO;
 @Service
 public class RegistroTrackingServiceImp implements IRegistroTrackingService {
 
+	/**
+	 * Inyección de un objeto implementador de la clase IRegistroTrackingDAO para la conexión con la capa repository
+	 */
 	@Autowired
 	private IRegistroTrackingDAO iRegistro;
 

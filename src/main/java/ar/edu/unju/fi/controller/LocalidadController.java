@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import ar.edu.unju.fi.model.Localidad;
-import ar.edu.unju.fi.service.LocalidadServiceImp;
+import ar.edu.unju.fi.service.ILocalidadService;
 
 /**
  * Clase que se encargada de tomar las peticiones y controlar que respuesta debe
@@ -25,8 +25,12 @@ import ar.edu.unju.fi.service.LocalidadServiceImp;
 @Controller
 public class LocalidadController {
 
+	/**
+	 * Se inyecta una variable de tipo ILocalidadService para poder solicitarle algún
+	 * servicio
+	 */
 	@Autowired
-	private LocalidadServiceImp localidadService;
+	private ILocalidadService localidadService;
 	
 	/**
 	 * Muestra la pagina del formulario y lista de localidades
