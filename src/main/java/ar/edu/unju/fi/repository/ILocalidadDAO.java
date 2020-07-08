@@ -32,7 +32,7 @@ public interface ILocalidadDAO extends JpaRepository<Localidad, Long>{
 	 * @param estado, "true" si la localidad esta activa y "false" si esta inactiva
 	 * @return Iterable con las localidades encontradas
 	 */
-	@Query("from Localidad l order by l.nombre")
+	
 	public Iterable<Localidad> findByEstado(boolean estado);
 	
 }
