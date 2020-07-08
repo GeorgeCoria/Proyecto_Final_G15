@@ -48,6 +48,6 @@ public interface IUsuarioDAO extends JpaRepository<Usuario, Long> {
 	 * @return Lista de tipo Usuario
 	 */
 	
-	public List<Usuario> findByEstado(boolean estado);
+	public List<Usuario> findByEstadoOrderByApellidoReal(boolean estado);
 
 }

@@ -123,7 +123,7 @@ public class UsuarioServiceImp implements IUsuarioService{
 	 */
 	@Override
 	public Iterable<Usuario> listarUsuarios(boolean estado) throws Exception {
-		Iterable<Usuario> listaUsuarios = iUsuario.findByEstado(estado);
+		Iterable<Usuario> listaUsuarios = iUsuario.findByEstadoOrderByApellidoReal(estado);
 		if(!listaUsuarios.iterator().hasNext()) {
 			throw new Exception("Lista Vacia ");
 		}
