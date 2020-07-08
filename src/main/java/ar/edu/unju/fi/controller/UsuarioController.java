@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import ar.edu.unju.fi.model.Usuario;
-import ar.edu.unju.fi.service.UsuarioServiceImp;
+import ar.edu.unju.fi.service.IUsuarioService;
 
 /**
  * Clase que se encargada de tomar las peticiones y controlar que respuesta debe
@@ -26,11 +26,11 @@ import ar.edu.unju.fi.service.UsuarioServiceImp;
 @Controller
 public class UsuarioController {
 	/**
-	 * variable que permitira que se haga efectiva la inyeccion de dependencias
-	 * a traves de la Annotations @Autowired
+	 * Se inyecta una variable de tipo IUsuarioService para poder solicitarle algún
+	 * servicio
 	 */
 	@Autowired
-	private UsuarioServiceImp usuarioService;
+	private IUsuarioService usuarioService;
 	
 	/**
 	 * Muesta la ventana del Formulario 

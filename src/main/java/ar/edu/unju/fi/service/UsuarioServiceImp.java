@@ -17,6 +17,9 @@ import java.util.Optional;
 @Service
 public class UsuarioServiceImp implements IUsuarioService{
 
+	/**
+	 * Inyección de un objeto implementador de la clase IUsuarioDAO para la conexión con la capa repository
+	 */
 	@Autowired
 	private IUsuarioDAO iUsuario;
 
@@ -128,6 +131,16 @@ public class UsuarioServiceImp implements IUsuarioService{
 		return listaUsuarios; 
 	}
 
+
+	/**
+	 * Metodo definido para realizar una buscaqueda en el repositorio segun el Tipo
+	 * de Usuario y por su estado.
+	 * 
+	 * @param tipoUsuario (CONSULTOR, REGISTRADOR)
+	 * @param estado	(true,false)
+	 * @return Lista con aquellos usuarios que cumplan con la condicion requerida
+	 * @throws Exception, definida para tratar eventos ante situaciones que se puedan presentar
+	 */
 	@Override
 	public Iterable<Usuario> findByTipoUsuario(String tipoUsuario, boolean estado) throws Exception {
 		Iterable<Usuario> usuarios = iUsuario.findByTipoUsuarioAndEstado(tipoUsuario, estado);
@@ -137,6 +150,14 @@ public class UsuarioServiceImp implements IUsuarioService{
 		return usuarios;
 	}
 
+	/**
+	 * Metodo que tiene por objetivo realizar una busqueda
+	 * de un Usuario en particular.
+	 * 
+	 * @param Nombre del Usuario buscado
+	 * @return Usuario encontrado
+	 * @throws Exception definida para trata situaciones en caso de que no se encuentre nada en la busqueda
+	 */
 	@Override
 	public Usuario buscarUsuario(String buscado) throws Exception {
 		Usuario encontrado = iUsuario.findByNombreUsuario(buscado).orElseThrow(()->new Exception ("El usuario buscado no Existe en nuestra base de Datos"));

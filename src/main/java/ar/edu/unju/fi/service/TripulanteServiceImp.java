@@ -19,6 +19,9 @@ import ar.edu.unju.fi.repository.ITripulanteDAO;
 @Service
 public class TripulanteServiceImp implements ITripulanteService{
 
+	/**
+	 * Inyección de un objeto implementador de la clase ITripulanteDAO para la conexión con la capa repository
+	 */
 	@Autowired
 	private ITripulanteDAO iTripulante;
 
