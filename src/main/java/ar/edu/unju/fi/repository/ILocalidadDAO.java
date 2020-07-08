@@ -3,6 +3,7 @@ package ar.edu.unju.fi.repository;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import ar.edu.unju.fi.model.Localidad;
 
@@ -31,6 +32,7 @@ public interface ILocalidadDAO extends JpaRepository<Localidad, Long>{
 	 * @param estado, "true" si la localidad esta activa y "false" si esta inactiva
 	 * @return Iterable con las localidades encontradas
 	 */
+	@Query("from Localidad l order by l.nombre")
 	public Iterable<Localidad> findByEstado(boolean estado);
 	
 }

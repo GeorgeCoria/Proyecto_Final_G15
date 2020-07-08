@@ -78,14 +78,14 @@
 			</div>
 
 			<!-- ************** TABLA PARA EFECTUAR EL LISTADO DE USUARIOS **************  -->
-			<div class="my-custom-scrollbar1 table-wrapper-scroll-y">
+			<div class="my-custom-scrollbar1 table-wrapper-scroll-y mb-5">
 				<table class="table table-reponsive-sm table-striped">
 					<thead>
 						<tr>
 							<th scope="col">ID</th>
-							<th scope="col">Usuario</th>
-							<th scope="col">Nombre</th>
 							<th scope="col">Apellido</th>
+							<th scope="col">Nombre</th>
+							<th scope="col">Usuario</th>
 							<th scope="col">Tipo de Usuario</th>
 							<th th:if="${busqueda} or ${suspendido}" scope="col">Estado</th>
 							<th scope="col">Accion</th>
@@ -97,9 +97,9 @@
 						<tr th:each="usuario : ${listaUsuarios}" th:if="${usuario.tipoUsuario ne 'BD'}">
 							
 							<th th:text="${usuario.id}"></th>
-							<td th:text="${usuario.nombreUsuario}"></td>
-							<td th:text="${usuario.nombreReal}"></td>
 							<td th:text="${usuario.apellidoReal}"></td>
+							<td th:text="${usuario.nombreReal}"></td>
+							<td th:text="${usuario.nombreUsuario}"></td>													
 							<td th:text="${usuario.tipoUsuario}"></td>
 							<td th:if="${busqueda} or ${suspendido}"
 								th:text="${usuario.estado==true}?'Habilitado':'Inhabilitado'">

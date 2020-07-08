@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import ar.edu.unju.fi.model.Usuario;
 
@@ -46,6 +47,7 @@ public interface IUsuarioDAO extends JpaRepository<Usuario, Long> {
 	 * @param estado requerido para generar la Lista
 	 * @return Lista de tipo Usuario
 	 */
+	@Query("from Usuario u order by u.apellidoReal")
 	public List<Usuario> findByEstado(boolean estado);
 
 }

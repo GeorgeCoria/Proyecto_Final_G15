@@ -5,7 +5,7 @@
 	position: relative;
 
 }
-/* Fuente */	
+/* Fuente general*/	
 .fuente{
 	font-family: 'Open sans';
 
@@ -45,7 +45,7 @@ overflow: auto;
 }
 .my-custom-scrollbar1{
 	position: relative;
-	height: 600px;
+	height: 400px;
 	overflow: auto;
 }
 .table-wrapper-scroll-y {
