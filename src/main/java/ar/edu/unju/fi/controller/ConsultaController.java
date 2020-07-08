@@ -31,6 +31,10 @@ import ar.edu.unju.fi.utils.ConsultaVehiculo;
 
 
 /**
+ * Clase que se encargada de tomar las peticiones y controlar que respuesta debe
+ * ser presentada en la vista Consutal 
+ * (plantillas buscarPatente - buscarTripulante - buscarVehiculos /.html).
+ * 
  * @author Castillo, Jorge E.
  *
  */
@@ -38,15 +42,41 @@ import ar.edu.unju.fi.utils.ConsultaVehiculo;
 @Controller
 public class ConsultaController {
 
-
+	//----------------- Variables Miembros o Atributos -----------------//
+	
+	/**
+	 * Representa la interfaz Service de Vehiculo. 
+	 */
 	@Autowired
 	private IVehiculoService vehiculoService;
+	
+	/**
+	 * Representa la interfaz Service de RegistroTracking.
+	 */
 	@Autowired
 	private IRegistroTrackingService trackingService;
+	
+	/**
+	 * Representa la interfaz Service de Tripulante.
+	 */
 	@Autowired
 	private ITripulanteService tripulanteService;
+	
+	/**
+	 * Representa la interfaz Service de Localidad.
+	 */
 	@Autowired
 	private ILocalidadService localidadService;
+	
+	/**
+	 * Representa un objeto de ConsultaVehiculo.
+	 */
+	@Autowired
+	private ConsultaVehiculo consultaVehiculo;
+	
+	
+	//////////////////////////////////////////////////////////////////////////////////////////////////////
+	//----------------- Metodos -----------------//
 	
 	
 	//-----------------------------------------------//
@@ -54,77 +84,93 @@ public class ConsultaController {
 	//-----------------------------------------------//
 	
 
+	/**
+	 * Primera accion que se realizara al poner el url /vehiculos (iniciar consulta)
+	 * Mostrara una lista de localidad listada, tendra un modelo de consulta para las consultas a realizar y 
+	 * las tablas estaran ocultas.
+	 * 
+	 * @param modelo se enviara para obtener las consulta realizada por Rango fechas y Localidad.
+	 * @return la plantilla buscarVehiculos.html 
+	 */
 	@GetMapping("/vehiculos")
-	public String getListLocalidad(Model modelo) {
+	public String iniciarConsultasLocalidadAndRangoFechas(Model modelo) {
 	
-		//Listando todas las localidades
+		//Lista todas las localidades habilitadas.
 		Iterable<Localidad> localidades= localidadService.listarLocalidades(true);
 		modelo.addAttribute("localidades", localidades);
 		
-		//Cajas que muestra el resultado de la busqueda
+		//Muestra el resultado de la busqueda (Deshabilitado)
 		modelo.addAttribute("activo", false);
 		modelo.addAttribute("modeloConsulta", new ConsultaVehiculo());
 		
 		return "buscarVehiculos";
 	}
 	
+	/**
+	 * Busca los vehiculos que esten en el rango de fechas y localidad.
+	 * Si pasa los controles de validacion y excepcion, mostrara los resultados,
+	 * caso contrario, mostrara segun el error detectado y se oculta las tablas.
+	 * 
+	 * @param consultaVehiculo, modelo obtenido de la consulta realizada.
+	 * @param result, validara las consulta realizada.
+	 * @param modelo, se utilizara modelos que se enviara como resultados.
+	 * @return plantilla buscarVehiculos.html dependiendo de los resultados.
+	 */
 	@PostMapping("/buscarVehiculosPorRangoFechaAndLocalidad")
 	public String buscarVehiculos(@Valid @ModelAttribute("modeloConsulta") ConsultaVehiculo consultaVehiculo, 
 			BindingResult result, Model modelo) {
-		
-		//Objeto que se le assignara cuando encuentre localidad
-		Localidad localidadEncontrada= new Localidad();
-				
-		//Objeto que se le asignara mas adelante, los registro de la localidad seleccionada y rango de fechas.
-		List<RegistroTracking> registrosLocalidade= new ArrayList<>();
-				
-		//Objeto que se le asignara los tripulante del registro buscado por localidad y rango de fechas.
-		List<Tripulante> tripulantesLocalidade= new ArrayList<>();
 		
 		
 		//Lista todas las localidades.
 		Iterable<Localidad> localidades= localidadService.listarLocalidades(true);
 		modelo.addAttribute("localidades", localidades);
 		
+		//Se almacenara el resultado de la busqueda.
+		this.consultaVehiculo= consultaVehiculo;
+			
+		//Objeto que se le asignara los tripulantes del registro buscado por localidad y rango de fechas.
+		List<Tripulante> tripulantes= new ArrayList<>();
+		
+
 		//Validando
 		if(result.hasErrors() == false) {
 			try {
 				
 				//Busca el objeto de la localidad selecionada
-				localidadEncontrada = localidadService.buscarNombreLocalidad(consultaVehiculo.getLocalidad().getNombre());
+				Localidad localidadEncontrada = localidadService.buscarNombreLocalidad(consultaVehiculo.getLocalidad().getNombre());
 				
 				//Busca el registro de la localidad seleccionada y rango de fechas.
-				registrosLocalidade = trackingService.getRegistrosRangoFechasAndLocalidad
+				List<RegistroTracking> registrosConsulta = trackingService.getRegistrosRangoFechasAndLocalidad
 						(consultaVehiculo.getFechaDesde(), consultaVehiculo.getFechaHasta(), localidadEncontrada);
 				
 				//Revisa si esta vacia
-				if(registrosLocalidade.isEmpty()){
+				if(registrosConsulta.isEmpty()){
 					
-					modelo.addAttribute("errorMessage", "La localidad o el rango de fechas seleccionados no tiene registro");
-					//Cajas que muestra el resultado de la busqueda
+					modelo.addAttribute("error", "La localidad o el rango de fechas seleccionados no tiene registro");
+					//Muestra el resultado de la busqueda (Deshabilitado)
 					modelo.addAttribute("activo", false);
 					
 					return "buscarVehiculos";
 				}
 				
-				//Guarda las listas de los tripulantes de la localidad seleccionada
-				for ( RegistroTracking n : registrosLocalidade) {
+				//Guarda las listas de los tripulantes de la localidad seleccionada y rango de fechas.
+				for ( RegistroTracking n : registrosConsulta) {
 					
-					tripulantesLocalidade.addAll(n.getTripulantes());
+					tripulantes.addAll(n.getTripulantes());
 				}
 				
 				//Envia el objeto de las listas de los tripulantes de la localidad seleccionada y rango de fechas.
-				modelo.addAttribute("tripulantesLocalidad", tripulantesLocalidade);
+				modelo.addAttribute("tripulantes", tripulantes);
 				
 				//Envia el objeto de los registros de la localidad seleccionada y rango de fechas.
-				modelo.addAttribute("registrosLocalidad", registrosLocalidade);
+				modelo.addAttribute("registrosConsulta", registrosConsulta);
 				
 				//Envia el id del registro (No es necesario ahora, pero para q no se vea vacio)
 				modelo.addAttribute("idRegistro", "-");
 				
 			} catch (Exception e) {
 				
-				modelo.addAttribute("errorMessage", "La localidad seleccionada no exite");
+				modelo.addAttribute("error", "La localidad seleccionada no exite");
 				//Cajas que muestra el resultado de la busqueda
 				modelo.addAttribute("activo", false);
 				
@@ -139,34 +185,62 @@ public class ConsultaController {
 		return "buscarVehiculos";
 	}
 	
+	
 
-	@GetMapping("/buscar/vehiculo/{id}")		
+	/**
+	 * Buscara el registro del id enviado para mostrar los tripulantes de ese
+	 * registro.
+	 * 
+	 * Se usara los datos enviado por la consulta realizada para mostrar los demas resultado.
+	 * 
+	 * @param id, id enviado para realizar la busqueda de ese registro.
+	 * @param modelo, se utilizara modelos que se enviara como resultados.
+	 * @return la plantilla buscarVehiculos..html
+	 */
+	@GetMapping("/buscar/registro/{id}")		
 	public String buscarRegistro(@PathVariable Long id, Model modelo) {
-		
-		//Objeto que almacenara el registro del id enviado
-		RegistroTracking registroVehiculo = new RegistroTracking();
-		
-		//Objeto que almacenara los tripulantes del registro buscado por id
-		List<Tripulante> registroTripulantes = new ArrayList<>();
-		
-		List<RegistroTracking> registrosLocalidade= new ArrayList<>();
-		Localidad localidadEncontrada= new Localidad();
 		
 		//Lista todas las localidades.
 		Iterable<Localidad> localidades= localidadService.listarLocalidades(true);
 		modelo.addAttribute("localidades", localidades);
+		
+		//Objeto que almacenara el registro del id enviado
+		RegistroTracking registroVehiculo = new RegistroTracking();
+		
+		List<RegistroTracking> registrosConsulta= new ArrayList<>();
+		//Localidad localidadEncontrada= new Localidad();
+		
+		//Objeto que almacenara los tripulantes del registro buscado por id
+		List<Tripulante> tripulantes = new ArrayList<>();
 				
 		try {
 			
 			//Busca el ID del registro
 			registroVehiculo= trackingService.getRegistros(id);
 			
-			//Busca la localidad selecionada (es necesario por el ID)
-			localidadEncontrada = localidadService.buscarNombreLocalidad(registroVehiculo.getLocalidad().getNombre());
+			try {
+				
+				//Busca la localidad de la consulta anteriormente seleccionado.
+				Localidad localidad= localidadService.buscarNombreLocalidad(this.consultaVehiculo.getLocalidad().getNombre());
+				
+				registrosConsulta = trackingService.getRegistrosRangoFechasAndLocalidad
+						(this.consultaVehiculo.getFechaDesde(), this.consultaVehiculo.getFechaHasta(), localidad);
+
+			} catch (Exception e) {
+				modelo.addAttribute("error", "La localidad o el rango de fechas seleccionados no tiene registro");
+				
+				//Cajas que muestra el resultado de la busqueda
+				modelo.addAttribute("activo", false);
+				
+				//Objeto para capturar el nombre de la localidad
+				modelo.addAttribute("modeloConsulta", new ConsultaVehiculo());
+				
+				return "buscarVehiculos";
+			}
 			
 		} catch (Exception e) {
 			
-			modelo.addAttribute("errorMessege", "La localidad o el rango de fechas seleccionados no tiene registro");
+			modelo.addAttribute("error", "el id seleccionado no existe");
 			//Cajas que muestra el resultado de la busqueda
 			modelo.addAttribute("activo", false);
 			
@@ -176,34 +250,22 @@ public class ConsultaController {
 			return "buscarVehiculos";
 		}
 		
-		//Busca el registro de la localidad seleccionada
-		registrosLocalidade = trackingService.getRegistrosLocalidad(localidadEncontrada);
 		
-		if(registrosLocalidade.isEmpty()){
-			
-			modelo.addAttribute("errorMessage", "La localidad seleccionada no tiene registro");
-			//Cajas que muestra el resultado de la busqueda
-			modelo.addAttribute("activo", false);
-			
-			//Objeto para capturar el nombre de la localidad
-			modelo.addAttribute("modeloConsulta", new ConsultaVehiculo());
-			return "buscarVehiculos";
-		}
+		//Se guarda los tripulantes del registro ID seleccionado.
+		tripulantes.addAll(registroVehiculo.getTripulantes());
 		
-		registroTripulantes.addAll(registroVehiculo.getTripulantes());
+		//Envia el objeto del listado de los tripulantes.
+		modelo.addAttribute("tripulantes", tripulantes);
 		
-		//Envia el objeto del listado de los tripulantes de la localidad seleccionada
-		modelo.addAttribute("tripulantesLocalidad", registroTripulantes);
-		
-		//Objeto para capturar el nombre de la localidad
-		modelo.addAttribute("modeloConsulta", new ConsultaVehiculo());
-				
 		//Envia los registros de la localidad seleccionada
-		modelo.addAttribute("registrosLocalidad", registrosLocalidade);
+		modelo.addAttribute("registrosConsulta", registrosConsulta);
 				
 		//Envia el id del registro
 		modelo.addAttribute("idRegistro", id);
 				
+		//Objeto para capturar el nombre de la localidad
+		modelo.addAttribute("modeloConsulta", new ConsultaVehiculo());
+		
 		//Cajas que muestra el resultado de la busqueda
 		modelo.addAttribute("activo", true);
 				
@@ -217,8 +279,16 @@ public class ConsultaController {
 	//----- Seccion buscarTripulante (plantilla) -----//
 	//------------------------------------------------//
 	
+	
+	/**
+	 * Primera accion que se realizara al poner el url /tripulante (iniciar consulta)
+	 * Tendra un modelo para la consulta por documento y las tablas estaran escondidas
+	 * 
+	 * @param modelo se usara para enviar un modelo Tripulante para la consulta a realizar.
+	 * @return la plantilla buscarTripulante.html
+	 */
 	@GetMapping("/tripulante")
-	public String buscarTripulante(Model modelo) {
+	public String iniciarConsultaPorTripulante(Model modelo) {
 		
 		modelo.addAttribute("modeloTripulante", new Tripulante());
 		
@@ -228,13 +298,24 @@ public class ConsultaController {
 		return "buscarTripulante";
 	}
 	
+	
+	
+	/**
+	 * Mostrara los datos personales del tripulante y registros si
+	 * pasa los controles de validacion y excepcion.
+	 * 
+	 * @param tripulante, se lo usara para buscar el tripulante.
+	 * @param modelo, se enviara modelos dependiendo del resultado de la consulta realizado.
+	 * @return la plantilla buscarTripulante.html
+	 */
 	@PostMapping("/searchTripulante")
-	public String getTripulante(@ModelAttribute("modeloTripulante") Tripulante tripulante, 
+	public String buscarTripulante(@ModelAttribute("modeloTripulante") Tripulante tripulante, 
 			 Model modelo) {
 		
 		Tripulante tripulanteEncontrado= new Tripulante();
 		
-		//Validando
+		List<RegistroTracking> tripulantes= new ArrayList<>();
+		
 		//Validando
 		if (tripulante.getDocumento().isEmpty() == false)
 		{
@@ -243,11 +324,20 @@ public class ConsultaController {
 				//Buscando Tripulante por documento.
 				tripulanteEncontrado= tripulanteService.buscarTripulante(tripulante.getDocumento());
 				
+				tripulantes=trackingService.getRegistrosTripulante(tripulanteEncontrado);
+				
+				if (tripulantes.isEmpty()) {
+					//Cajas que muestra el resultado de la busqueda
+					modelo.addAttribute("activo", false);
+					modelo.addAttribute("error", "El numero de documento no tiene registro");
+					
+					return "buscarTripulante";
+				}
 			} catch (Exception e) {
 				
 				//Cajas que muestra el resultado de la busqueda
 				modelo.addAttribute("activo", false);
-				modelo.addAttribute("errorMessage", "El numero de documento no existe");
+				modelo.addAttribute("error", "El numero de documento no existe");
 				
 				return "buscarTripulante";
 			}
@@ -256,7 +346,7 @@ public class ConsultaController {
 			//Envia los datos del Tripulante.
 			modelo.addAttribute("datoTripulante", tripulanteEncontrado);
 			//Envia los registros del Tripulante
-			modelo.addAttribute("registroTripulante", trackingService.getRegistrosTripulante(tripulanteEncontrado)); 
+			modelo.addAttribute("registroTripulante", tripulantes); 
 			
 			//Cajas que muestra el resultado de la busqueda
 			modelo.addAttribute("activo", true);
@@ -264,11 +354,8 @@ public class ConsultaController {
 		else {
 			//Cajas que muestra el resultado de la busqueda
 			modelo.addAttribute("activo", false);
-			modelo.addAttribute("errorMessage", "Ingrese numero de documento Ej: 39123456");
+			modelo.addAttribute("error", "Ingrese numero de documento Ej: 39123456");
 		}
-		
-		
-		
 		
 		return "buscarTripulante";
 	}
@@ -277,8 +364,14 @@ public class ConsultaController {
 	//----- Seccion buscarPatente (plantilla) -----//
 	//---------------------------------------------//
 	
+	/**
+	 * Primera accion que se realizara al poner el url /tripulante (iniciar consulta)
+	 * Tendra un modelo Vehiculo para las consulta a realizar y las tablas estaran ocultas
+	 * @param modelo, se enviara modelo para la consulta a realizar.
+	 * @return la plantilla buscarPatente.html
+	 */
 	@GetMapping("/patente")
-	public String buscarPatente( Model modelo) {
+	public String inciarConsultaPatente( Model modelo) {
 		
 		modelo.addAttribute("modeloVehiculo", new Vehiculo());
 		//Cajas que muestra el resultado de la busqueda
@@ -286,13 +379,25 @@ public class ConsultaController {
 		return "buscarPatente";
 	}
 	
+	
+	/**
+	 * Busca el registro del vehiculo, y sus tripulantes
+	 * siempre y cuando pase por la validacion y exception.
+	 * 
+	 * @param vehiculo, modelo tipo Vehiculo que se usara para buscar al vehiculo.
+	 * @param modelo, se enviara modelos dependiendo del resultado obtenido.
+	 * @return la plantilla buscarPatente.html
+	 */
 	@PostMapping("/searchPatente")
-	public String getPatente (@ModelAttribute("modeloVehiculo") Vehiculo vehiculo, 
+	public String buscarPatente (@ModelAttribute("modeloVehiculo") Vehiculo vehiculo, 
 			Model modelo) {
 		
 		Vehiculo vehiculoEncontrado= new Vehiculo();
-		List<Tripulante> vehiculoTripulantes= new ArrayList<>();
+
 		List<RegistroTracking> registroVehiculo= new ArrayList<>();
+		
+		//Lista que se le asignara los tripulantes de los registros del vehiculo buscado.
+		List<Tripulante> tripulantes= new ArrayList<>();
 		
 		//Validando
 		if(vehiculo.getPatente().isEmpty() == false) {
@@ -301,23 +406,36 @@ public class ConsultaController {
 				
 				//Buscando la patente del Vehiculo
 				vehiculoEncontrado= vehiculoService.buscarVehiculo(vehiculo.getPatente());
+				//Busca los registros del vehiculoEncontrado
+				registroVehiculo=trackingService.getRegistrosVehiculo(vehiculoEncontrado);
+				
+				
+				System.out.println(vehiculoEncontrado);
+				
+				System.out.println(registroVehiculo);
+				if (registroVehiculo.isEmpty()) {
 					
+					//Cajas que muestra el resultado de la busqueda
+					modelo.addAttribute("activo", false);
+					modelo.addAttribute("error", "La patente ingresada no tiene registro");
+					
+					return "buscarPatente";
+				}
 			} catch (Exception e) {
 				
 				//Cajas que muestra el resultado de la busqueda
 				modelo.addAttribute("activo", false);
-				modelo.addAttribute("errorMessage", "La patente ingresada no existe asegurese de que este bien -> Ej: AAA123 / AAA123EE");
+				modelo.addAttribute("error", "La patente ingresada no existe  -> Ej: AAA123 / AAA123EE");
 				
 				return "buscarPatente";
 			}
 		
-			//Busca los registros del vehiculoEncontrado
-			registroVehiculo=trackingService.getRegistrosVehiculo(vehiculoEncontrado);
+			
 				
 			//Se asigna la listas de los Tripulantes del Registro de Vehiculo buscado.
 			for ( RegistroTracking n : registroVehiculo)
 			{
-				vehiculoTripulantes.addAll(n.getTripulantes());
+				tripulantes.addAll(n.getTripulantes());
 			}
 				
 			//Envia los datos del Vehiculo
@@ -325,7 +443,7 @@ public class ConsultaController {
 			//Envia los registros del Vehiculo 
 			modelo.addAttribute("registroVehiculo",registroVehiculo);
 			//Envia los registros de los Tripulantes del Vehiculo buscado
-			modelo.addAttribute("tripulanteVehiculo", vehiculoTripulantes);
+			modelo.addAttribute("tripulanteVehiculo", tripulantes);
 			
 			//No necesario actualmente, pero en la busqueda de id, sera reemplazado
 			modelo.addAttribute("id", "-");
@@ -336,12 +454,20 @@ public class ConsultaController {
 		else {
 			//Cajas que muestra el resultado de la busqueda
 			modelo.addAttribute("activo", false);
-			modelo.addAttribute("errorMessage", "Ingrese la patente -> Ej: AAA123 / AAA123EE");
+			modelo.addAttribute("error", "Ingrese la patente -> Ej: AAA123 / AAA123EE");
 		}
 		return "buscarPatente";
 	}
 	
-	@GetMapping("/buscar/patente/{id}")		
+	/**
+	 * Busca el registro del vehiculo con el id enviado, si 
+	 * pasa las exception, mostrara los tripulante de ese id Registro. 
+	 * 
+	 * @param id, se usara para buscar el registro del vehiculo.
+	 * @param modelo, se enviara modelos dependiendo del resultado optenido.
+	 * @return la plantilla buscarPatente.html
+	 */
+	@GetMapping("/search/registro/{id}")		
 	public String searchRegistro(@PathVariable Long id, Model modelo) {
 		
 		//Objeto que guardara el registro del id del vehiculo
@@ -364,7 +490,7 @@ public class ConsultaController {
 		} catch (Exception e) {
 			//Cajas que muestra el resultado de la busqueda
 			modelo.addAttribute("activo", false);
-			modelo.addAttribute("errorMessage", "La patente ingresada no existe asegurese de que este bien -> Ej: AAA123 / AAA123EE");
+			modelo.addAttribute("error", "La patente ingresada no existe asegurese de que este bien -> Ej: AAA123 / AAA123EE");
 			modelo.addAttribute("modeloVehiculo", new Vehiculo());
 			return "buscarPatente";
 		}
@@ -396,38 +522,69 @@ public class ConsultaController {
 	//----- Seccion buscarVehiculos ( PARCHE ) -----//
 	//----------------------------------------------//
 	
-	@GetMapping("/buscar/vehiculo/vehiculos")
-	public String getWebVehiculo1 () {
+	/**
+	 * Redirecciona la vista.
+	 * 
+	 * @return la vista /vehiculos
+	 */
+	@GetMapping("/buscar/registro/vehiculos")
+	public String getWebVehiculos1 () {
 				
 		return "redirect:/vehiculos";
 	}
 	
-	@GetMapping("/buscar/vehiculo/patente")
+	/**
+	 * Redirecciona la vista.
+	 * 
+	 * @return la vista /patente
+	 */
+	@GetMapping("/buscar/registro/patente")
 	public String getWebPatente1 () {
 				
 		return "redirect:/patente";
 	}
 	
-	@GetMapping("/buscar/vehiculo/tripulante")
+	/**
+	 * Redirecciona la vista.
+	 * 
+	 * @return la vista /tripulante
+	 */
+	@GetMapping("/buscar/registro/tripulante")
 	public String getWebTripulante1 () {
 				
 		return "redirect:/tripulante";
 	}
 	
+//-----------------------------------------------------------------------------//
 	
-	@GetMapping("/buscar/patente/vehiculos")
-	public String patente () {
+	/**
+	 * Redirecciona la vista.
+	 * 
+	 * @return la vista /vehiculos
+	 */
+	@GetMapping("/search/registro/vehiculos")
+	public String getWebVehiculos2 () {
 				
 		return "redirect:/vehiculos";
 	}
 	
-	@GetMapping("/buscar/patente/patente")
+	/**
+	 * Redirecciona la vista.
+	 * 
+	 * @return la vista /patente
+	 */
+	@GetMapping("/search/registro/patente")
 	public String getWebPatente2 () {
 				
 		return "redirect:/patente";
 	}
 	
-	@GetMapping("/buscar/patente/tripulante")
+	/**
+	 * Redirecciona la vista.
+	 * 
+	 * @return la vista /tripulante
+	 */
+	@GetMapping("/search/registro/tripulante")
 	public String getWebTripulante2 () {
 				
 		return "redirect:/tripulante";
