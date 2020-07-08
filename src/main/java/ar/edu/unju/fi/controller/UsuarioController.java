@@ -16,6 +16,10 @@ import ar.edu.unju.fi.model.Usuario;
 import ar.edu.unju.fi.service.UsuarioServiceImp;
 
 /**
+ * Clase que se encargada de tomar las peticiones y controlar que respuesta debe
+ * ser presentada en la vista (paginas html: adminPrincipal.html,
+ * adminFormulario.html) de nuestro proyecto.
+ * 
  * @author Velarde Marcia
  * 
  */
@@ -25,9 +29,10 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioServiceImp usuarioService;
 	
-	//llamada al formulario
+	//Anotacion asociada a la url (/adminFormulario) que se acciona al ingresar a dicha url
 	@GetMapping("/adminFormulario")
 	public String mostrarFormAdmin(Model model) {
+		//Se manda a la vista un objeto de tipo Usuario vacio
 		model.addAttribute("usuarioDelForm", new Usuario());
 		return "adminFormulario";
 	}
@@ -35,43 +40,41 @@ public class UsuarioController {
 	//Evento luego de enviar datos del formulario
 	@PostMapping("/adminFormulario") 
 	public String crearUsuario(@Valid @ModelAttribute("usuarioDelForm") Usuario usuario, BindingResult result, ModelMap model) {
-		//se verifica errores de validacion en hml
+		//Se verifica errores de validacion en hml
 		if(result.hasErrors()) {
+			//Se manda a la vista el objeto usuario cargado con los datos que ingreso el usuario bd
 			model.addAttribute("usuarioDelForm", usuario);
 			return "adminFormulario";
 		}else {
 			try {
-				//al crear un usuario por defecto se le da un estado TRUE
+				//Al crear un usuario por defecto se le da un estado TRUE
 				usuario.setEstado(true);
+				//Se guarda en la base de datos el usuario agregado
 				usuarioService.crear(usuario);
-				model.addAttribute("usuarioDelForm", new Usuario());
-				model.addAttribute("listaUsuarios", usuarioService.listarUsuarios(true));
-				model.addAttribute("usuarioBuscado", new Usuario());
-				model.addAttribute("tituloPrincipal", "LISTA DE USUARIOS");
-				return "adminPrincipal";
+				return "redirect:/adminPrincipal";
 			}catch (Exception e){
 				//Acciones si ocurriese algun evento inesperado
 				model.addAttribute("formError", e.getMessage());
 				model.addAttribute("usuarioDelForm", usuario);
-				model.addAttribute("usuarioBuscado", new Usuario());
 				return "adminFormulario";
 			}
-		}
-		
-		
+		}	
 	}
 	
 	//Evento activado cunado se quiere editar un usuario, se pasa el id del mismo
-	//para luego sus datos se muestren en el formulario para procedes con la 
-	//edicion de los datos disponible
+	//para luego sus datos se muestren en el formulario para proceder con la 
+	//edicion de los datos disponibles
 	@GetMapping("/editarUsuario/{id}")
 	public String obtenerFormularioEditarUsuario(Model model, @PathVariable(name="id") Long id ) throws Exception{
 		try{
+			//Se guarda en un objeto de tipo Usuario el usuario encontrado por el id
 			Usuario usuarioEncontrado = usuarioService.encontrarUsuario(id);
+			//Se manda a la vista los datos editables del usuario encontrado 
 			model.addAttribute("usuarioDelForm", usuarioEncontrado);
 			model.addAttribute("editMode", "true");
 			return "adminFormulario";
 		}catch(Exception e){
+			//Acciones si ocurriese algun evento inesperado
 			model.addAttribute("formError",e.getMessage());
 			model.addAttribute("usuarioDelForm", new Usuario());
 			model.addAttribute("editMode", "false");
@@ -84,40 +87,41 @@ public class UsuarioController {
 	@PostMapping("/editarUsuario")
 	public String postEditarUsuario(@Valid @ModelAttribute("usuarioDelForm") Usuario usuario, BindingResult result, ModelMap model) {
 		if(result.hasErrors()) {
+			//Si ocurre un error se manda a la vista de nuevo los datos del usuario
 			model.addAttribute("usuarioDelForm", usuario);
 			model.addAttribute("editMode", "true");
 			return "adminFormulario";
 		}else {
 			try {
-					usuarioService.modificar(usuario);
-					model.addAttribute("usuarioDelForm", new Usuario());
-					model.addAttribute("editMode", "false");
-					return "redirect:/adminPrincipal";
-				}catch(Exception e) {
-					model.addAttribute("formError", e.getMessage());
-					model.addAttribute("usuarioDelForm", usuario);
-					model.addAttribute("editMode", "true");
-					return "adminFormulario";
+				//Se guardan los cambios en los datos del usuario
+				usuarioService.modificar(usuario);
+				model.addAttribute("editMode", "false");
+				return "redirect:/adminPrincipal";
+			}catch(Exception e) {
+				//Acciones si ocurriese algun evento inesperado
+				model.addAttribute("formError", e.getMessage());
+				model.addAttribute("usuarioDelForm", usuario);
+				model.addAttribute("editMode", "true");
+				return "adminFormulario";
 				}
 		}
 	}
 	
+	//Se acciona con el boton CANCELAR
 	@GetMapping("/editarUsuario/cancelar")
 	public String cancelEditUser() {
 		return "redirect:/adminPrincipal";
 	}
 	
-	/*Metodo que gestiona la eliminacion de un Usuario,
+	/* Metodo que gestiona la eliminacion de un Usuario,
 	 * sin embargo con eliminacion, nos referimos a que el 
 	 * usuario seleccionado para a tener un estado inactivo
 	 * Esto implica que no estara disponible en la lista principal
 	 * de Usuarios.
 	 */
-	
 	@GetMapping("/eliminarUsuario/{id}")
 	public String eliminarUsuario(Model model, @PathVariable(name="id") Long id) {
 		try {
-			//Usuario usuarioEncontrado = usuarioService.encontrarUsuario(id);
 			usuarioService.eliminar(id);
 		}catch(Exception e) {
 				model.addAttribute("listErrorMessage",e.getMessage());
@@ -125,23 +129,24 @@ public class UsuarioController {
 		return "redirect:/adminPrincipal";
 	}
 	
-	//llamado a la ventana Principal del Usuario administrador
+	//Llamado a la ventana Principal del Usuario administrador
 	@GetMapping("/adminPrincipal")
 	public String mostrarListaAdmin(Model model) throws Exception {
 		try {
-			//se listan usuario en estado activo
-			model.addAttribute("listaUsuarios", usuarioService.listarUsuarios(true));	
-			
+			//Se listan los usuarios en estado activo
+			model.addAttribute("listaUsuarios", usuarioService.listarUsuarios(true));
 		}catch(Exception e){
 			model.addAttribute("listErrorMessage", e.getMessage());
 		}
 		model.addAttribute("tituloPrincipal", "LISTA DE USUARIOS");
+		//Se activa la solapa "principal"
 		model.addAttribute("principal","active");
+		//Se limpia el input de busqueda por nombre de usuario
 		model.addAttribute("usuarioBuscado", new Usuario());
 		return "adminPrincipal";
 	}
 	
-	//Muestra una lista de solo Usuario Registradores
+	//Muestra una lista con solo usuarios Registradores
 	@GetMapping("/Registrador")
 	public String mostrarListaRegistrador(Model model) throws Exception {
 		try {
@@ -151,11 +156,10 @@ public class UsuarioController {
 		}
 		model.addAttribute("tituloPrincipal", "REGISTRADORES");
 		model.addAttribute("registrador","active");
-		model.addAttribute("usuarioBuscado", new Usuario());
 		return "adminPrincipal";
 	}
 	
-	//Muestra una lista con solo consultores
+	//Muestra una lista con solo usuarios consultores
 	@GetMapping("/Consultor")
 	public String mostrarListaConsultores(Model model) throws Exception{
 		try {
@@ -165,7 +169,6 @@ public class UsuarioController {
 		}
 		model.addAttribute("tituloPrincipal", "CONSULTORES");
 		model.addAttribute("consultor","active");
-		model.addAttribute("usuarioBuscado", new Usuario());
 		return "adminPrincipal";
 	}
 	
@@ -187,7 +190,6 @@ public class UsuarioController {
 			}
 			catch(Exception e) {
 				model.addAttribute("errorBusqueda",e.getMessage());
-				
 			}
 		}
 		model.addAttribute("tituloPrincipal", "RESULTADO DE BUSQUEDA");

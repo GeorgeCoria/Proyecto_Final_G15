@@ -17,7 +17,7 @@ import ar.edu.unju.fi.service.LocalidadServiceImp;
 
 /**
  * Clase que se encargada de tomar las peticiones y controlar que respuesta debe
- * ser presentada en la vista (paginas html) de nuestro proyecto.
+ * ser presentada en la vista (paginas html: adminLocalidad.html) de nuestro proyecto.
  * 
  * @author Velarde Marcia, Toconas Juan
  * 
@@ -28,31 +28,54 @@ public class LocalidadController {
 	@Autowired
 	private LocalidadServiceImp localidadService;
 	
-	
+	/**
+	 * Muestra la pagina del formulario y lista de localidades
+	 * 
+	 * @param model, el model que usara la pagina
+	 * @return la pagina del formulario y lista de localidades
+	 */
 	@GetMapping("/adminLocalidad")
 	public String mostrarLocalidad(Model model) {
 		model.addAttribute("titulo", "LOCALIDAD");
+		//Se manda a la vista un objeto de tipo Localidad vacio
 		model.addAttribute("localidadForm", new Localidad());
+		//Se lista las localidades activas
 		model.addAttribute("listaLocalidades", localidadService.listarLocalidades(true));
+		//Se activa el boton guardar
 		model.addAttribute("guardarLocalidad","active");
 		return "adminLocalidad";
 	}
-	
+
+	/**
+	 * Permite invocar al servicio que permite guardar la localidad, asi como a los
+	 * servicios que realizan los listados necesario
+	 * 
+	 * @param localidad, con los datos capturados que ingreso el usuario
+	 * @param result,    que realizara la validacion de los campos
+	 * @param model,     el model que usara la pagina
+	 * @return la pagina que se renderizara
+	 */
 	@PostMapping("/adminLocalidad")
-	public String crearLocalidad(@Valid @ModelAttribute("localidadForm") Localidad localidad, BindingResult result, ModelMap model) {
-		if(result.hasErrors()) {
+	public String crearLocalidad(@Valid @ModelAttribute("localidadForm") Localidad localidad, BindingResult result,
+			ModelMap model) {
+		if (result.hasErrors()) {
 			model.addAttribute("localidadForm", localidad);
 		}else {
 			try {
+				//Se guarda en la base de datos la localidad
 				localidadService.crearLocalidad(localidad);
+				//Se limpia los datos del formulario
 				model.addAttribute("localidadForm", new Localidad());	
 			}catch (Exception e){
+				//En caso de errores se muestra el mensje correspondiente
 				model.addAttribute("formErrorMessage", e.getMessage());
 				model.addAttribute("localidadForm", localidad);
 			}
 		}
+		//Se listan las localidades activas
 		model.addAttribute("listaLocalidades", localidadService.listarLocalidades(true));
 		model.addAttribute("titulo", "LOCALIDAD");
+		//Se activa el boton guardar
 		model.addAttribute("guardarLocalidad", "active");
 		model.addAttribute("editMode", "false");
 		return "adminLocalidad";

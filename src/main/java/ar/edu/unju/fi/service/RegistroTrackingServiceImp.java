@@ -2,7 +2,6 @@ package ar.edu.unju.fi.service;
 
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,10 +27,13 @@ public class RegistroTrackingServiceImp implements IRegistroTrackingService {
 	private IRegistroTrackingDAO iRegistro;
 
 	/**
-	 * Guarda un registro con su fecha del tipo RegistroTracking
+	 * Metodo que permite guardar el registro Tracking en el gestor de persistencia
+	 * 
+	 * @param nuevoRegistro, objeto que se desea guardar
 	 */
 	@Override
 	public void crearRegistro(RegistroTracking nuevoRegistro) {
+		//Se le asigna por defecto la fecha actual al registro
 		nuevoRegistro.setFecha(LocalDate.now());
 		iRegistro.save(nuevoRegistro);
 	}

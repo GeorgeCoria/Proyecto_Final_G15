@@ -15,8 +15,22 @@ import ar.edu.unju.fi.model.Localidad;
  */
 public interface ILocalidadDAO extends JpaRepository<Localidad, Long>{
 
+	/**
+	 * Este metodo tiene por objetivo buscar una localidad en la base de datos segun
+	 * su nombre
+	 * 
+	 * @param nombre, nombre de la localidad buscada
+	 * @return un optional con la localidad encontrada o null
+	 */
 	public Optional<Localidad> findByNombre (String nombre);
 	
+	/**
+	 * Este metodo tiene por objetivo buscar una localidad en la base de datos segun
+	 * su estado 
+	 * 
+	 * @param estado, "true" si la localidad esta activa y "false" si esta inactiva
+	 * @return Iterable con las localidades encontradas
+	 */
 	public Iterable<Localidad> findByEstado(boolean estado);
 	
 }

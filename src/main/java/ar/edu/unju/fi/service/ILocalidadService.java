@@ -14,14 +14,28 @@ import ar.edu.unju.fi.model.Localidad;
  */
 public interface ILocalidadService {
 
+	/**
+	 * Metodo que permite guardar el estado de una localidad en el gestor de
+	 * persistencia
+	 * 
+	 * @param localidad, objeto de tipo Localidad que se desea guardar
+	 * @throws Exception
+	 */
 	public void crearLocalidad(Localidad localidad) throws Exception;
-	
+
+	/**
+	 * Metodo que permite listar las localidades segun el estado en el que se
+	 * encuentran
+	 * 
+	 * @param estado, true si estan activas, false si estan inactivas
+	 * @return un Iterable con la lista de localidades encontradas
+	 */
 	public Iterable<Localidad> listarLocalidades(boolean estado);
-	
-	public void eliminarLocalidad (Long id) throws Exception ;
-	
+
+	public void eliminarLocalidad(Long id) throws Exception;
+
 	public void habilitarLocalidad(Long id) throws Exception;
-	
+
 	public Localidad buscarLocalidad1(Long id) throws Exception;
 	
 	public Optional<Localidad> buscarLocalidad(Long id);

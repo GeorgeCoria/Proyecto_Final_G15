@@ -18,6 +18,11 @@ import ar.edu.unju.fi.model.Vehiculo;
  */
 public interface IRegistroTrackingService {
 
+	/**
+	 * Metodo que permite guardar el registro Tracking en el gestor de persistencia
+	 * 
+	 * @param nuevoRegistro, objeto que se desea guardar
+	 */
 	public void crearRegistro(RegistroTracking nuevoRegistro);
 	
 	public List<RegistroTracking> getRegistrosVehiculo(Vehiculo vehiculos);

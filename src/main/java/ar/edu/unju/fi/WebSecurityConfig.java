@@ -7,7 +7,6 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.authentication.AuthenticationManagerBeanDefinitionParser;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import ar.edu.unju.fi.service.LoginUsuarioServiceImp;
 
@@ -75,7 +74,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 				.loginPage("/login") //Se define la pagina de Login
 				.permitAll()
 				.successHandler(autenticacion)   //Se realiza la redireccion correcta
-				.failureUrl("/login?error=true") //donde rediroige en caso de error
+				.failureUrl("/login?error=true") //donde redirige en caso de error
 				.usernameParameter("username")   //parametro nombre de  usuario para login
 				.passwordParameter("password")   //parametro contraseña para login
 				.and()

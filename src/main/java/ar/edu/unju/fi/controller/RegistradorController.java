@@ -53,10 +53,16 @@ public class RegistradorController {
 	@Autowired
 	private RegistroTracking registro;
 	
-	//Anotacion asociada a la url (/registros)
+	/**
+	 * Se acciona con el ingreso a la url /registros
+	 * 
+	 * @param vehiculo, el objeto usado en la pagina para capturar los datos
+	 * @param model, el model que usara la pagina
+	 * @return la pagina de la verificacion de la patente
+	 */
 	@GetMapping("/registros")
 	public String verificarVehiculo(@ModelAttribute("vehiculo") Vehiculo vehiculo, ModelMap model) {
-		//Se manda a la vista el objeto vehiculo vacio
+		//Se manda a la vista un objeto de tipo Vehiculo vacio
 		model.addAttribute("vehiculo", new Vehiculo());
 		
 		//Se habilita o deshabilita la visualizacion de los botones
@@ -70,7 +76,15 @@ public class RegistradorController {
 		return "registroVehiculo";
 	}
 
-	//Anotacion asociada a la url (/registros/vehiculoBuscado) que se acciona por el boton BUSCAR
+	/**
+	 * Permite invocar el servicio que busca la patente del vehiculo en el gestor de
+	 * persistencia y de acuerdo a eso activa los botones correspondientes y refresca la pagina
+	 * 
+	 * @param vehiculo, en donde estara guardada la patente que se desea buscar
+	 * @param model, el model que usara la pagina
+	 * @return la paginas correspondientes
+	 * @throws Exception
+	 */
 	@PostMapping("/registros/vehiculoBuscado")
 	public String buscarVehiculo(@ModelAttribute("vehiculo") Vehiculo vehiculo, ModelMap model) throws Exception {
 		try { 
@@ -110,8 +124,16 @@ public class RegistradorController {
 			}
 		}
 	}
-	
-	//Anotacion asociada a la url (/registroTracking) que se acciona al apretar el boton SIGUIENTE
+
+	/**
+	 * Muestra la pagina del registro tracking, carga sus listas invocando a los
+	 * servicios correspondientes
+	 * 
+	 * @param tripulante
+	 * @param model, el model que usara la pagina
+	 * @return la pagina del registro tracking
+	 * @throws Exception, en caso de ocurrir errores las muestra en la pagina
+	 */
 	@GetMapping("/registroTracking")
 	public String siguienteRegistro(@ModelAttribute("tripulanteDelForm") Tripulante tripulante, Model model) throws Exception {
 		try{//Se manda a la vista un objeto de tipo registroTracking vacio
@@ -137,51 +159,82 @@ public class RegistradorController {
 		return "registroTracking";
 	}
 	
-	//Anotacion asociada a la url (/vehiculoForm) que se acciona con el boton AGREGAR (un vehiculo)
+	/**
+	 * Muestra la pagina del formulario del vehiculo cargado con la patente que
+	 * ingreso el usuario
+	 * 
+	 * @param vehiculo
+	 * @param model,   el model que usara la pagina
+	 * @return la pagina del formulario del vehiculo
+	 */
 	@GetMapping("/vehiculoForm")
 	public String vehiculoFormulario(@ModelAttribute("vehiculo") Vehiculo vehiculo, ModelMap model) {
-		//Se manda a la vista el objeto de tipo Vehiculo, cargado con la patente ingresada
+		// Se manda a la vista el objeto de tipo Vehiculo, cargado con la patente
+		// ingresada
 		model.addAttribute("vehiculo", unVehiculo);
 		return "vehiculoFormulario";
 	}
-	
-	//Anotacion asociada a la url (/registroTracking) que se acciona por el boton GUARDAR en la pagina del formulario del vehiculo
+
+	/**
+	 * Permite invocar el servicio que guarda el vehiculo
+	 * 
+	 * @param vehiculo, con los datos capturados que ingreso el usuario
+	 * @param result,   que realizara la validacion de los campos
+	 * @param model,    el model que usara la pagina
+	 * @return redirige a la pagina registroTracking
+	 */
 	@PostMapping("/registroTracking")
-	public String guardarVehiculo(@Valid @ModelAttribute("vehiculo") Vehiculo vehiculo, BindingResult result,  ModelMap model) {
-		if(result.hasErrors()) {
-			//Se asigna a vehiculo la patente ingresada por el usuario
+	public String guardarVehiculo(@Valid @ModelAttribute("vehiculo") Vehiculo vehiculo, BindingResult result,
+			ModelMap model) {
+		if (result.hasErrors()) {
+			// Se asigna a vehiculo la patente ingresada por el usuario
 			vehiculo.setPatente(unVehiculo.getPatente());
-			//Se manda a la vista el objeto cargado con los datos ingresados por el usuario
+			// Se manda a la vista el objeto cargado con los datos ingresados por el usuario
 			model.addAttribute("vehiculo", vehiculo);
 			return "vehiculoFormulario";
-		}else {
-			//Se asigna a vehiculo la patente ingresada por el usuario
+		} else {
+			// Se asigna a vehiculo la patente ingresada por el usuario
 			vehiculo.setPatente(unVehiculo.getPatente());
-			//Se guarda el vehiculo en la base de datos
+			// Se guarda el vehiculo en la base de datos
 			vehiculoService.crearVehiculo(vehiculo);
 			return "redirect:/registroTracking";
 		}
 	}
-	
-	//Anotacion asociada a la url(/buscarTripulante) que se acciona por el boton BUSCAR de la ventada modal de tripulante
+
+	/**
+	 * Permite invocar el servicio que busca el tripulante y al servicio que lo guarda en la
+	 * lista que se guardara en el registro tracking
+	 * 
+	 * @param tripulante, el cual tendra el documento del tripulante buscado
+	 * @param model, el model que usara la pagina
+	 * @return se invoca al metodo siguienteRegistro y se manda el objeto y el model
+	 *         para que este lo muestre
+	 * @throws Exception, en caso de ocurrir errores las muestra en la pagina
+	 */
 	@PostMapping("/buscarTripulante")
-	public String buscarTripulanteExistente(@ModelAttribute("tripulanteDelForm") Tripulante tripulante, Model model) throws Exception{
-	try {
-		//Se guarda en un Objeto de tipo Tripulante el tripulante encontrado por su dni
-		Tripulante tripulanteEncontrado = tripulanteService.buscarTripulante(tripulante.getDocumento());
+	public String buscarTripulanteExistente(@ModelAttribute("tripulanteDelForm") Tripulante tripulante, Model model)
+			throws Exception {
 		try {
-			//Se guarda en una lista auxiliar al tripulante encontrado
-			tripulanteService.guardarTripulanteEncontrado(tripulanteEncontrado);
-		} catch(Exception e) {
+			// Se guarda en un Objeto de tipo Tripulante el tripulante encontrado por su dni
+			Tripulante tripulanteEncontrado = tripulanteService.buscarTripulante(tripulante.getDocumento());
+			try {
+				// Se guarda en una lista auxiliar al tripulante encontrado
+				tripulanteService.guardarTripulanteEncontrado(tripulanteEncontrado);
+			} catch (Exception e) {
+				model.addAttribute("ErrorMessage", e.getMessage());
+			}
+		} catch (Exception e) {
 			model.addAttribute("ErrorMessage", e.getMessage());
 		}
-	}catch(Exception e) {
-		model.addAttribute("ErrorMessage", e.getMessage());
-	}
 		return siguienteRegistro(tripulante,model);
 	}
 	
-	//Anotacion asociada a la url (/cargarTripulante) que se acciona por el boton AGREGAR TRIPULANTE 
+	/**
+	 * Muestra la pagina del formulario del tripulante
+	 * 
+	 * @param model, el model que usara la pagina
+	 * @return la pagina del formulario del tripulante
+	 */
 	@GetMapping("/cargarTripulante")
 	public String formularioTripulante(Model model) {
 		//Se manda a la vista objeto de tipo Tripulante vacio 
@@ -189,7 +242,15 @@ public class RegistradorController {
 		return "registroTripulante";
 	}
 
-	//Anotacion asociada a la url(/formTripulante) que se acciona por el boton GUARDAR del formulario de tripulante
+	/**
+	 * Permite invocar al servicio que guarda el tripulante 
+	 * 
+	 * @param tripulante, cargado con los datos ingresados por el usuario
+	 * @param result, que realizara la validacion de los campos
+	 * @param model, el model que usara la pagina
+	 * @return la pagina del registro tracking
+	 * @throws Exception, en caso de ocurrir errores las muestra en la pagina
+	 */
 	@PostMapping("/formTripulante")
 	public String agregarTripulante(@Valid @ModelAttribute("tripulanteForm") Tripulante tripulante, BindingResult result, ModelMap model) throws Exception {
 		if(result.hasErrors()) {
@@ -208,8 +269,18 @@ public class RegistradorController {
 			}
 		}
 	}
-	
-	//Anotacion asociada a la url (/registroFinalizado) que se acciona con el boton FINALIZAR REGISTRO
+
+	/**
+	 * Permite invocar al servicio que guarda el registro tracking, asi como a los
+	 * servicios que buscan la localidad, que buscan el vehiculo, que guardan la
+	 * lista de tripulantes en el registro tracking, los servicios que muestran las
+	 * listas correspondientes
+	 * 
+	 * @param registroT, cargado con los datos que ingreso el usuario
+	 * @param model, el model que usara la pagina
+	 * @return la pagina de la vista del registro terminado
+	 * @throws Exception, en caso de ocurrir errores las muestra en la pagina
+	 */
 	@PostMapping("/registroFinalizado")
 	public String tripulanteForm (@ModelAttribute("registroTracking") RegistroTracking registroT, ModelMap model) throws Exception {
 		//Se guarda en un optional la localidad encontrada por el id, elegida por el usuario
@@ -238,7 +309,11 @@ public class RegistradorController {
 		return "registroVista";
 	}
 	
-	//Anotacion asociada a la url(/registroNuevo) que se acciona con el boton CARGAR OTRO REGISTRO
+	/**
+	 * Permite invocar al servicio que vacia la lista de tripulantes para poder ser cargada nuevamente en el sigueinte registro
+	 * 
+	 * @return  la pagina de la verificacion de la patente
+	 */
 	@GetMapping("/registroNuevo")
 	public String registroNuevo() {
 		//Limpia la lista auxiliar de tripulantes
