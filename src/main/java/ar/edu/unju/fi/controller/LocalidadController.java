@@ -81,11 +81,24 @@ public class LocalidadController {
 		return "adminLocalidad";
 	}
 	
+	/**
+	 * Permite cancelar la edicion de un registro de Localidad
+	 * 
+	 * @return redirecciona al llamado de /adminLocalidad
+	 */
 	@GetMapping("/editarLoc/cancelar")
 	public String cancelar() {
 		return "redirect:/adminLocalidad";
 	}
 	
+	/**
+	 * Permite dar de baja a una Localidad, invocando metodos que 
+	 * efectuan el cambio del estado del registro
+	 * 
+	 * @param id captura el Id de la localidad enviada
+	 * @return redirecciona a la vantana principal de localidades si no presenta
+	 * inconvenientes al dar de baja a la localidad
+	 */
 	@GetMapping("/eliminarLoc/{id}")
 	public String eliminar (@PathVariable Long id, Model model) {
 		try {
@@ -96,6 +109,14 @@ public class LocalidadController {
 		return "redirect:/adminLocalidad";
 	}
 	
+	/**
+	 * Permite realizar el alta de una Localidad, si se presenta 
+	 * algun evento que interrumpa la transaccion se notificara a 
+	 * traves de la excepcion
+	 * 
+	 * @param id que captura el Id de localidad recibido
+	 * @return redirecciona a la ventana principal de Localidad
+	 */
 	@GetMapping("/habilitarLocalidad/{id}")
 		public String habilitarLocalidad(@PathVariable Long id, Model model) {
 			try {
@@ -107,6 +128,14 @@ public class LocalidadController {
 		}
 	
 	
+	/**
+	 * Muestra el Formulario con los datos del registro Localidad a editar
+	 * 
+	 * @param id, variable que captura el valor del Id del registro a editar
+	 * @return adminLocalidad con los atributos segun el resultado de la transaccion
+	 * @throws Exception, si se produce algun evento por el cual no se lleve 
+	 * a cabo la edicion, se notificara a traves de un mensaje almacenado en la excepcion
+	 */
 	@GetMapping("/editarLoc/{id}")
 	public String editar(@PathVariable Long id, Model model) throws Exception {
 		try{
@@ -122,6 +151,16 @@ public class LocalidadController {
 		model.addAttribute("titulo", "EDITAR LOCALIDAD");
 		return "adminLocalidad";
 	}
+	
+	/**
+	 * Envia los datos cargados en el formulario para que el registro
+	 * de Localidad pueda ser editada segun los datos enviados
+	 * 
+	 * @param localidad captura los datos del modelo recibido
+	 * @param model	almacena los datos del formulario
+	 * @param result, utilizada para llevar un control de validacion
+	 * @return adminLocalidad con atributos segun el resultado de la transaccion
+	 */
 	@PostMapping("/editarLocalidad")
 	public String editarLocalidad(@Valid @ModelAttribute("localidadForm") Localidad localidad, ModelMap model, BindingResult result) {
 		if(result.hasErrors()) {
@@ -145,7 +184,11 @@ public class LocalidadController {
 		
 		return "adminLocalidad";
 	}
-	
+	/**
+	 * Permite visualizar todas las localidades que esten dadas de baja
+	 * @param model
+	 * @return ventana con la lista
+	 */
 	@GetMapping("/suspendido")
 	public String listarSuspendido(Model model) {
 		model.addAttribute("listaLocalidades", localidadService.listarLocalidades(false));

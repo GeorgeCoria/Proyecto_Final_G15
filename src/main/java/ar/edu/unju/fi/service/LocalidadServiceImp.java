@@ -17,7 +17,14 @@ import ar.edu.unju.fi.repository.ILocalidadDAO;
  */
 @Service
 public class LocalidadServiceImp implements ILocalidadService{
-
+	
+	/**
+	 * variable que permitira que se haga efectiva la inyeccion de dependencias
+	 * a traves de la Annotations @Autowired
+	 * En definitiva, cada vez que alguno de los metodos de la
+	 * clase LocalidadServiceImp sea llamado, Spring hara un escaneo de
+	 * un objeto Usuario para luego inyectar al metodo
+	 */
 	@Autowired
 	private ILocalidadDAO iLocalidad;
 	
@@ -72,43 +79,102 @@ public class LocalidadServiceImp implements ILocalidadService{
 	public Iterable<Localidad> listarLocalidades(boolean estado) {
 		return iLocalidad.findByEstado(estado);
 	}
-
+	
+	/**
+	 * Este metodo permite realizar la el cambio de estado de un Localidad
+	 * Establece un estado en "false" ya que esta manera pasaria a estar 
+	 * inactivo o deshabilitado, simulando la eliminacion del registro
+	 * Se pasa por parametro el Id de la Localidad a tratar, en caso de se 
+	 * presente algun inconveniente este sera reflejado en la Excepcion 
+	 * para informar el motivo por el cual no fue exitosa la transaccion
+	 * 
+	 * @param id de la Localidad a editar estado
+	 */
 	@Override
 	public void eliminarLocalidad(Long id) throws Exception {
+			//si no se encuentra La localidad actua la excepcion
 			Localidad unaLocalidad=buscarLocalidad1(id);
 			unaLocalidad.setEstado(false);
 			iLocalidad.save(unaLocalidad);		
 	}
-
+	/**
+	 * Metodo definido para realizar una busquesa de una Localidad
+	 * segun el Id pasado por parametro.
+	 * Para llevar a cabo este procedimiento utiliza un objeto de tipo
+	 * iLocalidadDao para tener comunicacion al repositorio
+	 * En caso de no encontrar resultados se notificara
+	 * la excepcion
+	 * 
+	 * @param Id de localidad
+	 * 
+	 */
 	@Override
 	public Localidad buscarLocalidad1(Long id) throws Exception {
 		return iLocalidad.findById(id).orElseThrow(()-> new Exception("La localidad no existe"));
 	}
-
+	
+	/**
+	 * Metodo definido para realizar la busqueda de una Localidad segun
+	 * el Id pasado por paramtro
+	 * utiliza un objeto de la capa Repository para llevar a cabo 
+	 * la comunicacion con el repositorio
+	 * 
+	 * @param Id de localidad
+	 * @return resultado de la busqueda
+	 */
 	@Override
 	public Optional<Localidad> buscarLocalidad(Long id) {
 		return iLocalidad.findById(id);
 	}
-
+	
+	/**
+	 * Metodo que permite realizar una busqueda, a traves de un objeto de la capa reposity,
+	 * segun el nombre pasado por parametro.
+	 * 
+	 * @param Nombre de Localidad
+	 * @return objeto resultante de la busqueda, puede o no contener la Localidad buscada
+	 */
 	@Override
 	public Localidad buscarNombreLocalidad(String nombre) throws Exception {
 		return iLocalidad.findByNombre(nombre).orElseThrow();
 	}
-
+	
+	/**
+	 * Metod que permite realizar la edicion de una Localidad, se hace
+	 * un control respecto de un Nombre de Localidad con el fin de evitar
+	 * la redundancia en el repositorio
+	 * 
+	 * @param Localidad a editar
+	 */
 	@Override
 	public void editarLocalidad(Localidad localidad) throws Exception {
+		// se pasa a mayusculas el nombre de la Localidad para mantener el criterio de
+		//las localidad almacenadas
 		String localidadMayuscula = localidad.getNombre().toUpperCase();
 		localidad.setNombre(localidadMayuscula);
+		//se verifica que el nombre ya no exista en el repositorio
 		if(verificarEditarNombre(localidad)) {
 			iLocalidad.save(localidad);
 		}	
 	}
 	
+	/**
+	 * Este metodo tiene por finalidad determinar si un nombre de Localidad
+	 * ya existe o no en el repositorio, de esta manera se evita la redundancia 
+	 * de datos.
+	 * 
+	 * @param localidad a ser controlada
+	 * @return true si no existe un registro con el mismo nombre
+	 * @throws Exception definida en caso de encontrar coincidencias
+	 */
 	public boolean verificarEditarNombre(Localidad localidad)throws Exception{
 		int cont=0;
+		//se genera una lista con los registros almacenados
 		List<Localidad> listaLocalidad = iLocalidad.findAll();
 		for(Localidad loc: listaLocalidad) {
+			//se evalua si los nombres coinciden
 			if(localidad.getNombre().equals(loc.getNombre())) {
+				//se evalua si se trata de un registro distinto
 				if(localidad.getId()!=loc.getId())
 					cont++;
 			}
@@ -118,7 +184,16 @@ public class LocalidadServiceImp implements ILocalidadService{
 		}
 		return true;
 	}
-
+	
+	/**
+	 * Metodo definido para habilitar una Localidad que haya sido
+	 * dada de baja. 
+	 * Una localidad esta activa cuando su estado sea true, es decir, 
+	 * que el metodo realiza un cambio de estado en la Localidad Ingresada 
+	 * por Parametro
+	 * 
+	 * @param Id de localidad para habilitar
+	 */
 	@Override
 	public void habilitarLocalidad(Long id) throws Exception {
 		Localidad habilitado = buscarLocalidad1(id);

@@ -37,7 +37,9 @@
 
 		</div>
 
-		<!-- ************* FORMULARIO DE BUSQUEDA ********************** -->
+		<!-- ---------------------------------------------------- -->
+		<!-- ************** FORMULARIO DE BUSQUEDA ************** -->
+		<!-- ---------------------------------------------------- -->
 
 		<div class="col-4 pr-4" th:if="${principal}">
 			<form class=" float-right form-inline my-2 my-lg-0"
@@ -92,22 +94,23 @@
 
 					<tbody>
 					
-						<tr th:each="usuario : ${listaUsuarios}">
-							<div th:if="${usuario.tipoUsuario ne 'ADMIN'}">
+						<tr th:each="usuario : ${listaUsuarios}" th:if="${usuario.tipoUsuario ne 'ADMIN'}">
+							
 							<th th:text="${usuario.id}"></th>
 							<td th:text="${usuario.nombreUsuario}"></td>
 							<td th:text="${usuario.nombreReal}"></td>
 							<td th:text="${usuario.apellidoReal}"></td>
 							<td th:text="${usuario.tipoUsuario}"></td>
 							<td th:if="${busqueda} or ${suspendido}"
-								th:text="${usuario.estado==true}?'Habilitado':'Inhabilitado'"></td>
+								th:text="${usuario.estado==true}?'Habilitado':'Inhabilitado'">
+							</td>
 							<td><a class="btn btn-primary"
 								th:href="@{'/editarUsuario/'+${usuario.id}}">Editar</a> <a
 								th:if="not ${suspendido} and not ${busqueda}" href="#"
 								class="btn btn-danger"
 								th:onclick="'javascript:confirmarEliminar(\''+${usuario.id}+'\');'">Eliminar</a>
 							</td>
-							</div>
+							
 						</tr>
 
 					</tbody>

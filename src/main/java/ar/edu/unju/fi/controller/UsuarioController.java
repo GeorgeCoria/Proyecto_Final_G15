@@ -25,11 +25,17 @@ import ar.edu.unju.fi.service.UsuarioServiceImp;
  */
 @Controller
 public class UsuarioController {
-
+	/**
+	 * variable que permitira que se haga efectiva la inyeccion de dependencias
+	 * a traves de la Annotations @Autowired
+	 */
 	@Autowired
 	private UsuarioServiceImp usuarioService;
 	
-	//Anotacion asociada a la url (/adminFormulario) que se acciona al ingresar a dicha url
+	/**
+	 * Muesta la ventana del Formulario 
+	 * @return ventana Principal
+	 */
 	@GetMapping("/adminFormulario")
 	public String mostrarFormAdmin(Model model) {
 		//Se manda a la vista un objeto de tipo Usuario vacio
@@ -37,7 +43,14 @@ public class UsuarioController {
 		return "adminFormulario";
 	}
 	
-	//Evento luego de enviar datos del formulario
+	/**
+	 * Este metodo captura los datos del formulario para realizar la creacion
+	 * de un nuevo registro de Usuario
+	 * 
+	 * @param usuario captura los datos recibidos por el modelo "usuariodDelForm"
+	 * @param result, permite hacer un control de validacion
+	 * @return adminPrincipal con atributos segun el resultado de la transaccion 
+	 */
 	@PostMapping("/adminFormulario") 
 	public String crearUsuario(@Valid @ModelAttribute("usuarioDelForm") Usuario usuario, BindingResult result, ModelMap model) {
 		//Se verifica errores de validacion en hml
@@ -61,9 +74,13 @@ public class UsuarioController {
 		}	
 	}
 	
-	//Evento activado cunado se quiere editar un usuario, se pasa el id del mismo
-	//para luego sus datos se muestren en el formulario para proceder con la 
-	//edicion de los datos disponibles
+	/**
+	 * Metodo que muesta el formulario con los datos cargados del usuario
+	 * que se quiere Editar
+	 * 
+	 * @param id captura el Id del usuario a editar
+	 * @return Formulario
+	 */
 	@GetMapping("/editarUsuario/{id}")
 	public String obtenerFormularioEditarUsuario(Model model, @PathVariable(name="id") Long id ) throws Exception{
 		try{
@@ -82,8 +99,14 @@ public class UsuarioController {
 		}
 	}
 	
-	//Terminada la edicion se envian los datos del Formulario y se aciva este llamado
-	//para asi, guardar los cambios establecidos
+	/**
+	 * Este metodo envia los datos del Formulario del Usuario que se esta por editar
+	 * 
+	 * @param usuario captura los datos del modelo enviado
+	 * @param result, para efectuar validaciones
+
+	 * @return una ventana segun el resultado de transaccion
+	 */
 	@PostMapping("/editarUsuario")
 	public String postEditarUsuario(@Valid @ModelAttribute("usuarioDelForm") Usuario usuario, BindingResult result, ModelMap model) {
 		if(result.hasErrors()) {
@@ -107,15 +130,20 @@ public class UsuarioController {
 		}
 	}
 	
-	//Se acciona con el boton CANCELAR
+	/**
+	 * Permite cancelar la Edicion de un Usuario
+	 * 
+	 * @return redirecciona a la ventana Principal
+	 */
 	@GetMapping("/editarUsuario/cancelar")
 	public String cancelEditUser() {
 		return "redirect:/adminPrincipal";
 	}
 	
-	/* Metodo que gestiona la eliminacion de un Usuario,
+	/** 
+	 * Metodo que gestiona la eliminacion de un Usuario,
 	 * sin embargo con eliminacion, nos referimos a que el 
-	 * usuario seleccionado para a tener un estado inactivo
+	 * usuario seleccionado pasa a tener un estado inactivo
 	 * Esto implica que no estara disponible en la lista principal
 	 * de Usuarios.
 	 */
@@ -129,7 +157,12 @@ public class UsuarioController {
 		return "redirect:/adminPrincipal";
 	}
 	
-	//Llamado a la ventana Principal del Usuario administrador
+	/**
+	 * Metodo que muesta la ventana Principal del administrador
+	 * 
+	 * @return ventana Principal
+	 * @throws Exception
+	 */
 	@GetMapping("/adminPrincipal")
 	public String mostrarListaAdmin(Model model) throws Exception {
 		try {
@@ -146,7 +179,12 @@ public class UsuarioController {
 		return "adminPrincipal";
 	}
 	
-	//Muestra una lista con solo usuarios Registradores
+	/**
+	 * Muestra una lista con solo usuarios Registradores
+	 * @return la ventana Principal de administrador con un 
+	 * atributo en el model que contiene la lista requerida
+	 * @throws Exception 
+	 */
 	@GetMapping("/Registrador")
 	public String mostrarListaRegistrador(Model model) throws Exception {
 		try {
@@ -159,7 +197,13 @@ public class UsuarioController {
 		return "adminPrincipal";
 	}
 	
-	//Muestra una lista con solo usuarios consultores
+	/**
+	 * Muestra una lista con solo usuarios Consultores
+	 * 
+	 * @return la ventana Principal de administrador con un 
+	 * atributo en el model que contiene la lista requerida
+	 * @throws Exception 
+	 */
 	@GetMapping("/Consultor")
 	public String mostrarListaConsultores(Model model) throws Exception{
 		try {
@@ -172,7 +216,7 @@ public class UsuarioController {
 		return "adminPrincipal";
 	}
 	
-	/*
+	/**
 	 * Este evento actua cuando se hace una busqueda de Usuarios
 	 * la busqueda la hace en toda la lista de Usuarios, es decir,
 	 * que si el usuario buscado esta deshabilitado se mostrara de 
@@ -200,8 +244,11 @@ public class UsuarioController {
 		
 		
 		}
-	//muesta una lista con aquellos Usuarios que hayan sido eliminados de la
-	//lista principal. Usuario inactivos
+	/**
+	 * muesta una lista con aquellos Usuarios que hayan sido eliminados de la
+	 * lista principal. Usuario inactivos
+	 * @return
+	 */
 	@GetMapping("/Suspendido")
 	public String mostrarBajas(Model model) {
 		try {
