@@ -120,13 +120,24 @@ public class TripulanteServiceImp implements ITripulanteService{
 	}
 
 	/**
-	 * Metodo que guarda el tripulante encontrado en la lista auxiliar
+	 * Metodo que guarda el tripulante encontrado en la lista auxiliar verificando
+	 * que no fue guardado previamente
 	 * 
 	 * @param tripulanteEncontrado
+	 * @throws Exception, en caso del que el tripulante ya este agregado a la lista
 	 */
 	@Override
-	public void guardarTripulanteEncontrado(Tripulante tripulanteEncontrado) {
-		lista.add(tripulanteEncontrado);
+	public void guardarTripulanteEncontrado(Tripulante tripulanteEncontrado) throws Exception {
+		boolean repetido = false;
+		for (Tripulante trip : lista) {
+			if (tripulanteEncontrado.getId() == trip.getId()) {
+				repetido = true;
+			}
+		}
+		if (repetido==false)
+			lista.add(tripulanteEncontrado);
+		else
+			throw new Exception("El tripulante ya esta agregado a la lista");
 	}
 
 }

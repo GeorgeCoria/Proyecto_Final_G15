@@ -168,12 +168,33 @@
 										<!-- ********** BOTONES DE AGREGADO Y CANCELACION DE REGISTRO ********** -->
 										<!-- ------------------------------------------------------------------- -->
 	                                    <div class="my-2">
-	                                        <input type="submit" class="btn btn-primary botonDos mr-1" value="AGREGAR">
+	                                        <a type="button" class="btn btn-primary botonDos mr-1" data-toggle="modal" data-target="#modalAgregar">AGREGAR</a>
 	                                        <a th:href="@{/registroTracking}" type="button" class="btn btn-danger">CANCELAR</a>
 	                                    </div>
 	                                    
 	                                    <!-- ********** MENSAJE ANTE POSIBLE ERROR ********** -->
 										<div class="alert-danger text-center" th:if="${formErrorTrip}" th:text="${formErrorTrip}" >Name Error</div>
+										
+										<!-- ------------------------------------------------ -->
+										<!-- ********** MODAL CONFIRMACION DE ALTA ********** -->
+										<!-- ------------------------------------------------ -->
+										<div class="modal fade" id="modalAgregar" tabindex="-1"	role="dialog" aria-labelledby="agregarModalTitulo"	aria-hidden="true">
+											<div class="modal-dialog modal-dialog-centered" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h5 class="modal-title text-dark" id="agregarModalTitulo">Confirmacion Alta Tripulante</h5>
+														<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+															<span aria-hidden="true">&times;</span>
+														</button>
+													</div>
+													<div class="modal-body text-dark"><h6>Esta seguro que desea guardar este tripulante?</h6></div>
+													<div class="modal-footer">
+														<input type="submit" class="btn btn-primary" value="Save Changes"  th:value="CONFIRMAR">
+														<button type="button" class="btn btn-secondary"	data-dismiss="modal">Cerrar</button>
+													</div>
+												</div>
+											</div>
+										</div>
 										
 	                                </form>
                             </div>	                      

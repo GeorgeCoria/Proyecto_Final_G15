@@ -48,10 +48,12 @@ public interface ITripulanteService {
 	public Tripulante buscarTripulante(String documento) throws Exception;
 
 	/**
-	 * Metodo que guarda el tripulante encontrado en la lista auxiliar
+	 * Metodo que guarda el tripulante encontrado en la lista auxiliar verificando
+	 * que no fue guardado previamente
 	 * 
 	 * @param tripulanteEncontrado
+	 * @throws Exception, en caso del que el tripulante ya este agregado a la lista
 	 */
-	public void guardarTripulanteEncontrado(Tripulante tripulanteEncontrado);
+	public void guardarTripulanteEncontrado(Tripulante tripulanteEncontrado) throws Exception;
 
 }
