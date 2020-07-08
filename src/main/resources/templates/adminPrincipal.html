@@ -94,7 +94,7 @@
 
 					<tbody>
 					
-						<tr th:each="usuario : ${listaUsuarios}" th:if="${usuario.tipoUsuario ne 'ADMIN'}">
+						<tr th:each="usuario : ${listaUsuarios}" th:if="${usuario.tipoUsuario ne 'BD'}">
 							
 							<th th:text="${usuario.id}"></th>
 							<td th:text="${usuario.nombreUsuario}"></td>
