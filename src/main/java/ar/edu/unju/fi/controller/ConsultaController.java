@@ -425,7 +425,7 @@ public class ConsultaController {
 				
 				//Cajas que muestra el resultado de la busqueda
 				modelo.addAttribute("activo", false);
-				modelo.addAttribute("error", "La patente ingresada no existe  -> Ej: AAA123 / AAA123EE");
+				modelo.addAttribute("error", "La patente ingresada no existe  -> Ej: AAA123 / AA123EE");
 				
 				return "buscarPatente";
 			}
